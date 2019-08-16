@@ -181,8 +181,9 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
     
     switch (representationType) {
         case ASDKModelFormFieldRepresentationTypeDropdown:
-        case ASDKModelFormFieldRepresentationTypeRadio: {
-            [self handleDropDownAndRadioFormField:formField];
+        case ASDKModelFormFieldRepresentationTypeRadio:
+        case ASDKModelFormFieldRepresentationTypeTypeahead: {
+            [self handleMultipleChoiceFormField:formField];
         }
             break;
             
@@ -234,7 +235,8 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
     }
     
     if (ASDKModelFormFieldRepresentationTypeDropdown == representationType ||
-        ASDKModelFormFieldRepresentationTypeRadio == representationType) {
+        ASDKModelFormFieldRepresentationTypeRadio == representationType ||
+        ASDKModelFormFieldRepresentationTypeTypeahead == representationType) {
         ASDKModelRestFormField *restFormField = (ASDKModelRestFormField *)formField;
         
         if ([restFormField respondsToSelector:@selector(restURL)] &&
@@ -278,7 +280,7 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
     });
 }
 
-- (void)handleDropDownAndRadioFormField:(ASDKModelFormField *)formField {
+- (void)handleMultipleChoiceFormField:(ASDKModelFormField *)formField {
     ASDKModelRestFormField *restFormField = (ASDKModelRestFormField *)formField;
     
     if ([restFormField respondsToSelector:@selector(restURL)] &&
