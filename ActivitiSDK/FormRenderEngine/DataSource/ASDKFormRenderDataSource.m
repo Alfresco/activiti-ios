@@ -509,7 +509,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             break;
             
         case ASDKModelFormFieldRepresentationTypeDropdown:
-        case ASDKModelFormFieldRepresentationTypeRadio: {
+        case ASDKModelFormFieldRepresentationTypeRadio:
+        case ASDKModelFormFieldRepresentationTypeTypeahead: {
             cellIdentifier = kASDKCellIDFormFieldRadioRepresentation;
         }
             break;
@@ -606,6 +607,9 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             controllerIdentifierString = kASDKStoryboardIDDynamicTableFormFieldDetailController;
         }
             break;
+        case ASDKModelFormFieldRepresentationTypeTypeahead: {
+            controllerIdentifierString = kASDKStoryboardIDTypeaheadFormFieldDetailController;
+        }
             
         default:
             break;

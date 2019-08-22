@@ -28,6 +28,7 @@ extern NSString *kASDKStoryboardIDMultilineFormFieldDetailController;
 extern NSString *kASDKStoryboardIDPeopleFormFieldDetailController;
 extern NSString *kASDKStoryboardIDDynamicTableFormFieldDetailController;
 extern NSString *kASDKStoryboardIDIntegrationLoginWebViewController;
+extern NSString *kASDKStoryboardIDTypeaheadFormFieldDetailController;
 
 // Segue IDs
 extern NSString *kASDKSegueIDFormContentPicker;
@@ -39,7 +40,6 @@ extern NSString *kASDKCellIDFormFieldTextRepresentation;
 extern NSString *kASDKCellIDFormFieldBooleanRepresentation;
 extern NSString *kASDKCellIDFormFieldOutcomeRepresentation;
 extern NSString *kASDKCellIDFormFieldDateRepresentation;
-extern NSString *kASDKCellIDFormFieldDropdownRepresentation;
 extern NSString *kASDKCellIDFormFieldRadioRepresentation;
 extern NSString *kASDKCellIDFormFieldRadioOptionRepresentation;
 extern NSString *kASDKCellIDFormFieldRadioOptionDisplayValueRepresentation;
@@ -59,6 +59,8 @@ extern NSString *kASDKCellIDFormFieldDynamicTableHeaderRepresentation;
 extern NSString *kASDKCellIDFormFieldDynamicTableRowRepresentation;
 extern NSString *kASDKCellIDFormFieldTabRepresentation;
 extern NSString *kASDKCellIDFormFieldDisplayTextRepresentation;
+extern NSString *kASDKCellIDFormFieldTypeaheadRepresentation;
+extern NSString *kASDKCellIDFormFieldTypeaheadSuggestionRepresentation;
 extern NSString *kASDKCellIDIntegrationBrowsing;
 
 // Form field key values

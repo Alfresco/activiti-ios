@@ -29,6 +29,8 @@
 // Cells
 #import "ASDKRadioOptionTableViewCell.h"
 
+static NSInteger const kInvalidOptionSelection = -1;
+
 @interface ASDKRadioFormFieldDetailsViewController ()
 
 @property (strong, nonatomic) ASDKModelFormField    *currentFormField;
@@ -54,6 +56,9 @@
     // Configure table view
     self.optionTableView.estimatedRowHeight = 44.0f;
     self.optionTableView.rowHeight = UITableViewAutomaticDimension;
+    
+    // Set an invalid option selection so that the checkmark isn't set until the user picks one manually
+    self.currentOptionSelection = kInvalidOptionSelection;
     
     // Pick up index information from metadata if it exists
     if (self.currentFormField.metadataValue) {
