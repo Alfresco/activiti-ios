@@ -433,6 +433,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
         case ASDKModelFormFieldRepresentationTypeDropdown:
         case ASDKModelFormFieldRepresentationTypeRadio:
         case ASDKModelFormFieldRepresentationTypeMultiline:
+        case ASDKModelFormFieldRepresentationTypeTypeahead:
         case ASDKModelFormFieldRepresentationTypeText: {
             return ASDKFormFieldSupportedTypeString;
         }
@@ -904,7 +905,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     
     switch (operatorType) {
         case ASDKModelFormVisibilityConditionOperatorTypeEqual: {
-            result = (firstBoolean && secondBoolean);
+            result = (firstBoolean == secondBoolean);
         }
             break;
             
