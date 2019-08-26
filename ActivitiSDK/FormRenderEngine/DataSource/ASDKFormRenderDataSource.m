@@ -630,8 +630,6 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
 }
 
 - (BOOL)areFormFieldMetadataValuesValid {
-    BOOL formFieldsAreValid = YES;
-    
     // Check if mandatory form field values had been addressed
     for (ASDKModelFormField *sectionFormField in self.visibleFormFields) {
         if ([sectionFormField isKindOfClass:ASDKModelDynamicTableFormField.class]) { // Extract formfields from dynamic table
@@ -648,24 +646,41 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
         // Enumerate through the associated form fields and check if they
         // have a value or attached metadata values
         for (ASDKModelFormField *formField in sectionFormField.formFields) {
-            if (formField.isRequired) {
-                if (formField.representationType == ASDKModelFormFieldRepresentationTypeBoolean) {
-                    BOOL checked = NO;
-                    if (formField.metadataValue.attachedValue.length) {
-                        checked = [formField.metadataValue.attachedValue isEqualToString:kASDKFormFieldTrueStringValue] ? YES : NO;
-                    } else if (formField.values) {
-                        checked = [formField.values.firstObject boolValue];
+            if (ASDKModelFormFieldRepresentationTypeHeader == formField.representationType ||
+                ASDKModelFormFieldRepresentationTypeContainer == formField.representationType) {
+                for (ASDKModelFormField *containerChildFormField in formField.formFields) {
+                    if (![self areFormFieldMetadataValuesValidForFormField:containerChildFormField]) {
+                        return NO;
                     }
-                    
-                    if (!checked) {
-                        formFieldsAreValid = NO;
-                        break;
-                    }
-                } else if (!formField.values.count && !formField.metadataValue.attachedValue.length && !formField.metadataValue.option.attachedValue.length) {
-                    formFieldsAreValid = NO;
-                    break;
+                }
+            } else {
+                if (![self areFormFieldMetadataValuesValidForFormField:formField]) {
+                    return NO;
                 }
             }
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)areFormFieldMetadataValuesValidForFormField:(ASDKModelFormField *)formField {
+    BOOL formFieldsAreValid = YES;
+    
+    if (formField.isRequired) {
+        if (formField.representationType == ASDKModelFormFieldRepresentationTypeBoolean) {
+            BOOL checked = NO;
+            if (formField.metadataValue.attachedValue.length) {
+                checked = [formField.metadataValue.attachedValue isEqualToString:kASDKFormFieldTrueStringValue] ? YES : NO;
+            } else if (formField.values) {
+                checked = [formField.values.firstObject boolValue];
+            }
+            
+            if (!checked) {
+                formFieldsAreValid = NO;
+            }
+        } else if (!formField.values.count && !formField.metadataValue.attachedValue.length && !formField.metadataValue.option.attachedValue.length) {
+            formFieldsAreValid = NO;
         }
     }
     
