@@ -126,6 +126,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     
     if (self) {
         _isSaveActionAvailable = YES;
+        _currenFormDescription = formDescription;
         self.formTitle = formDescription.formTitle;
         
         [self setupWithTabFormDescription:formDescription];
@@ -295,12 +296,23 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                     // Double check if formFieldParams is a ASDKModelFormField derived object because it is
                     // probable to have other types of parameters that do not have the same inheritance
                     if ([formFieldForCurrentIndexPath.formFieldParams isKindOfClass:[ASDKModelFormField class]]) {
-                        NSPredicate *searchVariablePredicate = [NSPredicate predicateWithFormat:@"name==%@", formFieldForCurrentIndexPath.formFieldParams.modelID];
-                        NSArray *matchingVariables = [self.currenFormDescription.formVariables filteredArrayUsingPredicate:searchVariablePredicate];
-                        if (matchingVariables.count &&
-                            !formFieldForCurrentIndexPath.values.count) {
-                            ASDKModelFormVariable *formVariable = (ASDKModelFormVariable *)matchingVariables.firstObject;
-                            formFieldForCurrentIndexPath.values = @[formVariable.value];
+                        if (formFieldForCurrentIndexPath.formFieldParams.modelID) {
+                            NSPredicate *searchVariablePredicate = [NSPredicate predicateWithFormat:@"name == %@", formFieldForCurrentIndexPath.formFieldParams.modelID];
+                            NSArray *matchingVariables = [self.currenFormDescription.formVariables filteredArrayUsingPredicate:searchVariablePredicate];
+                            if (matchingVariables.count &&
+                                !formFieldForCurrentIndexPath.values.count) {
+                                ASDKModelFormVariable *formVariable = (ASDKModelFormVariable *)matchingVariables.firstObject;
+                                formFieldForCurrentIndexPath.values = @[formVariable.value];
+                            } else if (formFieldForCurrentIndexPath.values.count) {
+                                NSString *variableLabelName = [NSString stringWithFormat:@"%@_LABEL", formFieldForCurrentIndexPath.formFieldParams.modelID];
+                                NSPredicate *searchVariableLabelValuePredicate = [NSPredicate predicateWithFormat:@"modelID == %@", variableLabelName];
+                                matchingVariables = [self.currenFormDescription.formVariables filteredArrayUsingPredicate:searchVariableLabelValuePredicate];
+                                
+                                if (matchingVariables.count) {
+                                    ASDKModelFormVariable *formVariable = (ASDKModelFormVariable *)matchingVariables.firstObject;
+                                    formFieldForCurrentIndexPath.formFieldParams.values = @[formVariable];
+                                }
+                            }
                         }
                     }
                     

@@ -118,6 +118,7 @@ NSString * const kASDKAPITaskFormsPath              = @"task-forms";
 NSString * const kASDKAPIFormValuesPath             = @"form-values";
 NSString * const kASDKAPIStartFormValuesPath        = @"start-form-values";
 NSString * const kASDKAPISaveFormPath               = @"save-form";
+NSString * const kASDKAPIVariablesFormPath          = @"variables";
 
 #pragma mark -
 #pragma mark Users related

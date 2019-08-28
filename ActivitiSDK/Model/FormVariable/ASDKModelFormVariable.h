@@ -16,7 +16,7 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import "ASDKModelBase.h"
+#import "ASDKModelAttributable.h"
 
 typedef NS_ENUM(NSInteger, ASDKModelFormVariableType) {
     ASDKModelFormVariableTypeUndefined = -1,
@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, ASDKModelFormVariableType) {
     ASDKModelFormVariableTypePeople
 };
 
-@interface ASDKModelFormVariable : ASDKModelBase
+@interface ASDKModelFormVariable : ASDKModelAttributable
 
 @property (strong, nonatomic) NSString                  *name;
 @property (assign, nonatomic) ASDKModelFormVariableType type;

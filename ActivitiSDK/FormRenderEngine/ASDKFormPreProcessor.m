@@ -44,6 +44,7 @@
 @property (strong, nonatomic) NSMutableDictionary                   *formFieldOptionDataAccessorMap;
 @property (assign, nonatomic) ASDKServiceDataAccessorCachingPolicy  cachingPolicy;
 @property (strong, nonatomic) NSArray                               *processingFormFields;
+@property (strong, nonatomic) NSArray                               *formVariables;
 @property (strong, nonatomic) dispatch_group_t                      firstTrackDependenciesGroup;
 @property (strong, nonatomic) dispatch_group_t                      secondTrackDependenciesGroup;
 @property (strong, nonatomic) dispatch_queue_t                      preprocessorProcessingQueue;
@@ -53,6 +54,7 @@
 @property (strong, nonatomic) ASDKFormDataAccessor                  *fetchRestFieldValuesForDynamicTableInTaskFormDataAccessor;
 @property (strong, nonatomic) ASDKFormDataAccessor                  *fetchRestFieldValuesForStartFormDataAccessor;
 @property (strong, nonatomic) ASDKFormDataAccessor                  *fetchRestFieldValuesForDynamicTableInStartFormDataAccessor;
+@property (strong, nonatomic) ASDKFormDataAccessor                  *fetchFormVariablesDataAccessor;
 
 @end
 
@@ -96,6 +98,7 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
      * form description in accordance to the caching policy
      */
     [self handleDependencyGroupCreationForFormFields:formFields];
+    [self preProcessFormVariables];
     [self preprocessFormFields:formFields];
     
     ASDKModelTaskFormPreProcessorResponse *taskFormPreProcessorResponse = [ASDKModelTaskFormPreProcessorResponse new];
@@ -136,10 +139,15 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
 
 - (void)dataAccessor:(id<ASDKServiceDataAccessorProtocol>)dataAccessor
  didLoadDataResponse:(ASDKDataAccessorResponseBase *)response {
-    if (!response.error) {
-        ASDKDataAccessorResponseCollection *restFieldValuesResponse = (ASDKDataAccessorResponseCollection *)response;
-        ASDKModelFormField *correspondentFormField = [self.formFieldOptionDataAccessorMap objectForKey:dataAccessor];
-        correspondentFormField.formFieldOptions = restFieldValuesResponse.collection;
+    if (self.fetchFormVariablesDataAccessor == dataAccessor) {
+        ASDKDataAccessorResponseCollection *formVariableResponse = (ASDKDataAccessorResponseCollection *)response;
+        self.formVariables = formVariableResponse.collection;
+    } else {
+        if (!response.error) {
+            ASDKDataAccessorResponseCollection *restFieldValuesResponse = (ASDKDataAccessorResponseCollection *)response;
+            ASDKModelFormField *correspondentFormField = [self.formFieldOptionDataAccessorMap objectForKey:dataAccessor];
+            correspondentFormField.formFieldOptions = restFieldValuesResponse.collection;
+        }
     }
     
     if (response.isCachedData) {
@@ -155,6 +163,16 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
 
 #pragma mark -
 #pragma mark Private interface
+
+- (void)preProcessFormVariables {
+    if (ASDKServiceDataAccessorCachingPolicyHybrid == self.cachingPolicy) {
+        dispatch_group_enter(self.secondTrackDependenciesGroup);
+    }
+    dispatch_group_enter(self.firstTrackDependenciesGroup);
+    
+    self.fetchFormVariablesDataAccessor = [[ASDKFormDataAccessor alloc] initWithDelegate:self];
+    [self.fetchFormVariablesDataAccessor fetchFormVariablesForTaskID:self.taskID];
+}
 
 - (void)preprocessFormFields:(NSArray *)formFields {
     for (ASDKModelFormField *formField in formFields) {
@@ -261,6 +279,7 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
             NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:strongSelf.processingFormFields];
             NSArray *processedFormFieldsCopy = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
             formPreProcessorResponse.processedFormFields = processedFormFieldsCopy;
+            formPreProcessorResponse.formVariables = strongSelf.formVariables;
             
             [strongSelf.delegate didProcessedFormFieldsWithResponse:formPreProcessorResponse];
         }
@@ -274,6 +293,7 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
             NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:strongSelf.processingFormFields];
             NSArray *processedFormFieldsCopy = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
             formPreProcessorResponse.processedFormFields = processedFormFieldsCopy;
+            formPreProcessorResponse.formVariables = strongSelf.formVariables;
             
             [strongSelf.delegate didProcessedCachedFormFieldsWithResponse:formPreProcessorResponse];
         }

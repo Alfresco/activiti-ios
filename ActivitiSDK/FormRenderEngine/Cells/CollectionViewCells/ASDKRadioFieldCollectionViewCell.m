@@ -23,6 +23,7 @@
 #import "ASDKModelFormFieldValue.h"
 #import "ASDKModelRestFormField.h"
 #import "ASDKModelFormFieldOption.h"
+#import "ASDKModelFormVariable.h"
 
 // Constants
 #import "ASDKFormRenderEngineConstants.h"
@@ -85,7 +86,13 @@
         if ([restFormField.values.firstObject isKindOfClass:NSDictionary.class]) {
             descriptionLabelText = restFormField.values.firstObject[@"name"];
         } else {
-            descriptionLabelText = [NSString stringWithFormat:@"%@ (%@)", restFormField.values.firstObject, [self optionNameForRestFormField:restFormField]];
+            NSString *optionNameForRestFormField = [self optionNameForRestFormField:restFormField];
+            if (!optionNameForRestFormField) {
+                ASDKModelFormVariable *formVariable = restFormField.formFieldParams.values.firstObject;
+                optionNameForRestFormField = formVariable.value;
+            }
+            
+            descriptionLabelText = [NSString stringWithFormat:@"%@ (%@)", restFormField.values.firstObject, optionNameForRestFormField];
         }
     } else if (restFormField.representationType == ASDKModelFormFieldRepresentationTypeDropdown &&
                restFormField.restURL) {

@@ -1344,6 +1344,151 @@ withFormFieldValueRequestRepresentation:(ASDKFormFieldValueRequestRepresentation
 
 
 #pragma mark -
+#pragma mark Service - Fetch task form variables
+
+
+- (void)fetchFormVariablesForTaskID:(NSString *)taskID {
+    // Define operations
+    ASDKAsyncBlockOperation *remoteFormVariablesOperation = [self remoteFormVariablesForTaskID:taskID];
+    ASDKAsyncBlockOperation *cachedFormVariablesOperation = [self cachedFormVariablesOperationForTaskID:taskID];
+    ASDKAsyncBlockOperation *storeInCacheOperation = [self formVariablesStoreInCacheOperationForTaskID:taskID];
+    ASDKAsyncBlockOperation *completionOperation = [self defaultCompletionOperation];
+    
+    // Handle cache policies
+    switch (self.cachePolicy) {
+        case ASDKServiceDataAccessorCachingPolicyCacheOnly: {
+            [completionOperation addDependency:cachedFormVariablesOperation];
+            [self.processingQueue addOperations:@[cachedFormVariablesOperation,
+                                                  completionOperation]
+                              waitUntilFinished:NO];
+        }
+            break;
+            
+        case ASDKServiceDataAccessorCachingPolicyAPIOnly: {
+            [completionOperation addDependency:remoteFormVariablesOperation];
+            [self.processingQueue addOperations:@[remoteFormVariablesOperation,
+                                                  completionOperation]
+                              waitUntilFinished:NO];
+        }
+            break;
+            
+        case ASDKServiceDataAccessorCachingPolicyHybrid: {
+            [remoteFormVariablesOperation addDependency:cachedFormVariablesOperation];
+            [storeInCacheOperation addDependency:remoteFormVariablesOperation];
+            [completionOperation addDependency:storeInCacheOperation];
+            [self.processingQueue addOperations:@[cachedFormVariablesOperation,
+                                                  remoteFormVariablesOperation,
+                                                  storeInCacheOperation,
+                                                  completionOperation]
+                              waitUntilFinished:NO];
+        }
+            break;
+            
+        default: break;
+    }
+}
+
+- (ASDKAsyncBlockOperation *)remoteFormVariablesForTaskID:(NSString *)taskID {
+    if ([self.delegate respondsToSelector:@selector(dataAccessorDidStartFetchingRemoteData:)]) {
+        [self.delegate dataAccessorDidStartFetchingRemoteData:self];
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    ASDKAsyncBlockOperation *remoteFormDescriptionOperation = [ASDKAsyncBlockOperation blockOperationWithBlock:^(ASDKAsyncBlockOperation *operation) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [strongSelf.formNetworkService fetchFormVariablesForTaskWithID:taskID
+                                                       completionBlock:^(NSArray *formVariables, NSError *error) {
+                                                           if (operation.isCancelled) {
+                                                               [operation complete];
+                                                               return;
+                                                           }
+                                                           
+                                                           ASDKDataAccessorResponseCollection *responseCollection =
+                                                           [[ASDKDataAccessorResponseCollection alloc] initWithCollection:formVariables
+                                                                                                             isCachedData:NO
+                                                                                                                    error:error];
+                                                           
+                                                           if (weakSelf.delegate) {
+                                                               [weakSelf.delegate dataAccessor:weakSelf
+                                                                           didLoadDataResponse:responseCollection];
+                                                           }
+                                                           
+                                                           operation.result = responseCollection;
+                                                           [operation complete];
+        }];
+    }];
+    
+    return remoteFormDescriptionOperation;
+}
+
+- (ASDKAsyncBlockOperation *)cachedFormVariablesOperationForTaskID:(NSString *)taskID {
+    __weak typeof(self) weakSelf = self;
+    ASDKAsyncBlockOperation *cachedFormVariablesOperation = [ASDKAsyncBlockOperation blockOperationWithBlock:^(ASDKAsyncBlockOperation *operation) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [strongSelf.formCacheService fetchTaskFormVariablesForTaskID:taskID
+                                                 withCompletionBlock:^(NSArray *formVariables, NSError *error) {
+                                                     if (operation.isCancelled) {
+                                                         [operation complete];
+                                                         return;
+                                                     }
+                                                     
+                                                     if (!error) {
+                                                         ASDKLogVerbose(@"Form variables fetches successfully for taskID: %@", taskID);
+                                                         
+                                                         ASDKDataAccessorResponseCollection *responseCollection =
+                                                         [[ASDKDataAccessorResponseCollection alloc] initWithCollection:formVariables
+                                                                                                           isCachedData:YES
+                                                                                                                  error:error];
+                                                         if (weakSelf.delegate) {
+                                                             [weakSelf.delegate dataAccessor:weakSelf
+                                                                         didLoadDataResponse:responseCollection];
+                                                         }
+                                                     } else {
+                                                         ASDKLogError(@"An error occured while fetching cached form variables for taskID: %@. Reason: %@", taskID, error.localizedDescription);
+                                                     }
+                                                     
+                                                     [operation complete];
+        }];
+    }];
+    
+    return cachedFormVariablesOperation;
+}
+
+- (ASDKAsyncBlockOperation *)formVariablesStoreInCacheOperationForTaskID:(NSString *)taskID {
+    __weak typeof(self) weakSelf = self;
+    ASDKAsyncBlockOperation *storeInCacheOperation = [ASDKAsyncBlockOperation blockOperationWithBlock:^(ASDKAsyncBlockOperation *operation) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        ASDKAsyncBlockOperation *dependencyOperation = (ASDKAsyncBlockOperation *)operation.dependencies.firstObject;
+        ASDKDataAccessorResponseCollection *remoteResponse = dependencyOperation.result;
+        
+        if (remoteResponse.collection) {
+            [strongSelf.formCacheService cacheTaskFormVariables:remoteResponse.collection
+                                                      forTaskID:taskID
+                                            withCompletionBlock:^(NSError *error) {
+                                                if (operation.isCancelled) {
+                                                    [operation complete];
+                                                }
+                                                
+                                                if (!error) {
+                                                    ASDKLogVerbose(@"Form variables for task: %@ cached successfully", taskID);
+                                                    [weakSelf.formCacheService saveChanges];
+                                                } else {
+                                                    ASDKLogError(@"Encountered an error while caching form variables for task: %@", taskID);
+                                                }
+                                                
+                                                [operation complete];
+            }];
+        }
+    }];
+    
+    return storeInCacheOperation;
+}
+
+
+#pragma mark -
 #pragma mark Service - Fetch process instance form
 
 - (void)fetchFormDescriptionForProcessInstanceID:(NSString *)processInstanceID {

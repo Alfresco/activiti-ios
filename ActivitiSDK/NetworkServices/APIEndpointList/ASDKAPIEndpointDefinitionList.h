@@ -84,6 +84,7 @@ extern NSString * const kASDKAPITaskFormsPath;
 extern NSString * const kASDKAPIFormValuesPath;
 extern NSString * const kASDKAPIStartFormValuesPath;
 extern NSString * const kASDKAPISaveFormPath;
+extern NSString * const kASDKAPIVariablesFormPath;
 
 // User related
 extern NSString * const kASDKAPIUsersPath;

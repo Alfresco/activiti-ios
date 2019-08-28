@@ -25,6 +25,7 @@
 #import "ASDKModelFormField.h"
 #import "ASDKModelFormFieldOption.h"
 #import "ASDKModelFormFieldValue.h"
+#import "ASDKModelFormVariable.h"
 
 // Cells
 #import "ASDKTypeaheadValueTableViewCell.h"
@@ -159,11 +160,23 @@
         NSString *optionValue = nil;
         
         if (self.currentFormField.values.count) {
-            NSString *formFieldValue = self.currentFormField.values.firstObject;
+            NSString *labelValue = nil;
             
+            NSString *formFieldValue = self.currentFormField.values.firstObject;
             NSPredicate *metadataPredicate = [NSPredicate predicateWithFormat:@"modelID == %@", formFieldValue];
             ASDKModelFormFieldOption *formFieldOption = [self.currentFormField.formFieldOptions filteredArrayUsingPredicate:metadataPredicate].firstObject;
-            optionValue = [NSString stringWithFormat:@"%@ (%@)",formFieldValue, formFieldOption.name];
+            labelValue = formFieldOption.name;
+            
+            if (!labelValue) {
+                ASDKModelFormVariable *formVariable = self.currentFormField.formFieldParams.values.firstObject;
+                labelValue = formVariable.value;
+            }
+            
+            if (labelValue) {
+                optionValue = [NSString stringWithFormat:@"%@ (%@)",formFieldValue, labelValue];
+            } else {
+                optionValue = [NSString stringWithFormat:@"%@", formFieldValue];
+            }
         } else {
             optionValue = self.currentFormField.metadataValue.option.attachedValue;
         }

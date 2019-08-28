@@ -405,6 +405,8 @@
 
 - (void)handleTaskFormPreprocessorResponse:(ASDKModelFormPreProcessorResponse *)preProcessorResponse {
     self.formDescription.formFields = preProcessorResponse.processedFormFields;
+    self.formDescription.formVariables = preProcessorResponse.formVariables;
+    
     [self handleTaskFormCreationFromCurrentFormDescription];
 }
 

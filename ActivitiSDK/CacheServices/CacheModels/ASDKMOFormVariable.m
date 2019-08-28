@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (C) 2005-2018 Alfresco Software Limited.
  *
- * This file is part of the Alfresco Activiti Mobile SDK.
+ * This file is part of the Alfresco Activiti iOS App.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "ASDKMOFormVariable.h"
 
-@interface ASDKModelFormPreProcessorResponse : NSObject
+@implementation ASDKMOFormVariable
 
-@property (strong, nonatomic) NSArray   *processedFormFields;
-@property (strong, nonatomic) NSString  *dynamicTableFieldID;
-@property (strong, nonatomic) NSArray   *formVariables;
++ (NSString *)entityName {
+    return NSStringFromClass([self class]);
+}
 
 @end
