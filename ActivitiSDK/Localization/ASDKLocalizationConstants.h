@@ -65,6 +65,7 @@ extern NSString *kLocalizationFormContentPickerComponentBoxContentText;
 extern NSString *kLocalizationFormContentPickerComponentDriveText;
 extern NSString *kLocalizationContentPickerComponentNoContentText;
 extern NSString *kLocalizationContentPickerComponentNoContentNotEditableText;
+extern NSString *kLocalizationFormContentPickerComponentNotAuthorizedText;
 
 // People picker component
 extern NSString *kLocalizationPeoplePickerControllerTitleText;
@@ -102,3 +103,8 @@ extern NSString *kLocalizationDefaultFilterCompletedTasksText;
 extern NSString *kLocalizationDefaultFilterRunningProcessText;
 extern NSString *kLocalizationDefaultFilterCompletedProcessesText;
 extern NSString *kLocalizationDefaultFilterAllProcessesText;
+
+// Cloud decommissioning
+
+extern NSString *kLocalizationAlfrescoCloudAddressText;
+extern NSString *kLocalizationAlfrescoCloudDecommissionText;

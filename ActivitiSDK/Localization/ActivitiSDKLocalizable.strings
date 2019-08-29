@@ -58,6 +58,7 @@
 "formContentPickerComponentDriveContentText"                    = "Google Drive";
 "formContentPickerComponentNoContentText"                       = "You have no available content but you can add some by using the + button.";
 "formContentPickerComponentNoContentNotEditableText"            = "You have no available content.";
+"formContentPickerComponentNotAuthorizedText"                   = "The app is not authorized to access the Photos library. You can change that in the Settings app, on your device.";
 
 // Alert dialogs use
 "formAlertDialogOopsTitleText"                                  = "Oops...";
@@ -88,10 +89,13 @@
 "dynamicTableControllerIncompleteRowDataText"                   = "Are you sure you want to return without filling in the required field information? The row will be discarded.";
 
 // Default filter names
-"defaultFilterInvolvedTasksText"                         = "Involved tasks";
-"defaultFilterMyTasksText"                               = "My tasks";
-"defaultFilterQueuedTasksText"                           = "Queued tasks";
-"defaultFilterCompletedTasksText"                        = "Completed tasks";
-"defaultFilterRunningProcessesText"                      = "Running";
-"defaultFilterCompletedProcessesText"                    = "Completed";
-"defaultFilterAllProcessesText"                          = "All";
+"defaultFilterInvolvedTasksText"                                = "Involved tasks";
+"defaultFilterMyTasksText"                                      = "My tasks";
+"defaultFilterQueuedTasksText"                                  = "Queued tasks";
+"defaultFilterCompletedTasksText"                               = "Completed tasks";
+"defaultFilterRunningProcessesText"                             = "Running";
+"defaultFilterCompletedProcessesText"                           = "Completed";
+"defaultFilterAllProcessesText"                                 = "All";
+
+// Alfresco Cloud decommissioning
+"alfrescoCloudDecommissionText"                                 = "my.alfresco.com will be turned off on June 28, 2019. Please contact your Administrator for guidance on how to export your data from this service.";

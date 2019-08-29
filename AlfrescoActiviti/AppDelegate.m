@@ -67,8 +67,9 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
     [Fabric with:@[[Crashlytics class]]];
     
     // Buglife integration
-    // Add your API key to receive bug reports
-    [[Buglife sharedBuglife] startWithAPIKey:@"YOUR_KEY"];
+    // Add your email key to receive bug reports
+#warning Update Buglife report email
+    [[Buglife sharedBuglife] startWithEmail:@"you@yourdomain.com"];
     [Buglife sharedBuglife].invocationOptions = LIFEInvocationOptionsShake;
     [Buglife sharedBuglife].delegate = self;
     

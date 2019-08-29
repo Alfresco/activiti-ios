@@ -90,10 +90,8 @@
 #pragma mark Response handlers
 
 - (void)handleIntegrationAccountListResponse:(NSArray *)integrationAccountList {
-    // Filter out all but the Alfresco cloud services - development in progress
-    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"integrationServiceID == %@", kASDKAPIServiceIDAlfrescoCloud];
-    NSArray *filtereAccountsdArr = [integrationAccountList filteredArrayUsingPredicate:searchPredicate];
-    self.integrationAccountsArr = filtereAccountsdArr;
+    // Remove all integrations for now
+    self.integrationAccountsArr = [NSArray new];
 }
 
 

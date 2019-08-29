@@ -159,6 +159,7 @@ NSString *kLocalizationContentPickerComponentDriveContentText            = @"con
 NSString *kLocalizationContentPickerComponentIntegrationLoginErrorText   = @"contentPickerComponentIntegrationLoginErrorText";
 NSString *kLocalizationContentPickerComponentIntegrationLoginSuccessfullText = @"contentPickerComponentIntegrationLoginSuccessfullText";
 NSString *kLocalizationContentPickerComponentContentNotAvailableErrorText= @"contentPickerComponentContentNotAvailableErrorText";
+NSString *kLocalizationContentPickerComponentNotAuthorizedText           = @"contentPickerComponentNotAuthorizedText";
 
 
 #pragma mark -

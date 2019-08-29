@@ -226,13 +226,10 @@ typedef NS_ENUM(NSInteger, AFAPeoplePickerControllerState) {
                                         completionBlock:^(BOOL isUserInvolved, NSError *error) {
                                             __strong typeof(self) strongSelf = weakSelf;
                                             if (!error && isUserInvolved) {
-                                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                    weakSelf.progressHUD.textLabel.text = [NSString stringWithFormat:NSLocalizedString(kLocalizationPeoplePickerControllerInvolvingUserFormat, "User X is now involved text"), userFullName];
-                                                    weakSelf.progressHUD.detailTextLabel.text = nil;
-                                                    
-                                                    weakSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-                                                    weakSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-                                                });
+                                                strongSelf.progressHUD.textLabel.text = [NSString stringWithFormat:NSLocalizedString(kLocalizationPeoplePickerControllerInvolvingUserFormat, "User X is now involved text"), userFullName];
+                                                strongSelf.progressHUD.detailTextLabel.text = nil;
+                                                strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+                                                
                                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                     [weakSelf.progressHUD dismiss];
                                                 });
@@ -253,13 +250,10 @@ typedef NS_ENUM(NSInteger, AFAPeoplePickerControllerState) {
                                            completionBlock:^(ASDKModelTask *task, NSError *error) {
                                                __strong typeof(self) strongSelf = weakSelf;
                                                if (!error && task) {
-                                                   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                       weakSelf.progressHUD.textLabel.text = [NSString stringWithFormat:NSLocalizedString(kLocalizationPeoplePickerControllerAssigningUserFormat, "User X is now assigned text"), userFullName];
-                                                       weakSelf.progressHUD.detailTextLabel.text = nil;
-                                                       
-                                                       weakSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-                                                       weakSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-                                                   });
+                                                   strongSelf.progressHUD.textLabel.text = [NSString stringWithFormat:NSLocalizedString(kLocalizationPeoplePickerControllerAssigningUserFormat, "User X is now assigned text"), userFullName];
+                                                   strongSelf.progressHUD.detailTextLabel.text = nil;
+                                                   strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+                                                   
                                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                        [weakSelf.progressHUD dismiss];
                                                    });
@@ -281,13 +275,10 @@ typedef NS_ENUM(NSInteger, AFAPeoplePickerControllerState) {
                                                completionBlock:^(BOOL isUserInvolved, NSError *error) {
                                                    __strong typeof(self) strongSelf = weakSelf;
                                                    if (!error && !isUserInvolved) {
-                                                       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                           weakSelf.progressHUD.textLabel.text = [NSString stringWithFormat:NSLocalizedString(kLocalizationPeoplePickerControllerRemovingUserFormat, "User X is no longer involved text"), userFullName];
-                                                           weakSelf.progressHUD.detailTextLabel.text = nil;
-                                                           
-                                                           weakSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-                                                           weakSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-                                                       });
+                                                       strongSelf.progressHUD.textLabel.text = [NSString stringWithFormat:NSLocalizedString(kLocalizationPeoplePickerControllerRemovingUserFormat, "User X is no longer involved text"), userFullName];
+                                                       strongSelf.progressHUD.detailTextLabel.text = nil;
+                                                       strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+                                                       
                                                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                            [weakSelf.progressHUD dismiss];
                                                        });
@@ -303,19 +294,17 @@ typedef NS_ENUM(NSInteger, AFAPeoplePickerControllerState) {
 #pragma mark - Progress hud setup
 
 - (JGProgressHUD *)configureProgressHUD {
-    JGProgressHUD *hud = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
+    JGProgressHUD *hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
     JGProgressHUDFadeZoomAnimation *zoomAnimation = [JGProgressHUDFadeZoomAnimation animation];
     hud.animation = zoomAnimation;
-    hud.layoutChangeAnimationDuration = .0f;
-    hud.indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
     
     return hud;
 }
 
 - (void)showUserInvolvementIndicatorView {
     self.progressHUD.textLabel.text = nil;
-    JGProgressHUDIndeterminateIndicatorView *indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
+    JGProgressHUDIndeterminateIndicatorView *indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] init];
     [indicatorView setColor:[UIColor whiteColor]];
     self.progressHUD.indicatorView = indicatorView;
     [self.progressHUD showInView:self.navigationController.view];

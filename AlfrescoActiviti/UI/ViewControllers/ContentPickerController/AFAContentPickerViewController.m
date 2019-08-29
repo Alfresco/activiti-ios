@@ -116,19 +116,37 @@ UITableViewDelegate>
 #pragma mark Actions
 
 - (void)onTakePhoto {
-    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:self.imagePickerController
-                       animated:YES
-                     completion:nil];
+    __weak typeof(self) weakSelf = self;
+    [ASDKPhotosLibraryService requestPhotosAuthorizationWithCompletionBlock:^(BOOL isAuthorized) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        if (isAuthorized) {
+            strongSelf.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [strongSelf presentViewController:strongSelf.imagePickerController
+                                     animated:YES
+                                   completion:nil];
+        } else {
+            [strongSelf showGenericErrorAlertControllerWithMessage:NSLocalizedString(kLocalizationContentPickerComponentNotAuthorizedText, @"Access not granted error")];
+        }
+    }];
 }
 
 - (void)onSelectPhoto {
-    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    [self presentViewController:self.imagePickerController
-                       animated:YES
-                     completion:nil];
+    __weak typeof(self) weakSelf = self;
+    [ASDKPhotosLibraryService requestPhotosAuthorizationWithCompletionBlock:^(BOOL isAuthorized) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        if (isAuthorized) {
+            strongSelf.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            [strongSelf presentViewController:strongSelf.imagePickerController
+                                     animated:YES
+                                   completion:nil];
+        } else {
+            [strongSelf showGenericErrorAlertControllerWithMessage:NSLocalizedString(kLocalizationContentPickerComponentNotAuthorizedText, @"Access not granted error")];
+        }
+    }];
 }
 
 - (void)dowloadContent:(ASDKModelContent *)content
@@ -180,13 +198,9 @@ UITableViewDelegate>
                      content) {
                      strongSelf.currentSelectedDownloadResourceURL = downloadedContentURL;
                      
-                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                         weakSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationSuccessText, @"Success text");
-                         weakSelf.progressHUD.detailTextLabel.text = nil;
-                         
-                         weakSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-                         weakSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-                     });
+                     strongSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationSuccessText, @"Success text");
+                     strongSelf.progressHUD.detailTextLabel.text = nil;
+                     strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
                      
                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                          [weakSelf.progressHUD dismiss];
@@ -250,13 +264,9 @@ UITableViewDelegate>
             if (downloadedContentURL) {
                 strongSelf.currentSelectedDownloadResourceURL = downloadedContentURL;
                 
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    weakSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationSuccessText, @"Success text");
-                    weakSelf.progressHUD.detailTextLabel.text = nil;
-                    
-                    weakSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-                    weakSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-                });
+                strongSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationSuccessText, @"Success text");
+                strongSelf.progressHUD.detailTextLabel.text = nil;
+                strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [weakSelf.progressHUD dismiss];
@@ -312,13 +322,9 @@ UITableViewDelegate>
         __strong typeof(self) strongSelf = weakSelf;
         
         if (isContentUploaded) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                weakSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationSuccessText, @"Success text");
-                weakSelf.progressHUD.detailTextLabel.text = nil;
-                
-                weakSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-                weakSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-            });
+            strongSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationSuccessText, @"Success text");
+            strongSelf.progressHUD.detailTextLabel.text = nil;
+            strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf.progressHUD dismiss];
@@ -360,13 +366,7 @@ UITableViewDelegate>
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
     // Check if we are picking from the photo library
     if (UIImagePickerControllerSourceTypePhotoLibrary == picker.sourceType) {
-        PHAsset *selectedAsset = nil;
-        PHFetchResult *fetchResult = [PHAsset fetchAssetsWithALAssetURLs:@[info[UIImagePickerControllerReferenceURL]]
-                                                                 options:nil];
-        if (fetchResult && fetchResult.count) {
-            selectedAsset = [fetchResult lastObject];
-        }
-        
+        PHAsset *selectedAsset = info[UIImagePickerControllerPHAsset];
         if (selectedAsset) {
             CGRect cropRect = [info[UIImagePickerControllerCropRect] CGRectValue];
             NSInteger retinaScale = [UIScreen mainScreen].scale;
@@ -460,17 +460,75 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
 
 #pragma mark -
-#pragma mark - Progress hud setup
+#pragma mark Integration account selection handling
+
+- (void)handleIntegrationAccountSelectionForIndexPath:(NSIndexPath *)indexPath {
+    ASDKModelIntegrationAccount *account = self.dataSource.integrationAccounts[indexPath.row - AFAContentPickerCellTypeEnumCount];
+    
+    if (SHOW_CLOUD_DECOMMISSION_ALERT) {
+        __weak typeof(self) weakSelf = self;
+        [ASDKCloudDecommissionService
+         presentAlfrescoCloudDecommissioningAlertForAccount:account
+         inViewController:self
+         completionBlock:^{
+             __strong typeof(self) strongSelf = weakSelf;
+             [strongSelf handleIntegrationAccountSelectionWithAccount:account];
+         }];
+    } else {
+        [self handleIntegrationAccountSelectionWithAccount:account];
+    }
+}
+
+- (void)handleIntegrationAccountSelectionWithAccount:(ASDKModelIntegrationAccount *)account {
+    if (!account.isAccountAuthorized) {
+        __weak typeof(self) weakSelf = self;
+        self.integrationLoginController =
+        [[ASDKIntegrationLoginWebViewViewController alloc] initWithAuthorizationURL:account.authorizationURLString
+                                                                    completionBlock:^(BOOL isAuthorized) {
+                                                                        __strong typeof(self) strongSelf = weakSelf;
+                                                                        
+                                                                        if (isAuthorized) {
+                                                                            [strongSelf fetchIntegrationAccounts];
+                                                                            [strongSelf showIntegrationLoginHUD];
+                                                                            
+                                                                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                                                [weakSelf.progressHUD dismiss];
+                                                                                
+                                                                                if ([weakSelf.delegate respondsToSelector:@selector(userPickerIntegrationAccount:)]) {
+                                                                                    [weakSelf.delegate userPickerIntegrationAccount:account];
+                                                                                }
+                                                                            });
+                                                                        } else {
+                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                [weakSelf showGenericErrorAlertControllerWithMessage:NSLocalizedString(kLocalizationContentPickerComponentIntegrationLoginErrorText,  @"Cannot author integration service")];
+                                                                            });
+                                                                        }
+                                                                    }];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.integrationLoginController];
+        
+        [self presentViewController:navigationController
+                                 animated:YES
+                               completion:nil];
+    } else {
+        if ([self.delegate respondsToSelector:@selector(userPickerIntegrationAccount:)]) {
+            [self.delegate userPickerIntegrationAccount:account];
+        }
+    }
+}
+
+
+#pragma mark -
+#pragma mark Progress hud setup
 
 - (void)showUploadProgressHUD {
     self.progressHUD.textLabel.text = NSLocalizedString(kLocalizationContentPickerComponentUploadingText, @"Uploading text");
-    self.progressHUD.indicatorView = [[JGProgressHUDPieIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
+    self.progressHUD.indicatorView = [[JGProgressHUDPieIndicatorView alloc] init];
     [self.progressHUD showInView:self.navigationController.view];
 }
 
 - (void)showDownloadProgressHUD {
     self.progressHUD.textLabel.text = NSLocalizedString(kLocalizationContentPickerComponentDownloadingText, @"Downloading text");
-    self.progressHUD.indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
+    self.progressHUD.indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] init];
     [self.progressHUD showInView:self.navigationController.view];
 }
 
@@ -486,8 +544,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
     JGProgressHUDFadeZoomAnimation *zoomAnimation = [JGProgressHUDFadeZoomAnimation animation];
     hud.animation = zoomAnimation;
-    hud.layoutChangeAnimationDuration = .0f;
-    
     hud.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(kLocalizationContentPickerComponentProgressPercentFormat, @"Percent format"), 0];
     
     return hud;
@@ -529,41 +585,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
             break;
             
         default: { // Handle integration services cell behaviour
-            ASDKModelIntegrationAccount *account = self.dataSource.integrationAccounts[indexPath.row - AFAContentPickerCellTypeEnumCount];
-            
-            if (!account.isAccountAuthorized) {
-                __weak typeof(self) weakSelf = self;
-                self.integrationLoginController =
-                [[ASDKIntegrationLoginWebViewViewController alloc] initWithAuthorizationURL:account.authorizationURLString
-                                                                            completionBlock:^(BOOL isAuthorized) {
-                                                                                if (isAuthorized) {
-                                                                                    __strong typeof(self) strongSelf = weakSelf;
-                                                                                    [self fetchIntegrationAccounts];
-                                                                                    [strongSelf showIntegrationLoginHUD];
-                                                                                    
-                                                                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                                                        [weakSelf.progressHUD dismiss];
-                                                                                        
-                                                                                        if ([strongSelf.delegate respondsToSelector:@selector(userPickerIntegrationAccount:)]) {
-                                                                                            [strongSelf.delegate userPickerIntegrationAccount:account];
-                                                                                        }
-                                                                                    });
-                                                                                } else {
-                                                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                        [self showGenericErrorAlertControllerWithMessage:NSLocalizedString(kLocalizationContentPickerComponentIntegrationLoginErrorText,  @"Cannot author integration service")];
-                                                                                    });
-                                                                                }
-                                                                            }];
-                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.integrationLoginController];
-                
-                [self presentViewController:navigationController
-                                   animated:YES
-                                 completion:nil];
-            } else {
-                if ([self.delegate respondsToSelector:@selector(userPickerIntegrationAccount:)]) {
-                    [self.delegate userPickerIntegrationAccount:account];
-                }
-            }
+            [self handleIntegrationAccountSelectionForIndexPath:indexPath];
         }
             break;
     }

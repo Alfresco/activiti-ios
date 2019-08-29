@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0910"
-   version = "1.3">
+   LastUpgradeVersion = "1010"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Stamp version numbers"
+               scriptText = "if [ &quot;${CONFIGURATION}&quot; == &quot;Adhoc&quot; -o &quot;${CONFIGURATION}&quot; == &quot;Release&quot; ]; then&#10;    echo &quot;Pre-build: Stamping version number...&quot;&#10;    pwd&#10;    pushd ${PROJECT_DIR}&#10;    pwd&#10;    ./tools/set_build_number.sh &quot;${INFOPLIST_FILE}&quot; ${CF_BUNDLE_VERSION} &quot;AlfrescoActiviti/Resources/Settings.bundle/Root.plist&quot; &quot;PreferenceSpecifiers:1:DefaultValue&quot;&#10;    popd&#10;fi&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "1371944C1B6922DE00D4E1F0"
+                     BuildableName = "AlfrescoActiviti.app"
+                     BlueprintName = "AlfrescoActiviti"
+                     ReferencedContainer = "container:AlfrescoActiviti.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -123,7 +141,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Adhoc"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

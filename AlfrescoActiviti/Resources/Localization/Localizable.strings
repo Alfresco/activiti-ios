@@ -134,6 +134,7 @@
 "contentPickerComponentIntegrationLoginErrorText"        = "There seems to be an issue with authoring access to the current service.";
 "contentPickerComponentIntegrationLoginSuccessfullText"  = "You've been logged in successfully";
 "contentPickerComponentContentNotAvailableErrorText"     = "Your content is not yet available, try again in a few moments.";
+"contentPickerComponentNotAuthorizedText"                = "The app is not authorized to access the Photos library. You can change that in the Settings app, on your device.";
 
 // People picker component
 "peoplePickerControllerTitleText"                        = "Add person";

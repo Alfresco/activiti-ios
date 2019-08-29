@@ -10,7 +10,6 @@
 		130269691C57735800152F71 /* AFAFilterOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 130269681C57735800152F71 /* AFAFilterOptionTableViewCell.m */; };
 		13044FC91BFA178A008FF6E6 /* ASDKModelAmountFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = 13044FC71BFA178A008FF6E6 /* ASDKModelAmountFormField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13044FCA1BFA178A008FF6E6 /* ASDKModelAmountFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13044FC81BFA178A008FF6E6 /* ASDKModelAmountFormField.m */; };
-		1306E9701CC507D100BF696E /* ASDKFormRenderEngineDataSourceDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1306E96F1CC507D100BF696E /* ASDKFormRenderEngineDataSourceDelegate.h */; };
 		1306E9721CC8BCF600BF696E /* ASDKFormRenderEngineDataSourceDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1306E9711CC8BCF600BF696E /* ASDKFormRenderEngineDataSourceDelegate.h */; };
 		130761511BEA41970082EA2D /* ActivitiSDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 130761501BEA41970082EA2D /* ActivitiSDKLocalizable.strings */; };
 		130761541BEA42EC0082EA2D /* ASDKLocalizationConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 130761521BEA42EC0082EA2D /* ASDKLocalizationConstants.h */; };
@@ -273,6 +272,8 @@
 		135DB32E1B6B6920009138FC /* ASDKLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 135DB32C1B6B6920009138FC /* ASDKLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		135DB32F1B6B6920009138FC /* ASDKLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 135DB32D1B6B6920009138FC /* ASDKLogFormatter.m */; };
 		135EF5651B9090E800ECD1B2 /* NSDate+AFAStringTransformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 135EF5641B9090E800ECD1B2 /* NSDate+AFAStringTransformation.m */; };
+		135FE78421C1414200A380EC /* ASDKPhotosLibraryService.h in Headers */ = {isa = PBXBuildFile; fileRef = 135FE78221C1414100A380EC /* ASDKPhotosLibraryService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		135FE78521C1414200A380EC /* ASDKPhotosLibraryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 135FE78321C1414100A380EC /* ASDKPhotosLibraryService.m */; };
 		136130141D74788F00B23F71 /* AFATaskMembershipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 136130131D74788F00B23F71 /* AFATaskMembershipTableViewCell.m */; };
 		1363A23D1D634315009EAC54 /* ASDKCSRFTokenStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1363A23B1D634315009EAC54 /* ASDKCSRFTokenStorage.h */; };
 		1363A23E1D634315009EAC54 /* ASDKCSRFTokenStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1363A23C1D634315009EAC54 /* ASDKCSRFTokenStorage.m */; };
@@ -441,6 +442,8 @@
 		139564E71C20571100BF6153 /* ASDKModelFileSourceFolderTreeElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 139564E51C20571100BF6153 /* ASDKModelFileSourceFolderTreeElement.h */; };
 		139564E81C20571100BF6153 /* ASDKModelFileSourceFolderTreeElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 139564E61C20571100BF6153 /* ASDKModelFileSourceFolderTreeElement.m */; };
 		139564EB1C2156B200BF6153 /* ASDKAppNetworkServiceProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 139564EA1C2156B200BF6153 /* ASDKAppNetworkServiceProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1395BEA121DE323B00BEB57A /* ASDKCloudDecommissionService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1395BE9F21DE323B00BEB57A /* ASDKCloudDecommissionService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1395BEA221DE323B00BEB57A /* ASDKCloudDecommissionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1395BEA021DE323B00BEB57A /* ASDKCloudDecommissionService.m */; };
 		1395C1721DD2087400CC2AB3 /* ProcessDefinitionListResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 1395C16F1DD207ED00CC2AB3 /* ProcessDefinitionListResponse.json */; };
 		1395C1751DD20E2E00CC2AB3 /* ProcessInstanceListResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 1395C1731DD20A7400CC2AB3 /* ProcessInstanceListResponse.json */; };
 		1395CD9B1BE7AF73004C320D /* ASDKFormRenderEngineDataSourceProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1395CD9A1BE7AF73004C320D /* ASDKFormRenderEngineDataSourceProtocol.h */; };
@@ -908,7 +911,6 @@
 		130269681C57735800152F71 /* AFAFilterOptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFAFilterOptionTableViewCell.m; path = UI/Cells/FilterOptionCell/AFAFilterOptionTableViewCell.m; sourceTree = "<group>"; };
 		13044FC71BFA178A008FF6E6 /* ASDKModelAmountFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKModelAmountFormField.h; path = Model/AmountFormField/ASDKModelAmountFormField.h; sourceTree = "<group>"; };
 		13044FC81BFA178A008FF6E6 /* ASDKModelAmountFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKModelAmountFormField.m; path = Model/AmountFormField/ASDKModelAmountFormField.m; sourceTree = "<group>"; };
-		1306E96F1CC507D100BF696E /* ASDKFormRenderEngineDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKFormRenderEngineDataSourceDelegate.h; path = FormRenderEngine/Protocol/ASDKFormRenderEngineDataSourceDelegate.h; sourceTree = "<group>"; };
 		1306E9711CC8BCF600BF696E /* ASDKFormRenderEngineDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKFormRenderEngineDataSourceDelegate.h; path = FormRenderEngine/Protocol/ASDKFormRenderEngineDataSourceDelegate.h; sourceTree = "<group>"; };
 		130761501BEA41970082EA2D /* ActivitiSDKLocalizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ActivitiSDKLocalizable.strings; path = Localization/ActivitiSDKLocalizable.strings; sourceTree = "<group>"; };
 		130761521BEA42EC0082EA2D /* ASDKLocalizationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKLocalizationConstants.h; path = Localization/ASDKLocalizationConstants.h; sourceTree = "<group>"; };
@@ -1077,8 +1079,8 @@
 		133F05441BD52A9000C22CFD /* ASDKFormNetworkServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKFormNetworkServices.h; path = NetworkServices/Proxy/FormNetworkServices/ASDKFormNetworkServices.h; sourceTree = "<group>"; };
 		133F05451BD52A9000C22CFD /* ASDKFormNetworkServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKFormNetworkServices.m; path = NetworkServices/Proxy/FormNetworkServices/ASDKFormNetworkServices.m; sourceTree = "<group>"; };
 		133F05491BD52B5000C22CFD /* ASDKFormNetworkServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKFormNetworkServiceProtocol.h; path = NetworkServices/Proxy/FormNetworkServices/Protocol/ASDKFormNetworkServiceProtocol.h; sourceTree = "<group>"; };
-		13442A17208872340055790E /* ASDKNetworkDelayedOperationSaveFormService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKNetworkDelayedOperationSaveFormService.h; path = ../CacheServices/NetworkDelayedOperations/SaveFormService/ASDKNetworkDelayedOperationSaveFormService.h; sourceTree = "<group>"; };
-		13442A18208872340055790E /* ASDKNetworkDelayedOperationSaveFormService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKNetworkDelayedOperationSaveFormService.m; path = ../CacheServices/NetworkDelayedOperations/SaveFormService/ASDKNetworkDelayedOperationSaveFormService.m; sourceTree = "<group>"; };
+		13442A17208872340055790E /* ASDKNetworkDelayedOperationSaveFormService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKNetworkDelayedOperationSaveFormService.h; sourceTree = "<group>"; };
+		13442A18208872340055790E /* ASDKNetworkDelayedOperationSaveFormService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKNetworkDelayedOperationSaveFormService.m; sourceTree = "<group>"; };
 		13442A1D2088F1860055790E /* ASDKDataAccessorResponseFormFieldValueRepresentations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKDataAccessorResponseFormFieldValueRepresentations.h; path = ActivitiSDK/Model/DataAccessorResponseFormFieldValueRepresentation/ASDKDataAccessorResponseFormFieldValueRepresentations.h; sourceTree = "<group>"; };
 		13442A1E2088F1860055790E /* ASDKDataAccessorResponseFormFieldValueRepresentations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKDataAccessorResponseFormFieldValueRepresentations.m; path = ActivitiSDK/Model/DataAccessorResponseFormFieldValueRepresentation/ASDKDataAccessorResponseFormFieldValueRepresentations.m; sourceTree = "<group>"; };
 		13442A22208A102F0055790E /* ASDKDataAccessorOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKDataAccessorOperation.h; path = CacheServices/DataAccessorOperation/ASDKDataAccessorOperation.h; sourceTree = "<group>"; };
@@ -1204,6 +1206,8 @@
 		135DB32D1B6B6920009138FC /* ASDKLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKLogFormatter.m; path = Logging/ASDKLogFormatter.m; sourceTree = "<group>"; };
 		135EF5631B9090E800ECD1B2 /* NSDate+AFAStringTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+AFAStringTransformation.h"; path = "Business/Categories/NSDate+AFAStringTransformation.h"; sourceTree = "<group>"; };
 		135EF5641B9090E800ECD1B2 /* NSDate+AFAStringTransformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+AFAStringTransformation.m"; path = "Business/Categories/NSDate+AFAStringTransformation.m"; sourceTree = "<group>"; };
+		135FE78221C1414100A380EC /* ASDKPhotosLibraryService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKPhotosLibraryService.h; path = FormRenderEngine/PhotosLibraryService/ASDKPhotosLibraryService.h; sourceTree = "<group>"; };
+		135FE78321C1414100A380EC /* ASDKPhotosLibraryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKPhotosLibraryService.m; path = FormRenderEngine/PhotosLibraryService/ASDKPhotosLibraryService.m; sourceTree = "<group>"; };
 		136130121D74788F00B23F71 /* AFATaskMembershipTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFATaskMembershipTableViewCell.h; path = UI/Cells/TaskMembershipCell/AFATaskMembershipTableViewCell.h; sourceTree = "<group>"; };
 		136130131D74788F00B23F71 /* AFATaskMembershipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFATaskMembershipTableViewCell.m; path = UI/Cells/TaskMembershipCell/AFATaskMembershipTableViewCell.m; sourceTree = "<group>"; };
 		1363A23B1D634315009EAC54 /* ASDKCSRFTokenStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKCSRFTokenStorage.h; path = NetworkServices/CSRFTokenStorage/ASDKCSRFTokenStorage.h; sourceTree = "<group>"; };
@@ -1410,6 +1414,8 @@
 		139564E51C20571100BF6153 /* ASDKModelFileSourceFolderTreeElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKModelFileSourceFolderTreeElement.h; path = Model/FormFieldFileSourceFolderTreeElement/ASDKModelFileSourceFolderTreeElement.h; sourceTree = "<group>"; };
 		139564E61C20571100BF6153 /* ASDKModelFileSourceFolderTreeElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKModelFileSourceFolderTreeElement.m; path = Model/FormFieldFileSourceFolderTreeElement/ASDKModelFileSourceFolderTreeElement.m; sourceTree = "<group>"; };
 		139564EA1C2156B200BF6153 /* ASDKAppNetworkServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKAppNetworkServiceProtocol.h; path = NetworkServices/Proxy/AppNetworkServices/Protocol/ASDKAppNetworkServiceProtocol.h; sourceTree = "<group>"; };
+		1395BE9F21DE323B00BEB57A /* ASDKCloudDecommissionService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKCloudDecommissionService.h; path = FormRenderEngine/CloudDecommissionService/ASDKCloudDecommissionService.h; sourceTree = "<group>"; };
+		1395BEA021DE323B00BEB57A /* ASDKCloudDecommissionService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKCloudDecommissionService.m; path = FormRenderEngine/CloudDecommissionService/ASDKCloudDecommissionService.m; sourceTree = "<group>"; };
 		1395C16F1DD207ED00CC2AB3 /* ProcessDefinitionListResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ProcessDefinitionListResponse.json; path = Resources/JSONResponses/ProcessDefinitionListResponse.json; sourceTree = "<group>"; };
 		1395C1731DD20A7400CC2AB3 /* ProcessInstanceListResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ProcessInstanceListResponse.json; path = Resources/JSONResponses/ProcessInstanceListResponse.json; sourceTree = "<group>"; };
 		1395C1761DD22FF200CC2AB3 /* ProcessInstanceDetailsResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ProcessInstanceDetailsResponse.json; path = Resources/JSONResponses/ProcessInstanceDetailsResponse.json; sourceTree = "<group>"; };
@@ -1754,10 +1760,11 @@
 		13FFF40E1C43A6E600550747 /* AFAApplicationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFAApplicationListViewController.h; path = UI/ViewControllers/ApplicationScreen/AFAApplicationListViewController.h; sourceTree = "<group>"; };
 		13FFF40F1C43A6E600550747 /* AFAApplicationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFAApplicationListViewController.m; path = UI/ViewControllers/ApplicationScreen/AFAApplicationListViewController.m; sourceTree = "<group>"; };
 		1B3E20A3E70D86D0A041EC8A /* Pods_Shared_AlfrescoActiviti.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_AlfrescoActiviti.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C7E752A64E6EF9D22042B1D /* Pods-ActivitiSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActivitiSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ActivitiSDKTests/Pods-ActivitiSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		28522234EFEA7F8BB6062D0A /* Pods-Shared-ActivitiSDK.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-ActivitiSDK/Pods-Shared-ActivitiSDK.appstore.xcconfig"; sourceTree = "<group>"; };
 		2906F80B9C09C2F5BFFC9191 /* Pods_AlfrescoActivitiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlfrescoActivitiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E25276BEF85C0F448D1A4CE /* Pods-Shared-AlfrescoActiviti.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-AlfrescoActiviti.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti.adhoc.xcconfig"; sourceTree = "<group>"; };
 		3218291E5821721F400F9688 /* Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AB7497D9C2392B1A892C777 /* Pods-Shared-ActivitiSDK.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-ActivitiSDK/Pods-Shared-ActivitiSDK.adhoc.xcconfig"; sourceTree = "<group>"; };
 		410958C8FA815DD4ECEC4FC7 /* Pods-AlfrescoActivitiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlfrescoActivitiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlfrescoActivitiTests/Pods-AlfrescoActivitiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		43830D778594FE658501F747 /* Pods_ActivitiSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ActivitiSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7597AEE71B821E9500F8B5DE /* AFAActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFAActivityView.h; path = UI/Components/ActivitiView/AFAActivityView.h; sourceTree = "<group>"; };
@@ -1903,6 +1910,7 @@
 		8DEA25431C7E0D3400BF376F /* ASDKDateFormFieldDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKDateFormFieldDetailsViewController.m; path = FormRenderEngine/Controllers/FormFieldDetailControllers/ASDKDateFormFieldDetailsViewController.m; sourceTree = "<group>"; };
 		8DEA25461C7E0D9E00BF376F /* ASDKFormDateFieldCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKFormDateFieldCollectionViewCell.h; path = FormRenderEngine/Cells/CollectionViewCells/ASDKFormDateFieldCollectionViewCell.h; sourceTree = "<group>"; };
 		8DEA25471C7E0D9E00BF376F /* ASDKFormDateFieldCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKFormDateFieldCollectionViewCell.m; path = FormRenderEngine/Cells/CollectionViewCells/ASDKFormDateFieldCollectionViewCell.m; sourceTree = "<group>"; };
+		92BA6761AF22BC77B19E9753 /* Pods-AlfrescoActivitiTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlfrescoActivitiTests.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-AlfrescoActivitiTests/Pods-AlfrescoActivitiTests.adhoc.xcconfig"; sourceTree = "<group>"; };
 		A8116C6AA8C2812C26F400F9 /* Pods-Shared-AlfrescoActiviti.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-AlfrescoActiviti.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti.release.xcconfig"; sourceTree = "<group>"; };
 		AAA4DC332CB4E934BFB7DBF5 /* Pods-Shared-ActivitiSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-ActivitiSDK/Pods-Shared-ActivitiSDK.release.xcconfig"; sourceTree = "<group>"; };
 		B3F3872F0ABF6037F73092F4 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1922,7 +1930,9 @@
 		B9B08C4416C90E2F9EDB15C2 /* Pods-ActivitiSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActivitiSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ActivitiSDKTests/Pods-ActivitiSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BA43C477693B190D3F010536 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK-ActivitiSDKTests.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests.appstore.xcconfig"; sourceTree = "<group>"; };
 		C10331654767B56DCCA9DCAF /* Pods_Shared_ActivitiSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_ActivitiSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E30248B522AAA083006C5A3B /* AlfrescoActiviti.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AlfrescoActiviti.xcconfig; sourceTree = "<group>"; };
 		EC312161980F1E807A9C95B2 /* Pods-Shared-ActivitiSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-ActivitiSDK/Pods-Shared-ActivitiSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		F9DF599530562EE7DD5400D9 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2732,6 +2742,7 @@
 		133B7FE01B78FA3300C17D06 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E30248B522AAA083006C5A3B /* AlfrescoActiviti.xcconfig */,
 				1310F2F31D927481002FF53F /* AlfrescoActiviti.entitlements */,
 				13BDA7401B7B632500A2CE40 /* Localization */,
 				137194621B6922DE00D4E1F0 /* LaunchScreen.xib */,
@@ -2929,7 +2940,8 @@
 				13442A17208872340055790E /* ASDKNetworkDelayedOperationSaveFormService.h */,
 				13442A18208872340055790E /* ASDKNetworkDelayedOperationSaveFormService.m */,
 			);
-			path = SaveFormService;
+			name = SaveFormService;
+			path = CacheServices/NetworkDelayedOperations/SaveFormService;
 			sourceTree = "<group>";
 		};
 		1345942A1BDA4B8100A234BD /* FormTextFieldCell */ = {
@@ -3097,6 +3109,15 @@
 				13CFF33E1BBBBD5300D3DEB6 /* NSDate+AFADateAdditions.m */,
 			);
 			name = NSDate;
+			sourceTree = "<group>";
+		};
+		135FE78621C1414700A380EC /* PhotosLibraryService */ = {
+			isa = PBXGroup;
+			children = (
+				135FE78221C1414100A380EC /* ASDKPhotosLibraryService.h */,
+				135FE78321C1414100A380EC /* ASDKPhotosLibraryService.m */,
+			);
+			name = PhotosLibraryService;
 			sourceTree = "<group>";
 		};
 		136130151D74789400B23F71 /* TaskMembershipCell */ = {
@@ -3426,7 +3447,6 @@
 				1371944E1B6922DE00D4E1F0 /* Products */,
 				177C913B08C211EC66C0256F /* Pods */,
 				318B5A1183698EF8116993DD /* Frameworks */,
-				13CD88321F7BD7B6001A16D4 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3798,6 +3818,8 @@
 				139050E91CB3FE37004FEA89 /* VisibilityConditionsProcessor */,
 				13EBEC9D1CF73CD700EC8F96 /* FormColorSchemeManager */,
 				13EBECA51CF8470F00EC8F96 /* FormEngineActionHandler */,
+				135FE78621C1414700A380EC /* PhotosLibraryService */,
+				1395BEA321DE324100BEB57A /* CloudDecommissionService */,
 			);
 			name = FormRenderEngine;
 			sourceTree = "<group>";
@@ -4215,6 +4237,15 @@
 				139564EA1C2156B200BF6153 /* ASDKAppNetworkServiceProtocol.h */,
 			);
 			name = Protocol;
+			sourceTree = "<group>";
+		};
+		1395BEA321DE324100BEB57A /* CloudDecommissionService */ = {
+			isa = PBXGroup;
+			children = (
+				1395BE9F21DE323B00BEB57A /* ASDKCloudDecommissionService.h */,
+				1395BEA021DE323B00BEB57A /* ASDKCloudDecommissionService.m */,
+			);
+			name = CloudDecommissionService;
 			sourceTree = "<group>";
 		};
 		1395C16E1DD207A900CC2AB3 /* Images */ = {
@@ -5270,14 +5301,6 @@
 			name = CoreDataCacheService;
 			sourceTree = "<group>";
 		};
-		13CD88321F7BD7B6001A16D4 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				1306E96F1CC507D100BF696E /* ASDKFormRenderEngineDataSourceDelegate.h */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		13CD883B1F7D19BB001A16D4 /* ProcessInstanceDataAccessor */ = {
 			isa = PBXGroup;
 			children = (
@@ -5976,8 +5999,6 @@
 		177C913B08C211EC66C0256F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B9B08C4416C90E2F9EDB15C2 /* Pods-ActivitiSDKTests.debug.xcconfig */,
-				1C7E752A64E6EF9D22042B1D /* Pods-ActivitiSDKTests.release.xcconfig */,
 				410958C8FA815DD4ECEC4FC7 /* Pods-AlfrescoActivitiTests.debug.xcconfig */,
 				12DF594F694C6D6620E26176 /* Pods-AlfrescoActivitiTests.release.xcconfig */,
 				EC312161980F1E807A9C95B2 /* Pods-Shared-ActivitiSDK.debug.xcconfig */,
@@ -5990,6 +6011,10 @@
 				28522234EFEA7F8BB6062D0A /* Pods-Shared-ActivitiSDK.appstore.xcconfig */,
 				BA43C477693B190D3F010536 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.appstore.xcconfig */,
 				0D10B7C54358B16E7E753C7A /* Pods-Shared-AlfrescoActiviti.appstore.xcconfig */,
+				92BA6761AF22BC77B19E9753 /* Pods-AlfrescoActivitiTests.adhoc.xcconfig */,
+				3AB7497D9C2392B1A892C777 /* Pods-Shared-ActivitiSDK.adhoc.xcconfig */,
+				F9DF599530562EE7DD5400D9 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig */,
+				2E25276BEF85C0F448D1A4CE /* Pods-Shared-AlfrescoActiviti.adhoc.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -6557,6 +6582,7 @@
 				138C48BA1C50DDAD00B4F4FB /* ASDKProcessInstanceNetworkServices.h in Headers */,
 				13479E8D2046AD170057B898 /* ASDKModelDateFormField.h in Headers */,
 				137FC4311C68C94900243715 /* ASDKFormRenderEngineValueTransactionsProtocol.h in Headers */,
+				135FE78421C1414200A380EC /* ASDKPhotosLibraryService.h in Headers */,
 				1347E50A1F3C8EB900EC277F /* ASDKTaskFilterMapCacheMapper.h in Headers */,
 				139564E21C20512500BF6153 /* ASDKModelFileSourceFolder.h in Headers */,
 				8D3B50EF1C8733C5005BEEEB /* ASDKFormPreProcessorProtocol.h in Headers */,
@@ -6632,6 +6658,7 @@
 				137B94451BD671BA00134BF1 /* ASDKTaskFormParserOperationWorker.h in Headers */,
 				139E53FF1C215C9A00CE4674 /* ASDKAppNetworkServices.h in Headers */,
 				13E830801B6A4A9B0028901A /* ASDKServicePathFactory.h in Headers */,
+				1395BEA121DE323B00BEB57A /* ASDKCloudDecommissionService.h in Headers */,
 				139026ED1F388F07009BB14A /* ASDKTaskCacheMapper.h in Headers */,
 				135682A12092098400748703 /* ASDKMOUser.h in Headers */,
 				13442A24208A102F0055790E /* ASDKDataAccessorOperation.h in Headers */,
@@ -6810,7 +6837,6 @@
 				13A578651CEDD63C0014B6FD /* ASDKIntegrationFolderContentDataSource.h in Headers */,
 				8D3A51EC1C8089F200FF9A00 /* ASDKUserNetworkServices.h in Headers */,
 				1356829E2092098400748703 /* ASDKMOServerConfiguration.h in Headers */,
-				1306E9701CC507D100BF696E /* ASDKFormRenderEngineDataSourceDelegate.h in Headers */,
 				138C48B51C50DC2B00B4F4FB /* ASDKProcessInstanceNetworkServiceProtocol.h in Headers */,
 				1394F66A1F028A68005C8C32 /* ASDKPersistenceStack.h in Headers */,
 				137B94601BD796B700134BF1 /* ASDKFormCollectionViewController.h in Headers */,
@@ -6866,7 +6892,6 @@
 				1371949A1B6924DF00D4E1F0 /* Embed Frameworks */,
 				131E27961BA2BF91009586C1 /* Version increment script */,
 				2B0FCEE644C5D6819A7ADB7E /* [CP] Embed Pods Frameworks */,
-				6BD16CE0BCB1F3E226198B90 /* [CP] Copy Pods Resources */,
 				133A21501D537C98000A7661 /* Fabric */,
 			);
 			buildRules = (
@@ -6887,8 +6912,6 @@
 				137194651B6922DE00D4E1F0 /* Sources */,
 				137194661B6922DE00D4E1F0 /* Frameworks */,
 				137194671B6922DE00D4E1F0 /* Resources */,
-				141CBF048E5C3F0BFEBBAE04 /* [CP] Embed Pods Frameworks */,
-				696FCC121309BA3F4E1E0E94 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -6910,7 +6933,6 @@
 				1371947B1B6924DE00D4E1F0 /* Headers */,
 				1371947C1B6924DE00D4E1F0 /* Resources */,
 				7597AEF01B82580800F8B5DE /* Embed Pods Framework */,
-				DD045FB387EF4B9E1902205D /* [CP] Copy Pods Resources */,
 				13F0E9311D368A0E00BF10A9 /* Cocoapods framework clean script */,
 			);
 			buildRules = (
@@ -6931,7 +6953,6 @@
 				137194851B6924DF00D4E1F0 /* Frameworks */,
 				137194861B6924DF00D4E1F0 /* Resources */,
 				A3BB4420BE1B0DA86FEDAFEB /* [CP] Embed Pods Frameworks */,
-				7649CFA1CFBD1DB6FD468635 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -6950,7 +6971,7 @@
 		137194451B6922DE00D4E1F0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Emanuel Lupu-Marinei";
 				TargetAttributes = {
 					1371944C1B6922DE00D4E1F0 = {
@@ -6960,7 +6981,6 @@
 					};
 					137194681B6922DE00D4E1F0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = W8N95J537P;
 						ProvisioningStyle = Manual;
 						TestTargetID = 1371944C1B6922DE00D4E1F0;
 					};
@@ -6971,7 +6991,6 @@
 					};
 					137194871B6924DF00D4E1F0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = W8N95J537P;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -7117,29 +7136,15 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
 		};
-		141CBF048E5C3F0BFEBBAE04 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlfrescoActivitiTests/Pods-AlfrescoActivitiTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2B0FCEE644C5D6819A7ADB7E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Buglife/Buglife.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantle/Mantle.framework",
@@ -7147,13 +7152,14 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Buglife.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantle.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5CE28D3042B888D091891AF7 /* [CP] Check Pods Manifest.lock */ = {
@@ -7174,36 +7180,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		696FCC121309BA3F4E1E0E94 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlfrescoActivitiTests/Pods-AlfrescoActivitiTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6BD16CE0BCB1F3E226198B90 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7597AEF01B82580800F8B5DE /* Embed Pods Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -7217,21 +7193,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shared-ActivitiSDK/Pods-Shared-ActivitiSDK-frameworks.sh\"";
-		};
-		7649CFA1CFBD1DB6FD468635 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		8070C399F97168FC84A3011C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7257,7 +7218,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
@@ -7274,7 +7235,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B6C219D10BC87270A12414B5 /* [CP] Check Pods Manifest.lock */ = {
@@ -7293,21 +7254,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DD045FB387EF4B9E1902205D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shared-ActivitiSDK/Pods-Shared-ActivitiSDK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F8B8A090E6DEE659522134EF /* [CP] Check Pods Manifest.lock */ = {
@@ -7535,6 +7481,7 @@
 				13E830751B6A303B0028901A /* ASDKRequestOperationManager.m in Sources */,
 				8D9E6AE01CBE4009001EA2CA /* ASDKDynamicTableRenderDataSource.m in Sources */,
 				8D6ABE711CBCDF03008FACB4 /* ASDKDynamicTableRowHeaderTableViewCell.m in Sources */,
+				1395BEA221DE323B00BEB57A /* ASDKCloudDecommissionService.m in Sources */,
 				13D3CBD91D2CFD4500A19F48 /* ASDKFormTabFieldCollectionViewCell.m in Sources */,
 				13DC2BFA1F2895F10016CFB6 /* ASDKApplicationCacheService.m in Sources */,
 				13F0E9351D3E59D200BF10A9 /* ASDKFormDisplayTextFieldCollectionViewCell.m in Sources */,
@@ -7556,6 +7503,7 @@
 				13771D2A200E218500AA3160 /* ASDKProcessDefinitionCacheMapper.m in Sources */,
 				132A18F61F273BB500966D49 /* ASDKCacheService.m in Sources */,
 				8D8F86051C8ED62000356A5B /* ASDKFormAttachFieldCollectionViewCell.m in Sources */,
+				135FE78521C1414200A380EC /* ASDKPhotosLibraryService.m in Sources */,
 				8D6ABE791CBCEA22008FACB4 /* ASDKDynamicTableFormFieldDetailsViewController.m in Sources */,
 				130D55512087648900BBDE74 /* ASDKFormFieldValueRepresentationCacheMapper.m in Sources */,
 				1319EF551C157EEF003FA6C1 /* UIFont+ASDKGlyphicons.m in Sources */,
@@ -7882,12 +7830,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -7902,6 +7852,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = W8N95J537P;
 				ENABLE_BITCODE = YES;
+				ENABLE_CLOUD_DECOMMISSION_ALERT = 0;
 				ENABLE_REPORT_TOOL = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -7913,6 +7864,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 					"REPORT_TOOL=${ENABLE_REPORT_TOOL}",
+					"SHOW_CLOUD_DECOMMISSION_ALERT=${ENABLE_CLOUD_DECOMMISSION_ALERT}",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -7921,7 +7873,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Alfresco Activiti";
@@ -7944,12 +7896,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -7964,19 +7918,23 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = W8N95J537P;
 				ENABLE_BITCODE = YES;
+				ENABLE_CLOUD_DECOMMISSION_ALERT = 0;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_REPORT_TOOL = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "REPORT_TOOL=${ENABLE_REPORT_TOOL}";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"REPORT_TOOL=${ENABLE_REPORT_TOOL}",
+					"SHOW_CLOUD_DECOMMISSION_ALERT=${ENABLE_CLOUD_DECOMMISSION_ALERT}",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "Alfresco Activiti";
 				PROVISIONING_PROFILE = "213b908d-3e87-4ef3-b7fb-fe10925db92e";
@@ -7992,7 +7950,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AlfrescoActiviti/AlfrescoActiviti.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = W8N95J537P;
+				ENABLE_CLOUD_DECOMMISSION_ALERT = 1;
 				INFOPLIST_FILE = AlfrescoActiviti/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alfresco.activiti;
@@ -8007,10 +7967,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AlfrescoActiviti/AlfrescoActiviti.entitlements;
+				DEVELOPMENT_TEAM = W8N95J537P;
+				ENABLE_CLOUD_DECOMMISSION_ALERT = 1;
 				INFOPLIST_FILE = AlfrescoActiviti/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alfresco.activiti;
 				PRODUCT_NAME = AlfrescoActiviti;
+				PROVISIONING_PROFILE_SPECIFIER = "Activiti Mobile App Store Profile";
 			};
 			name = Release;
 		};
@@ -8019,6 +7982,7 @@
 			baseConfigurationReference = 410958C8FA815DD4ECEC4FC7 /* Pods-AlfrescoActivitiTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -8036,6 +8000,7 @@
 			baseConfigurationReference = 12DF594F694C6D6620E26176 /* Pods-AlfrescoActivitiTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AlfrescoActivitiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alfresco.activiti.$(PRODUCT_NAME:rfc1034identifier)";
@@ -8106,6 +8071,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 02234AA2C24DA62A0D11A368 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -8122,6 +8088,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B3F3872F0ABF6037F73092F4 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				INFOPLIST_FILE = ActivitiSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -8130,7 +8097,7 @@
 			};
 			name = Release;
 		};
-		13EC7A201E71AEEE0073CB5E /* AppStore */ = {
+		E31E2A0922AA93F80068B449 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -8143,12 +8110,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -8163,19 +8132,23 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = W8N95J537P;
 				ENABLE_BITCODE = YES;
+				ENABLE_CLOUD_DECOMMISSION_ALERT = 0;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_REPORT_TOOL = 0;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "REPORT_TOOL=${ENABLE_REPORT_TOOL}";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"REPORT_TOOL=${ENABLE_REPORT_TOOL}",
+					"SHOW_CLOUD_DECOMMISSION_ALERT=${ENABLE_CLOUD_DECOMMISSION_ALERT}",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "Alfresco Activiti";
 				PROVISIONING_PROFILE = "b4719f20-4b43-48a7-b29c-ecd127369b7e";
@@ -8183,37 +8156,41 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = AppStore;
+			name = Adhoc;
 		};
-		13EC7A211E71AEEE0073CB5E /* AppStore */ = {
+		E31E2A0A22AA93F80068B449 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D10B7C54358B16E7E753C7A /* Pods-Shared-AlfrescoActiviti.appstore.xcconfig */;
+			baseConfigurationReference = 2E25276BEF85C0F448D1A4CE /* Pods-Shared-AlfrescoActiviti.adhoc.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AlfrescoActiviti/AlfrescoActiviti.entitlements;
+				DEVELOPMENT_TEAM = W8N95J537P;
+				ENABLE_CLOUD_DECOMMISSION_ALERT = 1;
 				INFOPLIST_FILE = AlfrescoActiviti/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alfresco.activiti;
 				PRODUCT_NAME = AlfrescoActiviti;
+				PROVISIONING_PROFILE_SPECIFIER = "Activiti Mobile Ad Hoc Profile";
 			};
-			name = AppStore;
+			name = Adhoc;
 		};
-		13EC7A221E71AEEE0073CB5E /* AppStore */ = {
+		E31E2A0B22AA93F80068B449 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C1D664B1FCE96030E621377 /* Pods-AlfrescoActivitiTests.appstore.xcconfig */;
+			baseConfigurationReference = 92BA6761AF22BC77B19E9753 /* Pods-AlfrescoActivitiTests.adhoc.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AlfrescoActivitiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alfresco.activiti.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlfrescoActiviti.app/AlfrescoActiviti";
 			};
-			name = AppStore;
+			name = Adhoc;
 		};
-		13EC7A231E71AEEE0073CB5E /* AppStore */ = {
+		E31E2A0C22AA93F80068B449 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 28522234EFEA7F8BB6062D0A /* Pods-Shared-ActivitiSDK.appstore.xcconfig */;
+			baseConfigurationReference = 3AB7497D9C2392B1A892C777 /* Pods-Shared-ActivitiSDK.adhoc.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -8236,19 +8213,20 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = AppStore;
+			name = Adhoc;
 		};
-		13EC7A241E71AEEE0073CB5E /* AppStore */ = {
+		E31E2A0D22AA93F80068B449 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA43C477693B190D3F010536 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.appstore.xcconfig */;
+			baseConfigurationReference = F9DF599530562EE7DD5400D9 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				INFOPLIST_FILE = ActivitiSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alfresco.activiti.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = AppStore;
+			name = Adhoc;
 		};
 /* End XCBuildConfiguration section */
 
@@ -8258,7 +8236,7 @@
 			buildConfigurations = (
 				137194711B6922DE00D4E1F0 /* Debug */,
 				137194721B6922DE00D4E1F0 /* Release */,
-				13EC7A201E71AEEE0073CB5E /* AppStore */,
+				E31E2A0922AA93F80068B449 /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -8268,7 +8246,7 @@
 			buildConfigurations = (
 				137194741B6922DE00D4E1F0 /* Debug */,
 				137194751B6922DE00D4E1F0 /* Release */,
-				13EC7A211E71AEEE0073CB5E /* AppStore */,
+				E31E2A0A22AA93F80068B449 /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -8278,7 +8256,7 @@
 			buildConfigurations = (
 				137194771B6922DE00D4E1F0 /* Debug */,
 				137194781B6922DE00D4E1F0 /* Release */,
-				13EC7A221E71AEEE0073CB5E /* AppStore */,
+				E31E2A0B22AA93F80068B449 /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -8288,7 +8266,7 @@
 			buildConfigurations = (
 				137194981B6924DF00D4E1F0 /* Debug */,
 				137194991B6924DF00D4E1F0 /* Release */,
-				13EC7A231E71AEEE0073CB5E /* AppStore */,
+				E31E2A0C22AA93F80068B449 /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -8298,7 +8276,7 @@
 			buildConfigurations = (
 				1371949C1B6924DF00D4E1F0 /* Debug */,
 				1371949D1B6924DF00D4E1F0 /* Release */,
-				13EC7A241E71AEEE0073CB5E /* AppStore */,
+				E31E2A0D22AA93F80068B449 /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

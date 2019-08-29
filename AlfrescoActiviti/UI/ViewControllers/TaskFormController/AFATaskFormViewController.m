@@ -194,8 +194,6 @@
     [self showFormSaveIndicatorView];
     
     if (!error) {
-        __weak typeof(self) weakSelf = self;
-        
         CGFloat messageDismissDurationInSeconds;
         NSString *saveMessage = nil;
         
@@ -204,23 +202,13 @@
             messageDismissDurationInSeconds = 4.0;
         } else {
             saveMessage = NSLocalizedString(kLocalizationTaskDetailsScreenTaskFormSavedText, "Task form is saved text");
-            messageDismissDurationInSeconds = 0.3;
+            messageDismissDurationInSeconds = 1.0;
         }
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            __strong typeof(self) strongSelf = weakSelf;
-            
-            strongSelf.progressHUD.textLabel.text = saveMessage;
-            strongSelf.progressHUD.detailTextLabel.text = nil;
-            strongSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-            strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-        });
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(messageDismissDurationInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            __strong typeof(self) strongSelf = weakSelf;
-            
-            [strongSelf.progressHUD dismiss];
-        });
+        self.progressHUD.textLabel.text = saveMessage;
+        self.progressHUD.detailTextLabel.text = nil;
+        self.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+        [self.progressHUD dismissAfterDelay:messageDismissDurationInSeconds];
     } else {
         if (error.code != NSURLErrorNotConnectedToInternet) {
             [self.progressHUD dismiss];
@@ -234,19 +222,17 @@
 #pragma mark Progress hud setup
 
 - (JGProgressHUD *)configureProgressHUD {
-    JGProgressHUD *hud = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
+    JGProgressHUD *hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
     JGProgressHUDFadeZoomAnimation *zoomAnimation = [JGProgressHUDFadeZoomAnimation animation];
     hud.animation = zoomAnimation;
-    hud.layoutChangeAnimationDuration = .0f;
-    hud.indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
     
     return hud;
 }
 
 - (void)showFormSaveIndicatorView {
     self.progressHUD.textLabel.text = nil;
-    JGProgressHUDIndeterminateIndicatorView *indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
+    JGProgressHUDIndeterminateIndicatorView *indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] init];
     [indicatorView setColor:[UIColor whiteColor]];
     self.progressHUD.indicatorView = indicatorView;
     [self.progressHUD showInView:self.navigationController.view];

@@ -80,6 +80,7 @@ extern NSInteger kASDKFormVisibilityConditionProcessorErrorCode;
 extern NSString *kASDKFormNotificationShowContentPicker;
 extern NSString *kASDKFormNotificationFormFieldContentSuccessfullUpload;
 extern NSString *kASDKFormNotificationFormFieldContentSuccessfullDeleted;
+extern NSString *kASDKAlfrescoCloudDecommissioningAlertShownKey;
 
 // Animations
 extern NSTimeInterval kASDKDefaultAnimationTime;

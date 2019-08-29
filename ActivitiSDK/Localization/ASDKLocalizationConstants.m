@@ -68,6 +68,7 @@ NSString *kLocalizationFormContentPickerComponentBoxContentText                 
 NSString *kLocalizationFormContentPickerComponentDriveText                          = @"formContentPickerComponentDriveContentText";
 NSString *kLocalizationContentPickerComponentNoContentText                          = @"formContentPickerComponentNoContentText";
 NSString *kLocalizationContentPickerComponentNoContentNotEditableText               = @"formContentPickerComponentNoContentNotEditableText";
+NSString *kLocalizationFormContentPickerComponentNotAuthorizedText                  = @"formContentPickerComponentNotAuthorizedText";
 
 
 #pragma mark -
@@ -120,3 +121,9 @@ NSString *kLocalizationDefaultFilterCompletedTasksText           = @"defaultFilt
 NSString *kLocalizationDefaultFilterRunningProcessText           = @"defaultFilterRunningProcessesText";
 NSString *kLocalizationDefaultFilterCompletedProcessesText       = @"defaultFilterCompletedProcessesText";
 NSString *kLocalizationDefaultFilterAllProcessesText             = @"defaultFilterAllProcessesText";
+
+#pragma mark -
+#pragma mark Cloud decommissioning
+
+NSString *kLocalizationAlfrescoCloudAddressText                  = @"my.alfresco.com";
+NSString *kLocalizationAlfrescoCloudDecommissionText             = @"alfrescoCloudDecommissionText";

@@ -421,19 +421,17 @@ UITableViewDelegate>
 #pragma mark Progress hud setup
 
 - (JGProgressHUD *)configureProgressHUD {
-    JGProgressHUD *hud = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
+    JGProgressHUD *hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
     JGProgressHUDFadeZoomAnimation *zoomAnimation = [JGProgressHUDFadeZoomAnimation animation];
     hud.animation = zoomAnimation;
-    hud.layoutChangeAnimationDuration = .0f;
-    hud.indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
     
     return hud;
 }
 
 - (void)showFormSaveIndicatorView {
     self.progressHUD.textLabel.text = nil;
-    JGProgressHUDIndeterminateIndicatorView *indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
+    JGProgressHUDIndeterminateIndicatorView *indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] init];
     [indicatorView setColor:[UIColor whiteColor]];
     self.progressHUD.indicatorView = indicatorView;
     [self.progressHUD showInView:self.navigationController.view];
@@ -492,12 +490,9 @@ UITableViewDelegate>
                  strongSelf.refreshControl.attributedTitle = [[NSDate date] lastUpdatedFormattedString];
              }
              
-             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                 weakSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationProfileScreenProfileInformationUpdatedText, "Profile updated text");
-                 weakSelf.progressHUD.detailTextLabel.text = nil;
-                 weakSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-                 weakSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-             });
+             strongSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationProfileScreenProfileInformationUpdatedText, "Profile updated text");
+             strongSelf.progressHUD.detailTextLabel.text = nil;
+             strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
              
              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                  [weakSelf.progressHUD dismiss];
@@ -541,12 +536,9 @@ UITableViewDelegate>
                  strongSelf.refreshControl.attributedTitle = [[NSDate date] lastUpdatedFormattedString];
              }
              
-             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                 weakSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationProfileScreenPasswordUpdatedText, "Password updated text");
-                 weakSelf.progressHUD.detailTextLabel.text = nil;
-                 weakSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-                 weakSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-             });
+             strongSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationProfileScreenPasswordUpdatedText, "Password updated text");
+             strongSelf.progressHUD.detailTextLabel.text = nil;
+             strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
              
              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                  [weakSelf.progressHUD dismiss];

@@ -227,16 +227,13 @@ typedef NS_ENUM(NSUInteger, AFAStartProcessInstanceLoadingState) {
              __strong typeof(self) strongSelf = weakSelf;
              
              if (!error) {
-                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                     weakSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationSuccessText, @"Success text");
-                     weakSelf.progressHUD.detailTextLabel.text = nil;
-                     
-                     weakSelf.progressHUD.layoutChangeAnimationDuration = 0.3;
-                     weakSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-                 });
+                 strongSelf.progressHUD.textLabel.text = NSLocalizedString(kLocalizationSuccessText, @"Success text");
+                 strongSelf.progressHUD.detailTextLabel.text = nil;
+                 strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+                 [strongSelf.progressHUD dismissAfterDelay:1.0f];
+                 
                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                     [weakSelf.progressHUD dismiss];
-                     [self onBack:nil];
+                     [weakSelf onBack:nil];
                  });
              } else {
                  [strongSelf.progressHUD dismiss];
@@ -292,13 +289,11 @@ typedef NS_ENUM(NSUInteger, AFAStartProcessInstanceLoadingState) {
 #pragma mark Progress hud setup
 
 - (JGProgressHUD *)configureProgressHUD {
-    JGProgressHUD *hud = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
+    JGProgressHUD *hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
     JGProgressHUDFadeZoomAnimation *zoomAnimation = [JGProgressHUDFadeZoomAnimation animation];
     hud.animation = zoomAnimation;
-    hud.layoutChangeAnimationDuration = .0f;
     hud.textLabel.text = [NSString stringWithFormat:NSLocalizedString(kLocalizationProcessInstanceStartInProgressText, @"Starting process text")];
-    hud.indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
     
     return hud;
 }

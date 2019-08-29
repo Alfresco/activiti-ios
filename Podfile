@@ -1,12 +1,12 @@
-platform :ios, '10.0'
+platform :ios, '11.4'
 use_frameworks!
 
 # Shared pods
 def shared_pods
-	pod 'CocoaLumberjack', '~> 3.3'
+	pod 'CocoaLumberjack'
 	pod 'Mantle', '~> 2.1'
 	pod 'JGProgressHUD'
-	pod 'AFNetworking', '~>3.1'
+	pod 'AFNetworking'
 end
 
 abstract_target 'Shared' do
@@ -14,7 +14,7 @@ abstract_target 'Shared' do
 
 	target 'AlfrescoActiviti' do
         pod 'Fabric'
-        pod 'Crashlytics', '~> 3.9'
+        pod 'Crashlytics'
         pod 'Buglife'
 	end
 
@@ -34,6 +34,7 @@ post_install do |installer|
             cflags = config.build_settings['OTHER_CFLAGS'] || ['$(inherited)']
             cflags << '-fembed-bitcode'
             config.build_settings['OTHER_CFLAGS'] = cflags
+            config.build_settings['ENABLE_BITCODE'] = 'YES'  
         end
     end
     

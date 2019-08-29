@@ -205,19 +205,18 @@ typedef NS_ENUM(NSInteger, ASDKPeoplePickerControllerState) {
 #pragma mark Progress hud setup
 
 - (JGProgressHUD *)configureProgressHUD {
-    JGProgressHUD *hud = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
+    JGProgressHUD *hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     hud.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
     JGProgressHUDFadeZoomAnimation *zoomAnimation = [JGProgressHUDFadeZoomAnimation animation];
     hud.animation = zoomAnimation;
-    hud.layoutChangeAnimationDuration = .0f;
-    hud.indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
+    hud.indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] init];
     
     return hud;
 }
 
 - (void)showUserInvolvementIndicatorView {
     self.progressHUD.textLabel.text = nil;
-    JGProgressHUDIndeterminateIndicatorView *indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] initWithHUDStyle:self.progressHUD.style];
+    JGProgressHUDIndeterminateIndicatorView *indicatorView = [[JGProgressHUDIndeterminateIndicatorView alloc] init];
     [indicatorView setColor:[UIColor whiteColor]];
     self.progressHUD.indicatorView = indicatorView;
     [self.progressHUD showInView:self.navigationController.view];
