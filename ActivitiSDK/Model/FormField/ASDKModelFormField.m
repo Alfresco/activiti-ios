@@ -153,7 +153,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
               @"hyperlink"      : @(ASDKModelFormFieldRepresentationTypeHyperlink),
               @"people"         : @(ASDKModelFormFieldRepresentationTypePeople),
               @"dynamic-table"  : @(ASDKModelFormFieldRepresentationTypeDynamicTable),
-              @"datetime"       : @(ASDKModelFormFieldRepresentationTypeDateTime)}];
+              @"datetime"       : @(ASDKModelFormFieldRepresentationTypeDateTime),
+              @"typeahead"      : @(ASDKModelFormFieldRepresentationTypeTypeahead)}];
 }
 
 + (NSValueTransformer *)formFieldsJSONTransformer {

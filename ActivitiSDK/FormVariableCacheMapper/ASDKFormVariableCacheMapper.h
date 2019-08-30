@@ -18,10 +18,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ASDKModelFormPreProcessorResponse : NSObject
+@class ASDKMOFormVariable, ASDKModelFormVariable;
 
-@property (strong, nonatomic) NSArray   *processedFormFields;
-@property (strong, nonatomic) NSString  *dynamicTableFieldID;
-@property (strong, nonatomic) NSArray   *formVariables;
+@interface ASDKFormVariableCacheMapper : NSObject
+
++ (ASDKMOFormVariable *)mapFormVariable:(ASDKModelFormVariable *)formVariable
+                          forTaskWithID:(NSString *)taskID
+                              toCacheMO:(ASDKMOFormVariable *)moFormVariable;
+
++ (ASDKModelFormVariable *)mapCacheMOToFormVariable:(ASDKMOFormVariable *)moFormVariable;
 
 @end

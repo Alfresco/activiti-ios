@@ -100,8 +100,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self refreshContentInCollectionView];
+    [self.collectionView reloadData];
 }
 
 
@@ -379,8 +378,9 @@ referenceSizeForHeaderInSection:(NSInteger)section {
     _renderDelegate.actionHandler.dataSourceActionDelegate = (id<ASDKFormEngineDataSourceActionHandlerDelegate>)_dataSource;
     _renderDelegate.actionHandler.formControllerActionDelegate = self;
     
+    NSArray *formOutcomesIndexPaths = [self.dataSource indexPathsOfFormOutcomes];
     NSArray *selectedItemsIndexPaths = [self.collectionView indexPathsForSelectedItems];
-    for (NSIndexPath *indexPath in selectedItemsIndexPaths) {
+    for (NSIndexPath *indexPath in [selectedItemsIndexPaths arrayByAddingObjectsFromArray:formOutcomesIndexPaths]) {
         [self.collectionView deselectItemAtIndexPath:indexPath
                                             animated:NO];
         [self refreshContentForCellAtIndexPath:indexPath];

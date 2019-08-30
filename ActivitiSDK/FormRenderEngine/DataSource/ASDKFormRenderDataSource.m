@@ -126,6 +126,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     
     if (self) {
         _isSaveActionAvailable = YES;
+        _currenFormDescription = formDescription;
         self.formTitle = formDescription.formTitle;
         
         [self setupWithTabFormDescription:formDescription];
@@ -295,12 +296,23 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                     // Double check if formFieldParams is a ASDKModelFormField derived object because it is
                     // probable to have other types of parameters that do not have the same inheritance
                     if ([formFieldForCurrentIndexPath.formFieldParams isKindOfClass:[ASDKModelFormField class]]) {
-                        NSPredicate *searchVariablePredicate = [NSPredicate predicateWithFormat:@"name==%@", formFieldForCurrentIndexPath.formFieldParams.modelID];
-                        NSArray *matchingVariables = [self.currenFormDescription.formVariables filteredArrayUsingPredicate:searchVariablePredicate];
-                        if (matchingVariables.count &&
-                            !formFieldForCurrentIndexPath.values.count) {
-                            ASDKModelFormVariable *formVariable = (ASDKModelFormVariable *)matchingVariables.firstObject;
-                            formFieldForCurrentIndexPath.values = @[formVariable.value];
+                        if (formFieldForCurrentIndexPath.formFieldParams.modelID) {
+                            NSPredicate *searchVariablePredicate = [NSPredicate predicateWithFormat:@"name == %@", formFieldForCurrentIndexPath.formFieldParams.modelID];
+                            NSArray *matchingVariables = [self.currenFormDescription.formVariables filteredArrayUsingPredicate:searchVariablePredicate];
+                            if (matchingVariables.count &&
+                                !formFieldForCurrentIndexPath.values.count) {
+                                ASDKModelFormVariable *formVariable = (ASDKModelFormVariable *)matchingVariables.firstObject;
+                                formFieldForCurrentIndexPath.values = @[formVariable.value];
+                            } else if (formFieldForCurrentIndexPath.values.count) {
+                                NSString *variableLabelName = [NSString stringWithFormat:@"%@_LABEL", formFieldForCurrentIndexPath.formFieldParams.modelID];
+                                NSPredicate *searchVariableLabelValuePredicate = [NSPredicate predicateWithFormat:@"modelID == %@", variableLabelName];
+                                matchingVariables = [self.currenFormDescription.formVariables filteredArrayUsingPredicate:searchVariableLabelValuePredicate];
+                                
+                                if (matchingVariables.count) {
+                                    ASDKModelFormVariable *formVariable = (ASDKModelFormVariable *)matchingVariables.firstObject;
+                                    formFieldForCurrentIndexPath.formFieldParams.values = @[formVariable];
+                                }
+                            }
                         }
                     }
                     
@@ -509,7 +521,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             break;
             
         case ASDKModelFormFieldRepresentationTypeDropdown:
-        case ASDKModelFormFieldRepresentationTypeRadio: {
+        case ASDKModelFormFieldRepresentationTypeRadio:
+        case ASDKModelFormFieldRepresentationTypeTypeahead: {
             cellIdentifier = kASDKCellIDFormFieldRadioRepresentation;
         }
             break;
@@ -606,6 +619,9 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             controllerIdentifierString = kASDKStoryboardIDDynamicTableFormFieldDetailController;
         }
             break;
+        case ASDKModelFormFieldRepresentationTypeTypeahead: {
+            controllerIdentifierString = kASDKStoryboardIDTypeaheadFormFieldDetailController;
+        }
             
         default:
             break;
@@ -626,8 +642,6 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
 }
 
 - (BOOL)areFormFieldMetadataValuesValid {
-    BOOL formFieldsAreValid = YES;
-    
     // Check if mandatory form field values had been addressed
     for (ASDKModelFormField *sectionFormField in self.visibleFormFields) {
         if ([sectionFormField isKindOfClass:ASDKModelDynamicTableFormField.class]) { // Extract formfields from dynamic table
@@ -644,24 +658,41 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
         // Enumerate through the associated form fields and check if they
         // have a value or attached metadata values
         for (ASDKModelFormField *formField in sectionFormField.formFields) {
-            if (formField.isRequired) {
-                if (formField.representationType == ASDKModelFormFieldRepresentationTypeBoolean) {
-                    BOOL checked = NO;
-                    if (formField.metadataValue.attachedValue.length) {
-                        checked = [formField.metadataValue.attachedValue isEqualToString:kASDKFormFieldTrueStringValue] ? YES : NO;
-                    } else if (formField.values) {
-                        checked = [formField.values.firstObject boolValue];
+            if (ASDKModelFormFieldRepresentationTypeHeader == formField.representationType ||
+                ASDKModelFormFieldRepresentationTypeContainer == formField.representationType) {
+                for (ASDKModelFormField *containerChildFormField in formField.formFields) {
+                    if (![self areFormFieldMetadataValuesValidForFormField:containerChildFormField]) {
+                        return NO;
                     }
-                    
-                    if (!checked) {
-                        formFieldsAreValid = NO;
-                        break;
-                    }
-                } else if (!formField.values.count && !formField.metadataValue.attachedValue.length && !formField.metadataValue.option.attachedValue.length) {
-                    formFieldsAreValid = NO;
-                    break;
+                }
+            } else {
+                if (![self areFormFieldMetadataValuesValidForFormField:formField]) {
+                    return NO;
                 }
             }
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)areFormFieldMetadataValuesValidForFormField:(ASDKModelFormField *)formField {
+    BOOL formFieldsAreValid = YES;
+    
+    if (formField.isRequired) {
+        if (formField.representationType == ASDKModelFormFieldRepresentationTypeBoolean) {
+            BOOL checked = NO;
+            if (formField.metadataValue.attachedValue.length) {
+                checked = [formField.metadataValue.attachedValue isEqualToString:kASDKFormFieldTrueStringValue] ? YES : NO;
+            } else if (formField.values) {
+                checked = [formField.values.firstObject boolValue];
+            }
+            
+            if (!checked) {
+                formFieldsAreValid = NO;
+            }
+        } else if (!formField.values.count && !formField.metadataValue.attachedValue.length && !formField.metadataValue.option.attachedValue.length) {
+            formFieldsAreValid = NO;
         }
     }
     

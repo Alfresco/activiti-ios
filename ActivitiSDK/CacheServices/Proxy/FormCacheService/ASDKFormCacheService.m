@@ -26,17 +26,20 @@
 #import "ASDKMOFormFieldOption.h"
 #import "ASDKMOFormDescription.h"
 #import "ASDKMOFormFieldValueRepresentation.h"
+#import "ASDKMOFormVariable.h"
 
 // Model upsert
 #import "ASDKFormFieldOptionCacheModelUpsert.h"
 #import "ASDKFormDescriptionCacheModelUpsert.h"
 #import "ASDKFormFieldValueRepresentationCacheModelUpsert.h"
+#import "ASDKFormVariablesCacheModelUpsert.h"
 
 // Mappers
 #import "ASDKFormFieldOptionMapCacheMapper.h"
 #import "ASDKFormFieldOptionCacheMapper.h"
 #import "ASDKFormDescriptionCacheMapper.h"
 #import "ASDKFormFieldValueRepresentationCacheMapper.h"
+#import "ASDKFormVariableCacheMapper.h"
 
 
 @implementation ASDKFormCacheService
@@ -56,8 +59,8 @@
         managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         
         NSError *error = [strongSelf cleanStalledRestFieldValuesInContext:managedObjectContext
-                                                             forPredicate:[self restFieldValuesPredicateForTaskID:taskID
-                                                                                                      formFieldID:fieldID]];
+                                                             forPredicate:[strongSelf restFieldValuesPredicateForTaskID:taskID
+                                                                                                            formFieldID:fieldID]];
         if (!error) {
             error = [strongSelf saveRestFieldValuesAndGenerateFormFieldOptionMap:restFieldValues
                                                                        forTaskID:taskID
@@ -274,6 +277,61 @@
             } else {
                 ASDKModelFormDescription *formDescription = [ASDKFormDescriptionCacheMapper mapCacheMOToFormDescription:moFormDescription];
                 completionBlock(formDescription, nil, moFormDescription.isSavedFormDescription);
+            }
+        }
+    }];
+}
+
+- (void)cacheTaskFormVariables:(NSArray *)formVariables
+                     forTaskID:(NSString *)taskID
+           withCompletionBlock:(ASDKCacheServiceCompletionBlock)completionBlock {
+    __weak typeof(self) weakSelf = self;
+    [self.persistenceStack performBackgroundTask:^(NSManagedObjectContext *managedObjectContext) {
+        __strong typeof(self) strongSelf = weakSelf;
+        managedObjectContext.automaticallyMergesChangesFromParent = YES;
+        managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+        
+        NSError *error = [strongSelf cleanStalledFormVariablesInContext:managedObjectContext
+                                                           forPredicate:[strongSelf formVariablesPredicateForTaskID:taskID]];
+        if (!error) {
+            error = [strongSelf saveFormVariables:formVariables
+                                        forTaskID:taskID
+                                        inContext:managedObjectContext];
+        }
+        
+        if (!error) {
+            [managedObjectContext save:&error];
+        }
+        
+        if (completionBlock) {
+            completionBlock(error);
+        }
+    }];
+}
+
+- (void)fetchTaskFormVariablesForTaskID:(NSString *)taskID
+                    withCompletionBlock:(ASDKCacheServiceFormVariablesCompletionBlock)completionBlock {
+    [self.persistenceStack performBackgroundTask:^(NSManagedObjectContext *managedObjectContext) {
+        managedObjectContext.automaticallyMergesChangesFromParent = YES;
+        managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+        
+        NSError *error = nil;
+        NSFetchRequest *fetchFormVariablesRequest = [ASDKMOFormVariable fetchRequest];
+        NSArray *fetchResults = [managedObjectContext executeFetchRequest:fetchFormVariablesRequest
+                                                                    error:&error];
+        
+        if (completionBlock) {
+            if (error || !fetchResults.count) {
+                completionBlock(nil, error);
+            } else {
+                NSMutableArray *formVariableList = [NSMutableArray array];
+                
+                for (ASDKMOFormVariable *moFormVariable in fetchResults) {
+                    ASDKModelFormVariable *formVariable = [ASDKFormVariableCacheMapper mapCacheMOToFormVariable:moFormVariable];
+                    [formVariableList addObject:formVariable];
+                }
+                
+                completionBlock(formVariableList, nil);
             }
         }
     }];
@@ -684,6 +742,39 @@
     return nil;
 }
 
+- (NSError *)cleanStalledFormVariablesInContext:(NSManagedObjectContext *)managedObjectContext
+                                   forPredicate:(NSPredicate *)predicate {
+    NSError *internalError = nil;
+    NSFetchRequest *oldFormVariables = [ASDKMOFormVariable fetchRequest];
+    oldFormVariables.predicate = predicate;
+    oldFormVariables.resultType = NSManagedObjectIDResultType;
+    
+    NSBatchDeleteRequest *removeOldFormVariablesRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:oldFormVariables];
+    removeOldFormVariablesRequest.resultType = NSBatchDeleteResultTypeObjectIDs;
+    NSBatchDeleteResult *removeOldFormVariablesResult = [managedObjectContext executeRequest:removeOldFormVariablesRequest
+                                                                                         error:&internalError];
+    NSArray *moIDArr = removeOldFormVariablesResult.result;
+    [NSManagedObjectContext mergeChangesFromRemoteContextSave:@{NSDeletedObjectsKey : moIDArr}
+                                                 intoContexts:@[managedObjectContext]];
+    if (internalError) {
+        return [self clearCacheStalledDataError];
+    }
+    
+    return nil;
+}
+
+- (NSError *)saveFormVariables:(NSArray *)formVariables
+                forTaskID:(NSString *)taskID
+                inContext:(NSManagedObjectContext *)managedObjectContext {
+    // Upsert form variables
+    NSError *error = nil;
+    NSArray *moFormVariableList = [ASDKFormVariablesCacheModelUpsert upsertFormVariableListToCache:formVariables
+                                                                                         forTaskID:taskID
+                                                                                             error:&error
+                                                                                       inMOContext:managedObjectContext];
+    return error;
+}
+
 
 #pragma mark -
 #pragma mark Predicate construction
@@ -705,6 +796,16 @@
     
     if (processDefinitionID.length || formFieldID.length) {
         predicate = [NSPredicate predicateWithFormat:@"processDefinitionID == %@ && formFieldID == %@", processDefinitionID, formFieldID];
+    }
+    
+    return predicate;
+}
+
+- (NSPredicate *)formVariablesPredicateForTaskID:(NSString *)taskID {
+    NSPredicate *predicate = nil;
+    
+    if (taskID.length) {
+        predicate = [NSPredicate predicateWithFormat:@"taskID == %@", taskID];
     }
     
     return predicate;

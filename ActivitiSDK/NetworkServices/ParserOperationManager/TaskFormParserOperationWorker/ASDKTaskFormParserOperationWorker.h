@@ -22,7 +22,8 @@
 typedef NS_ENUM(NSInteger, ASDKTaskFormParserContentType) {
     ASDKTaskFormParserContentTypeUndefined = -1,
     ASDKTaskFormParserContentTypeFormModels = 1, // Start enumeration from 1 to be able to assert (!=0)
-    ASDKTaskFormParserContentTypeRestFieldValues = 2
+    ASDKTaskFormParserContentTypeRestFieldValues,
+    ASDKTaskFormParserContentTypeFormVariables
 };
 
 @interface ASDKTaskFormParserOperationWorker : ASDKBaseParserOperationWorker

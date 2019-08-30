@@ -25,6 +25,7 @@ ASDKModelProcessInstance,
 ASDKModelProcessDefinition;
 
 typedef void  (^ASDKFormModelsCompletionBlock) (ASDKModelFormDescription *formDescription, NSError *error);
+typedef void  (^ASDKFormVariablesCompletionBlock) (NSArray *formVariables, NSError *error);
 typedef void  (^ASDKFormCompletionBlock) (BOOL isFormCompleted, NSError *error);
 typedef void  (^ASDKFormSaveBlock) (BOOL isFormSaved, NSError *error);
 typedef void  (^ASDKStarFormCompletionBlock) (ASDKModelProcessInstance *processInstance, NSError *error);
@@ -116,6 +117,17 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
 - (void)fetchFormForTaskWithID:(NSString *)taskID
                completionBlock:(ASDKFormModelsCompletionBlock)completionBlock;
 
+
+/**
+ * Fetches and returns via the completion block an array of form variables for the
+ * given task ID.
+ *
+ * @param taskID            The task ID for which the array of form variables is returned
+ * @param completionBlock   Completion block providing an array of form variables and an
+ *                          optional error reason
+ */
+- (void)fetchFormVariablesForTaskWithID:(NSString *)taskID
+                        completionBlock:(ASDKFormVariablesCompletionBlock)completionBlock;
 
 /**
  *  Uploads provided content data for a content field (which has no process instance or task to relate to)

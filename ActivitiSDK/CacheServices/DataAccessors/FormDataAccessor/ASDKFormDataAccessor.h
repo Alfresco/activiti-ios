@@ -155,6 +155,14 @@ withFormFieldValueRequestRepresentation:(ASDKFormFieldValueRequestRepresentation
  */
 - (void)fetchFormDescriptionForTaskID:(NSString *)taskID;
 
+
+/**
+ * Requests the form variables for a specified task and reports the result via the designated data accessor delegate.
+ *
+ * @param taskID Task ID for which the form variables are requested
+ */
+- (void)fetchFormVariablesForTaskID:(NSString *)taskID;
+
 /**
  * Requests the start form for a specified process instance ID and reports the result via the designated data accessor delegate.
  *

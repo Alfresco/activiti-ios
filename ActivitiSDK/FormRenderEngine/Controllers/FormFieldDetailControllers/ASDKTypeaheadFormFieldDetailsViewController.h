@@ -16,12 +16,11 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "ASDKFormFieldDetailsControllerProtocol.h"
 
-@interface ASDKModelFormPreProcessorResponse : NSObject
+@interface ASDKTypeaheadFormFieldDetailsViewController : UIViewController<ASDKFormFieldDetailsControllerProtocol>
 
-@property (strong, nonatomic) NSArray   *processedFormFields;
-@property (strong, nonatomic) NSString  *dynamicTableFieldID;
-@property (strong, nonatomic) NSArray   *formVariables;
+@property (weak, nonatomic) id<ASDKFormRenderEngineValueTransactionsProtocol> valueTransactionDelegate;
 
 @end

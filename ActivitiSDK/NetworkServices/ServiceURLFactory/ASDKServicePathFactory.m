@@ -217,6 +217,10 @@ static NSString * const kASDkHTTPS = @"https";
     return [[[kASDKAPIPath stringByAppendingPathComponent:kASDKAPIEnterprisePath] stringByAppendingPathComponent:kASDKAPITaskFormsPath] stringByAppendingPathComponent:@"%@"];
 }
 
+- (NSString *)taskFormVariablesPathFormat {
+    return [[self taskFormServicePathFormat] stringByAppendingPathComponent:kASDKAPIVariablesFormPath];
+}
+
 - (NSString *)contentFieldUploadServicePath {
     return [[[kASDKAPIPath stringByAppendingPathComponent:kASDKAPIEnterprisePath] stringByAppendingPathComponent:kASDKAPIContentPath] stringByAppendingPathComponent:kASDKAPIContentRawPath];
 }

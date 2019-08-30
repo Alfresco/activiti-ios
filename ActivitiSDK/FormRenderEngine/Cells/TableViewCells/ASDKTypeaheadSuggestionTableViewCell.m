@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (C) 2005-2018 Alfresco Software Limited.
  *
- * This file is part of the Alfresco Activiti Mobile SDK.
+ * This file is part of the Alfresco Activiti Mobile iOS App.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,8 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "ASDKTypeaheadSuggestionTableViewCell.h"
 
-@interface ASDKModelFormPreProcessorResponse : NSObject
-
-@property (strong, nonatomic) NSArray   *processedFormFields;
-@property (strong, nonatomic) NSString  *dynamicTableFieldID;
-@property (strong, nonatomic) NSArray   *formVariables;
+@implementation ASDKTypeaheadSuggestionTableViewCell
 
 @end

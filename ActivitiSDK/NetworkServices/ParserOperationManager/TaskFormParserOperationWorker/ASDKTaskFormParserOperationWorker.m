@@ -19,6 +19,7 @@
 #import "ASDKTaskFormParserOperationWorker.h"
 #import "ASDKModelFormDescription.h"
 #import "ASDKModelFormFieldOption.h"
+#import "ASDKModelFormVariable.h"
 
 @import Mantle;
 
@@ -57,7 +58,7 @@
         });
     } else if ([CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues) isEqualToString:contentType]) {
         NSError *parserError = nil;
-        NSArray *responseArray = (NSArray *) contentDictionary;
+        NSArray *responseArray = (NSArray *)contentDictionary;
         NSArray *restFormFieldOptions = [MTLJSONAdapter modelsOfClass:ASDKModelFormFieldOption.class
                                                         fromJSONArray:responseArray
                                                                 error:&parserError];
@@ -65,12 +66,22 @@
         dispatch_async(completionQueue, ^{
             completionBlock(restFormFieldOptions, parserError, nil);
         });
+    } else if ([CREATE_STRING(ASDKTaskFormParserContentTypeFormVariables) isEqualToString:contentType]) {
+        NSError *parserError = nil;
+        NSArray *responseArray = (NSArray *)contentDictionary;
+        NSArray *formVariablesValues = [MTLJSONAdapter modelsOfClass:ASDKModelFormVariable.class
+                                                       fromJSONArray:responseArray
+                                                               error:&parserError];
+        dispatch_async(completionQueue, ^{
+            completionBlock(formVariablesValues, parserError, nil);
+        });
     }
 }
 
 - (NSArray *)availableServices {
     return @[CREATE_STRING(ASDKTaskFormParserContentTypeFormModels),
-             CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues)];
+             CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues),
+             CREATE_STRING(ASDKTaskFormParserContentTypeFormVariables)];
 }
 
 @end

@@ -32,6 +32,7 @@ NSString *kASDKStoryboardIDPeopleFormFieldDetailController          = @"ASDKForm
 NSString *kASDKStoryboardIDDynamicTableFormFieldDetailController    = @"ASDKFormDynamicTableFormFieldDetailController";
 NSString *kASDKStoryboardIDIntegrationLoginWebViewController        = @"ASDKIntegrationLoginWebViewController";
 NSString *kASDKStoryboardIDIntegrationBrowsingViewController        = @"ASDKIntegrationBrowsingViewController";
+NSString *kASDKStoryboardIDTypeaheadFormFieldDetailController       = @"ASDKFormFieldTypeaheadViewController";
 
 
 #pragma mark -
@@ -48,7 +49,6 @@ NSString *kASDKCellIDFormFieldTextRepresentation                    = @"FormFiel
 NSString *kASDKCellIDFormFieldBooleanRepresentation                 = @"FormFieldBooleanRepresentationCellID";
 NSString *kASDKCellIDFormFieldOutcomeRepresentation                 = @"FormFieldOutcomeRepresentationCellID";
 NSString *kASDKCellIDFormFieldDateRepresentation                    = @"FormFieldDateRepresentationCellID";
-NSString *kASDKCellIDFormFieldDropdownRepresentation                = @"FormFieldDropdownRepresentationCellID";
 NSString *kASDKCellIDFormFieldRadioRepresentation                   = @"FormFieldRadioRepresentationCellID";
 NSString *kASDKCellIDFormFieldRadioOptionRepresentation             = @"FormFieldRadioOptionRepresentationCellID";
 NSString *kASDKCellIDFormFieldRadioOptionDisplayValueRepresentation = @"FormFieldRadioOptionDisplayValueRepresentationCellID";
@@ -68,6 +68,8 @@ NSString *kASDKCellIDFormFieldDynamicTableHeaderRepresentation      = @"FormFiel
 NSString *kASDKCellIDFormFieldDynamicTableRowRepresentation         = @"FormFieldDynamicTableRowRepresentationCellID";
 NSString *kASDKCellIDFormFieldTabRepresentation                     = @"FormFieldTabRepresentationCellID";
 NSString *kASDKCellIDFormFieldDisplayTextRepresentation             = @"FormFieldDisplayTextRepresentationCellID";
+NSString *kASDKCellIDFormFieldTypeaheadRepresentation               = @"FormFieldTypeaheadValueRepresentationCellID";
+NSString *kASDKCellIDFormFieldTypeaheadSuggestionRepresentation     = @"FormFieldTypeaheadSuggestionRepresentationCellID";
 NSString *kASDKCellIDIntegrationBrowsing                            = @"IntegrationBrowsingCellID";
 
 

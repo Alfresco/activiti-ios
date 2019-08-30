@@ -359,6 +359,60 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
     [self.networkOperations addObject:dataTask];
 }
 
+- (void)fetchFormVariablesForTaskWithID:(NSString *)taskID
+                        completionBlock:(ASDKFormVariablesCompletionBlock)completionBlock {
+    // Check mandatory properties
+    NSParameterAssert(taskID);
+    NSParameterAssert(completionBlock);
+    
+    __weak typeof(self) weakSelf = self;
+    __block NSURLSessionDataTask *dataTask =
+    [self.requestOperationManager GET:[NSString stringWithFormat:[self.servicePathFactory taskFormVariablesPathFormat], taskID]
+                           parameters:nil
+                             progress:nil
+                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                  __strong typeof(self) strongSelf = weakSelf;
+                                  
+                                  // Remove operation reference
+                                  [strongSelf.networkOperations removeObject:dataTask];
+                                  
+                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+                                  ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
+                                                 [task stateDescriptionForResponse:responseDictionary]);
+                                  
+                                  // Parse response data
+                                  NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeFormVariables);
+                                  [strongSelf.parserOperationManager
+                                   parseContentDictionary:responseDictionary
+                                   ofType:parserContentType
+                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+                                       if (error) {
+                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                                           dispatch_async(weakSelf.resultsQueue, ^{
+                                               completionBlock(nil, error);
+                                           });
+                                       } else {
+                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                                           dispatch_async(weakSelf.resultsQueue, ^{
+                                               completionBlock(parsedObject, nil);
+                                           });
+                                       }
+                                   }];
+                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                  __strong typeof(self) strongSelf = weakSelf;
+                                  
+                                  // Remove operation reference
+                                  [strongSelf.networkOperations removeObject:dataTask];
+                                  
+                                  ASDKLogError(@"Failed to fetch rest field values for request: %@",
+                                               [task stateDescriptionForError:error]);
+                                  
+                                  dispatch_async(strongSelf.resultsQueue, ^{
+                                      completionBlock(nil, error);
+                                  });
+                              }];
+}
+
 - (void)uploadContentWithModel:(ASDKModelFileContent *)file
                    contentData:(NSData *)contentData
                  progressBlock:(ASDKFormContentProgressBlock)progressBlock

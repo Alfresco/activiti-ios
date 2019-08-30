@@ -17,11 +17,17 @@
  ******************************************************************************/
 
 #import <Foundation/Foundation.h>
+@import CoreData;
 
-@interface ASDKModelFormPreProcessorResponse : NSObject
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) NSArray   *processedFormFields;
-@property (strong, nonatomic) NSString  *dynamicTableFieldID;
-@property (strong, nonatomic) NSArray   *formVariables;
+@interface ASDKFormVariablesCacheModelUpsert : NSObject
+
++ (NSArray *)upsertFormVariableListToCache:(NSArray *)formVariableList
+                                 forTaskID:(NSString *)taskID
+                                     error:(NSError **)error
+                               inMOContext:(NSManagedObjectContext *)moContext;
 
 @end
+
+NS_ASSUME_NONNULL_END

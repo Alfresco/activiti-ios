@@ -23,6 +23,7 @@
 #import "ASDKModelFormFieldValue.h"
 #import "ASDKModelRestFormField.h"
 #import "ASDKModelFormFieldOption.h"
+#import "ASDKModelFormVariable.h"
 
 // Constants
 #import "ASDKFormRenderEngineConstants.h"
@@ -79,25 +80,19 @@
         descriptionLabelText = restFormField.metadataValue.option.attachedValue;
     } else if (restFormField.representationType == ASDKModelFormFieldRepresentationTypeRadio &&
                restFormField.restURL) {
-        NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"modelID == %@", (NSString *)restFormField.values.firstObject];
-        ASDKModelFormFieldOption *correspondingOption = [restFormField.formFieldOptions filteredArrayUsingPredicate:searchPredicate].firstObject;
-        descriptionLabelText = correspondingOption.name;
-        
-        if (!descriptionLabelText.length) {
-            if (restFormField.formFieldOptions) {
-                ASDKModelFormFieldOption *firstOption = restFormField.formFieldOptions.firstObject;
-                descriptionLabelText = firstOption.name;
-                restFormField.values = @[firstOption.name];
-            } else {
-                descriptionLabelText = @"";
-            }
-        }
+        descriptionLabelText = [self optionNameForRestFormField:restFormField];
     } else if (restFormField.values) {
         // TODO: Should dynamic table fields be formatted conform regular drop down fields??
         if ([restFormField.values.firstObject isKindOfClass:NSDictionary.class]) {
             descriptionLabelText = restFormField.values.firstObject[@"name"];
         } else {
-            descriptionLabelText = restFormField.values.firstObject;
+            NSString *optionNameForRestFormField = [self optionNameForRestFormField:restFormField];
+            if (!optionNameForRestFormField) {
+                ASDKModelFormVariable *formVariable = restFormField.formFieldParams.values.firstObject;
+                optionNameForRestFormField = formVariable.value;
+            }
+            
+            descriptionLabelText = [NSString stringWithFormat:@"%@ (%@)", restFormField.values.firstObject, optionNameForRestFormField];
         }
     } else if (restFormField.representationType == ASDKModelFormFieldRepresentationTypeDropdown &&
                restFormField.restURL) {
@@ -145,6 +140,16 @@
             [self markCellValueAsValid];
         }
     }
+}
+
+
+#pragma mark -
+#pragma mark Covenience methods
+
+- (NSString *)optionNameForRestFormField:(ASDKModelRestFormField *)restFormField {
+    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"modelID == %@", (NSString *)restFormField.values.firstObject];
+    ASDKModelFormFieldOption *correspondingOption = [restFormField.formFieldOptions filteredArrayUsingPredicate:searchPredicate].firstObject;
+    return correspondingOption.name;
 }
 
 @end

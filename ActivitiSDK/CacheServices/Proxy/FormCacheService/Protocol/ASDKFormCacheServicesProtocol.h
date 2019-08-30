@@ -23,6 +23,7 @@ ASDKFormFieldValueRequestRepresentation;
 
 typedef void (^ASDKCacheServiceTaskRestFieldValuesCompletionBlock) (NSArray *restFieldValues, NSError *error);
 typedef void (^ASDKCacheServiceFormDescriptionCompletionBlock) (ASDKModelFormDescription *formDescription, NSError *error);
+typedef void (^ASDKCacheServiceFormVariablesCompletionBlock) (NSArray *formVariables, NSError *error);
 typedef void (^ASDKCacheServiceTaskSavedFormDescriptionCompletionBlock) (ASDKModelFormDescription *formDescription, NSError *error, BOOL isSavedForm);
 typedef void (^ASDKCacheServiceTaskFormValueRepresentationCompletionBlock) (ASDKFormFieldValueRequestRepresentation *formFieldValueRequestRepresentation, NSError *error);
 typedef void (^ASDKCacheServiceTaskFormValueRepresentationListCompletionBlock) (NSArray *formFieldValueRepresentationList, NSArray *taskIDs, NSError *error);
@@ -167,6 +168,27 @@ typedef void (^ASDKCacheServiceTaskFormValueRepresentationListCompletionBlock) (
  */
 - (void)fetchTaskFormDescriptionForTaskID:(NSString *)taskID
                       withCompletionBlock:(ASDKCacheServiceTaskSavedFormDescriptionCompletionBlock)completionBlock;
+
+/**
+ * Caches provided form variables associated with a specified task and reports the operation success
+ * over a completion block.
+ *
+ * @param formVariables     List of form variables associated with a task form
+ * @param taskID            ID of the task for which the form variables are cached
+ * @param completionBlock   Completion block indicating the success of the operation
+ */
+- (void)cacheTaskFormVariables:(NSArray *)formVariables
+                     forTaskID:(NSString *)taskID
+           withCompletionBlock:(ASDKCacheServiceCompletionBlock)completionBlock;
+
+/**
+ * Fetches and reports via a completion block the form variables associated with the specified task.
+ *
+ * @param taskID            ID of the task for which the form variables are retrieved
+ * @param completionBlock   Completion block returning the task form variables.
+ */
+- (void)fetchTaskFormVariablesForTaskID:(NSString *)taskID
+                      withCompletionBlock:(ASDKCacheServiceFormVariablesCompletionBlock)completionBlock;
 
 /**
  * Caches provided form description containing user values for the specified task and reports the operation
