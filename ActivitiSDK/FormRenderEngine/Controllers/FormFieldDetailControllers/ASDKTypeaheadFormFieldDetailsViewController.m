@@ -157,29 +157,7 @@
     UITableViewCell *typeaheadCell = nil;
     
     if (indexPath.row == 0) {
-        NSString *optionValue = nil;
-        
-        if (self.currentFormField.values.count) {
-            NSString *labelValue = nil;
-            
-            NSString *formFieldValue = self.currentFormField.values.firstObject;
-            NSPredicate *metadataPredicate = [NSPredicate predicateWithFormat:@"modelID == %@", formFieldValue];
-            ASDKModelFormFieldOption *formFieldOption = [self.currentFormField.formFieldOptions filteredArrayUsingPredicate:metadataPredicate].firstObject;
-            labelValue = formFieldOption.name;
-            
-            if (!labelValue) {
-                ASDKModelFormVariable *formVariable = self.currentFormField.formFieldParams.values.firstObject;
-                labelValue = formVariable.value;
-            }
-            
-            if (labelValue) {
-                optionValue = [NSString stringWithFormat:@"%@ (%@)",formFieldValue, labelValue];
-            } else {
-                optionValue = [NSString stringWithFormat:@"%@", formFieldValue];
-            }
-        } else {
-            optionValue = self.currentFormField.metadataValue.option.attachedValue;
-        }
+        NSString *optionValue = [self optionValueForTypeaheadCell];
         
         ASDKTypeaheadValueTableViewCell *typeaheadValueCell =
         [tableView dequeueReusableCellWithIdentifier:kASDKCellIDFormFieldTypeaheadRepresentation
@@ -285,6 +263,46 @@
                             range:range];
     
     return attributedText;
+}
+
+- (NSString *)optionValueForTypeaheadCell {
+    NSString *optionValue = nil;
+    
+    if (self.currentFormField.values.count) {
+        NSString *labelValue = nil;
+        
+        NSString *formFieldValue = self.currentFormField.values.firstObject;
+        NSPredicate *metadataPredicate = [NSPredicate predicateWithFormat:@"modelID == %@", formFieldValue];
+        ASDKModelFormFieldOption *formFieldOption = [self.currentFormField.formFieldOptions filteredArrayUsingPredicate:metadataPredicate].firstObject;
+        labelValue = formFieldOption.name;
+        
+        if (!labelValue) {
+            ASDKModelFormVariable *formVariable = self.currentFormField.formFieldParams.values.firstObject;
+            labelValue = formVariable.value;
+        }
+        
+        if (ASDKModelFormFieldRepresentationTypeReadOnly == self.currentFormField.representationType) {
+            if (formFieldValue.length) {
+                optionValue = formFieldValue;
+            }
+            
+            if (labelValue.length) {
+                if (optionValue.length) {
+                    optionValue = [NSString stringWithFormat:@"%@ (%@)", optionValue, labelValue];
+                }
+            }
+            
+            if (!optionValue.length) {
+                optionValue = kASDKFormFieldEmptyStringValue;
+            }
+        } else {
+            optionValue = labelValue;
+        }
+    } else {
+        optionValue = self.currentFormField.metadataValue.option.attachedValue;
+    }
+    
+    return optionValue;
 }
 
 
