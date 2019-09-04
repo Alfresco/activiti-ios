@@ -127,7 +127,8 @@
             }
             // special radio / dropdown field handling
             else if (formField.representationType == ASDKModelFormFieldRepresentationTypeDropdown ||
-                     formField.representationType == ASDKModelFormFieldRepresentationTypeRadio) {
+                     formField.representationType == ASDKModelFormFieldRepresentationTypeRadio ||
+                     formField.representationType == ASDKModelFormFieldRepresentationTypeTypeahead) {
                 formFieldValue = [self handleDropdownAndRadioFormFieldValueRepresentationForFormField:formField];
             }
             // special people field handling

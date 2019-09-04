@@ -92,7 +92,25 @@
                 optionNameForRestFormField = formVariable.value;
             }
             
-            descriptionLabelText = [NSString stringWithFormat:@"%@ (%@)", restFormField.values.firstObject, optionNameForRestFormField];
+            if (ASDKModelFormFieldRepresentationTypeReadOnly == restFormField.representationType) {
+                NSString *stringValue = restFormField.values.firstObject;
+                
+                if (stringValue.length) {
+                    descriptionLabelText = stringValue;
+                }
+                
+                if (optionNameForRestFormField.length) {
+                    if (descriptionLabelText.length) {
+                        descriptionLabelText = [NSString stringWithFormat:@"%@ (%@)", descriptionLabelText, optionNameForRestFormField];
+                    }
+                }
+                
+                if (!descriptionLabelText.length) {
+                    descriptionLabelText = kASDKFormFieldEmptyStringValue;
+                }
+            } else {
+                descriptionLabelText = optionNameForRestFormField;
+            }
         }
     } else if (restFormField.representationType == ASDKModelFormFieldRepresentationTypeDropdown &&
                restFormField.restURL) {
