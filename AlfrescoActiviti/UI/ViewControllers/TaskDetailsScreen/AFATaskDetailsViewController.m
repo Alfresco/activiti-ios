@@ -1346,6 +1346,14 @@ AFAModalPeoplePickerViewControllerDelegate>
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)formDidStartedLoadingPrerequisites {
+    self.controllerState = AFATaskDetailsLoadingStateRefreshInProgress;
+}
+
+- (void)formDidLoadPrerequisitesWithError:(NSError *)error {
+    self.controllerState = AFATaskDetailsLoadingStateIdle;
+}
+
 
 #pragma mark -
 #pragma mark ASDKIntegrationBrowsingDelegate

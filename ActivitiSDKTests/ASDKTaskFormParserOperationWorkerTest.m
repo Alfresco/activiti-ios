@@ -38,7 +38,8 @@
 
 - (void)testThatItReturnsAvailableServices {
     NSArray *availableServices = @[CREATE_STRING(ASDKTaskFormParserContentTypeFormModels),
-                                   CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues)];
+                                   CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues),
+                                   CREATE_STRING(ASDKTaskFormParserContentTypeFormVariables)];
     XCTAssert([[self.taskFormParserWorker availableServices] isEqualToArray:availableServices]);
 }
 

@@ -23,5 +23,6 @@
 @property (strong, nonatomic) NSArray   *processedFormFields;
 @property (strong, nonatomic) NSString  *dynamicTableFieldID;
 @property (strong, nonatomic) NSArray   *formVariables;
+@property (strong, nonatomic) NSError   *error;
 
 @end

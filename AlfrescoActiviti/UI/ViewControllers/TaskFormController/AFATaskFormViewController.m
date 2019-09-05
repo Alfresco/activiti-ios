@@ -217,6 +217,19 @@
     }
 }
 
+- (void)didRequestAdditionalInformationForFormDescription:(ASDKModelFormDescription *)formDescription {
+    if ([self.delegate respondsToSelector:@selector(formDidStartedLoadingPrerequisites)]) {
+        [self.delegate formDidStartedLoadingPrerequisites];
+    }
+}
+
+- (void)didCompleteRequestingAdditionalInformationForFormDescription:(ASDKModelFormDescription *)formDescription
+                                                           withError:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(formDidLoadPrerequisitesWithError:)]) {
+        [self.delegate formDidLoadPrerequisitesWithError:error];
+    }
+}
+
 
 #pragma mark -
 #pragma mark Progress hud setup
