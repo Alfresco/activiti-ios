@@ -218,6 +218,8 @@
 }
 
 - (void)didRequestAdditionalInformationForFormDescription:(ASDKModelFormDescription *)formDescription {
+    self.view.userInteractionEnabled = NO;
+    
     if ([self.delegate respondsToSelector:@selector(formDidStartedLoadingPrerequisites)]) {
         [self.delegate formDidStartedLoadingPrerequisites];
     }
@@ -225,6 +227,8 @@
 
 - (void)didCompleteRequestingAdditionalInformationForFormDescription:(ASDKModelFormDescription *)formDescription
                                                            withError:(NSError *)error {
+    self.view.userInteractionEnabled = YES;
+    
     if ([self.delegate respondsToSelector:@selector(formDidLoadPrerequisitesWithError:)]) {
         [self.delegate formDidLoadPrerequisitesWithError:error];
     }
