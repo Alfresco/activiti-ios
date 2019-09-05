@@ -39,6 +39,7 @@ typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {
 - (void)fetchRestFieldValuesForTaskID:(NSString *)taskID
                       withFormFieldID:(NSString *)fieldID
                          withColumnID:(NSString *)columnID;
+- (void)fetchFormVariablesForTaskID:(NSString *)taskID;
 
 @end
 
@@ -66,10 +67,8 @@ typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {
                                                           isCachedData:NO
                                                                  error:nil];
         
-        if (self.delegate) {
-            [self.delegate dataAccessor:(id<ASDKServiceDataAccessorProtocol>)self
-                        didLoadDataResponse:responseCollection];
-        }
+        [self.delegate dataAccessor:(id<ASDKServiceDataAccessorProtocol>)self
+                didLoadDataResponse:responseCollection];
     }
 }
 
@@ -82,10 +81,20 @@ typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {
                                                           isCachedData:NO
                                                                  error:nil];
         
-        if (self.delegate) {
-            [self.delegate dataAccessor:(id<ASDKServiceDataAccessorProtocol>)self
-                    didLoadDataResponse:responseCollection];
-        }
+        [self.delegate dataAccessor:(id<ASDKServiceDataAccessorProtocol>)self
+                didLoadDataResponse:responseCollection];
+    }
+}
+
+- (void)fetchFormVariablesForTaskID:(NSString *)taskID {
+    if (self.delegate) {
+        ASDKDataAccessorResponseCollection *responseCollection =
+        [[ASDKDataAccessorResponseCollection alloc] initWithCollection:[self jSONRestFieldValuesFromJSON:@"TaskFormRestFieldValuesResponse"]
+                                                          isCachedData:NO
+                                                                 error:nil];
+        
+        [self.delegate dataAccessor:(id<ASDKServiceDataAccessorProtocol>)self
+                didLoadDataResponse:responseCollection];
     }
 }
 
@@ -119,6 +128,7 @@ typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {
 
 @property (strong, nonatomic) ASDKFormDataAccessorMock *fetchRestFieldValuesForTaskFormDataAccessor;
 @property (strong, nonatomic) ASDKFormDataAccessorMock *fetchRestFieldValuesForDynamicTableInTaskFormDataAccessor;
+@property (strong, nonatomic) ASDKFormDataAccessorMock *fetchFormVariablesDataAccessor;
 
 @end
 
@@ -132,12 +142,15 @@ typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {
     _fetchRestFieldValuesForDynamicTableInTaskFormDataAccessor = [[ASDKFormDataAccessorMock alloc] initWithDelegate:fetchRestFieldValuesForDynamicTableInTaskFormDataAccessor.delegate];
 }
 
+- (void)setFetchFormVariablesDataAccessor:(ASDKFormDataAccessor *)fetchFormVariablesDataAccessor {
+    _fetchFormVariablesDataAccessor = [[ASDKFormDataAccessorMock alloc] initWithDelegate:fetchFormVariablesDataAccessor.delegate];
+}
+
 @end
 
 
 @interface ASDKFormPreProcessorTest : ASDKNetworkProxyBaseTest <ASDKFormPreProcessorDelegate>
 
-@property (strong, nonatomic) ASDKFormPreProcessor              *formPreProcessor;
 @property (strong, nonatomic) ASDKFormPreProcessorMock          *formPreProcessorMock;
 @property (strong, nonatomic) ASDKTaskFormParserOperationWorker *taskFormParserWorker;
 
@@ -155,7 +168,6 @@ typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {
 
 - (void)setUp {
     [super setUp];
-    self.formPreProcessor = [[ASDKFormPreProcessor alloc] initWithDelegate:self];
     self.taskFormParserWorker = [ASDKTaskFormParserOperationWorker new];
 }
 
@@ -174,7 +186,8 @@ typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {
     self.taskFormFieldsExpectationNoProcessing = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     // when
-    [self.formPreProcessor setupWithTaskID:OCMOCK_ANY
+    self.formPreProcessorMock = [[ASDKFormPreProcessorMock alloc] initWithDelegate:self];
+    [self.formPreProcessorMock setupWithTaskID:OCMOCK_ANY
                             withFormFields:formDescription.formFields
                    withDynamicTableFieldID:nil];
     
@@ -285,7 +298,8 @@ typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {
     self.taskFormFieldExpectationAmountHyperlinkFields = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     // when
-    [self.formPreProcessor setupWithTaskID:OCMOCK_ANY
+    self.formPreProcessorMock = [[ASDKFormPreProcessorMock alloc] initWithDelegate:self];
+    [self.formPreProcessorMock setupWithTaskID:OCMOCK_ANY
                             withFormFields:formDescription.formFields
                    withDynamicTableFieldID:nil];
     

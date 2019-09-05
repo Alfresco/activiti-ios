@@ -20,7 +20,8 @@
 #import "ASDKFormControllerNavigationProtocol.h"
 
 @class UICollectionViewController,
-ASDKModelProcessInstance;
+ASDKModelProcessInstance,
+ASDKModelFormDescription;
 
 @protocol ASDKFormRenderEngineDelegate <NSObject>
 
@@ -66,5 +67,22 @@ ASDKModelProcessInstance;
  * Signals that the user triggered a form save action whilst being offline.
  */
 - (void)didSaveFormInOfflineMode;
+
+/**
+ * Signals that the form render engine is requesting more information to render the form description
+ */
+- (void)didRequestAdditionalInformationForFormDescription:(ASDKModelFormDescription *)formDescription;
+
+
+/**
+ * Signals that the form render engine has finished requesting information needed to render the form
+ * description
+ *
+ * @param formDescription Form description for which the request was completed
+ * @param error           Optional error reason indicating a failure when fetching the additional
+ *                        information
+ */
+- (void)didCompleteRequestingAdditionalInformationForFormDescription:(ASDKModelFormDescription *)formDescription
+                                                           withError:(NSError *)error;
 
 @end

@@ -154,6 +154,10 @@
     [self.formPreProcessor setupWithTaskID:task.modelID
                             withFormFields:dynamicTableRowFormFields
                    withDynamicTableFieldID:dynamicTableFormFieldID];
+    
+    if ([self.delegate respondsToSelector:@selector(didRequestAdditionalInformationForFormDescription:)]) {
+        [self.delegate didRequestAdditionalInformationForFormDescription:self.formDescription];
+    }
 }
 
 - (void)setupWithDynamicTableRowFormFields:(NSArray *)dynamicTableRowFormFields
@@ -175,6 +179,10 @@
     [self.formPreProcessor setupWithProcessDefinitionID:processDefinition.modelID
                                          withFormFields:dynamicTableRowFormFields
                                 withDynamicTableFieldID:dynamicTableFormFieldID];
+    
+    if ([self.delegate respondsToSelector:@selector(didRequestAdditionalInformationForFormDescription:)]) {
+        [self.delegate didRequestAdditionalInformationForFormDescription:self.formDescription];
+    }
 }
 
 - (UICollectionViewController *)setupWithTabFormDescription:(ASDKModelFormTabDescription *)formDescription {
@@ -257,6 +265,10 @@
 #pragma mark ASDKFormPreProcessorDelegate
 
 - (void)didProcessedFormFieldsWithResponse:(ASDKModelFormPreProcessorResponse *)preProcessorResponse {
+    if ([self.delegate respondsToSelector:@selector(didCompleteRequestingAdditionalInformationForFormDescription:withError:)]) {
+        [self.delegate didCompleteRequestingAdditionalInformationForFormDescription:self.formDescription
+                                                                          withError:preProcessorResponse.error];
+    }
     [self handleGenericPreProcessorResponse:preProcessorResponse];
 }
 
@@ -318,6 +330,10 @@
             [self.formPreProcessor setupWithTaskID:self.task.modelID
                                     withFormFields:self.formDescription.formFields
                            withDynamicTableFieldID:nil];
+            
+            if ([self.delegate respondsToSelector:@selector(didRequestAdditionalInformationForFormDescription:)]) {
+                [self.delegate didRequestAdditionalInformationForFormDescription:self.formDescription];
+            }
         }
     } else {
         [self handleTaskFormCreationFromCurrentFormDescription];
@@ -332,6 +348,10 @@
         [self.formPreProcessor setupWithProcessDefinitionID:self.processInstance.processDefinitionID
                                              withFormFields:self.formDescription.formFields
                                     withDynamicTableFieldID:nil];
+        
+        if ([self.delegate respondsToSelector:@selector(didRequestAdditionalInformationForFormDescription:)]) {
+            [self.delegate didRequestAdditionalInformationForFormDescription:self.formDescription];
+        }
     }
 }
 
@@ -343,6 +363,10 @@
         [self.formPreProcessor setupWithProcessDefinitionID:self.processDefinition.modelID
                                              withFormFields:self.formDescription.formFields
                                     withDynamicTableFieldID:nil];
+        
+        if ([self.delegate respondsToSelector:@selector(didRequestAdditionalInformationForFormDescription:)]) {
+            [self.delegate didRequestAdditionalInformationForFormDescription:self.formDescription];
+        }
     }
 }
 

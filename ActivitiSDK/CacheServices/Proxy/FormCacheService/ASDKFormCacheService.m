@@ -764,14 +764,14 @@
 }
 
 - (NSError *)saveFormVariables:(NSArray *)formVariables
-                forTaskID:(NSString *)taskID
-                inContext:(NSManagedObjectContext *)managedObjectContext {
+                     forTaskID:(NSString *)taskID
+                     inContext:(NSManagedObjectContext *)managedObjectContext {
     // Upsert form variables
     NSError *error = nil;
-    NSArray *moFormVariableList = [ASDKFormVariablesCacheModelUpsert upsertFormVariableListToCache:formVariables
-                                                                                         forTaskID:taskID
-                                                                                             error:&error
-                                                                                       inMOContext:managedObjectContext];
+    [ASDKFormVariablesCacheModelUpsert upsertFormVariableListToCache:formVariables
+                                                           forTaskID:taskID
+                                                               error:&error
+                                                         inMOContext:managedObjectContext];
     return error;
 }
 

@@ -24,6 +24,8 @@
 @protocol AFATaskFormViewControllerDelegate <NSObject>
 
 - (void)formDidLoadWithError:(NSError *)error;
+- (void)formDidStartedLoadingPrerequisites;
+- (void)formDidLoadPrerequisitesWithError:(NSError *)error;
 - (void)userDidCompleteForm;
 - (void)presentFormDetailController:(UIViewController *)controller;
 - (UINavigationController *)formNavigationController;
