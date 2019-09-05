@@ -103,6 +103,19 @@
     [self.collectionView reloadData];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    // After a size transition adjust the collection view layout item size with the new values
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *) self.collectionViewLayout;
+    flowLayout.itemSize = CGSizeMake(size.width, flowLayout.itemSize.height);
+    
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        [self.collectionView reloadData];
+    }];  
+}
+
 
 #pragma mark -
 #pragma mark Public interface
