@@ -1271,20 +1271,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycK-di-G8c">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIZ-Wm-3dr">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="delegate" destination="55M-lm-cgc" id="rnm-46-i2n"/>
-                                </connections>
-                            </webView>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ycK-di-G8c" firstAttribute="leading" secondItem="Omk-4i-C1T" secondAttribute="leading" id="9dg-gf-PVC"/>
-                            <constraint firstItem="Omk-4i-C1T" firstAttribute="bottom" secondItem="ycK-di-G8c" secondAttribute="bottom" id="Blg-oO-hqx"/>
-                            <constraint firstItem="Omk-4i-C1T" firstAttribute="trailing" secondItem="ycK-di-G8c" secondAttribute="trailing" id="DJZ-Ms-9iN"/>
-                            <constraint firstItem="ycK-di-G8c" firstAttribute="top" secondItem="Omk-4i-C1T" secondAttribute="top" id="uF0-IP-8hF"/>
+                            <constraint firstItem="hIZ-Wm-3dr" firstAttribute="top" secondItem="Omk-4i-C1T" secondAttribute="top" id="BUl-rg-wyN"/>
+                            <constraint firstItem="hIZ-Wm-3dr" firstAttribute="leading" secondItem="Omk-4i-C1T" secondAttribute="leading" id="N4o-aP-leN"/>
+                            <constraint firstItem="Omk-4i-C1T" firstAttribute="trailing" secondItem="hIZ-Wm-3dr" secondAttribute="trailing" id="ceY-FW-buh"/>
+                            <constraint firstItem="Omk-4i-C1T" firstAttribute="bottom" secondItem="hIZ-Wm-3dr" secondAttribute="bottom" id="pUL-np-u9Z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Omk-4i-C1T"/>
                     </view>
@@ -1300,7 +1301,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="cancelBarButtonItem" destination="Drt-yF-RKO" id="itF-x0-xP6"/>
-                        <outlet property="webViewContainer" destination="ycK-di-G8c" id="grR-Nk-qd2"/>
+                        <outlet property="webViewContainer" destination="hIZ-Wm-3dr" id="Q1D-bZ-uKa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8me-pE-WKR" userLabel="First Responder" sceneMemberID="firstResponder"/>
