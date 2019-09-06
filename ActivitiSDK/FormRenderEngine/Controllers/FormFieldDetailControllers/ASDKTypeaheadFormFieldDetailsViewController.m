@@ -133,6 +133,7 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     self.currentFormField.metadataValue = nil;
+    self.currentFormField.values = nil;
     self.typeaheadSuggestionsArr = nil;
     [self.optionTableView reloadData];
     
