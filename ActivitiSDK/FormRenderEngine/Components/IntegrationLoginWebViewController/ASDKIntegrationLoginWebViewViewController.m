@@ -16,6 +16,7 @@
  *  limitations under the License.
  ******************************************************************************/
 
+@import WebKit;
 #import "ASDKIntegrationLoginWebViewViewController.h"
 
 // Constants
@@ -39,9 +40,9 @@
 
 static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLAG_TRACE;
 
-@interface ASDKIntegrationLoginWebViewViewController () <UIWebViewDelegate>
+@interface ASDKIntegrationLoginWebViewViewController () <WKNavigationDelegate>
 
-@property (weak, nonatomic)   IBOutlet UIWebView        *webViewContainer;
+@property (weak, nonatomic)   IBOutlet WKWebView        *webViewContainer;
 @property (weak, nonatomic)   IBOutlet UIBarButtonItem  *cancelBarButtonItem;
 @property (strong, nonatomic) NSString                  *loginURLString;
 @property (assign, nonatomic) BOOL                      isAuthorizationComplete;
@@ -71,6 +72,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     [super awakeFromNib];
     
     [self.cancelBarButtonItem setTitle:ASDKLocalizedStringFromTable(kLocalizationCancelButtonText, ASDKLocalizationTable, @"Cancel button")];
+    self.webViewContainer.navigationDelegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,21 +114,20 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
 #pragma mark -
 #pragma mark UIWebView Delegate
 
-- (BOOL)webView:(UIWebView *)webView
-shouldStartLoadWithRequest:(NSURLRequest *)request
- navigationType:(UIWebViewNavigationType)navigationType {
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
+decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     // Check if the login flow has finished
-    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:request.URL.absoluteString];
+    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:navigationAction.request.URL.absoluteString];
     for (NSURLQueryItem *item in urlComponents.queryItems) {
         if ([item.name isEqualToString:kASDKIntegrationOauth2CodeParameter]) {
             self.isAuthorizationComplete = YES;
         }
     }
     
-    return YES;
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     if (_isAuthorizationComplete) {
         self.completionBlock(YES);
         [self dismissViewControllerAnimated:YES
@@ -134,8 +135,8 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     }
 }
 
-- (void)webView:(UIWebView *)webView
-didFailLoadWithError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation
+      withError:(NSError *)error {
     self.completionBlock(NO);
     [self dismissViewControllerAnimated:YES
                              completion:nil];

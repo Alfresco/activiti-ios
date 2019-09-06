@@ -48,7 +48,7 @@
     // given
     NSString *hostnameAddress = @"http://localhost:9999";
     NSURL *baseURL = [NSURL URLWithString:@"activiti-app" relativeToURL:
-                      [NSURL URLWithString:[hostnameAddress stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+                      [NSURL URLWithString:[hostnameAddress stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
     
     // then
     XCTAssertTrue([self isURL:baseURL
@@ -64,7 +64,7 @@
     
     NSString *hostnameAddress = @"https://localhost:9999";
     NSURL *baseURL = [NSURL URLWithString:@"activiti-app" relativeToURL:
-                      [NSURL URLWithString:[hostnameAddress stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+                      [NSURL URLWithString:[hostnameAddress stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
     
     // then
     XCTAssertTrue([self isURL:baseURL

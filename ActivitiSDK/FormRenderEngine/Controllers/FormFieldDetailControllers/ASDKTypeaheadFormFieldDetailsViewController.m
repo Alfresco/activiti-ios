@@ -105,6 +105,10 @@
     if (!range.location && !string.length) {
         indexPathsToBeRemovedArr = [self indexPathArrayOfCleanedSuggestions];
         typeaheadSuggestionsArr = nil;
+        
+        // Clear any saved values or saved user input data
+        self.currentFormField.metadataValue = nil;
+        self.currentFormField.values = nil;
     } else {
         NSString *suggestionTitleString = [textField.text stringByAppendingString:string];
         if(!string.length) {
@@ -319,8 +323,7 @@
                                               fromView:self.view.window];
     
     int kbHeight = finalKeyboardFrame.size.height;
-    int height = kbHeight + self.optionTableViewBottomConstraint.constant;
-    self.optionTableViewBottomConstraint.constant = height;
+    self.optionTableViewBottomConstraint.constant = kbHeight;
     
     [UIView animateWithDuration:animationDuration
                      animations:^{
