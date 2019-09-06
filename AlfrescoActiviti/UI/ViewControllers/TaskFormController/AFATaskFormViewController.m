@@ -218,20 +218,30 @@
 }
 
 - (void)didRequestAdditionalInformationForFormDescription:(ASDKModelFormDescription *)formDescription {
-    self.view.userInteractionEnabled = NO;
-    
-    if ([self.delegate respondsToSelector:@selector(formDidStartedLoadingPrerequisites)]) {
-        [self.delegate formDidStartedLoadingPrerequisites];
-    }
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        strongSelf.view.userInteractionEnabled = NO;
+        
+        if ([strongSelf.delegate respondsToSelector:@selector(formDidStartedLoadingPrerequisites)]) {
+            [strongSelf.delegate formDidStartedLoadingPrerequisites];
+        }
+    });
 }
 
 - (void)didCompleteRequestingAdditionalInformationForFormDescription:(ASDKModelFormDescription *)formDescription
                                                            withError:(NSError *)error {
-    self.view.userInteractionEnabled = YES;
-    
-    if ([self.delegate respondsToSelector:@selector(formDidLoadPrerequisitesWithError:)]) {
-        [self.delegate formDidLoadPrerequisitesWithError:error];
-    }
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        strongSelf.view.userInteractionEnabled = YES;
+        
+        if ([strongSelf.delegate respondsToSelector:@selector(formDidLoadPrerequisitesWithError:)]) {
+            [strongSelf.delegate formDidLoadPrerequisitesWithError:error];
+        }
+    });
 }
 
 
