@@ -1312,8 +1312,6 @@ AFAModalPeoplePickerViewControllerDelegate>
         saveBarButtonItem.tintColor = [UIColor whiteColor];
         self.navigationItem.rightBarButtonItem = saveBarButtonItem;
     }
-    
-    self.controllerState = AFATaskDetailsLoadingStateIdle;
 }
 
 - (void)userDidCompleteForm {
@@ -1344,10 +1342,6 @@ AFAModalPeoplePickerViewControllerDelegate>
 
 - (void)popFormDetailController {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)formDidStartedLoadingPrerequisites {
-    self.controllerState = AFATaskDetailsLoadingStateRefreshInProgress;
 }
 
 - (void)formDidLoadPrerequisitesWithError:(NSError *)error {
