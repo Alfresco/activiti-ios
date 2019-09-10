@@ -84,6 +84,9 @@
         if ([self.delegate respondsToSelector:@selector(formDidLoadWithError:)]) {
             [self.delegate formDidLoadWithError:nil];
         }
+        if ([self.delegate respondsToSelector:@selector(formDidLoadPrerequisitesWithError:)]) {
+            [self.delegate formDidLoadPrerequisitesWithError:nil];
+        }
     }
 }
 

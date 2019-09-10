@@ -193,8 +193,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row) {
-        [self.view endEditing:YES];
-        
         ASDKModelFormFieldOption *formFieldOption = self.typeaheadSuggestionsArr[indexPath.row - 1];
         
         // Propagate the change after an option has been selected
@@ -205,6 +203,7 @@
         formFieldValue.option = optionFormFieldValue;
         
         self.currentFormField.metadataValue = formFieldValue;
+        self.currentFormField.values = nil;
         
         // Notify the value transaction delegate there has been a change with the provided form field model
         if ([self.valueTransactionDelegate respondsToSelector:@selector(updatedMetadataValueForFormField:inCell:)]) {
@@ -215,6 +214,8 @@
         // Clean visible suggestions
         self.typeaheadSuggestionsArr = nil;
         [tableView reloadData];
+        
+        [self.view endEditing:YES];
     }
 }
 
