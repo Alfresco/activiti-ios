@@ -26,12 +26,12 @@
 
 @property (assign, nonatomic) BOOL                                          isExecuting;
 @property (assign, nonatomic) BOOL                                          isFinished;
-@property (strong, nonatomic) NSDictionary                                  *userInfo;
+@property (strong, nonatomic) NSDictionary                                  * _Nullable userInfo;
 @property (strong, nonatomic, nullable) id<ASDKServiceDataAccessorProtocol> dataAccessor;
-@property (weak, nonatomic) id<ASDKDataAccessorOperationProtocol>           delegate;
+@property (weak, nonatomic) id<ASDKDataAccessorOperationProtocol>           _Nullable delegate;
 
-- (nonnull instancetype)initWithDataAccessor:(id<ASDKServiceDataAccessorProtocol>)dataAccessor
-                                    delegate:(id<ASDKDataAccessorOperationProtocol>)delegate;
+- (nonnull instancetype)initWithDataAccessor:(id<ASDKServiceDataAccessorProtocol>_Nonnull)dataAccessor
+                                    delegate:(id<ASDKDataAccessorOperationProtocol>_Nullable)delegate;
 
 @end
 
@@ -46,9 +46,9 @@
  * @param response      Response object that's encapsulating the actual data, whether the response
  *                      is being delivered from the cache or remote
  */
-- (void)dataAccessorOperation:(ASDKDataAccessorOperation *)operation
-             withDataAccessor:(id<ASDKServiceDataAccessorProtocol>)dataAccessor
-          didLoadDataResponse:(ASDKDataAccessorResponseBase *)response;
+- (void)dataAccessorOperation:(ASDKDataAccessorOperation *_Nonnull)operation
+             withDataAccessor:(id<ASDKServiceDataAccessorProtocol>_Nonnull)dataAccessor
+          didLoadDataResponse:(ASDKDataAccessorResponseBase *_Nullable)response;
 
 /**
  * Signals that all data fetching operations from the cache or remote have finished
@@ -56,8 +56,8 @@
  * @param operation    Reference to the operation encapsulating the data accessor
  * @param dataAccessor Reference to the data accessor that is delivering the response
  */
-- (void)dataAccessorOperation:(ASDKDataAccessorOperation *)operation
-didFinishedLoadingDataResponse:(id<ASDKServiceDataAccessorProtocol>)dataAccessor;
+- (void)dataAccessorOperation:(ASDKDataAccessorOperation *_Nonnull)operation
+didFinishedLoadingDataResponse:(id<ASDKServiceDataAccessorProtocol>_Nonnull)dataAccessor;
 
 @end
 
