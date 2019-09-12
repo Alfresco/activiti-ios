@@ -20,11 +20,13 @@
 
 @class LIFEAnnotatedImage;
 @class LIFEAnnotationView;
+@class LIFEAnnotatedImageView;
 
 @interface LIFEScreenshotAnnotatorView : UIView
 
 @property (nonatomic, readonly) LIFEAnnotationType selectedAnnotationType;
 @property (nonatomic, readonly) NSArray<LIFEAnnotationView *> *annotationViews;
+- (LIFEAnnotatedImageView *)annotatedImageView;
 - (UIImageView *)sourceImageView;
 
 - (instancetype)initWithAnnotatedImage:(LIFEAnnotatedImage *)annotatedImage;
@@ -35,6 +37,8 @@
 
 // You may want to call this when views underneath loupe annotations move/change
 - (void)updateLoupeAnnotationViewsWithSourceImage:(UIImage *)sourceImage;
+
+- (LIFEAnnotationView *)annotationViewAtLocation:(CGPoint)location;
 
 #pragma mark - Toolbars
 

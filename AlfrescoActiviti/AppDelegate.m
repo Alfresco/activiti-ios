@@ -50,10 +50,10 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Cocoa Lumberjack integration
-    [[DDASLLogger sharedInstance] setLogFormatter:[AFALogFormatter new]];
+    [[DDOSLogger sharedInstance] setLogFormatter:[AFALogFormatter new]];
     [[DDTTYLogger sharedInstance] setLogFormatter:[AFALogFormatter new]];
     
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDOSLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     self.fileLogger = [DDFileLogger new];

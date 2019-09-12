@@ -22,7 +22,8 @@ typedef NS_ENUM(NSInteger, LIFEToolButtonType)
 {
     LIFEToolButtonTypeArrow = 0,
     LIFEToolButtonTypeLoupe = 1,
-    LIFEToolButtonTypeBlur = 2
+    LIFEToolButtonTypeBlur = 2,
+    LIFEToolButtonTypeFreeform = 3
 };
 
 @interface LIFEToolButton : UIControl
