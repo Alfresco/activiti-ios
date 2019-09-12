@@ -20,6 +20,7 @@
 #import "LIFEArrowAnnotationView.h"
 #import "LIFEBlurAnnotationView.h"
 #import "LIFELoupeAnnotationView.h"
+#import "LIFEFreeformAnnotationView.h"
 #import "LIFEAnnotatedImage.h"
 #import "NSArray+LIFEAdditions.h"
 #import "UIView+LIFEAdditions.h"
@@ -33,6 +34,7 @@
 @property (nonatomic) NSMutableArray<LIFEBlurAnnotationView *> *blurAnnotationViews;
 @property (nonatomic) NSMutableArray<LIFELoupeAnnotationView *> *loupeAnnotationViews;
 @property (nonatomic) NSMutableArray<LIFEArrowAnnotationView *> *arrowAnnotationViews;
+@property (nonatomic) NSMutableArray<LIFEFreeformAnnotationView *> *freeformAnnotationViews;
 
 @end
 
@@ -56,12 +58,17 @@
         _blurAnnotationViews = [annotatedImage.annotations life_arrayFilteredToObjectsOfClass:[LIFEBlurAnnotationView class]].mutableCopy;
         _loupeAnnotationViews = [annotatedImage.annotations life_arrayFilteredToObjectsOfClass:[LIFELoupeAnnotationView class]].mutableCopy;
         _arrowAnnotationViews = [annotatedImage.annotations life_arrayFilteredToObjectsOfClass:[LIFEArrowAnnotationView class]].mutableCopy;
+        _freeformAnnotationViews = [annotatedImage.annotations life_arrayFilteredToObjectsOfClass:[LIFEFreeformAnnotationView class]].mutableCopy;
         
         for (UIView *view in _blurAnnotationViews) {
             [self addSubview:view];
         }
         
         for (UIView *view in _loupeAnnotationViews) {
+            [self addSubview:view];
+        }
+        
+        for (UIView *view in _freeformAnnotationViews) {
             [self addSubview:view];
         }
         
@@ -97,6 +104,10 @@
         [self bringSubviewToFront:loupe];
     }
     
+    for (LIFEFreeformAnnotationView *freeform in _freeformAnnotationViews) {
+        [self bringSubviewToFront:freeform];
+    }
+    
     for (LIFEArrowAnnotationView *arrow in _arrowAnnotationViews) {
         [self bringSubviewToFront:arrow];
     }
@@ -108,6 +119,14 @@
 {
     [_arrowAnnotationViews addObject:arrowAnnotationView];
     [self addSubview:arrowAnnotationView];
+    [self _reorderSubviews];
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)_addFreeformAnnotationView:(LIFEFreeformAnnotationView *)freeformAnnotationView
+{
+    [_freeformAnnotationViews addObject:freeformAnnotationView];
+    [self addSubview:freeformAnnotationView];
     [self _reorderSubviews];
     [self setNeedsUpdateConstraints];
 }
@@ -136,6 +155,8 @@
         [self _addLoupeAnnotationView:(LIFELoupeAnnotationView *)annotationView];
     } else if ([annotationView isKindOfClass:[LIFEBlurAnnotationView class]]) {
         [self _addBlurAnnotationView:(LIFEBlurAnnotationView *)annotationView];
+    } else if ([annotationView isKindOfClass:[LIFEFreeformAnnotationView class]]) {
+        [self _addFreeformAnnotationView:(LIFEFreeformAnnotationView *)annotationView];
     } else {
         NSParameterAssert(NO); // not implemented
     }
@@ -193,6 +214,8 @@
         [_loupeAnnotationViews removeObject:(LIFELoupeAnnotationView *)annotationView];
     } else if ([annotationView isKindOfClass:[LIFEBlurAnnotationView class]]) {
         [_blurAnnotationViews removeObject:(LIFEBlurAnnotationView *)annotationView];
+    } else if ([annotationView isKindOfClass:[LIFEFreeformAnnotationView class]]) {
+        [_freeformAnnotationViews removeObject:(LIFEFreeformAnnotationView *)annotationView];
     } else {
         NSParameterAssert(NO); // not implemented
     }
@@ -220,6 +243,17 @@
     return [LIFEUIImage life_aspectRatio:self.sourceImageView.image];
 }
 
+- (nullable LIFEAnnotationView *)annotationViewAtLocation:(CGPoint)location
+{
+    for (LIFEAnnotationView *view in self._allAnnotationViews) {
+        if ([view containsLocation:location]) {
+            return view;
+        }
+    }
+    
+    return nil;
+}
+
 #pragma mark - Private methods
 
 - (NSArray *)_allAnnotationViews
@@ -227,6 +261,7 @@
     NSMutableArray *annotationViews = [NSMutableArray array];
     [annotationViews addObjectsFromArray:_blurAnnotationViews];
     [annotationViews addObjectsFromArray:_loupeAnnotationViews];
+    [annotationViews addObjectsFromArray:_freeformAnnotationViews];
     [annotationViews addObjectsFromArray:_arrowAnnotationViews];
     return [NSArray arrayWithArray:annotationViews];
 }
