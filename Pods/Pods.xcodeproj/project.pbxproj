@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = Fabric;
+			productName = Fabric;
 		};
 		C0E41540D6862472ED7F2FA11669BE1F /* Crashlytics */ = {
 			isa = PBXAggregateTarget;
@@ -25,6 +26,7 @@
 				B3E718B99AA7B65DD61B8E3DB49D5C96 /* PBXTargetDependency */,
 			);
 			name = Crashlytics;
+			productName = Crashlytics;
 		};
 /* End PBXAggregateTarget section */
 
@@ -791,7 +793,7 @@
 		4464174EF56948D7D02671EEE6A89627 /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXTRuntimeExtensions.h; path = Mantle/extobjc/EXTRuntimeExtensions.h; sourceTree = "<group>"; };
 		448F0C2CFBF71B8DE1CD3EE1A1CC1D9D /* LIFEContainerModalDismissAnimator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LIFEContainerModalDismissAnimator.m; path = "Source/Views/Container Window/LIFEContainerModalDismissAnimator.m"; sourceTree = "<group>"; };
 		44BD897D2DC0164808FF98AAE2BEFEEA /* OCMStubRecorder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMStubRecorder.h; path = Source/OCMock/OCMStubRecorder.h; sourceTree = "<group>"; };
-		4532388978F9DEF47DAA177D17669F7B /* Pods_AlfrescoActivitiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AlfrescoActivitiTests.framework; path = "Pods-AlfrescoActivitiTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4532388978F9DEF47DAA177D17669F7B /* Pods_AlfrescoActivitiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlfrescoActivitiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4592E53D085D6281C7A3A34E613796A8 /* LIFEReportTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEReportTableViewController.h; path = Source/Controllers/LIFEReportTableViewController.h; sourceTree = "<group>"; };
 		4595A0BEFB34C51887B11A40CD1E36D8 /* LIFEAttachmentView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEAttachmentView.h; path = Source/Views/LIFEAttachmentView.h; sourceTree = "<group>"; };
 		45A570449A1E497631D8162FA0E245D7 /* AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.xcconfig; sourceTree = "<group>"; };
@@ -813,7 +815,7 @@
 		4F7F04D4D2CC0E4E34BBF576A4939C02 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
 		4FC25F286097673C8DD1FF1574E07B9F /* LIFELogFacility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFELogFacility.h; path = Source/Services/LIFELogFacility.h; sourceTree = "<group>"; };
 		4FF58C996A7A8891F550961576D4499A /* AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
-		50BFFE42053E6D006359F73E08370CE1 /* JGProgressHUD.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = JGProgressHUD.bundle; path = "JGProgressHUD-JGProgressHUD.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50BFFE42053E6D006359F73E08370CE1 /* JGProgressHUD.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JGProgressHUD.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C42489BFF1863E5DEE3665B4CEA36A /* Pods-AlfrescoActivitiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlfrescoActivitiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		50DB31A630C42648FC383C42C9DE483A /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
 		50ECBBC47D156264B9B28931009C3B7A /* NSObject+MTLComparisonAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+MTLComparisonAdditions.h"; path = "Mantle/NSObject+MTLComparisonAdditions.h"; sourceTree = "<group>"; };
@@ -876,7 +878,7 @@
 		6A6CF3AA6FF021CD98E384FF6170F609 /* LIFETTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFETTYLogger.h; path = Source/Services/Logging/LIFETTYLogger.h; sourceTree = "<group>"; };
 		6AB377312C1CCB76A16931693899EB6A /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
 		6ABE053A88135F1A4958A05DFBA5D2F2 /* LIFEReproStep.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEReproStep.h; path = Source/Models/LIFEReproStep.h; sourceTree = "<group>"; };
-		6BCD3E077861DE8917A0FFFBC6BD96CF /* Mantle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Mantle.framework; path = Mantle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BCD3E077861DE8917A0FFFBC6BD96CF /* Mantle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mantle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BD929E0E1CB57F9E4D15F807C810B84 /* LIFEAVPlayerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEAVPlayerViewController.h; path = Source/Controllers/LIFEAVPlayerViewController.h; sourceTree = "<group>"; };
 		6D8A865BB5832289791FFE1F0BFFEE8F /* JGProgressHUDFadeAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JGProgressHUDFadeAnimation.m; path = JGProgressHUD/JGProgressHUD/JGProgressHUDFadeAnimation.m; sourceTree = "<group>"; };
 		6E68F3E17D9F7FC89D6C7A5FF80D7A8F /* UIWindow+LIFEAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIWindow+LIFEAdditions.m"; path = "Source/Additions/UIWindow+LIFEAdditions.m"; sourceTree = "<group>"; };
@@ -919,7 +921,7 @@
 		7F4C853B05DCA8781F8A36AB6930C4D8 /* LIFEContinuousForceTouchGestureRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEContinuousForceTouchGestureRecognizer.h; path = Source/Views/GestureRecognizers/LIFEContinuousForceTouchGestureRecognizer.h; sourceTree = "<group>"; };
 		7F606AD2CD622495372DBE45995030B1 /* LIFEContainerModalDismissAnimator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEContainerModalDismissAnimator.h; path = "Source/Views/Container Window/LIFEContainerModalDismissAnimator.h"; sourceTree = "<group>"; };
 		7FA258042FF55C9BF82D711CD7523A8D /* LIFEToastView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEToastView.h; path = Source/Views/Toast/LIFEToastView.h; sourceTree = "<group>"; };
-		7FBAFAA66E9C7401884F439AE8BC662C /* JGProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JGProgressHUD.framework; path = JGProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FBAFAA66E9C7401884F439AE8BC662C /* JGProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JGProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC05755C30F75966740FB946E7C212D /* Pods-Shared-ActivitiSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Shared-ActivitiSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		7FE4B9F8575041DD58BEE034A1FF0C84 /* AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-prefix.pch"; sourceTree = "<group>"; };
 		804E8EEBFE704D1861CAF1D4C1635D8B /* OCClassMockObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCClassMockObject.h; path = Source/OCMock/OCClassMockObject.h; sourceTree = "<group>"; };
@@ -941,7 +943,7 @@
 		8974ADFF56C6ACB88517DDAEC3B54EC6 /* LIFEFreeformAnnotationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEFreeformAnnotationView.h; path = Source/Views/AnnotationViews/LIFEFreeformAnnotationView.h; sourceTree = "<group>"; };
 		8A2396BAB788FBCEB1B229C58EA4A9A0 /* LIFEAlertAnimator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEAlertAnimator.h; path = "Source/Controllers/Alert View/LIFEAlertAnimator.h"; sourceTree = "<group>"; };
 		8A61EC5223FBA6982515D58616D84020 /* LIFEContainerModalPresentAnimator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEContainerModalPresentAnimator.h; path = "Source/Views/Container Window/LIFEContainerModalPresentAnimator.h"; sourceTree = "<group>"; };
-		8B06C8AFA5F1B59253AAF596CC54D748 /* Pods_Shared_AlfrescoActiviti.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Shared_AlfrescoActiviti.framework; path = "Pods-Shared-AlfrescoActiviti.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B06C8AFA5F1B59253AAF596CC54D748 /* Pods_Shared_AlfrescoActiviti.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_AlfrescoActiviti.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B871D8A1B1EB5CCB71C24BF11C79FEA /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig"; sourceTree = "<group>"; };
 		8B8A2953B668CAEEAB5A9AE26CA293A6 /* OCMLocation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMLocation.m; path = Source/OCMock/OCMLocation.m; sourceTree = "<group>"; };
 		8C28018662CB1107927DF092A6D4118B /* OCMockObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMockObject.h; path = Source/OCMock/OCMockObject.h; sourceTree = "<group>"; };
@@ -952,7 +954,7 @@
 		8DFB0C685F82EB983AE3A508632A9738 /* UITableView+LIFEAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableView+LIFEAdditions.m"; path = "Source/Additions/UITableView+LIFEAdditions.m"; sourceTree = "<group>"; };
 		8E2562B980C62AA917525834C49BDF4D /* LIFEAVFoundation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LIFEAVFoundation.m; path = Source/Services/LIFEAVFoundation.m; sourceTree = "<group>"; };
 		8E4ED541B616069C26BD1B36FB1349BE /* AFNetworking-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "AFNetworking-Info.plist"; sourceTree = "<group>"; };
-		8F1F8183999C2DDD56CE2D3A755E1861 /* Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework; path = "Pods-Shared-ActivitiSDK-ActivitiSDKTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F1F8183999C2DDD56CE2D3A755E1861 /* Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF34977F30EAED6FF9B0993D35CFA4B /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		90250BAEC62CE16D1B8864ECA7547DEB /* OCMVerifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMVerifier.h; path = Source/OCMock/OCMVerifier.h; sourceTree = "<group>"; };
 		902C3C164219C27498078A4365D2C6E0 /* LIFEScreenshotContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LIFEScreenshotContext.m; path = Source/Models/LIFEScreenshotContext.m; sourceTree = "<group>"; };
@@ -982,7 +984,7 @@
 		9C641982B51E8224EFA51A84C9E472DB /* OCMArg.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMArg.m; path = Source/OCMock/OCMArg.m; sourceTree = "<group>"; };
 		9D1215EDFC5A6607220CAADF0287839F /* NSArray+MTLManipulationAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MTLManipulationAdditions.h"; path = "Mantle/NSArray+MTLManipulationAdditions.h"; sourceTree = "<group>"; };
 		9D2B17CB08F58A908233DC993B78F160 /* OCProtocolMockObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCProtocolMockObject.h; path = Source/OCMock/OCProtocolMockObject.h; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9D9E6805F65A8C1ED8978DF8718E378D /* JGProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JGProgressHUD.xcconfig; sourceTree = "<group>"; };
 		9E82561582A9C85F2BF09227916EED8A /* EXTKeyPathCoding.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXTKeyPathCoding.h; path = Mantle/extobjc/EXTKeyPathCoding.h; sourceTree = "<group>"; };
 		9ECBE7D30643311D4C950D8EDD0D7367 /* OCMBoxedReturnValueProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMBoxedReturnValueProvider.m; path = Source/OCMock/OCMBoxedReturnValueProvider.m; sourceTree = "<group>"; };
@@ -995,12 +997,12 @@
 		A3558809D6C95CAC74204488519EBA92 /* EXTScope.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EXTScope.m; path = Mantle/extobjc/EXTScope.m; sourceTree = "<group>"; };
 		A36DF666B9A9CCE94161523AD4FC8F59 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActivityIndicatorView+AFNetworking.h"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
 		A3A5E8D56FFAE32E17E981B5FB5EAF77 /* LIFENotificationLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFENotificationLogger.h; path = Source/Services/Logging/LIFENotificationLogger.h; sourceTree = "<group>"; };
-		A4017453F0D883FE4FF6D749B3BB6EB1 /* Buglife.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Buglife.framework; path = Buglife.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4017453F0D883FE4FF6D749B3BB6EB1 /* Buglife.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Buglife.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A405E29134AECA941BDD0940DEF3D587 /* Pods-Shared-AlfrescoActiviti.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Shared-AlfrescoActiviti.debug.xcconfig"; sourceTree = "<group>"; };
 		A40A88C99C8EA6C5FE970615CB3F0D48 /* LIFESwizzler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LIFESwizzler.m; path = Source/Services/LIFESwizzler.m; sourceTree = "<group>"; };
 		A44BC1B66C17CE4467B76923A7EED023 /* Buglife.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Buglife.h; path = Source/Buglife.h; sourceTree = "<group>"; };
 		A460698209B544399C28384891F5D0DB /* LIFEAlertActionView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEAlertActionView.h; path = "Source/Controllers/Alert View/LIFEAlertActionView.h"; sourceTree = "<group>"; };
-		A4FA15D44DF6BAC7550EDEED10862AA3 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AFNetworking.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4FA15D44DF6BAC7550EDEED10862AA3 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51C2991CCF0787628901531CF46C8D8 /* LIFEFloatingButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LIFEFloatingButton.m; path = Source/Views/LIFEFloatingButton.m; sourceTree = "<group>"; };
 		A57E69EC333ABDD889035F0EC8F428AD /* NSDictionary+MTLJSONKeyPath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+MTLJSONKeyPath.h"; path = "Mantle/NSDictionary+MTLJSONKeyPath.h"; sourceTree = "<group>"; };
 		A79563D991AC977C65EC347170D1A4DA /* JGProgressHUDSuccessIndicatorView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JGProgressHUDSuccessIndicatorView.h; path = JGProgressHUD/JGProgressHUD/JGProgressHUDSuccessIndicatorView.h; sourceTree = "<group>"; };
@@ -1066,7 +1068,7 @@
 		BF9C6C836542140A13BABB3E6110DDCB /* UITextView+LIFEAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextView+LIFEAdditions.m"; path = "Source/Additions/UITextView+LIFEAdditions.m"; sourceTree = "<group>"; };
 		BFE634971F8A1B63BE7E84771CDFD849 /* UIView+LIFEAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+LIFEAdditions.m"; path = "Source/Additions/UIView+LIFEAdditions.m"; sourceTree = "<group>"; };
 		C223DB0F57A11C4D39541EA103D67AA7 /* JGProgressHUDShadow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JGProgressHUDShadow.h; path = JGProgressHUD/JGProgressHUD/JGProgressHUDShadow.h; sourceTree = "<group>"; };
-		C261436D14052AE3C35F240BCD155CAC /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CocoaLumberjack.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C261436D14052AE3C35F240BCD155CAC /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29927BF6ED7CE42932D7CA5E99BFEB5 /* Crashlytics.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Crashlytics.xcconfig; sourceTree = "<group>"; };
 		C2D427A83F1C81B0DA4922EAED186E5B /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		C2DCA7FF4EA1D1AEF995EAA560B892E5 /* OCMPassByRefSetter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMPassByRefSetter.m; path = Source/OCMock/OCMPassByRefSetter.m; sourceTree = "<group>"; };
@@ -1076,7 +1078,7 @@
 		C3E0B21EC997AFB2EFAFBC29DCE9E59E /* NSError+MTLModelException.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSError+MTLModelException.m"; path = "Mantle/NSError+MTLModelException.m"; sourceTree = "<group>"; };
 		C54AB5B556F0D210339D71C6F64AD383 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		C5778C6C52327317224273BEE100857A /* LIFEStepsToReproTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LIFEStepsToReproTableViewController.m; path = Source/Controllers/LIFEStepsToReproTableViewController.m; sourceTree = "<group>"; };
-		C6EEBEE1DC63A25B5F32CCEB61613296 /* Pods_Shared_ActivitiSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Shared_ActivitiSDK.framework; path = "Pods-Shared-ActivitiSDK.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6EEBEE1DC63A25B5F32CCEB61613296 /* Pods_Shared_ActivitiSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_ActivitiSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F53AFF08CF56D0186DE4A6620573B7 /* JGProgressHUD.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = JGProgressHUD.modulemap; sourceTree = "<group>"; };
 		C748FA98CA1BC04B49FC564AA175E784 /* JGProgressHUDAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JGProgressHUDAnimation.h; path = JGProgressHUD/JGProgressHUD/JGProgressHUDAnimation.h; sourceTree = "<group>"; };
 		C757E6D7EB218DBD2E5F54C48154D920 /* LIFETextFieldCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LIFETextFieldCell.m; path = Source/Views/LIFETextFieldCell.m; sourceTree = "<group>"; };
@@ -1170,7 +1172,7 @@
 		F1226E56005AC71DB34745CBD087809B /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
 		F28DB86213197F9453DA5257C947A9D9 /* LIFEDeviceInfoProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEDeviceInfoProvider.h; path = Source/Services/LIFEDeviceInfoProvider.h; sourceTree = "<group>"; };
 		F2C3FC2E2D7BC53C92724428E3D99296 /* NSLayoutConstraint+LIFEAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+LIFEAdditions.m"; path = "Source/Additions/NSLayoutConstraint+LIFEAdditions.m"; sourceTree = "<group>"; };
-		F30C125DB91902F63DC73AEF0B0E6111 /* OCMock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = OCMock.framework; path = OCMock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F30C125DB91902F63DC73AEF0B0E6111 /* OCMock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OCMock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F518931B73CB8E72DEA49578C71F50D3 /* LIFEContainerWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFEContainerWindow.h; path = "Source/Views/Container Window/LIFEContainerWindow.h"; sourceTree = "<group>"; };
 		F5F2E6DA5E702EEA13EF9BF68545F049 /* Mantle-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Mantle-dummy.m"; sourceTree = "<group>"; };
 		F62C16DACF4908204AAFEBC2F5B067DF /* Fabric.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Fabric.xcconfig; sourceTree = "<group>"; };
@@ -1321,7 +1323,6 @@
 				D1AB5785A0970E32DE88954154681ACD /* Frameworks */,
 				CD5F0D10277B34F10D759D8D1B1F21D3 /* Support Files */,
 			);
-			name = Fabric;
 			path = Fabric;
 			sourceTree = "<group>";
 		};
@@ -1461,7 +1462,6 @@
 				03F78865B3E217DF66FA085E16B896BA /* Frameworks */,
 				451EECC4FAA98934F0F121EC4FB1753D /* Support Files */,
 			);
-			name = Crashlytics;
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
@@ -1496,7 +1496,6 @@
 				852C3D64E3D008F184DB6A67C5C6CC6F /* Resources */,
 				31B74B5452CBAA2DE735426C9E19E37F /* Support Files */,
 			);
-			name = JGProgressHUD;
 			path = JGProgressHUD;
 			sourceTree = "<group>";
 		};
@@ -1511,7 +1510,6 @@
 				D825E9F9F0EB69C037309A7C8EDE54D3 /* Support Files */,
 				B66B9D383DD232FBA55EF0C113B7EA13 /* UIKit */,
 			);
-			name = AFNetworking;
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
@@ -1831,7 +1829,6 @@
 				6E68F3E17D9F7FC89D6C7A5FF80D7A8F /* UIWindow+LIFEAdditions.m */,
 				D516D8D48F1A5E4FC642A0A002203340 /* Support Files */,
 			);
-			name = Buglife;
 			path = Buglife;
 			sourceTree = "<group>";
 		};
@@ -1870,7 +1867,6 @@
 				093DE80625306DDE0F7C0D8D7C14FC86 /* extobjc */,
 				91B8803C5D2C099C3565B0A5D9568254 /* Support Files */,
 			);
-			name = Mantle;
 			path = Mantle;
 			sourceTree = "<group>";
 		};
@@ -2027,7 +2023,6 @@
 				F7A9688321091760BB50A79B6E1F7293 /* OCProtocolMockObject.m */,
 				FCAAE257122D83664F2590B96AAF0982 /* Support Files */,
 			);
-			name = OCMock;
 			path = OCMock;
 			sourceTree = "<group>";
 		};
@@ -2104,7 +2099,6 @@
 				B86255062C465F84AC01017BB5FD75B4 /* Core */,
 				8904FE60C4D56C9ADEC30C9E7ECDDE70 /* Support Files */,
 			);
-			name = CocoaLumberjack;
 			path = CocoaLumberjack;
 			sourceTree = "<group>";
 		};
@@ -2688,7 +2682,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1030;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2696,6 +2690,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = 19956988AEF72A6F11A6BC9351179466 /* Products */;
@@ -3219,7 +3214,6 @@
 			baseConfigurationReference = C3CBBC0AE00B05BB8322872672505D24 /* Pods-Shared-AlfrescoActiviti.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3259,7 +3253,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C29927BF6ED7CE42932D7CA5E99BFEB5 /* Crashlytics.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = YES;
@@ -3279,7 +3272,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3625E41FB295E5B5542BEFD8F7FEB108 /* Buglife.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3317,7 +3309,6 @@
 			baseConfigurationReference = 7FC05755C30F75966740FB946E7C212D /* Pods-Shared-ActivitiSDK.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3356,7 +3347,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EC6DD1AD9B7666466D9BA066D32E7199 /* OCMock.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3393,7 +3383,6 @@
 			baseConfigurationReference = 8B871D8A1B1EB5CCB71C24BF11C79FEA /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3434,7 +3423,6 @@
 			baseConfigurationReference = 4F143C860A39F77F701BDF7FFDEA187F /* Pods-Shared-AlfrescoActiviti.adhoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3474,7 +3462,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D5FB672CEF43931F952B82F9A2D51C8F /* Mantle.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3511,7 +3498,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 45A570449A1E497631D8162FA0E245D7 /* AFNetworking.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3549,7 +3535,6 @@
 			baseConfigurationReference = 63AECABB06BE20010B36676FC0890D03 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3590,7 +3575,6 @@
 			baseConfigurationReference = DEF562ECD7A3BAE5338767B421E48B65 /* Pods-Shared-ActivitiSDK.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3630,7 +3614,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3625E41FB295E5B5542BEFD8F7FEB108 /* Buglife.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3668,7 +3651,6 @@
 			baseConfigurationReference = 520E24E2AD9429C7D44D3A42E686C741 /* Pods-AlfrescoActivitiTests.adhoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3708,7 +3690,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 45A570449A1E497631D8162FA0E245D7 /* AFNetworking.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3745,7 +3726,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 45A570449A1E497631D8162FA0E245D7 /* AFNetworking.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3781,7 +3761,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8CC5445EC560E5B4435DBE7DDF2C242 /* CocoaLumberjack.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3868,8 +3847,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -3879,7 +3857,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C29927BF6ED7CE42932D7CA5E99BFEB5 /* Crashlytics.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = YES;
@@ -3898,7 +3875,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C29927BF6ED7CE42932D7CA5E99BFEB5 /* Crashlytics.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = YES;
@@ -3940,7 +3916,6 @@
 			baseConfigurationReference = 4E69272984F642255493EEC97B1EBFB5 /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3979,7 +3954,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F62C16DACF4908204AAFEBC2F5B067DF /* Fabric.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = YES;
@@ -3999,7 +3973,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9D9E6805F65A8C1ED8978DF8718E378D /* JGProgressHUD.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4037,7 +4010,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EC6DD1AD9B7666466D9BA066D32E7199 /* OCMock.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4074,7 +4046,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9D9E6805F65A8C1ED8978DF8718E378D /* JGProgressHUD.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4111,7 +4082,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D5FB672CEF43931F952B82F9A2D51C8F /* Mantle.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4148,7 +4118,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F62C16DACF4908204AAFEBC2F5B067DF /* Fabric.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = YES;
@@ -4169,7 +4138,6 @@
 			baseConfigurationReference = 2CF1FC964B89578D5E500FEBF4B45ED1 /* Pods-Shared-ActivitiSDK.adhoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -4231,7 +4199,6 @@
 			baseConfigurationReference = A405E29134AECA941BDD0940DEF3D587 /* Pods-Shared-AlfrescoActiviti.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -4270,7 +4237,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3625E41FB295E5B5542BEFD8F7FEB108 /* Buglife.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4370,7 +4336,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9D9E6805F65A8C1ED8978DF8718E378D /* JGProgressHUD.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4457,8 +4422,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -4468,7 +4432,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8CC5445EC560E5B4435DBE7DDF2C242 /* CocoaLumberjack.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4506,7 +4469,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D5FB672CEF43931F952B82F9A2D51C8F /* Mantle.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4542,7 +4504,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8CC5445EC560E5B4435DBE7DDF2C242 /* CocoaLumberjack.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4580,7 +4541,6 @@
 			baseConfigurationReference = 806FA26859A54FDF844693CA64A03774 /* Pods-AlfrescoActivitiTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -4620,7 +4580,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EC6DD1AD9B7666466D9BA066D32E7199 /* OCMock.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4657,7 +4616,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F62C16DACF4908204AAFEBC2F5B067DF /* Fabric.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = YES;
@@ -4700,7 +4658,6 @@
 			baseConfigurationReference = 50C42489BFF1863E5DEE3665B4CEA36A /* Pods-AlfrescoActivitiTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
