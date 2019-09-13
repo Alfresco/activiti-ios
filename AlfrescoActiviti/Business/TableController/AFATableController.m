@@ -92,6 +92,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
                                   forModel:self.model];
     }
     
+    if (!cell) {
+        cell = [UITableViewCell new];
+    }
+    
     return cell;
 }
 
