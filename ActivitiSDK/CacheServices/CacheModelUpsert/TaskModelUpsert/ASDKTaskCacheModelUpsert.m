@@ -170,7 +170,10 @@
         }
     }
     
-    *error = internalError;
+    if (internalError) {
+        *error = internalError;
+    }
+
     return moTask;
 }
 

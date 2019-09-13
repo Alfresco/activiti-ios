@@ -299,6 +299,10 @@
             break;
     }
     
+    if (!cell) {
+        cell = [UITableViewCell new];
+    }
+    
     return cell;
 }
 

@@ -161,7 +161,10 @@
         }
     }
     
-    *error = internalError;
+    if (internalError) {
+        *error = internalError;
+    }
+    
     return moProcessInstance;
 }
 

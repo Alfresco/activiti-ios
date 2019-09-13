@@ -167,7 +167,10 @@
         [moProcessInstanceContent addContentList:[NSSet setWithArray:contentArr]];
     }
     
-    *error = internalError;
+    if (internalError) {
+        *error = internalError;
+    }
+    
     return moProcessInstanceContent;
 }
 

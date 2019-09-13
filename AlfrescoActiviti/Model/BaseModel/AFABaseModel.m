@@ -48,6 +48,7 @@
             [array addObject:@(propertyName)];
         }
         free(properties);
+        properties = nil;
         subclass = [subclass superclass];
     }
     
