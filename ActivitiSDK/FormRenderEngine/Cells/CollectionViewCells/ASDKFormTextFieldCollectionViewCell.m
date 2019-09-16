@@ -73,7 +73,7 @@
         }
         isEditable = isEditable && !formField.isReadOnly;
         self.textfield.enabled = isEditable;
-        self.textfield.placeholder = formField.placeholer;
+        self.textfield.placeholder = formField.placeholder;
         self.textfield.keyboardType = [self keyBoardTypeForValue:self.keyBoardType];
         
         // Check for any existing metadata value that might have been attached to the form

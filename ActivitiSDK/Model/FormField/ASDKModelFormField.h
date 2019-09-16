@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, ASDKModelFormFieldRepresentationType) {
 @property (assign, nonatomic) ASDKModelFormFieldType                fieldType;
 @property (assign, nonatomic) ASDKModelFormFieldRepresentationType  representationType;
 @property (strong, nonatomic) NSString                              *fieldName;
-@property (strong, nonatomic) NSString                              *placeholer;
+@property (strong, nonatomic) NSString                              *placeholder;
 @property (strong, nonatomic) NSArray                               *values;
 @property (assign, nonatomic) BOOL                                  isReadOnly;
 @property (assign, nonatomic) BOOL                                  isRequired;

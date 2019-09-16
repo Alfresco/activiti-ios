@@ -168,6 +168,7 @@
         [tableView dequeueReusableCellWithIdentifier:kASDKCellIDFormFieldTypeaheadRepresentation
                                         forIndexPath:indexPath];
         typeaheadValueCell.inputTextField.text = optionValue;
+        typeaheadValueCell.inputTextField.placeholder = self.currentFormField.placeholder;
         
         if (ASDKModelFormFieldRepresentationTypeReadOnly == self.currentFormField.representationType) {
             typeaheadValueCell.userInteractionEnabled = NO;

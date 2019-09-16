@@ -105,7 +105,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                                                       @"fieldType"            : @"fieldType",
                                                       @"fieldName"            : @"name",
                                                       @"representationType"   : @"type",
-                                                      @"placeholer"           : @"placeholder",
+                                                      @"placeholder"          : @"placeholder",
                                                       @"values"               : @"value",
                                                       @"isReadOnly"           : @"readOnly",
                                                       @"isRequired"           : @"required",
