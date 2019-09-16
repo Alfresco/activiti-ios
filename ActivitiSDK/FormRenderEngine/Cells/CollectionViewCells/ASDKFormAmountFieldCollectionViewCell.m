@@ -73,7 +73,7 @@
         self.amountTextfield.textColor = self.colorSchemeManager.formViewFilledInValueColor;
     } else {
         self.isRequired = formField.isRequired;
-        self.amountTextfield.placeholder = formField.placeholer;
+        self.amountTextfield.placeholder = formField.placeholder;
         self.amountTextfield.enabled = !formField.isReadOnly;
         
         // Check for any existing metadata value that might have been attached to the form

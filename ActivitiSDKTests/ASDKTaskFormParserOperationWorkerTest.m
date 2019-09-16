@@ -71,7 +71,7 @@
          XCTAssert(containerFormField.fieldType == ASDKModelFormFieldTypeContainer);
          XCTAssert([containerFormField.modelID isEqualToString:@"1472729004123"]);
          XCTAssert(containerFormField.representationType == ASDKModelFormFieldRepresentationTypeContainer);
-         XCTAssertNil(containerFormField.placeholer);
+         XCTAssertNil(containerFormField.placeholder);
          XCTAssertNil(containerFormField.values);
          XCTAssertFalse(containerFormField.isReadOnly);
          XCTAssertFalse(containerFormField.isRequired);
@@ -89,7 +89,7 @@
          XCTAssert(textFormField.representationType == ASDKModelFormFieldRepresentationTypeText);
          XCTAssert([textFormField.fieldName isEqualToString:@"Text field"]);
          XCTAssert([textFormField.modelID isEqualToString:@"textfield"]);
-         XCTAssertNil(textFormField.placeholer);
+         XCTAssertNil(textFormField.placeholder);
          XCTAssertNil(textFormField.values);
          XCTAssertFalse(textFormField.isReadOnly);
          XCTAssertFalse(textFormField.isRequired);
@@ -105,7 +105,7 @@
          XCTAssert(multilineFormField.representationType == ASDKModelFormFieldRepresentationTypeMultiline);
          XCTAssert([multilineFormField.fieldName isEqualToString:@"Multiline textfield"]);
          XCTAssert([multilineFormField.modelID isEqualToString:@"multilinetextfield"]);
-         XCTAssertNil(multilineFormField.placeholer);
+         XCTAssertNil(multilineFormField.placeholder);
          XCTAssertNil(multilineFormField.values);
          XCTAssertFalse(multilineFormField.isReadOnly);
          XCTAssertFalse(multilineFormField.isRequired);
@@ -122,7 +122,7 @@
          XCTAssert(numberFormField.representationType == ASDKModelFormFieldRepresentationTypeNumerical);
          XCTAssert([numberFormField.fieldName isEqualToString:@"Number textfield"]);
          XCTAssert([numberFormField.modelID isEqualToString:@"numbertextfield"]);
-         XCTAssertNil(numberFormField.placeholer);
+         XCTAssertNil(numberFormField.placeholder);
          XCTAssertNil(numberFormField.values);
          XCTAssertFalse(numberFormField.isReadOnly);
          XCTAssertFalse(numberFormField.isRequired);
@@ -138,7 +138,7 @@
          XCTAssert(checkboxFormField.representationType == ASDKModelFormFieldRepresentationTypeBoolean);
          XCTAssert([checkboxFormField.fieldName isEqualToString:@"Checkbox field"]);
          XCTAssert([checkboxFormField.modelID isEqualToString:@"checkboxfield"]);
-         XCTAssertNil(checkboxFormField.placeholer);
+         XCTAssertNil(checkboxFormField.placeholder);
          XCTAssertNil(checkboxFormField.values);
          XCTAssertFalse(checkboxFormField.isReadOnly);
          XCTAssertFalse(checkboxFormField.isRequired);
@@ -154,7 +154,7 @@
          XCTAssert(dateFormField.representationType == ASDKModelFormFieldRepresentationTypeDate);
          XCTAssert([dateFormField.fieldName isEqualToString:@"Date formfield"]);
          XCTAssert([dateFormField.modelID isEqualToString:@"dateformfield"]);
-         XCTAssertNil(dateFormField.placeholer);
+         XCTAssertNil(dateFormField.placeholder);
          XCTAssertNil(dateFormField.values);
          XCTAssertFalse(dateFormField.isReadOnly);
          XCTAssertFalse(dateFormField.isRequired);
@@ -170,7 +170,7 @@
          XCTAssert(dropdownField.representationType == ASDKModelFormFieldRepresentationTypeDropdown);
          XCTAssert([dropdownField.fieldName isEqualToString:@"Dropdown formfield"]);
          XCTAssert([dropdownField.modelID isEqualToString:@"dropdownformfield"]);
-         XCTAssertNil(dropdownField.placeholer);
+         XCTAssertNil(dropdownField.placeholder);
          XCTAssert([dropdownField.values.firstObject isEqualToString:@"Choose one..."]);
          XCTAssertFalse(dropdownField.isReadOnly);
          XCTAssertFalse(dropdownField.isRequired);
@@ -191,7 +191,7 @@
          XCTAssert(amountFormField.representationType == ASDKModelFormFieldRepresentationTypeAmount);
          XCTAssert([amountFormField.fieldName isEqualToString:@"Amount formfield"]);
          XCTAssert([amountFormField.modelID isEqualToString:@"amountformfield"]);
-         XCTAssertNil(amountFormField.placeholer);
+         XCTAssertNil(amountFormField.placeholder);
          XCTAssertNil(amountFormField.values);
          XCTAssertFalse(amountFormField.isReadOnly);
          XCTAssertFalse(amountFormField.isRequired);
@@ -209,7 +209,7 @@
          XCTAssert(radioFormField.representationType == ASDKModelFormFieldRepresentationTypeRadio);
          XCTAssert([radioFormField.fieldName isEqualToString:@"Radio formfield"]);
          XCTAssert([radioFormField.modelID isEqualToString:@"radioformfield"]);
-         XCTAssertNil(radioFormField.placeholer);
+         XCTAssertNil(radioFormField.placeholder);
          XCTAssert([radioFormField.values.firstObject isEqualToString:@"Option 1"]);
          XCTAssertFalse(radioFormField.isReadOnly);
          XCTAssertFalse(radioFormField.isRequired);
@@ -229,7 +229,7 @@
          XCTAssert(peopleFormField.representationType == ASDKModelFormFieldRepresentationTypePeople);
          XCTAssert([peopleFormField.fieldName isEqualToString:@"People formfield"]);
          XCTAssert([peopleFormField.modelID isEqualToString:@"peopleformfield"]);
-         XCTAssertNil(peopleFormField.placeholer);
+         XCTAssertNil(peopleFormField.placeholder);
          XCTAssertNil(peopleFormField.values);
          XCTAssertFalse(peopleFormField.isReadOnly);
          XCTAssertFalse(peopleFormField.isRequired);
@@ -245,7 +245,7 @@
          XCTAssert(hyperlinkFormField.representationType == ASDKModelFormFieldRepresentationTypeHyperlink);
          XCTAssert([hyperlinkFormField.fieldName isEqualToString:@"Hyperlink formfield"]);
          XCTAssert([hyperlinkFormField.modelID isEqualToString:@"hyperlinkformfield"]);
-         XCTAssertNil(hyperlinkFormField.placeholer);
+         XCTAssertNil(hyperlinkFormField.placeholder);
          XCTAssertNil(hyperlinkFormField.values);
          XCTAssertFalse(hyperlinkFormField.isReadOnly);
          XCTAssertFalse(hyperlinkFormField.isRequired);
@@ -263,7 +263,7 @@
          XCTAssert(attachFormField.representationType == ASDKModelFormFieldRepresentationTypeAttach);
          XCTAssert([attachFormField.fieldName isEqualToString:@"Attach formfield"]);
          XCTAssert([attachFormField.modelID isEqualToString:@"attachformfield"]);
-         XCTAssertNil(attachFormField.placeholer);
+         XCTAssertNil(attachFormField.placeholder);
          XCTAssertNil(attachFormField.values);
          XCTAssertFalse(attachFormField.isReadOnly);
          XCTAssertFalse(attachFormField.isRequired);
@@ -288,7 +288,7 @@
          XCTAssert(displayTextFormField.representationType == ASDKModelFormFieldRepresentationTypeReadonlyText);
          XCTAssert([displayTextFormField.fieldName isEqualToString:@"Display text formfield"]);
          XCTAssert([displayTextFormField.modelID isEqualToString:@"displaytextformfield"]);
-         XCTAssertNil(displayTextFormField.placeholer);
+         XCTAssertNil(displayTextFormField.placeholder);
          XCTAssert([displayTextFormField.values.firstObject isEqualToString:@"Some display text goes here...."]);
          XCTAssertFalse(displayTextFormField.isReadOnly);
          XCTAssertFalse(displayTextFormField.isRequired);
