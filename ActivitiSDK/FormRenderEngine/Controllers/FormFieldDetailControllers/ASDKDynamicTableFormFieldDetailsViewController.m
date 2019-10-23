@@ -42,6 +42,9 @@
 // Protocols
 #import "ASDKFormCellProtocol.h"
 
+
+static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLAG_TRACE;
+
 @interface ASDKDynamicTableFormFieldDetailsViewController () <ASDKFormRenderEngineDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView        *rowsWithVisibleColumnsTableView;
@@ -155,7 +158,20 @@
     }
     
     // make deepcopy of column definitions
-    NSArray* dynamicTableDeepCopy = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:dynamicTableFormField.columnDefinitions]];
+    NSError *error = nil;
+    NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:dynamicTableFormField.columnDefinitions
+                                           requiringSecureCoding:NO
+                                                           error:&error];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                error:&error];
+    unarchiver.requiresSecureCoding = NO;
+    NSArray* dynamicTableDeepCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObjects: NSArray.class, ASDKModelFormField.class]
+                                                               forKey:NSKeyedArchiveRootObjectKey];
+    
+    if (error) {
+        ASDKLogError(@"Encountered an error while un/archiving the column definitions");
+    }
+    
     
     // and add them as a new table row
     [newDynamicTableRows addObject:dynamicTableDeepCopy];

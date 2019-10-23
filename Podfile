@@ -1,26 +1,30 @@
-platform :ios, '11.4'
+source 'https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk'
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '12.0'
 use_frameworks!
 
 # Shared pods
 def shared_pods
-	pod 'CocoaLumberjack'
+	pod 'CocoaLumberjack', '~> 3.6'
 	pod 'Mantle', '~> 2.1'
-	pod 'JGProgressHUD'
-	pod 'AFNetworking'
+	pod 'JGProgressHUD', '~> 2.1'
+	pod 'AFNetworking', '~> 3.2'
 end
 
 abstract_target 'Shared' do
 	shared_pods
 
 	target 'AlfrescoActiviti' do
-        pod 'Fabric'
-        pod 'Crashlytics'
-        pod 'Buglife'
+        pod 'Fabric', '~> 1.0'
+        pod 'Crashlytics', '~> 3.14'
+        pod 'Buglife', '~> 2.10'
+	    pod 'AlfrescoAuth'
 	end
 
 	target 'ActivitiSDK' do
         target 'ActivitiSDKTests' do
-            pod 'OCMock'
+            pod 'OCMock', '~> 3.4'
         end
 	end
 end

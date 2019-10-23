@@ -145,8 +145,18 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                                                                                    tabList:formDescription.formTabs];
     // Deep copy all renderable objects so that the initial collection remains
     // untouched by future mutations of sections and sub-section elements
-    NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:renderableParsedFormFields];
-    NSArray *renderableParsedFormFieldsCopy = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
+    NSError *error = nil;
+    NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:renderableParsedFormFields
+                                           requiringSecureCoding:NO
+                                                           error:&error];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                error:&error];
+    unarchiver.requiresSecureCoding = NO;
+    NSArray *renderableParsedFormFieldsCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObjects:NSMutableArray.class, ASDKModelFormField.class, nil]
+                                                                         forKey:NSKeyedArchiveRootObjectKey];
+    if (error) {
+        ASDKLogError(@"Encountered an error while un/archiving the form description");
+    }
     
     // Initialize the visibility condition processor with a plain array of form fields and form variables
     self.renderableFormFields = renderableParsedFormFieldsCopy;
@@ -787,8 +797,19 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                         if (![visibleFormFields doesCollectionContainFormField:self.renderableFormFields[originalSectionIndex]]) {
                             // If it doesn't then extract it from the renderable collection and only set
                             // the element to be added as a child
-                            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:self.renderableFormFields[originalSectionIndex]];
-                            ASDKModelFormField *sectionToBecomeVisible = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
+                            NSError *error = nil;
+                            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:self.renderableFormFields[originalSectionIndex]
+                                                                   requiringSecureCoding:NO
+                                                                                   error:&error];
+                            NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                                        error:&error];
+                            unarchiver.requiresSecureCoding = NO;
+                            ASDKModelFormField *sectionToBecomeVisible = [unarchiver decodeObjectOfClasses:[NSSet setWithObject: ASDKModelFormField.class]
+                                                                                                    forKey:NSKeyedArchiveRootObjectKey];
+                            if (error) {
+                                ASDKLogError(@"Encountered an error while un/archiving data source form fields");
+                            }
+                            
                             sectionToBecomeVisible.formFields = @[formFieldToBeInserted];
                             
                             NSUInteger insertIndex = [visibleFormFields insertIndexInFormFieldCollectionForSectionIndex:originalSectionIndex

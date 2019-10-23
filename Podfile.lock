@@ -14,32 +14,46 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - AlfrescoAuth (0.2.1):
+    - AlfrescoCore
+    - AppAuth
+  - AlfrescoCore (0.1.4)
+  - AppAuth (1.2.0):
+    - AppAuth/Core (= 1.2.0)
+    - AppAuth/ExternalUserAgent (= 1.2.0)
+  - AppAuth/Core (1.2.0)
+  - AppAuth/ExternalUserAgent (1.2.0)
   - Buglife (2.10.1)
-  - CocoaLumberjack (3.5.3):
-    - CocoaLumberjack/Core (= 3.5.3)
-  - CocoaLumberjack/Core (3.5.3)
+  - CocoaLumberjack (3.6.0):
+    - CocoaLumberjack/Core (= 3.6.0)
+  - CocoaLumberjack/Core (3.6.0)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
-  - JGProgressHUD (2.0.4)
+  - JGProgressHUD (2.1)
   - Mantle (2.1.0):
     - Mantle/extobjc (= 2.1.0)
   - Mantle/extobjc (2.1.0)
   - OCMock (3.4.3)
 
 DEPENDENCIES:
-  - AFNetworking
-  - Buglife
-  - CocoaLumberjack
-  - Crashlytics
-  - Fabric
-  - JGProgressHUD
+  - AFNetworking (~> 3.2)
+  - AlfrescoAuth
+  - Buglife (~> 2.10)
+  - CocoaLumberjack (~> 3.6)
+  - Crashlytics (~> 3.14)
+  - Fabric (~> 1.0)
+  - JGProgressHUD (~> 2.1)
   - Mantle (~> 2.1)
-  - OCMock
+  - OCMock (~> 3.4)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk:
+    - AlfrescoAuth
+    - AlfrescoCore
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
+    - AppAuth
     - Buglife
     - CocoaLumberjack
     - Crashlytics
@@ -50,14 +64,17 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AlfrescoAuth: 952b63780f64d03090251466866c295fed763543
+  AlfrescoCore: 3630f2ba4aeca5e2f097d97fab81062614789ff5
+  AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   Buglife: bc8e4931ebe37b2901c6dbcb0ca6dd76f62a98c3
-  CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
+  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
+  JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
 
-PODFILE CHECKSUM: 68c7ee28a2769bf442e3fd03269ab871eba57372
+PODFILE CHECKSUM: 0b4f322c143453129f899057c2519abb2456ee2f
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.8.4
