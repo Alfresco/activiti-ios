@@ -34,6 +34,9 @@
 #import "ASDKModelTaskFormPreProcessorResponse.h"
 #import "ASDKModelStartFormPreProcessorResponse.h"
 
+
+static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLAG_TRACE;
+
 @interface ASDKFormPreProcessor ()
 
 // Internals
@@ -276,8 +279,18 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
         
         if (strongSelf.delegate) {
             // Deep copy all form fields so that the initial collection remains untouched by future mutations
-            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:strongSelf.processingFormFields];
-            NSArray *processedFormFieldsCopy = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
+            NSError *error = nil;
+            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:strongSelf.processingFormFields
+                                                   requiringSecureCoding:NO
+                                                                   error:&error];
+            
+            NSArray *processedFormFieldsCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:NSArray.class
+                                                                                 fromData:buffer
+                                                                                    error:&error];
+            if (error) {
+                ASDKLogError(@"Encountered an error while un/archiving processing form fields");
+            }
+            
             formPreProcessorResponse.processedFormFields = processedFormFieldsCopy;
             formPreProcessorResponse.formVariables = strongSelf.formVariables;
             
@@ -290,8 +303,17 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
         
         if (strongSelf.delegate) {
             // Deep copy all form fields so that the initial collection remains untouched by future mutations
-            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:strongSelf.processingFormFields];
-            NSArray *processedFormFieldsCopy = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
+            NSError *error = nil;
+            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:strongSelf.processingFormFields
+                                                   requiringSecureCoding:NO
+                                                                   error:&error];
+            NSArray *processedFormFieldsCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:NSArray.class
+                                                                                 fromData:buffer
+                                                                                    error:&error];
+            if (error) {
+                ASDKLogError(@"Encountered an error while un/archiving processing form fields");
+            }
+            
             formPreProcessorResponse.processedFormFields = processedFormFieldsCopy;
             formPreProcessorResponse.formVariables = strongSelf.formVariables;
             

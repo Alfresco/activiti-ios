@@ -50,6 +50,8 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
+static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLAG_TRACE;
+
 @interface ASDKFormRenderEngine () <ASDKDataAccessorDelegate,
                                     ASDKFormPreProcessorDelegate>
 
@@ -405,8 +407,16 @@
             ASDKModelFormDescription *formDescription = responseModel.model;
             
             // Deep copy all form fields so that the initial collection remains untouched by future mutations
-            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:formDescription];
-            ASDKModelFormDescription *formDescriptionCopy = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
+            NSError *error = nil;
+            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:formDescription
+                                                   requiringSecureCoding:NO
+                                                                   error:&error];
+            ASDKModelFormDescription *formDescriptionCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:ASDKModelFormDescription.class
+                                                                                              fromData:buffer
+                                                                                                 error:&error];
+            if (error) {
+                ASDKLogError(@"Encountered an error while archiving the form description");
+            }
             
             self.formDescription = formDescriptionCopy;
         }

@@ -1,6 +1,0 @@
-framework module Pods_Shared_ActivitiSDK {
-  umbrella header "Pods-Shared-ActivitiSDK-umbrella.h"
-
-  export *
-  module * { export * }
-}

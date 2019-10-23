@@ -30,6 +30,8 @@
 #import "AFAProfileSimpleTableViewCell.h"
 #import "AFAProfileActionTableViewCell.h"
 
+static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLAG_TRACE;
+
 @interface AFAProfileViewControllerDataSource () <AFAProfileDetailTableViewCellDelegate,
                                                   AFAProfileActionTableViewCellDelegate>
 
@@ -46,8 +48,17 @@
     if (self) {
         _currentProfile = profile;
         // Deep copy the profile object so that it remains untouched by future mutations
-        NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:profile];
-        ASDKModelProfile *profileCopy = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
+        NSError *error = nil;
+        NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:profile
+                                               requiringSecureCoding:NO
+                                                               error:&error];
+        ASDKModelProfile *profileCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:ASDKModelProfile.class
+                                                                          fromData:buffer
+                                                                             error:&error];
+        if (error) {
+            ASDKLogError(@"Encountered an error while un/archiving processing profile model");
+        }
+        
         _originalProfileInstance = profileCopy;
         _isInputEnabled = YES;
     }
@@ -56,8 +67,17 @@
 }
 
 - (void)rollbackProfileChanges {
-    NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:self.originalProfileInstance];
-    ASDKModelProfile *originalProfileInstanceCopy = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
+    NSError *error = nil;
+    NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:self.originalProfileInstance
+                                           requiringSecureCoding:NO
+                                                           error:&error];
+    ASDKModelProfile *originalProfileInstanceCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:ASDKModelProfile.class
+                                                                                      fromData:buffer
+                                                                                         error:&error];
+    if (error) {
+        ASDKLogError(@"Encountered an error while un/archiving processing profile model");
+    }
+    
     _currentProfile = originalProfileInstanceCopy;
 }
 
