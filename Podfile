@@ -20,6 +20,7 @@ abstract_target 'Shared' do
         pod 'Crashlytics', '~> 3.14'
         pod 'Buglife', '~> 2.10'
 	    pod 'AlfrescoAuth'
+        pod 'MaterialComponents'
 	end
 
 	target 'ActivitiSDK' do
