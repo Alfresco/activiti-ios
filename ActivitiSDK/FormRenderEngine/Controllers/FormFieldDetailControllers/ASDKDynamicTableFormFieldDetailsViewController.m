@@ -165,7 +165,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
                                                                                 error:&error];
     unarchiver.requiresSecureCoding = NO;
-    NSArray* dynamicTableDeepCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObjects: NSArray.class, ASDKModelFormField.class]
+    NSArray* dynamicTableDeepCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObjects: NSArray.class, ASDKModelFormField.class, nil]
                                                                forKey:NSKeyedArchiveRootObjectKey];
     
     if (error) {
