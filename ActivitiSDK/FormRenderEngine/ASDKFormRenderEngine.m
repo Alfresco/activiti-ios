@@ -411,9 +411,12 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:formDescription
                                                    requiringSecureCoding:NO
                                                                    error:&error];
-            ASDKModelFormDescription *formDescriptionCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:ASDKModelFormDescription.class
-                                                                                              fromData:buffer
-                                                                                                 error:&error];
+            NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                        error:&error];
+            unarchiver.requiresSecureCoding = NO;
+            ASDKModelFormDescription *formDescriptionCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObject: ASDKModelFormDescription.class]
+                                                                                       forKey:NSKeyedArchiveRootObjectKey];
+            
             if (error) {
                 ASDKLogError(@"Encountered an error while archiving the form description");
             }

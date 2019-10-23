@@ -179,8 +179,15 @@ typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {
     // given
     self.formPreProcessorTestType = ASDKFormPreProcessorTestTypeNoProcessing;
     ASDKModelFormDescription *formDescription = [self formFieldDescriptionFromJSON:@"TaskAllFieldsFormResponse"];
-    NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:formDescription.formFields];
-    self.formFieldsWithNoProcessing = [NSKeyedUnarchiver unarchiveObjectWithData:buffer];
+    NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:formDescription.formFields
+                                           requiringSecureCoding:NO
+                                                           error:nil];
+    NSError *error = nil;
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                error:&error];
+    unarchiver.requiresSecureCoding = NO;
+    self.formFieldsWithNoProcessing = [unarchiver decodeObjectOfClasses:[NSSet setWithObjects:NSMutableArray.class, ASDKModelFormField.class, nil]
+                                                                 forKey:NSKeyedArchiveRootObjectKey];
     
     // expect
     self.taskFormFieldsExpectationNoProcessing = [self expectationWithDescription:NSStringFromSelector(_cmd)];

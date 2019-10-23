@@ -149,9 +149,11 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:renderableParsedFormFields
                                            requiringSecureCoding:NO
                                                            error:&error];
-    NSArray *renderableParsedFormFieldsCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:NSArray.class
-                                                                                fromData:buffer
-                                                                                   error:&error];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                error:&error];
+    unarchiver.requiresSecureCoding = NO;
+    NSArray *renderableParsedFormFieldsCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObjects:NSMutableArray.class, ASDKModelFormField.class, nil]
+                                                                         forKey:NSKeyedArchiveRootObjectKey];
     if (error) {
         ASDKLogError(@"Encountered an error while un/archiving the form description");
     }
@@ -799,9 +801,11 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                             NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:self.renderableFormFields[originalSectionIndex]
                                                                    requiringSecureCoding:NO
                                                                                    error:&error];
-                            ASDKModelFormField *sectionToBecomeVisible = [NSKeyedUnarchiver unarchivedObjectOfClass:ASDKModelFormField.class
-                                                                                                           fromData:buffer 
-                                                                                                              error:&error];
+                            NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                                        error:&error];
+                            unarchiver.requiresSecureCoding = NO;
+                            ASDKModelFormField *sectionToBecomeVisible = [unarchiver decodeObjectOfClasses:[NSSet setWithObject: ASDKModelFormField.class]
+                                                                                                    forKey:NSKeyedArchiveRootObjectKey];
                             if (error) {
                                 ASDKLogError(@"Encountered an error while un/archiving data source form fields");
                             }

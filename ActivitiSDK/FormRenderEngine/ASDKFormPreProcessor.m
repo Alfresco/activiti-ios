@@ -278,23 +278,8 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
         __strong typeof(self) strongSelf = weakSelf;
         
         if (strongSelf.delegate) {
-            // Deep copy all form fields so that the initial collection remains untouched by future mutations
-            NSError *error = nil;
-            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:strongSelf.processingFormFields
-                                                   requiringSecureCoding:NO
-                                                                   error:&error];
-            
-            NSArray *processedFormFieldsCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:NSArray.class
-                                                                                 fromData:buffer
-                                                                                    error:&error];
-            if (error) {
-                ASDKLogError(@"Encountered an error while un/archiving processing form fields");
-            }
-            
-            formPreProcessorResponse.processedFormFields = processedFormFieldsCopy;
-            formPreProcessorResponse.formVariables = strongSelf.formVariables;
-            
-            [strongSelf.delegate didProcessedFormFieldsWithResponse:formPreProcessorResponse];
+            ASDKModelFormPreProcessorResponse *processedResponse = [strongSelf handleProcessedFormFieldsResponse:formPreProcessorResponse];
+            [strongSelf.delegate didProcessedFormFieldsWithResponse:processedResponse];
         }
     });
     
@@ -302,24 +287,33 @@ withDynamicTableFieldID:(NSString *)dynamicTableFieldID {
        __strong typeof(self) strongSelf = weakSelf;
         
         if (strongSelf.delegate) {
-            // Deep copy all form fields so that the initial collection remains untouched by future mutations
-            NSError *error = nil;
-            NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:strongSelf.processingFormFields
-                                                   requiringSecureCoding:NO
-                                                                   error:&error];
-            NSArray *processedFormFieldsCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:NSArray.class
-                                                                                 fromData:buffer
-                                                                                    error:&error];
-            if (error) {
-                ASDKLogError(@"Encountered an error while un/archiving processing form fields");
-            }
-            
-            formPreProcessorResponse.processedFormFields = processedFormFieldsCopy;
-            formPreProcessorResponse.formVariables = strongSelf.formVariables;
-            
-            [strongSelf.delegate didProcessedCachedFormFieldsWithResponse:formPreProcessorResponse];
+            ASDKModelFormPreProcessorResponse *processedResponse = [strongSelf handleProcessedFormFieldsResponse:formPreProcessorResponse];
+            [strongSelf.delegate didProcessedCachedFormFieldsWithResponse:processedResponse];
         }
     });
+}
+
+- (ASDKModelFormPreProcessorResponse *)handleProcessedFormFieldsResponse:(ASDKModelFormPreProcessorResponse *)formPreProcessorResponse {
+    // Deep copy all form fields so that the initial collection remains untouched by future mutations
+    NSError *error = nil;
+    NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:self.processingFormFields
+                                           requiringSecureCoding:NO
+                                                           error:&error];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                error:&error];
+    unarchiver.requiresSecureCoding = NO;
+    
+    NSArray *processedFormFieldsCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObjects:NSMutableArray.class, ASDKModelFormField.class, nil]
+                                                                  forKey:NSKeyedArchiveRootObjectKey];
+    
+    if (error) {
+        ASDKLogError(@"Encountered an error while un/archiving processing form fields");
+    }
+    
+    formPreProcessorResponse.processedFormFields = processedFormFieldsCopy;
+    formPreProcessorResponse.formVariables = self.formVariables;
+    
+    return formPreProcessorResponse;
 }
 
 - (void)handleMultipleChoiceFormField:(ASDKModelFormField *)formField {

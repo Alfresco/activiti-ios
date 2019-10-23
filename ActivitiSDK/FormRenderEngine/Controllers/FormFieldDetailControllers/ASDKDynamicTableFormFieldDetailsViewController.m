@@ -162,9 +162,12 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:dynamicTableFormField.columnDefinitions
                                            requiringSecureCoding:NO
                                                            error:&error];
-    NSArray* dynamicTableDeepCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:NSArray.class
-                                                                      fromData:buffer
-                                                                         error:&error];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                error:&error];
+    unarchiver.requiresSecureCoding = NO;
+    NSArray* dynamicTableDeepCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObjects: NSArray.class, ASDKModelFormField.class]
+                                                               forKey:NSKeyedArchiveRootObjectKey];
+    
     if (error) {
         ASDKLogError(@"Encountered an error while un/archiving the column definitions");
     }

@@ -52,9 +52,11 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
         NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:profile
                                                requiringSecureCoding:NO
                                                                error:&error];
-        ASDKModelProfile *profileCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:ASDKModelProfile.class
-                                                                          fromData:buffer
-                                                                             error:&error];
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                    error:&error];
+        unarchiver.requiresSecureCoding = NO;
+        ASDKModelProfile *profileCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObject:ASDKModelProfile.class]
+                                                                   forKey:NSKeyedArchiveRootObjectKey];
         if (error) {
             ASDKLogError(@"Encountered an error while un/archiving processing profile model");
         }
@@ -71,9 +73,12 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSData *buffer = [NSKeyedArchiver archivedDataWithRootObject:self.originalProfileInstance
                                            requiringSecureCoding:NO
                                                            error:&error];
-    ASDKModelProfile *originalProfileInstanceCopy = [NSKeyedUnarchiver unarchivedObjectOfClass:ASDKModelProfile.class
-                                                                                      fromData:buffer
-                                                                                         error:&error];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:buffer
+                                                                                error:&error];
+    unarchiver.requiresSecureCoding = NO;
+    ASDKModelProfile *originalProfileInstanceCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObject:ASDKModelProfile.class]
+                                                                               forKey:NSKeyedArchiveRootObjectKey];
+    
     if (error) {
         ASDKLogError(@"Encountered an error while un/archiving processing profile model");
     }
