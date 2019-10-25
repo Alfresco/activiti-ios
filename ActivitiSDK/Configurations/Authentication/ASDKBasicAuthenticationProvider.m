@@ -16,12 +16,26 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <Foundation/Foundation.h>
-@import AFNetworking;
+#import "ASDKBasicAuthenticationProvider.h"
 
-@interface ASDKBasicAuthentificationProvider : AFJSONRequestSerializer
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
+@implementation ASDKBasicAuthenticationProvider
 
 - (instancetype)initWithUserName:(NSString *)username
-                        password:(NSString *)password;
+                        password:(NSString *)password {
+    NSParameterAssert(username);
+    NSParameterAssert(password);
+    
+    self = [super init];
+    if (self) {
+        [self setAuthorizationHeaderFieldWithUsername:username
+                                             password:password];
+    }
+    
+    return self;
+}
 
 @end

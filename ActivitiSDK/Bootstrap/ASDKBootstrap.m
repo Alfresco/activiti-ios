@@ -59,7 +59,8 @@
 #import "ASDKNetworkDelayedOperationSaveFormService.h"
 
 // Configurations imports
-#import "ASDKBasicAuthentificationProvider.h"
+#import "ASDKBasicAuthenticationProvider.h"
+#import "ASDKPKCEAuthenticationProvider.h"
 
 // Model imports
 #import "ASDKModelServerConfiguration.h"
@@ -120,11 +121,9 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                                                                                      overSecureLayer:self.serverConfiguration.isCommunicationOverSecureLayer];
     
     // Set up the request manager
-    ASDKBasicAuthentificationProvider *basicAuthentificationProvider =
-    [[ASDKBasicAuthentificationProvider alloc] initWithUserName:self.serverConfiguration.username
-                                                       password:self.serverConfiguration.password];
+    AFJSONRequestSerializer *authenticationProvider = [self authenticationProviderForServerConfiguration:serverConfiguration];
     self.requestOperationManager = [[ASDKRequestOperationManager alloc] initWithBaseURL:servicePathFactory.baseURL
-                                                                 authenticationProvider:basicAuthentificationProvider];
+                                                                 authenticationProvider:authenticationProvider];
     
     // Set up parser services
     ASDKParserOperationManager *parserOperationManager = [self parserOperationManager];
@@ -190,15 +189,37 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     _serverConfiguration.username = username;
     _serverConfiguration.password = password;
     
-    ASDKBasicAuthentificationProvider *authenticationProvider =
-    [[ASDKBasicAuthentificationProvider alloc] initWithUserName:username
-                                                       password:password];
+    ASDKBasicAuthenticationProvider *authenticationProvider =
+    [[ASDKBasicAuthenticationProvider alloc] initWithUserName:username
+                                                     password:password];
+    [self.requestOperationManager replaceAuthenticationProvider:authenticationProvider];
+}
+
+- (void)updateServerConfigurationForAccessToken:(NSString *)accessToken {
+    _serverConfiguration.acessToken = accessToken;
+    
+    ASDKPKCEAuthenticationProvider *authenticationProvider =
+    [[ASDKPKCEAuthenticationProvider alloc] initWithAccessToken:accessToken];
     [self.requestOperationManager replaceAuthenticationProvider:authenticationProvider];
 }
 
 
 #pragma mark -
 #pragma mark Private interface
+
+- (AFJSONRequestSerializer *)authenticationProviderForServerConfiguration:(ASDKModelServerConfiguration *)serverConfiguration {
+    // Based on the server configuration object assess whether it's a basic auth or token login
+    AFJSONRequestSerializer *authenticationProvider = nil;
+    
+    if (serverConfiguration.acessToken.length) {
+        authenticationProvider = [[ASDKPKCEAuthenticationProvider alloc] initWithAccessToken:serverConfiguration.acessToken];
+    } else {
+        authenticationProvider = [[ASDKBasicAuthenticationProvider alloc] initWithUserName:serverConfiguration.username
+                                                                                  password:serverConfiguration.password];
+    }
+    
+    return authenticationProvider;
+}
 
 - (ASDKParserOperationManager *)parserOperationManager {
     ASDKParserOperationManager *parserOperationManager = [ASDKParserOperationManager new];

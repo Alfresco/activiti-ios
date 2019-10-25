@@ -30,6 +30,7 @@
 #import "AFAThumbnailManager.h"
 #import "AFAKeychainWrapper.h"
 #import "AFALogFormatter.h"
+#import "AlfrescoActiviti-Swift.h"
 
 // Frameworks
 #import <Fabric/Fabric.h>
@@ -41,7 +42,8 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
 
 @interface AppDelegate () <CrashlyticsDelegate, BuglifeDelegate>
 
-@property (strong, nonatomic) DDFileLogger *fileLogger;
+@property (strong, nonatomic) DDFileLogger      *fileLogger;
+@property (strong, nonatomic) AIMSLoginService  *loginService;
 
 @end
 
@@ -122,6 +124,11 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    AIMSLoginService *loginService = [[AFAServiceRepository sharedRepository] serviceObjectForPurpose:AFAServiceObjectTypeAIMSLogin];
+    return [loginService resumeExternalUserAgentFlowWith:url];
 }
 
 @end

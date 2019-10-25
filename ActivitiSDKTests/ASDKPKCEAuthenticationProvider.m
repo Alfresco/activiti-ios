@@ -16,16 +16,28 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "ASDKBaseTest.h"
 
-@interface ASDKModelServerConfiguration : NSObject
+@interface ASDKPKCEAuthentificationProviderTest : ASDKBaseTest
 
-@property (strong, nonatomic, nonnull) NSString   *hostAddressString;
-@property (assign, nonatomic) BOOL                isCommunicationOverSecureLayer;
-@property (strong, nonatomic, nullable) NSString  *username;
-@property (strong, nonatomic, nullable) NSString  *password;
-@property (strong, nonatomic, nullable) NSString  *acessToken;
-@property (strong, nonatomic, nullable) NSString  *port;
-@property (strong, nonatomic, nonnull) NSString   *serviceDocument;
+@end
+
+@implementation ASDKPKCEAuthentificationProviderTest
+
+- (void)setUp {
+    [super setUp];
+}
+
+- (void)tearDown {
+    [super tearDown];
+}
+
+- (void)testThatItConfiguresProviderWithBasicAuthentication {
+    // given
+    ASDKPKCEAuthenticationProvider *pkceAuthentication = [[ASDKPKCEAuthenticationProvider alloc] initWithAccessToken:@"123456789"];
+    
+    // then
+    XCTAssertTrue([[pkceAuthentication valueForHTTPHeaderField:@"Authorization"] isEqualToString:@"Bearer 123456789"]);
+}
 
 @end

@@ -17,15 +17,11 @@
  ******************************************************************************/
 
 #import <Foundation/Foundation.h>
+@import AFNetworking;
 
-@interface ASDKModelServerConfiguration : NSObject
+@interface ASDKBasicAuthenticationProvider : AFJSONRequestSerializer
 
-@property (strong, nonatomic, nonnull) NSString   *hostAddressString;
-@property (assign, nonatomic) BOOL                isCommunicationOverSecureLayer;
-@property (strong, nonatomic, nullable) NSString  *username;
-@property (strong, nonatomic, nullable) NSString  *password;
-@property (strong, nonatomic, nullable) NSString  *acessToken;
-@property (strong, nonatomic, nullable) NSString  *port;
-@property (strong, nonatomic, nonnull) NSString   *serviceDocument;
+- (instancetype)initWithUserName:(NSString *)username
+                        password:(NSString *)password;
 
 @end
