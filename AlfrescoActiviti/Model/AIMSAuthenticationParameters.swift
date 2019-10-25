@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (C) 2005-2018 Alfresco Software Limited.
  *
- * This file is part of the Alfresco Activiti Mobile SDK.
+ * This file is part of the Alfresco Activiti iOS App.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +16,27 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import "ASDKBasicAuthentificationProvider.h"
+import Foundation
 
-#if ! __has_feature(objc_arc)
-#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
-#endif
-
-@implementation ASDKBasicAuthentificationProvider
-
-- (instancetype)initWithUserName:(NSString *)username
-                        password:(NSString *)password {
-    NSParameterAssert(username);
-    NSParameterAssert(password);
+class AIMSAuthenticationParameters: NSObject {
+    var identityServiceURL: String
+    let contentURL: String
+    let processURL: String
+    let realm: String
+    let clientID: String
+    let redirectURI: String
     
-    self = [super init];
-    if (self) {
-        [self setAuthorizationHeaderFieldWithUsername:username
-                                             password:password];
+    init(identityServiceURL:String,
+         contentURL:String,
+         processURL:String,
+         realm:String,
+         clientID:String,
+         redirectURI:String) {
+        self.identityServiceURL = identityServiceURL
+        self.contentURL = contentURL
+        self.processURL = processURL
+        self.realm = realm
+        self.clientID = clientID
+        self.redirectURI = redirectURI
     }
-    
-    return self;
 }
-
-@end

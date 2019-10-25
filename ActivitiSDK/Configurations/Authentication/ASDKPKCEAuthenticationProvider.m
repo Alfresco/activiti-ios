@@ -16,16 +16,20 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "ASDKPKCEAuthenticationProvider.h"
 
-@interface ASDKModelServerConfiguration : NSObject
+@implementation ASDKPKCEAuthenticationProvider
 
-@property (strong, nonatomic, nonnull) NSString   *hostAddressString;
-@property (assign, nonatomic) BOOL                isCommunicationOverSecureLayer;
-@property (strong, nonatomic, nullable) NSString  *username;
-@property (strong, nonatomic, nullable) NSString  *password;
-@property (strong, nonatomic, nullable) NSString  *acessToken;
-@property (strong, nonatomic, nullable) NSString  *port;
-@property (strong, nonatomic, nonnull) NSString   *serviceDocument;
+- (instancetype)initWithAccessToken:(NSString *)accessToken {
+    NSParameterAssert(accessToken);
+    
+    self = [super init];
+    if (self) {
+        NSString *accessTokenHTTPHeaderField = [NSString stringWithFormat:@"Bearer %@", accessToken];
+        [self setValue:accessTokenHTTPHeaderField forHTTPHeaderField:@"Authorization"];
+    }
+    
+    return self;
+}
 
 @end

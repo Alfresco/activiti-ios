@@ -195,7 +195,8 @@
 #import <ActivitiSDK/ASDKFormRenderEngineConstants.h>
 
 // Authentication providers
-#import <ActivitiSDK/ASDKBasicAuthentificationProvider.h>
+#import <ActivitiSDK/ASDKBasicAuthenticationProvider.h>
+#import <ActivitiSDK/ASDKPKCEAuthenticationProvider.h>
 
 //! Project version number for ActivitiSDK.
 FOUNDATION_EXPORT double ActivitiSDKVersionNumber;

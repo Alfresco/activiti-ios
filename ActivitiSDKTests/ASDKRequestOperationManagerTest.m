@@ -39,7 +39,7 @@
                                                                                                 port:port
                                                                                      overSecureLayer:overSecureLayer];
     
-    id authenticationProvider = OCMClassMock([ASDKBasicAuthentificationProvider class]);
+    id authenticationProvider = OCMClassMock([ASDKBasicAuthenticationProvider class]);
     self.requestOperationManager = [[ASDKRequestOperationManager alloc] initWithBaseURL:servicePathFactory.baseURL
                                                                  authenticationProvider:authenticationProvider];
 }

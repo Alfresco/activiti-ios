@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (C) 2005-2018 Alfresco Software Limited.
  *
- * This file is part of the Alfresco Activiti Mobile SDK.
+ * This file is part of the Alfresco Activiti iOS App.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,19 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <Foundation/Foundation.h>
+import Foundation
+import AlfrescoAuth
 
-@interface ASDKModelServerConfiguration : NSObject
-
-@property (strong, nonatomic, nonnull) NSString   *hostAddressString;
-@property (assign, nonatomic) BOOL                isCommunicationOverSecureLayer;
-@property (strong, nonatomic, nullable) NSString  *username;
-@property (strong, nonatomic, nullable) NSString  *password;
-@property (strong, nonatomic, nullable) NSString  *acessToken;
-@property (strong, nonatomic, nullable) NSString  *port;
-@property (strong, nonatomic, nonnull) NSString   *serviceDocument;
-
-@end
+protocol AIMSLoginServiceProtocol {
+    
+    // Login related methods
+    func login(onViewController: UIViewController, delegate: AlfrescoAuthDelegate)
+    func refreshSession(delegate: AlfrescoAuthDelegate)
+    func logout()
+    
+    // Parameter related methods
+    func updateAuthParameters(with parameters: AIMSAuthenticationParameters)
+    
+    // URL redirect
+    func resumeExternalUserAgentFlow(with url: URL) -> Bool 
+}
