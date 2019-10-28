@@ -35,6 +35,15 @@ extern NSString *kLocalizationLoginTimedOutText;
 extern NSString *kLocalizationLoginUnauthorizedRequestErrorText;
 extern NSString *kLocalizationLoginCloudLoginButtonText;
 extern NSString *kLocalizationLoginPremiseLoginButtonText;
+extern NSString *kLocalizationLoginProcessServicesAppText;
+extern NSString *kLocalizationLoginScreenProcessServicesAppText;
+extern NSString *kLocalizationLoginScreenAlfrescoURLPlaceholderText;
+extern NSString *kLocalizationLoginScreenProcessURLPlaceholderText;
+extern NSString *kLocalizationLoginScreenUseHTTPsText;
+extern NSString *kLocalizationLoginScreenConnectButtonText;
+extern NSString *kLocalizationLoginScreenCloudSignInButtonText;
+extern NSString *kLocalizationLoginScreenAdvancedSettingsButtonText;
+extern NSString *kLocalizationLoginScreenCopyrightFormat;
 
 // Applications screen
 extern NSString *kLocalizationAppScreenTitleText;

@@ -38,6 +38,15 @@ NSString *kLocalizationLoginTimedOutText                         = @"loginScreen
 NSString *kLocalizationLoginUnauthorizedRequestErrorText         = @"loginScreenUnauthorizedRequestErrorText";
 NSString *kLocalizationLoginCloudLoginButtonText                 = @"loginScreenCloudLoginButtonText";
 NSString *kLocalizationLoginPremiseLoginButtonText               = @"loginScreenPremiseLoginButtonText";
+NSString *kLocalizationLoginProcessServicesAppText               = @"loginScreenProcessServicesAppText";
+NSString *kLocalizationLoginScreenProcessServicesAppText         = @"loginScreenProcessServicesAppText";
+NSString *kLocalizationLoginScreenAlfrescoURLPlaceholderText     = @"loginScreenAlfrescoURLPlaceholderText";
+NSString *kLocalizationLoginScreenProcessURLPlaceholderText      = @"loginScreenProcessURLPlaceholderText";
+NSString *kLocalizationLoginScreenUseHTTPsText                   = @"loginScreenUseHTTPsText";
+NSString *kLocalizationLoginScreenConnectButtonText              = @"loginScreenConnectButtonText";
+NSString *kLocalizationLoginScreenCloudSignInButtonText          = @"loginScreenCloudSignInButtonText";
+NSString *kLocalizationLoginScreenAdvancedSettingsButtonText     = @"loginScreenAdvancedSettingsButtonText";
+NSString *kLocalizationLoginScreenCopyrightFormat                = @"loginScreenCopyrightFormat";
 
 
 #pragma mark -

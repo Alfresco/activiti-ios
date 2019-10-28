@@ -75,6 +75,11 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
     [Buglife sharedBuglife].invocationOptions = LIFEInvocationOptionsShake;
     [Buglife sharedBuglife].delegate = self;
     
+    // Register color scheme manager
+    MaterialDesignColorSchemeComponent *colorSchemeManager = [MaterialDesignColorSchemeComponent new];
+    [[AFAServiceRepository sharedRepository] registerServiceObject:colorSchemeManager
+                                                        forPurpose:AFAServiceObjectTypeMaterialDesignColorSchemeComponent];
+    
     application.delegate.window.backgroundColor = [UIColor windowBackgroundColor];
     
     return YES;

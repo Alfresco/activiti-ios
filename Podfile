@@ -19,7 +19,7 @@ abstract_target 'Shared' do
         pod 'Fabric', '~> 1.0'
         pod 'Crashlytics', '~> 3.14'
         pod 'Buglife', '~> 2.10'
-	    pod 'AlfrescoAuth'
+        pod 'AlfrescoAuth'
         pod 'MaterialComponents'
 	end
 

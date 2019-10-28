@@ -49,6 +49,7 @@
 	<string>This allows Alfresco Activiti to let you pick images from your photo library and attach them to tasks.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Muli-Light.ttf</string>
 		<string>glyphicons-filetypes.otf</string>
 		<string>glyphicons-regular.otf</string>
 	</array>

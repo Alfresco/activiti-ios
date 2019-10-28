@@ -21,7 +21,8 @@
 typedef NS_ENUM(NSInteger, AFAServiceObjectType) {
     AFAServiceObjectTypeThumbnailManager,
     AFAServiceObjectTypeNetworkDelayedSaveFormService,
-    AFAServiceObjectTypeAIMSLogin
+    AFAServiceObjectTypeAIMSLogin,
+    AFAServiceObjectTypeMaterialDesignColorSchemeComponent
 };
 
 /**

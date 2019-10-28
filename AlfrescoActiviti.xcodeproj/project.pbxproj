@@ -850,6 +850,10 @@
 		B925EB7A231404B6003CF3CF /* ASDKMOFormVariable.h in Headers */ = {isa = PBXBuildFile; fileRef = B925EB78231404B6003CF3CF /* ASDKMOFormVariable.h */; };
 		B925EB7B231404B6003CF3CF /* ASDKMOFormVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = B925EB79231404B6003CF3CF /* ASDKMOFormVariable.m */; };
 		B948F7CC2362E5D2004044DF /* ASDKRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E830731B6A303B0028901A /* ASDKRequestOperationManager.m */; };
+		B94FE483236704E0008BCA64 /* AIMSLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94FE482236704E0008BCA64 /* AIMSLoginViewModel.swift */; };
+		B94FE48623671BA6008BCA64 /* MaterialDesignColorSchemeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94FE48523671BA6008BCA64 /* MaterialDesignColorSchemeComponent.swift */; };
+		B94FE4892367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94FE4882367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift */; };
+		B94FE48D23672B72008BCA64 /* AFALog.m in Sources */ = {isa = PBXBuildFile; fileRef = B94FE48C23672B72008BCA64 /* AFALog.m */; };
 		B9849849231554E40051F545 /* ASDKFormVariableCacheMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AA069E23154D6200D1B2AF /* ASDKFormVariableCacheMapper.m */; };
 		B9AA069A231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h in Headers */ = {isa = PBXBuildFile; fileRef = B9AA0698231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h */; };
 		B9AA069B231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AA0699231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m */; };
@@ -857,6 +861,8 @@
 		B9BF25B22362E9200017B71D /* ASDKPKCEAuthenticationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BF25B02362E9200017B71D /* ASDKPKCEAuthenticationProvider.m */; };
 		B9BF25B32362E9210017B71D /* ASDKPKCEAuthenticationProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B9BF25B12362E9200017B71D /* ASDKPKCEAuthenticationProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B9BF25B6236309D60017B71D /* ASDKPKCEAuthenticationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BF25B5236309D60017B71D /* ASDKPKCEAuthenticationProvider.m */; };
+		B9BF25B823631A520017B71D /* AIMSLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BF25B723631A520017B71D /* AIMSLoginViewController.swift */; };
+		B9BF25BB236338590017B71D /* Muli-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9BF25BA236338590017B71D /* Muli-Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1912,6 +1918,11 @@
 		B925EB772314023F003CF3CF /* CacheServicesDataModel-v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CacheServicesDataModel-v2.xcdatamodel"; sourceTree = "<group>"; };
 		B925EB78231404B6003CF3CF /* ASDKMOFormVariable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKMOFormVariable.h; path = ActivitiSDK/CacheServices/CacheModels/ASDKMOFormVariable.h; sourceTree = "<group>"; };
 		B925EB79231404B6003CF3CF /* ASDKMOFormVariable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKMOFormVariable.m; path = ActivitiSDK/CacheServices/CacheModels/ASDKMOFormVariable.m; sourceTree = "<group>"; };
+		B94FE482236704E0008BCA64 /* AIMSLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSLoginViewModel.swift; path = ViewModel/AIMSViewModel/AIMSLoginViewModel.swift; sourceTree = "<group>"; };
+		B94FE48523671BA6008BCA64 /* MaterialDesignColorSchemeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MaterialDesignColorSchemeComponent.swift; path = UI/Components/MaterialDesignColorSchemeComponent/MaterialDesignColorSchemeComponent.swift; sourceTree = "<group>"; };
+		B94FE4882367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+MaterialDesignColorScheme.swift"; path = "UI/Extensions/UIViewController+MaterialDesignColorScheme.swift"; sourceTree = "<group>"; };
+		B94FE48B23672B72008BCA64 /* AFALog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFALog.h; path = Business/Logging/AFALog.h; sourceTree = "<group>"; };
+		B94FE48C23672B72008BCA64 /* AFALog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AFALog.m; path = Business/Logging/AFALog.m; sourceTree = "<group>"; };
 		B9AA0698231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKFormVariablesCacheModelUpsert.h; path = CacheServices/CacheModelUpsert/FormVariablesModelUpsert/ASDKFormVariablesCacheModelUpsert.h; sourceTree = "<group>"; };
 		B9AA0699231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKFormVariablesCacheModelUpsert.m; path = CacheServices/CacheModelUpsert/FormVariablesModelUpsert/ASDKFormVariablesCacheModelUpsert.m; sourceTree = "<group>"; };
 		B9AA069D23154D6200D1B2AF /* ASDKFormVariableCacheMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKFormVariableCacheMapper.h; sourceTree = "<group>"; };
@@ -1919,6 +1930,8 @@
 		B9BF25B02362E9200017B71D /* ASDKPKCEAuthenticationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKPKCEAuthenticationProvider.m; path = ActivitiSDK/Configurations/Authentication/ASDKPKCEAuthenticationProvider.m; sourceTree = SOURCE_ROOT; };
 		B9BF25B12362E9200017B71D /* ASDKPKCEAuthenticationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKPKCEAuthenticationProvider.h; path = ActivitiSDK/Configurations/Authentication/ASDKPKCEAuthenticationProvider.h; sourceTree = SOURCE_ROOT; };
 		B9BF25B5236309D60017B71D /* ASDKPKCEAuthenticationProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKPKCEAuthenticationProvider.m; sourceTree = "<group>"; };
+		B9BF25B723631A520017B71D /* AIMSLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSLoginViewController.swift; path = UI/ViewControllers/LoginScreen/AIMSLoginViewController.swift; sourceTree = "<group>"; };
+		B9BF25BA236338590017B71D /* Muli-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Muli-Light.ttf"; path = "AlfrescoActiviti/Resources/Fonts/Muli-Light.ttf"; sourceTree = SOURCE_ROOT; };
 		E30248B522AAA083006C5A3B /* AlfrescoActiviti.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AlfrescoActiviti.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2705,6 +2718,7 @@
 				138D3D801C3FBAB400266A7C /* LoginCredentialsViewController */,
 				133B7FDB1B78DBFE00C17D06 /* AFALoginViewController.h */,
 				133B7FDC1B78DBFE00C17D06 /* AFALoginViewController.m */,
+				B9BF25B723631A520017B71D /* AIMSLoginViewController.swift */,
 			);
 			name = LoginScreen;
 			sourceTree = "<group>";
@@ -2715,6 +2729,7 @@
 				136DFF831DA7E54800FA40E0 /* Storyboards */,
 				13DBF3591B79E1E5003E6938 /* Constants */,
 				13DBF3541B79DF53003E6938 /* Categories */,
+				B94FE48A23672067008BCA64 /* Extensions */,
 				133B7FE41B78FB2500C17D06 /* Components */,
 				136829A91F2F1C1500B74EAF /* Animators */,
 				13BDA7391B7B4B7F00A2CE40 /* Cells */,
@@ -2726,6 +2741,7 @@
 		133B7FE01B78FA3300C17D06 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B9BF25B9236338270017B71D /* Fonts */,
 				E30248B522AAA083006C5A3B /* AlfrescoActiviti.xcconfig */,
 				1310F2F31D927481002FF53F /* AlfrescoActiviti.entitlements */,
 				13BDA7401B7B632500A2CE40 /* Localization */,
@@ -2749,6 +2765,7 @@
 				13891CAB1D00258D00A61015 /* ConfirmationView */,
 				136DFF691DA3DB8600FA40E0 /* FilterHeaderView */,
 				132154D81F1E00A400A8C7F2 /* BannerAlertView */,
+				B94FE48723671BAA008BCA64 /* MaterialDesignColorSchemeComponent */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3429,6 +3446,7 @@
 				1371944F1B6922DE00D4E1F0 /* AlfrescoActiviti */,
 				1371947F1B6924DE00D4E1F0 /* ActivitiSDK */,
 				1371944E1B6922DE00D4E1F0 /* Products */,
+				A341846D49F7DD70CECF11A1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -4589,6 +4607,8 @@
 				1323CFD31B87704E00E66D6F /* AFALogConfiguration.h */,
 				1323CFD41B87719900E66D6F /* AFALogFormatter.h */,
 				1323CFD51B87719900E66D6F /* AFALogFormatter.m */,
+				B94FE48B23672B72008BCA64 /* AFALog.h */,
+				B94FE48C23672B72008BCA64 /* AFALog.m */,
 			);
 			name = Logger;
 			sourceTree = "<group>";
@@ -5968,6 +5988,7 @@
 			children = (
 				13FEE5571E81402400FF30DB /* LoginViewModel */,
 				13A106991E93BB3900506871 /* ListViewModel */,
+				B94FE484236704E4008BCA64 /* AIMSViewModel */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -6472,6 +6493,13 @@
 			name = FormMultiLineTextFieldCell;
 			sourceTree = "<group>";
 		};
+		A341846D49F7DD70CECF11A1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B90A375F2360822D00BE66A1 /* AIMSLoginService */ = {
 			isa = PBXGroup;
 			children = (
@@ -6506,6 +6534,30 @@
 			path = PKCEAuthentication;
 			sourceTree = "<group>";
 		};
+		B94FE484236704E4008BCA64 /* AIMSViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B94FE482236704E0008BCA64 /* AIMSLoginViewModel.swift */,
+			);
+			name = AIMSViewModel;
+			sourceTree = "<group>";
+		};
+		B94FE48723671BAA008BCA64 /* MaterialDesignColorSchemeComponent */ = {
+			isa = PBXGroup;
+			children = (
+				B94FE48523671BA6008BCA64 /* MaterialDesignColorSchemeComponent.swift */,
+			);
+			name = MaterialDesignColorSchemeComponent;
+			sourceTree = "<group>";
+		};
+		B94FE48A23672067008BCA64 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B94FE4882367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		B9AA069C231412D700D1B2AF /* ASDKFormVariablesCacheModelUpsert */ = {
 			isa = PBXGroup;
 			children = (
@@ -6522,6 +6574,14 @@
 				B9AA069E23154D6200D1B2AF /* ASDKFormVariableCacheMapper.m */,
 			);
 			path = FormVariableCacheMapper;
+			sourceTree = "<group>";
+		};
+		B9BF25B9236338270017B71D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B9BF25BA236338590017B71D /* Muli-Light.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -7005,6 +7065,7 @@
 				13A578671CEDDDB90014B6FD /* glyphicons-filetypes.otf in Resources */,
 				1371945F1B6922DE00D4E1F0 /* Main.storyboard in Resources */,
 				13BDA73F1B7B632100A2CE40 /* Localizable.strings in Resources */,
+				B9BF25BB236338590017B71D /* Muli-Light.ttf in Resources */,
 				13A578541CEC677C0014B6FD /* glyphicons-regular.otf in Resources */,
 				137194641B6922DE00D4E1F0 /* LaunchScreen.xib in Resources */,
 				137194611B6922DE00D4E1F0 /* Images.xcassets in Resources */,
@@ -7179,10 +7240,12 @@
 				137B8DE01BB99B1200F1A6DC /* AFATableControllerContentCellFactory.m in Sources */,
 				13BBAB091E9CF761009B2D43 /* AFAContentPickerDataSource.m in Sources */,
 				13A106A31E94DEC400506871 /* AFAListBaseViewModel.m in Sources */,
+				B94FE48D23672B72008BCA64 /* AFALog.m in Sources */,
 				8D7C1A461C808D010092EA81 /* AFAAssigneeTableViewCell.m in Sources */,
 				132BB7671D48AEB200757493 /* AFAStartFormTableViewCell.m in Sources */,
 				13F562C71CA2A3D300F0C7B5 /* AFAClaimTableViewCell.m in Sources */,
 				13AEE2BC1C96B79500E9EB44 /* AFATableControllerProcessInstanceContentModel.m in Sources */,
+				B94FE48623671BA6008BCA64 /* MaterialDesignColorSchemeComponent.swift in Sources */,
 				131DCF4E1DAFB18E00E08798 /* AFAModalTaskDetailsUpdateTaskAction.m in Sources */,
 				8D7C1A811C8091D40092EA81 /* AFAPeoplePickerViewController.m in Sources */,
 				136DFF681DA3DB8300FA40E0 /* AFAFilterHeaderView.m in Sources */,
@@ -7217,6 +7280,8 @@
 				139DF5C21C5B6BB00062D01D /* AFATaskServices.m in Sources */,
 				1323CFC31B87065000E66D6F /* UIImage+AFAFontGlyphicons.m in Sources */,
 				13CE8ED51B85B32E0022F17A /* AFAContainerViewController.m in Sources */,
+				B94FE4892367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift in Sources */,
+				B94FE483236704E0008BCA64 /* AIMSLoginViewModel.swift in Sources */,
 				13323B611E9E255000D45ABB /* AFAContentPickerProcessInstanceAuditLogDownloadBehavior.m in Sources */,
 				13A106A01E94DC4B00506871 /* AFAProcessListViewModel.m in Sources */,
 				13FFF4101C43A6E600550747 /* AFAApplicationListViewController.m in Sources */,
@@ -7258,6 +7323,7 @@
 				8D7C1A5A1C808D7F0092EA81 /* AFACommentTableViewCell.m in Sources */,
 				13A106981E93BB3500506871 /* AFATaskListViewModel.m in Sources */,
 				132154D71F1E00A100A8C7F2 /* AFANavigationBarBannerAlertView.m in Sources */,
+				B9BF25B823631A520017B71D /* AIMSLoginViewController.swift in Sources */,
 				135443EF1B97409C0044157B /* AFASliderTitleView.m in Sources */,
 				8D7C1A851C80921E0092EA81 /* AFAUserServices.m in Sources */,
 				133539FF1F30A84C0058B85E /* AFAPopFadeAnimator.m in Sources */,
@@ -7793,7 +7859,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Alfresco Activiti Mobile Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "AlfrescoActiviti/AlfrescoActiviti-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -7812,7 +7878,7 @@
 				PRODUCT_NAME = AlfrescoActiviti;
 				PROVISIONING_PROFILE_SPECIFIER = "Activiti Mobile App Store Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "AlfrescoActiviti/AlfrescoActiviti-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -8013,7 +8079,7 @@
 				PRODUCT_NAME = AlfrescoActiviti;
 				PROVISIONING_PROFILE_SPECIFIER = "Activiti Mobile Ad Hoc Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "AlfrescoActiviti/AlfrescoActiviti-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Adhoc;
 		};

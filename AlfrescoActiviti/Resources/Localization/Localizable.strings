@@ -34,6 +34,14 @@
 "loginScreenUnauthorizedRequestErrorText"                = "Invalid credentials, you will be redirected to the login screen";
 "loginScreenCloudLoginButtonText"                        = "Alfresco Process Services Online";
 "loginScreenPremiseLoginButtonText"                      = "Process Services On Premise";
+"loginScreenProcessServicesAppText"                      = "Process Services App";
+"loginScreenAlfrescoURLPlaceholderText"                  = "Alfresco URL";
+"loginScreenProcessURLPlaceholderText"                   = "Process URL";
+"loginScreenUseHTTPsText"                                = "USE HTTPS";
+"loginScreenConnectButtonText"                           = "CONNECT";
+"loginScreenCloudSignInButtonText"                       = "SIGN IN WITH CLOUD";
+"loginScreenAdvancedSettingsButtonText"                  = "ADVANCED SETTINGS";
+"loginScreenCopyrightFormat"                             = "© 2017 - %d Alfresco Software, Inc. All rights reserved.";
 
 // Applications screen
 "appScreenTitleText"                                     = "Applications";
