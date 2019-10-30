@@ -44,6 +44,8 @@ extern NSString *kLocalizationLoginScreenConnectButtonText;
 extern NSString *kLocalizationLoginScreenCloudSignInButtonText;
 extern NSString *kLocalizationLoginScreenAdvancedSettingsButtonText;
 extern NSString *kLocalizationLoginScreenCopyrightFormat;
+extern NSString *kLocalizationLoginScreenIndentityServiceURLHintTitleText;
+extern NSString *kLocalizationLoginScreenIdentityServiceURLHintText;
 
 // Applications screen
 extern NSString *kLocalizationAppScreenTitleText;

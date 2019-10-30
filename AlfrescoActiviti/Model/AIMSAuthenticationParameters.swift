@@ -20,8 +20,8 @@ import Foundation
 
 class AIMSAuthenticationParameters: NSObject {
     var identityServiceURL: String
-    let contentURL: String
-    let processURL: String
+    var contentURL: String
+    var processURL: String
     let realm: String
     let clientID: String
     let redirectURI: String
