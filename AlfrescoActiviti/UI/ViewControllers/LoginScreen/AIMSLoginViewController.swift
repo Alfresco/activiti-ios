@@ -80,4 +80,11 @@ class AIMSLoginViewController: UIViewController {
         advancedSettingsButton.applyTextTheme(withScheme: colorSchemeManager.flatButtonWithoutBackgroundScheme)
         cloudSignInButton.applyTextTheme(withScheme: colorSchemeManager.highlighterFlatButtonWithBackgroundScheme)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+       
 }

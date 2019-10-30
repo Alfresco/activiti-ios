@@ -24,6 +24,7 @@
 
 NSUInteger kDefaultLoginUnsecuredPort                = 80;
 NSUInteger kDefaultLoginSecuredPort                  = 443;
+NSString *kAdvancedSettingsParameters                = @"kAdvancedSettingsParameters";
 
 
 #pragma mark -

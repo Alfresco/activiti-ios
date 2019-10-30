@@ -48,6 +48,14 @@ NSString *kLocalizationLoginScreenCloudSignInButtonText          = @"loginScreen
 NSString *kLocalizationLoginScreenAdvancedSettingsButtonText     = @"loginScreenAdvancedSettingsButtonText";
 NSString *kLocalizationLoginScreenCopyrightFormat                = @"loginScreenCopyrightFormat";
 
+#pragma mark -
+#pragma mark Advanced Settings screen
+
+NSString *kLocalizationAdvancedSettingsScreenRealmPlaceholderText               = @"advancedSettingsScreenRealmPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText            = @"advancedSettingsScreeClientIDPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenPortPlaceholderText                = @"advancedSettingsScreenPortPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText     = @"advancedSettingsScreenServiceDocumentPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenSaveButtonText                     = @"advancedSettingsScreenSaveButtonText";
 
 #pragma mark -
 #pragma mark Application screen

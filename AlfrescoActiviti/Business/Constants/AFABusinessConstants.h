@@ -22,6 +22,7 @@
 // Login related
 extern NSUInteger kDefaultLoginUnsecuredPort;
 extern NSUInteger kDefaultLoginSecuredPort;
+extern NSString *kAdvancedSettingsParameters;
 
 // Task related
 extern NSInteger  kDayDifferenceForHighPriorityTasks;

@@ -43,6 +43,13 @@
 "loginScreenAdvancedSettingsButtonText"                  = "ADVANCED SETTINGS";
 "loginScreenCopyrightFormat"                             = "© 2017 - %d Alfresco Software, Inc. All rights reserved.";
 
+// Advanced Settings screen
+"advancedSettingsScreenRealmPlaceholderText"             = "Realm";
+"advancedSettingsScreeClientIDPlaceholderText"           = "Client ID";
+"advancedSettingsScreenPortPlaceholderText"              = "Port";
+"advancedSettingsScreenServiceDocumentPlaceholderText"   = "Service Document";
+"advancedSettingsScreenSaveButtonText"                   = "Save";
+
 // Applications screen
 "appScreenTitleText"                                     = "Applications";
 
