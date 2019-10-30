@@ -51,6 +51,10 @@
 "advancedSettingsScreenPortPlaceholderText"              = "Port";
 "advancedSettingsScreenServiceDocumentPlaceholderText"   = "Service Document";
 "advancedSettingsScreenSaveButtonText"                   = "Save";
+"advancedSettingsScreenRealmHintText"                    = "Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
+"advancedSettingsScreenClientIDHintText"                 = "Your system administrator will have setup a client id for this application. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
+"advancedSettingsScreenPortHintText"                     = "You can connect using a custom port number here";
+"advancedSettingsScreenServiceDocumentHintText"          = " ";
 
 // Applications screen
 "appScreenTitleText"                                     = "Applications";

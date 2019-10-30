@@ -11,10 +11,15 @@ import Foundation
 class AIMSAdvancedSettingsViewModel {
     // Localization
     let realmPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenRealmPlaceholderText, comment: "Realm")
+    let realmHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenRealmHintText, comment: "Hint Text")
     let cliendIDPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText, comment: "Client ID")
+    let cliendIDHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenClientIDHintText, comment: "Hint Text")
     let portPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenPortPlaceholderText, comment: "Port")
+    let portHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenPortHintText, comment: "Hint Text")
     let serviceDocumentPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText, comment: "Service Document")
+    let serviceDocumentHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenServiceDocumentHintText, comment: "Hint Text")
     let saveButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenSaveButtonText, comment: "Save")
+    
     var copyrightText: String {
         get {
             let calendar = Calendar.current

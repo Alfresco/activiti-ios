@@ -58,6 +58,10 @@ NSString *kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText            
 NSString *kLocalizationAdvancedSettingsScreenPortPlaceholderText                = @"advancedSettingsScreenPortPlaceholderText";
 NSString *kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText     = @"advancedSettingsScreenServiceDocumentPlaceholderText";
 NSString *kLocalizationAdvancedSettingsScreenSaveButtonText                     = @"advancedSettingsScreenSaveButtonText";
+NSString *kLocalizationAdvancedSettingsScreenRealmHintText                      = @"advancedSettingsScreenRealmHintText";
+NSString *kLocalizationAdvancedSettingsScreenClientIDHintText                   = @"advancedSettingsScreenClientIDHintText";
+NSString *kLocalizationAdvancedSettingsScreenPortHintText                       = @"advancedSettingsScreenPortHintText";
+NSString *kLocalizationAdvancedSettingsScreenServiceDocumentHintText            = @"advancedSettingsScreenServiceDocumentHintText";
 
 #pragma mark -
 #pragma mark Application screen

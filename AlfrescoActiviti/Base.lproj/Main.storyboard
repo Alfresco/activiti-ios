@@ -4064,11 +4064,11 @@
             <objects>
                 <viewController id="alz-iV-uqZ" customClass="AFAProcessInstanceDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XMX-t1-Gxg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rC6-Rq-Ol0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="724"/>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="NfO-80-xdz">
@@ -4457,7 +4457,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="Task name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxq-4H-spZ">
-                                                    <rect key="frame" x="57" y="8.0000000000000018" width="333" height="20.666666666666671"/>
+                                                    <rect key="frame" x="57" y="8.0000000000000018" width="337" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <color key="textColor" red="0.72323139479999998" green="0.72323139479999998" blue="0.72323139479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4469,7 +4469,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSs-Ou-kAV">
-                                                    <rect key="frame" x="390" y="23.666666666666668" width="16" height="14.000000000000004"/>
+                                                    <rect key="frame" x="394" y="23.666666666666668" width="12" height="14.000000000000004"/>
                                                     <fontDescription key="fontDescription" name="GLYPHICONS-Regular" family="GLYPHICONS" pointSize="12"/>
                                                     <color key="textColor" red="0.77647058820000003" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4816,13 +4816,13 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" text="name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2i-Kg-OVh">
-                                                    <rect key="frame" x="57" y="12" width="325" height="37"/>
+                                                    <rect key="frame" x="57" y="12" width="329" height="37"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZs-22-LFo">
-                                                    <rect key="frame" x="390" y="23.666666666666668" width="16" height="14.000000000000004"/>
+                                                    <rect key="frame" x="394" y="23.666666666666668" width="12" height="14.000000000000004"/>
                                                     <fontDescription key="fontDescription" name="GLYPHICONS-Regular" family="GLYPHICONS" pointSize="12"/>
                                                     <color key="textColor" red="0.77647058820000003" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4852,7 +4852,7 @@
                                 </prototypes>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HtY-U5-ifu" customClass="AFAActivityView">
-                                <rect key="frame" x="187" y="384" width="40" height="40"/>
+                                <rect key="frame" x="187" y="362" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Ujv-5Q-zNI"/>
@@ -4877,17 +4877,17 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N05-2c-M8i" userLabel="No content view" customClass="AFANoContentView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="715"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jdu-md-ccQ">
-                                        <rect key="frame" x="143" y="248.66666666666669" width="128" height="128"/>
+                                        <rect key="frame" x="143" y="243.66666666666669" width="128" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="7aC-gK-25L"/>
                                             <constraint firstAttribute="height" constant="128" id="kNX-6I-Nyb"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no available content but you can add some by using the + button." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-Qw-2BH">
-                                        <rect key="frame" x="50" y="384.66666666666669" width="314" height="36"/>
+                                        <rect key="frame" x="50" y="379.66666666666669" width="314" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -4907,7 +4907,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJn-Fb-WRb" customClass="ASDKRoundedBorderView">
-                                <rect key="frame" x="0.0" y="768" width="414" height="40"/>
+                                <rect key="frame" x="0.0" y="724" width="414" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="stI-5h-w22" userLabel="Separator1">
                                         <rect key="frame" x="0.0" y="10" width="46" height="20"/>
@@ -5295,22 +5295,66 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9QT-z0-8do" id="ak9-tk-voC"/>
+                                </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a08-0u-ZBp">
+                                <rect key="frame" x="330" y="84" width="25" height="24"/>
+                                <color key="tintColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="alfrescoURLInfoButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="o0l-VO-jFw"/>
+                                    <action selector="intoButtonPressed:" destination="9QT-z0-8do" eventType="touchUpInside" id="5SF-6J-rJI"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uDB-a5-yez" customClass="MDCTextField">
                                 <rect key="frame" x="47" y="113" width="320" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9QT-z0-8do" id="EX0-dn-uha"/>
+                                </connections>
                             </textField>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1G2-Lc-ngA">
+                                <rect key="frame" x="330" y="118" width="25" height="24"/>
+                                <color key="tintColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="alfrescoURLInfoButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="qbn-7h-bVv"/>
+                                    <action selector="intoButtonPressed:" destination="9QT-z0-8do" eventType="touchUpInside" id="Mcb-ZI-7LY"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MH0-nB-gfv" customClass="MDCTextField">
                                 <rect key="frame" x="47" y="147" width="320" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9QT-z0-8do" id="3mx-Cl-BBk"/>
+                                </connections>
                             </textField>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ds0-Ka-mgc">
+                                <rect key="frame" x="330.66666666666669" y="152.33333333333334" width="24.333333333333314" height="23.666666666666657"/>
+                                <color key="tintColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="alfrescoURLInfoButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="Uue-Ml-Z3j"/>
+                                    <action selector="intoButtonPressed:" destination="9QT-z0-8do" eventType="touchUpInside" id="ltC-q3-4Po"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dik-0Q-PLB" customClass="MDCTextField">
                                 <rect key="frame" x="47" y="181" width="320" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9QT-z0-8do" id="BFs-oe-1vk"/>
+                                </connections>
                             </textField>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAZ-1y-H7F">
+                                <rect key="frame" x="330" y="186" width="25" height="24"/>
+                                <color key="tintColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="alfrescoURLInfoButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="3PG-YE-3aw"/>
+                                    <action selector="intoButtonPressed:" destination="9QT-z0-8do" eventType="touchUpInside" id="vHE-fP-FYc"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-AZ-HXA" customClass="MDCButton">
                                 <rect key="frame" x="47" y="265" width="320" height="30"/>
                                 <state key="normal" title="SAVE"/>
@@ -5330,10 +5374,18 @@
                             <constraint firstItem="dik-0Q-PLB" firstAttribute="trailing" secondItem="iob-K0-XyF" secondAttribute="trailing" id="HON-5e-ei9"/>
                             <constraint firstItem="iob-K0-XyF" firstAttribute="centerX" secondItem="ocl-5N-hrx" secondAttribute="centerX" id="HXf-ef-aKV"/>
                             <constraint firstItem="uDB-a5-yez" firstAttribute="trailing" secondItem="iob-K0-XyF" secondAttribute="trailing" id="Qda-Q4-zaF"/>
+                            <constraint firstItem="a08-0u-ZBp" firstAttribute="centerY" secondItem="iob-K0-XyF" secondAttribute="centerY" id="Rl1-XI-LxV"/>
+                            <constraint firstItem="ds0-Ka-mgc" firstAttribute="centerY" secondItem="MH0-nB-gfv" secondAttribute="centerY" id="XTb-p9-ugs"/>
+                            <constraint firstItem="a08-0u-ZBp" firstAttribute="trailing" secondItem="iob-K0-XyF" secondAttribute="trailing" constant="-12" id="XWb-bt-85E"/>
                             <constraint firstItem="MH0-nB-gfv" firstAttribute="leading" secondItem="iob-K0-XyF" secondAttribute="leading" id="Zn9-nt-Z8b"/>
+                            <constraint firstItem="ds0-Ka-mgc" firstAttribute="trailing" secondItem="MH0-nB-gfv" secondAttribute="trailing" constant="-12" id="aq4-2B-3Zl"/>
+                            <constraint firstItem="GAZ-1y-H7F" firstAttribute="centerY" secondItem="dik-0Q-PLB" secondAttribute="centerY" id="eRY-aF-AVA"/>
                             <constraint firstItem="uDB-a5-yez" firstAttribute="top" secondItem="iob-K0-XyF" secondAttribute="bottom" id="i2V-4L-AN8"/>
                             <constraint firstItem="iob-K0-XyF" firstAttribute="top" secondItem="8if-nV-Nbn" secondAttribute="top" constant="35" id="ilf-1M-a5A"/>
+                            <constraint firstItem="1G2-Lc-ngA" firstAttribute="centerY" secondItem="uDB-a5-yez" secondAttribute="centerY" id="nqG-Jw-WB7"/>
                             <constraint firstItem="iob-K0-XyF" firstAttribute="centerY" secondItem="ocl-5N-hrx" secondAttribute="centerY" multiplier="1:2" id="o8y-YI-6bp"/>
+                            <constraint firstItem="GAZ-1y-H7F" firstAttribute="trailing" secondItem="dik-0Q-PLB" secondAttribute="trailing" constant="-12" id="pR9-kf-KTR"/>
+                            <constraint firstItem="1G2-Lc-ngA" firstAttribute="trailing" secondItem="uDB-a5-yez" secondAttribute="trailing" constant="-12" id="t8a-ow-JVD"/>
                             <constraint firstItem="eSQ-AZ-HXA" firstAttribute="leading" secondItem="iob-K0-XyF" secondAttribute="leading" id="xCw-Zl-YIB"/>
                             <constraint firstItem="dik-0Q-PLB" firstAttribute="leading" secondItem="iob-K0-XyF" secondAttribute="leading" id="xGj-62-Kw7"/>
                             <constraint firstItem="uDB-a5-yez" firstAttribute="leading" secondItem="iob-K0-XyF" secondAttribute="leading" id="zHA-mT-XpU"/>
@@ -5369,9 +5421,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cliendIDTextField" destination="uDB-a5-yez" id="WYk-IX-Ukw"/>
+                        <outlet property="clientIDInfoButton" destination="1G2-Lc-ngA" id="uZb-9v-jl3"/>
+                        <outlet property="portInfoButton" destination="ds0-Ka-mgc" id="xKR-xB-5GM"/>
                         <outlet property="portTextField" destination="MH0-nB-gfv" id="DUn-e4-TCs"/>
+                        <outlet property="realmInfoButton" destination="a08-0u-ZBp" id="ENW-vs-nPe"/>
                         <outlet property="realmTextField" destination="iob-K0-XyF" id="Qfe-ZT-sK2"/>
                         <outlet property="saveButton" destination="eSQ-AZ-HXA" id="MKI-rb-ekP"/>
+                        <outlet property="serviceDocumentInfoButton" destination="GAZ-1y-H7F" id="r6n-yA-p5e"/>
                         <outlet property="serviceDocumentTextField" destination="dik-0Q-PLB" id="AnZ-gV-rvN"/>
                     </connections>
                 </viewController>
@@ -5780,7 +5836,7 @@
             <objects>
                 <viewController id="216-Jj-Kis" customClass="AFAPeoplePickerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rli-zA-tH6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-CE-8eb" userLabel="Search view" customClass="ASDKRoundedBorderView">
@@ -5828,7 +5884,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3XV-4g-yt4">
-                                <rect key="frame" x="0.0" y="40" width="414" height="685"/>
+                                <rect key="frame" x="0.0" y="40" width="414" height="675"/>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="mCa-sj-J9r">
                                     <rect key="frame" x="0.0" y="117" width="414" height="0.0"/>
@@ -5936,7 +5992,7 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UB-j7-O4e" customClass="AFAActivityView">
-                                <rect key="frame" x="187" y="384" width="40" height="40"/>
+                                <rect key="frame" x="187" y="362" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="9fm-UY-OX7"/>
@@ -5961,13 +6017,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No contributors available" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QU-5H-h3I" userLabel="No Records Label">
-                                <rect key="frame" x="112" y="393.66666666666669" width="190" height="21"/>
+                                <rect key="frame" x="112" y="371.66666666666669" width="190" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cV-Vx-8aH" userLabel="Overlay view">
-                                <rect key="frame" x="0.0" y="40" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="40" width="414" height="724"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <connections>

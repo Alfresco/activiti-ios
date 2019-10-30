@@ -54,6 +54,10 @@ extern NSString *kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText;
 extern NSString *kLocalizationAdvancedSettingsScreenPortPlaceholderText;
 extern NSString *kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText;
 extern NSString *kLocalizationAdvancedSettingsScreenSaveButtonText;
+extern NSString *kLocalizationAdvancedSettingsScreenRealmHintText;
+extern NSString *kLocalizationAdvancedSettingsScreenClientIDHintText;
+extern NSString *kLocalizationAdvancedSettingsScreenPortHintText;
+extern NSString *kLocalizationAdvancedSettingsScreenServiceDocumentHintText;
 
 // Applications screen
 extern NSString *kLocalizationAppScreenTitleText;
