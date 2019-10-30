@@ -44,6 +44,8 @@ extern NSString *kLocalizationLoginScreenConnectButtonText;
 extern NSString *kLocalizationLoginScreenCloudSignInButtonText;
 extern NSString *kLocalizationLoginScreenAdvancedSettingsButtonText;
 extern NSString *kLocalizationLoginScreenCopyrightFormat;
+extern NSString *kLocalizationLoginScreenIndentityServiceURLHintTitleText;
+extern NSString *kLocalizationLoginScreenIdentityServiceURLHintText;
 extern NSString *kLocalizationLoginScreenCopyrightFormat;
 
 // Advanced Settings screen

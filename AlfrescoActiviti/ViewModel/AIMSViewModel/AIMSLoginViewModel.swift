@@ -17,6 +17,7 @@
  ******************************************************************************/
 
 import Foundation
+import AlfrescoAuth
 
 class AIMSLoginViewModel {
     // Localization
@@ -33,5 +34,42 @@ class AIMSLoginViewModel {
             let year = calendar.component(.year, from: Date())
             return String(format: NSLocalizedString(kLocalizationLoginScreenCopyrightFormat, comment: "Copyright text"), year)
         }
+    }
+    
+    // Authentication service
+    var authenticationService: AIMSLoginService?
+
+    func updateIdentityServiceParameters(with url: String, isSecureConnection: Bool) {
+        let fullFormatURL = serviceURL(url: url, isSecureConnection: isSecureConnection)
+        authenticationService?.authenticationParameters.identityServiceURL = fullFormatURL
+    }
+    
+    func updateProcessParameters(with url: String, isSecureConnection: Bool) {
+        let fullFormatURL = serviceURL(url: url, isSecureConnection: isSecureConnection)
+        authenticationService?.authenticationParameters.processURL = fullFormatURL
+    }
+    
+    func login(onViewController viewController: UIViewController) {
+        authenticationService?.login(onViewController: viewController, delegate: self)
+    }
+    
+    // MARK: Private
+    
+    func serviceURL(url: String, isSecureConnection: Bool) -> String {
+        let fullFormatURL = String(format:"%@://%@", isSecureConnection ? "https" : "http", url)
+        return fullFormatURL
+    }
+}
+
+//MARK: - AlfrescoAuth Delegate
+extension AIMSLoginViewModel: AlfrescoAuthDelegate {
+    func didReceive(result: Result<AlfrescoCredential, APIError>) {
+//        switch result {
+//        case .success(let alfrescoCredential):
+//
+//
+//        case .failure(let error):
+//
+//        }
     }
 }

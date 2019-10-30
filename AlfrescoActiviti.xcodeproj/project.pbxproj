@@ -858,6 +858,8 @@
 		B94FE48623671BA6008BCA64 /* MaterialDesignColorSchemeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94FE48523671BA6008BCA64 /* MaterialDesignColorSchemeComponent.swift */; };
 		B94FE4892367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94FE4882367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift */; };
 		B94FE48D23672B72008BCA64 /* AFALog.m in Sources */ = {isa = PBXBuildFile; fileRef = B94FE48C23672B72008BCA64 /* AFALog.m */; };
+		B94FE48F23683392008BCA64 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B94FE48E23683392008BCA64 /* Muli-Regular.ttf */; };
+		B94FE49123683C84008BCA64 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B94FE49023683C83008BCA64 /* Muli-Bold.ttf */; };
 		B9849849231554E40051F545 /* ASDKFormVariableCacheMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AA069E23154D6200D1B2AF /* ASDKFormVariableCacheMapper.m */; };
 		B9AA069A231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h in Headers */ = {isa = PBXBuildFile; fileRef = B9AA0698231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h */; };
 		B9AA069B231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AA0699231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m */; };
@@ -1940,6 +1942,8 @@
 		B94FE4882367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+MaterialDesignColorScheme.swift"; path = "UI/Extensions/UIViewController+MaterialDesignColorScheme.swift"; sourceTree = "<group>"; };
 		B94FE48B23672B72008BCA64 /* AFALog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AFALog.h; path = Business/Logging/AFALog.h; sourceTree = "<group>"; };
 		B94FE48C23672B72008BCA64 /* AFALog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AFALog.m; path = Business/Logging/AFALog.m; sourceTree = "<group>"; };
+		B94FE48E23683392008BCA64 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Muli-Regular.ttf"; path = "AlfrescoActiviti/Resources/Fonts/Muli-Regular.ttf"; sourceTree = SOURCE_ROOT; };
+		B94FE49023683C83008BCA64 /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Muli-Bold.ttf"; path = "AlfrescoActiviti/Resources/Fonts/Muli-Bold.ttf"; sourceTree = SOURCE_ROOT; };
 		B9AA0698231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKFormVariablesCacheModelUpsert.h; path = CacheServices/CacheModelUpsert/FormVariablesModelUpsert/ASDKFormVariablesCacheModelUpsert.h; sourceTree = "<group>"; };
 		B9AA0699231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKFormVariablesCacheModelUpsert.m; path = CacheServices/CacheModelUpsert/FormVariablesModelUpsert/ASDKFormVariablesCacheModelUpsert.m; sourceTree = "<group>"; };
 		B9AA069D23154D6200D1B2AF /* ASDKFormVariableCacheMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKFormVariableCacheMapper.h; sourceTree = "<group>"; };
@@ -6625,6 +6629,8 @@
 		B9BF25B9236338270017B71D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				B94FE49023683C83008BCA64 /* Muli-Bold.ttf */,
+				B94FE48E23683392008BCA64 /* Muli-Regular.ttf */,
 				B9BF25BA236338590017B71D /* Muli-Light.ttf */,
 			);
 			path = Fonts;
@@ -7140,6 +7146,8 @@
 				13A578541CEC677C0014B6FD /* glyphicons-regular.otf in Resources */,
 				137194641B6922DE00D4E1F0 /* LaunchScreen.xib in Resources */,
 				137194611B6922DE00D4E1F0 /* Images.xcassets in Resources */,
+				B94FE49123683C84008BCA64 /* Muli-Bold.ttf in Resources */,
+				B94FE48F23683392008BCA64 /* Muli-Regular.ttf in Resources */,
 				13778DDC1D6C3EF10074C70F /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -42,6 +42,8 @@
 "loginScreenCloudSignInButtonText"                       = "SIGN IN WITH CLOUD";
 "loginScreenAdvancedSettingsButtonText"                  = "ADVANCED SETTINGS";
 "loginScreenCopyrightFormat"                             = "© 2017 - %d Alfresco Software, Inc. All rights reserved.";
+"loginScreenIndentityServiceURLHintTitleText"            = "How to connect to Alfresco";
+"loginScreenIdentityServiceURLHintText"                  = "Alfresco Process Services URL:\nYou can enter the URL of your Alfresco Process Services instance. This will require you to enter your username & password to authenticate.\n\nSign in with SSO:\nYou can enter the URL of your Alfresco Identity Management Service in order to authenticate with your organisations identity provider.\n\n*You will have to provide the URL of your Alfresco Process Services instance afterwards.\n\nTalk to your Alfresco administrator if you require help.";
 
 // Advanced Settings screen
 "advancedSettingsScreenRealmPlaceholderText"             = "Realm";

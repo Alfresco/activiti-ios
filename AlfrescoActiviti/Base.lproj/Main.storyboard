@@ -4457,7 +4457,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="Task name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxq-4H-spZ">
-                                                    <rect key="frame" x="57" y="8.0000000000000018" width="337" height="20.666666666666671"/>
+                                                    <rect key="frame" x="57" y="8.0000000000000018" width="333" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <color key="textColor" red="0.72323139479999998" green="0.72323139479999998" blue="0.72323139479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4469,7 +4469,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSs-Ou-kAV">
-                                                    <rect key="frame" x="394" y="23.666666666666668" width="12" height="14.000000000000004"/>
+                                                    <rect key="frame" x="390" y="23.666666666666668" width="16" height="14.000000000000004"/>
                                                     <fontDescription key="fontDescription" name="GLYPHICONS-Regular" family="GLYPHICONS" pointSize="12"/>
                                                     <color key="textColor" red="0.77647058820000003" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4816,13 +4816,13 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" text="name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2i-Kg-OVh">
-                                                    <rect key="frame" x="57" y="12" width="329" height="37"/>
+                                                    <rect key="frame" x="57" y="12" width="325" height="37"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZs-22-LFo">
-                                                    <rect key="frame" x="394" y="23.666666666666668" width="12" height="14.000000000000004"/>
+                                                    <rect key="frame" x="390" y="23.666666666666668" width="16" height="14.000000000000004"/>
                                                     <fontDescription key="fontDescription" name="GLYPHICONS-Regular" family="GLYPHICONS" pointSize="12"/>
                                                     <color key="textColor" red="0.77647058820000003" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -5133,7 +5133,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yva-zw-Nts">
-                                <rect key="frame" x="81.666666666666686" y="342.33333333333331" width="251" height="31"/>
+                                <rect key="frame" x="84.333333333333329" y="334.33333333333331" width="245.66666666666669" height="29.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -5142,6 +5142,9 @@
                                 <rect key="frame" x="-58" y="436" width="530" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="wzB-9P-BSv" id="zW2-vj-VAz"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SZu-t4-pQn" customClass="MDCTextField">
                                 <rect key="frame" x="-58" y="486" width="530" height="0.0"/>
@@ -5150,15 +5153,18 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="wzB-9P-BSv" id="UY9-Mo-7hF"/>
+                                </connections>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alfrescoLogoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="oUU-t7-qeO">
                                 <rect key="frame" x="-58" y="198.33333333333337" width="530" height="136"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2z8-cK-i0v">
-                                <rect key="frame" x="-58" y="502" width="530" height="31"/>
+                                <rect key="frame" x="-58" y="470" width="530" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use HTTPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7j-FB-EO9">
-                                        <rect key="frame" x="0.0" y="5" width="481" height="21"/>
+                                        <rect key="frame" x="0.0" y="5.6666666666666856" width="481" height="20"/>
                                         <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -5178,26 +5184,46 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3t8-IP-G8g" customClass="MDCButton">
-                                <rect key="frame" x="-58" y="597" width="530" height="30"/>
+                                <rect key="frame" x="-58" y="565" width="530" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="fm3-cy-nBm"/>
+                                </constraints>
                                 <state key="normal" title="LOGIN"/>
+                                <connections>
+                                    <action selector="loginButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="m1G-Ow-xhd"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G4-Ef-5j2" customClass="MDCButton">
-                                <rect key="frame" x="131" y="643" width="152" height="30"/>
+                                <rect key="frame" x="131" y="645" width="152" height="30"/>
                                 <state key="normal" title="SIGN IN WITH CLOUD"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwj-Bk-jf5" customClass="MDCButton">
-                                <rect key="frame" x="129" y="689" width="156" height="30"/>
+                                <rect key="frame" x="129" y="691" width="156" height="30"/>
                                 <state key="normal" title="ADVANCED SETTINGS"/>
                                 <connections>
                                     <segue destination="9QT-z0-8do" kind="show" id="XD8-9y-zR3"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COPYRIGHT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKk-tT-hXT">
-                                <rect key="frame" x="-58" y="857" width="530" height="21"/>
+                                <rect key="frame" x="-58" y="841" width="530" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OjX-1K-jS0">
+                                <rect key="frame" x="435" y="441" width="25" height="24"/>
+                                <color key="tintColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="alfrescoURLInfoButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="S2M-9O-Ddh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ydm-u8-oiv">
+                                <rect key="frame" x="439" y="468" width="25" height="24"/>
+                                <color key="tintColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="processURLInfoButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="dib-gd-1jJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -5212,20 +5238,24 @@
                             <constraint firstItem="IKk-tT-hXT" firstAttribute="width" secondItem="Jx5-3K-GGx" secondAttribute="width" id="K2x-9L-7vy"/>
                             <constraint firstItem="3t8-IP-G8g" firstAttribute="centerX" secondItem="ayg-co-Jfc" secondAttribute="centerX" id="LX7-4h-aLt"/>
                             <constraint firstItem="3t8-IP-G8g" firstAttribute="width" secondItem="Jx5-3K-GGx" secondAttribute="width" id="MHb-jc-z9x"/>
-                            <constraint firstItem="2z8-cK-i0v" firstAttribute="top" secondItem="SZu-t4-pQn" secondAttribute="bottom" constant="16" id="MQv-Xo-Kxf"/>
-                            <constraint firstItem="yva-zw-Nts" firstAttribute="top" secondItem="oUU-t7-qeO" secondAttribute="bottom" constant="8" id="NIA-X8-xhu"/>
+                            <constraint firstItem="2z8-cK-i0v" firstAttribute="top" secondItem="SZu-t4-pQn" secondAttribute="bottom" constant="-16" id="MQv-Xo-Kxf"/>
+                            <constraint firstItem="yva-zw-Nts" firstAttribute="top" secondItem="oUU-t7-qeO" secondAttribute="bottom" id="NIA-X8-xhu"/>
                             <constraint firstItem="3t8-IP-G8g" firstAttribute="top" secondItem="2z8-cK-i0v" secondAttribute="bottom" constant="64" id="Na0-Re-0dX"/>
                             <constraint firstItem="3G4-Ef-5j2" firstAttribute="top" secondItem="3t8-IP-G8g" secondAttribute="bottom" constant="16" id="V2X-53-ZfZ"/>
                             <constraint firstItem="SZu-t4-pQn" firstAttribute="width" secondItem="Jx5-3K-GGx" secondAttribute="width" id="VRw-3E-hmk"/>
                             <constraint firstItem="2z8-cK-i0v" firstAttribute="width" secondItem="Jx5-3K-GGx" secondAttribute="width" id="Wzs-Qr-NyX"/>
                             <constraint firstItem="2z8-cK-i0v" firstAttribute="centerX" secondItem="ayg-co-Jfc" secondAttribute="centerX" id="ZHS-8G-yan"/>
+                            <constraint firstItem="Ydm-u8-oiv" firstAttribute="centerY" secondItem="SZu-t4-pQn" secondAttribute="centerY" constant="-6" id="ZKf-6r-2ie"/>
                             <constraint firstItem="Jx5-3K-GGx" firstAttribute="width" secondItem="oUU-t7-qeO" secondAttribute="width" id="aTy-ll-qaq"/>
                             <constraint firstItem="SZu-t4-pQn" firstAttribute="top" secondItem="Jx5-3K-GGx" secondAttribute="bottom" constant="16" id="aVh-zP-THa"/>
-                            <constraint firstItem="IKk-tT-hXT" firstAttribute="bottom" secondItem="ayg-co-Jfc" secondAttribute="bottom" constant="16" id="cqg-Uf-1xv"/>
+                            <constraint firstItem="IKk-tT-hXT" firstAttribute="bottom" secondItem="ayg-co-Jfc" secondAttribute="bottom" id="cqg-Uf-1xv"/>
                             <constraint firstItem="Jx5-3K-GGx" firstAttribute="leading" secondItem="oUU-t7-qeO" secondAttribute="leading" id="e84-0I-Lh6"/>
                             <constraint firstItem="hwj-Bk-jf5" firstAttribute="centerX" secondItem="ayg-co-Jfc" secondAttribute="centerX" id="ewP-dp-xm3"/>
+                            <constraint firstItem="OjX-1K-jS0" firstAttribute="trailing" secondItem="Jx5-3K-GGx" secondAttribute="trailing" constant="-12" id="jln-M1-GDJ"/>
                             <constraint firstItem="IKk-tT-hXT" firstAttribute="centerX" secondItem="ayg-co-Jfc" secondAttribute="centerX" id="sKy-y5-uQA"/>
+                            <constraint firstItem="Ydm-u8-oiv" firstAttribute="trailing" secondItem="SZu-t4-pQn" secondAttribute="trailing" constant="-8" id="sZf-WR-SyU"/>
                             <constraint firstItem="yva-zw-Nts" firstAttribute="centerX" secondItem="ayg-co-Jfc" secondAttribute="centerX" id="x7G-kM-EGW"/>
+                            <constraint firstItem="OjX-1K-jS0" firstAttribute="centerY" secondItem="Jx5-3K-GGx" secondAttribute="centerY" id="xcU-Sj-ufV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ayg-co-Jfc"/>
                     </view>
@@ -5233,6 +5263,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="advancedSettingsButton" destination="hwj-Bk-jf5" id="fDT-Ql-GCE"/>
+                        <outlet property="alfrescoURLInfoButton" destination="OjX-1K-jS0" id="Ei9-hd-E2L"/>
                         <outlet property="alfrescoURLTextField" destination="Jx5-3K-GGx" id="ZJS-ed-X1Y"/>
                         <outlet property="cloudSignInButton" destination="3G4-Ef-5j2" id="dIx-Om-6dx"/>
                         <outlet property="copyrightLabel" destination="IKk-tT-hXT" id="SoM-Py-FYE"/>
@@ -5240,6 +5271,7 @@
                         <outlet property="httpsSwitch" destination="JI5-S0-pse" id="YRg-jV-amh"/>
                         <outlet property="loginButton" destination="3t8-IP-G8g" id="xNx-jY-ZSe"/>
                         <outlet property="processServicesAppLabel" destination="yva-zw-Nts" id="dKo-AR-M8f"/>
+                        <outlet property="processURLInfoButton" destination="Ydm-u8-oiv" id="Z5s-Dg-jrQ"/>
                         <outlet property="processURLTextField" destination="SZu-t4-pQn" id="gBb-Jc-1mZ"/>
                         <outlet property="processURLTextFieldHeightConstraint" destination="znx-NO-mSb" id="wtW-bH-dba"/>
                     </connections>
@@ -6055,11 +6087,11 @@
             <objects>
                 <viewController id="K1K-0q-yJ3" customClass="AFAAddCommentsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nPS-3n-DD5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yZ4-E5-adw">
-                                <rect key="frame" x="8" y="0.0" width="406" height="766"/>
+                                <rect key="frame" x="8" y="0.0" width="406" height="756"/>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -6404,7 +6436,7 @@
         <segue reference="RN3-5C-FKi"/>
         <segue reference="XZ3-C5-Oig"/>
         <segue reference="fpJ-UB-l4s"/>
-        <segue reference="Rct-bP-63w"/>
-        <segue reference="dAG-4I-soh"/>
+        <segue reference="OCj-p8-qSZ"/>
+        <segue reference="RF7-69-ZNi"/>
     </inferredMetricsTieBreakers>
 </document>
