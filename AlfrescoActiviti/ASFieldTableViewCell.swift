@@ -36,6 +36,9 @@ class ASFieldTableViewCell: UITableViewCell, ASCell {
         }
         
         textFieldController = MDCTextInputControllerUnderline(textInput: textField)
+        textFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
+        textField.font = colorSchemeManager.textFieldTypographyScheme.headline1
+        
         if let textFieldController = self.textFieldController {
             textFieldController.placeholderText = model.title
             MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.advancedSettingsTextFieldColorScheme, to: textFieldController )
