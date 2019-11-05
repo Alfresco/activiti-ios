@@ -34,6 +34,9 @@ class MaterialDesignColorSchemeComponent: NSObject {
         self.grayFlatButtonWithoutBackgroundScheme.colorScheme = self.grayColorScheme
         self.grayFlatButtonWithoutBackgroundScheme.typographyScheme = self.defaultTypographyScheme
         
+        self.blueFlatButtonWithoutBackgroundScheme.colorScheme = self.blueColorScheme
+        self.blueFlatButtonWithoutBackgroundScheme.typographyScheme = self.defaultTypographyScheme
+        
         super.init()
     }
     
@@ -41,6 +44,7 @@ class MaterialDesignColorSchemeComponent: NSObject {
     public let flatButtonWithoutBackgroundScheme = MDCContainerScheme()
     public let highlighterFlatButtonWithBackgroundScheme = MDCContainerScheme()
     public let grayFlatButtonWithoutBackgroundScheme = MDCContainerScheme()
+    public let blueFlatButtonWithoutBackgroundScheme = MDCContainerScheme()
     
     public let defaultColorScheme: MDCSemanticColorScheme = {
         let scheme = MDCSemanticColorScheme(defaults: .material201804)
@@ -51,6 +55,22 @@ class MaterialDesignColorSchemeComponent: NSObject {
         scheme.onSecondaryColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         scheme.surfaceColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         scheme.onSurfaceColor = #colorLiteral(red: 0.2474783659, green: 0.6575964093, blue: 0.2639612854, alpha: 1)
+        scheme.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        scheme.onBackgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.72)
+        scheme.errorColor = #colorLiteral(red: 1, green: 0.2470588235, blue: 0.2666666667, alpha: 1)
+        
+        return scheme
+    }()
+    
+    public let advancedSettingsTextFieldColorScheme: MDCSemanticColorScheme = {
+        let scheme = MDCSemanticColorScheme(defaults: .material201804)
+        scheme.primaryColor = #colorLiteral(red: 0.2474783659, green: 0.6575964093, blue: 0.2639612854, alpha: 1)
+        scheme.primaryColorVariant = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        scheme.onPrimaryColor = #colorLiteral(red: 1, green: 0.2470588235, blue: 0.2666666667, alpha: 1)
+        scheme.secondaryColor = #colorLiteral(red: 0, green: 0.3333333333, blue: 0.7215686275, alpha: 1)
+        scheme.onSecondaryColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        scheme.surfaceColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        scheme.onSurfaceColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         scheme.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         scheme.onBackgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.72)
         scheme.errorColor = #colorLiteral(red: 1, green: 0.2470588235, blue: 0.2666666667, alpha: 1)
@@ -70,6 +90,22 @@ class MaterialDesignColorSchemeComponent: NSObject {
         scheme.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         scheme.onBackgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.72)
         scheme.errorColor = #colorLiteral(red: 1, green: 0.2470588235, blue: 0.2666666667, alpha: 1)
+        
+        return scheme
+    }()
+    
+    public let blueColorScheme: MDCSemanticColorScheme = {
+        let scheme = MDCSemanticColorScheme(defaults: .material201804)
+        scheme.primaryColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+        scheme.primaryColorVariant = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        scheme.onPrimaryColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        scheme.secondaryColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        scheme.onSecondaryColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        scheme.surfaceColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        scheme.onSurfaceColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        scheme.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        scheme.onBackgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        scheme.errorColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         
         return scheme
     }()
