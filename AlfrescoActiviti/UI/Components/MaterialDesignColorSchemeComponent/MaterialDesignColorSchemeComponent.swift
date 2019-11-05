@@ -65,14 +65,7 @@ class MaterialDesignColorSchemeComponent: NSObject {
     public let advancedSettingsTextFieldColorScheme: MDCSemanticColorScheme = {
         let scheme = MDCSemanticColorScheme(defaults: .material201804)
         scheme.primaryColor = #colorLiteral(red: 0.2474783659, green: 0.6575964093, blue: 0.2639612854, alpha: 1)
-        scheme.primaryColorVariant = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        scheme.onPrimaryColor = #colorLiteral(red: 1, green: 0.2470588235, blue: 0.2666666667, alpha: 1)
-        scheme.secondaryColor = #colorLiteral(red: 0, green: 0.3333333333, blue: 0.7215686275, alpha: 1)
-        scheme.onSecondaryColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        scheme.surfaceColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        scheme.onSurfaceColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        scheme.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        scheme.onBackgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.72)
+        scheme.primaryColorVariant = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         scheme.errorColor = #colorLiteral(red: 1, green: 0.2470588235, blue: 0.2666666667, alpha: 1)
         
         return scheme
@@ -137,6 +130,20 @@ class MaterialDesignColorSchemeComponent: NSObject {
         scheme.headline4 = UIFont(name: boldFontName, size: 24)!
         scheme.subtitle1 = UIFont(name: lightFontName, size: 12)!
         scheme.button = UIFont(name: lightFontName, size: 14)!
+        scheme.subtitle2 = UIFont(name: lightFontName, size: 16)!
+        
+        return scheme
+    }()
+    
+    public let textFieldTypographyScheme: MDCTypographyScheme = {
+        let scheme = MDCTypographyScheme()
+        
+        let lightFontName = "Muli-Light"
+        let boldFontName = "Muli-Bold"
+        
+        scheme.headline1 = UIFont(name: lightFontName, size: 16)!
+        scheme.subtitle1 = UIFont(name: lightFontName, size: 16)!
+        scheme.subtitle2 = UIFont(name: lightFontName, size: 1)!
         
         return scheme
     }()
