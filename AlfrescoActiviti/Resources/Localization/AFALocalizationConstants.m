@@ -53,15 +53,26 @@ NSString *kLocalizationLoginScreenIdentityServiceURLHintText     = @"loginScreen
 #pragma mark -
 #pragma mark Advanced Settings screen
 
-NSString *kLocalizationAdvancedSettingsScreenRealmPlaceholderText               = @"advancedSettingsScreenRealmPlaceholderText";
-NSString *kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText            = @"advancedSettingsScreeClientIDPlaceholderText";
-NSString *kLocalizationAdvancedSettingsScreenPortPlaceholderText                = @"advancedSettingsScreenPortPlaceholderText";
-NSString *kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText     = @"advancedSettingsScreenServiceDocumentPlaceholderText";
-NSString *kLocalizationAdvancedSettingsScreenSaveButtonText                     = @"advancedSettingsScreenSaveButtonText";
-NSString *kLocalizationAdvancedSettingsScreenRealmHintText                      = @"advancedSettingsScreenRealmHintText";
-NSString *kLocalizationAdvancedSettingsScreenClientIDHintText                   = @"advancedSettingsScreenClientIDHintText";
-NSString *kLocalizationAdvancedSettingsScreenPortHintText                       = @"advancedSettingsScreenPortHintText";
-NSString *kLocalizationAdvancedSettingsScreenServiceDocumentHintText            = @"advancedSettingsScreenServiceDocumentHintText";
+NSString *kLocalizationAdvancedSettingsScreenTransportProtocolText                  = @"advancedSettingsScreenTransportProtocolText";
+NSString *kLocalizationAdvancedSettingsScreenHttpsText                              = @"advancedSettingsScreenHttpsPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenPortPlaceholderText                    = @"advancedSettingsScreenPortPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenPortHintText                           = @"advancedSettingsScreenPortHintText";
+NSString *kLocalizationAdvancedSettingsScreenAlfrescoProcessServiceSettingsText     = @"advancedSettingProcessServiceSettingsText";
+NSString *kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText         = @"advancedSettingsScreenServiceDocumentPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenServiceDocumentHintText                = @"advancedSettingsScreenServiceDocumentHintText";
+NSString *kLocalizationAdvancedSettingsScreenAuthenticationText                     = @"advancedSettingsScreenAuthenticationText";
+NSString *kLocalizationAdvancedSettingsScreenRealmPlaceholderText                   = @"advancedSettingsScreenRealmPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenRealmHintText                          = @"advancedSettingsScreenRealmHintText";
+NSString *kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText                = @"advancedSettingsScreeClientIDPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenClientIDHintText                       = @"advancedSettingsScreenClientIDHintText";
+NSString *kLocalizationAdvancedSettingsScreenRedirectURLPlaceholderText             = @"advancedSettingsScreenRedirectURLPlaceHolderText";
+NSString *kLocalizationAdvancedSettingsScreenRedirectURLHintText                    = @"advancedSettingsScreenRedirectURLHintText";
+NSString *kLocalizationAdvancedSettingsScreenSaveButtonText                         = @"advancedSettingsScreenSaveButtonText";
+NSString *kLocalizationAdvancedSettingsScreenHelpButtonText                         = @"advancedSettingsScreenHelpButtonText";
+NSString *kLocalizationAdvancedSettingsScreenHelpText                               = @"advancedSettingsScreenHelpText";
+NSString *kLocalizationAdvancedSettingsScreenHelpHintText                           = @"advancedSettingsScreenHelpHintText";
+NSString *kLocalizationAdvancedSettingsScreenCloseText                             = @"advancedSettingsScreenCloseText";
+
 
 #pragma mark -
 #pragma mark Application screen

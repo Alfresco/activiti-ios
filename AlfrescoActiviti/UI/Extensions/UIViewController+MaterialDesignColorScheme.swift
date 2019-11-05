@@ -30,3 +30,16 @@ extension UIViewController {
         }
     }
 }
+
+extension UITableViewCell {
+    var colorSchemeManager: MaterialDesignColorSchemeComponent? {
+        get {
+            let serviceRepository = AFAServiceRepository.shared()
+            if let colorSchemeManager = serviceRepository?.serviceObject(forPurpose: .materialDesignColorSchemeComponent) as? MaterialDesignColorSchemeComponent {
+                return colorSchemeManager
+            }
+            
+            return nil
+        }
+    }
+}

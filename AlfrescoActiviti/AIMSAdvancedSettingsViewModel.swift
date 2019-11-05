@@ -10,16 +10,20 @@ import Foundation
 
 class AIMSAdvancedSettingsViewModel {
     // Localization
-    let realmPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenRealmPlaceholderText, comment: "Realm")
-    let realmHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenRealmHintText, comment: "Hint Text")
-    let cliendIDPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText, comment: "Client ID")
-    let cliendIDHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenClientIDHintText, comment: "Hint Text")
+    let transportProtocolText = NSLocalizedString(kLocalizationAdvancedSettingsScreenTransportProtocolText, comment: "Transport Protocol")
+    let httpsText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHttpsText, comment: "HTTPS")
     let portPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenPortPlaceholderText, comment: "Port")
-    let portHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenPortHintText, comment: "Hint Text")
+    let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
     let serviceDocumentPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText, comment: "Service Document")
-    let serviceDocumentHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenServiceDocumentHintText, comment: "Hint Text")
+    let authenticationText = NSLocalizedString(kLocalizationAdvancedSettingsScreenAuthenticationText, comment: "Authentication")
+    let realmPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenRealmPlaceholderText, comment: "Realm")
+    let cliendIDPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText, comment: "Client ID")
+    let redirectURLPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenRedirectURLPlaceholderText, comment: "Redirect URL")
     let saveButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenSaveButtonText, comment: "Save")
-    
+    let helpButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpButtonText, comment: "Need Help")
+    let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
+    let helpHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpHintText, comment: "Hint Help")
+    let closeText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCloseText, comment: "Close")
     var copyrightText: String {
         get {
             let calendar = Calendar.current
@@ -35,13 +39,105 @@ class AIMSAdvancedSettingsViewModel {
         defaults.synchronize()
     }
     
-    func getParameters() -> AdvancedSettingsParameters? {
+    func getParameters() -> AdvancedSettingsParameters {
         let defaults = UserDefaults.standard
         if let data = defaults.value(forKey: kAdvancedSettingsParameters) as? Data {
             if let params = try? PropertyListDecoder().decode(AdvancedSettingsParameters.self, from: data) {
                 return params
             }
         }
-        return nil
+        return AdvancedSettingsParameters()
+    }
+    
+    func datasource() -> [ASModelSection] {
+        let transportProtocolSection = ASModelSection(type: .transportProtocol,
+                                                     numberOfRow: 3,
+                                                     title: transportProtocolText,
+                                                     rows: [ASModelRow(type: .sectionTitle, title: transportProtocolText),
+                                                            ASModelRow(type: .https, title: httpsText),
+                                                            ASModelRow(type: .port, title: portPlaceholderText)])
+        
+        let settingsSection = ASModelSection(type: .settings,
+                                            numberOfRow: 2,
+                                            title: processServicessAppText,
+                                            rows: [ASModelRow(type: .sectionTitle, title: processServicessAppText),
+                                                   ASModelRow(type: .serviceDocuments, title: serviceDocumentPlaceholderText)])
+        
+        let authSection = ASModelSection(type: .authentication,
+                                        numberOfRow: 4,
+                                        title: authenticationText,
+                                        rows: [ASModelRow(type: .sectionTitle, title: authenticationText),
+                                               ASModelRow(type: .realm, title: realmPlaceholderText),
+                                               ASModelRow(type: .clientID, title: cliendIDPlaceholderText),
+                                               ASModelRow(type: .redirectURL, title: redirectURLPlaceholderText)])
+        
+        let saveSection = ASModelSection(type: .save,
+                                        numberOfRow: 1,
+                                        title: saveButtonText,
+                                        rows: [ASModelRow(type: .save, title: saveButtonText)])
+        
+        let helpSection = ASModelSection(type: .help,
+                                        numberOfRow: 1,
+                                        title: helpButtonText,
+                                        rows: [ASModelRow(type: .help, title: helpButtonText, info: helpHintText)])
+        
+        let copyRightSection = ASModelSection(type: .copyright,
+                                             numberOfRow: 1,
+                                             title: copyrightText,
+                                             rows: [ASModelRow(type: .copyright, title: copyrightText)])
+        
+        return [transportProtocolSection, settingsSection, authSection, saveSection, helpSection, copyRightSection]
+    }
+    
+    func getIndexPathForSaveButton() -> IndexPath {
+        return IndexPath(row: 0, section: 3)
+    }
+}
+
+enum ASSections {
+    case transportProtocol
+    case settings
+    case authentication
+    case save
+    case help
+    case copyright
+}
+
+enum ASRows {
+    case https
+    case port
+    case serviceDocuments
+    case realm
+    case clientID
+    case redirectURL
+    case save
+    case help
+    case sectionTitle
+    case copyright
+}
+
+class ASModelSection {
+    let type: ASSections
+    let numberOfRow: NSInteger
+    let title: String
+    let arrayRows: [ASModelRow]
+    
+    init(type: ASSections, numberOfRow: NSInteger, title: String, rows: [ASModelRow]) {
+        self.type = type
+        self.numberOfRow = numberOfRow
+        self.title = title
+        self.arrayRows = rows
+    }
+}
+
+class ASModelRow {
+    let type: ASRows
+    let title: String
+    let info: String?
+    
+    init(type: ASRows, title: String, info: String = "") {
+        self.type = type
+        self.title = title
+        self.info = info
     }
 }
