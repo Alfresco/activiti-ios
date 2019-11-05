@@ -23,11 +23,10 @@ class AIMSLoginViewModel {
     // Localization
     let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
     let alfrescoURLPlaceholderText = NSLocalizedString(kLocalizationLoginScreenAlfrescoURLPlaceholderText, comment: "Alfresco URL")
-    let processURLPlaceholderText = NSLocalizedString(kLocalizationLoginScreenProcessURLPlaceholderText, comment: "Process URL")
-    let useHTTPSText = NSLocalizedString(kLocalizationLoginScreenUseHTTPsText, comment: "Use HTTPS")
     let connectButtonText = NSLocalizedString(kLocalizationLoginScreenConnectButtonText, comment: "Connect button")
     let cloudSignInButtonText = NSLocalizedString(kLocalizationLoginScreenCloudSignInButtonText, comment: "Cloud sign in button")
     let advancedSettingsButtonText = NSLocalizedString(kLocalizationLoginScreenAdvancedSettingsButtonText, comment: "Advanced settings button")
+    let helpButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpButtonText, comment: "Need Help")
     var copyrightText: String {
         get {
             let calendar = Calendar.current

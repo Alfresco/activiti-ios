@@ -28,21 +28,13 @@ class AIMSLoginViewController: UIViewController {
     
     // URLs section
     @IBOutlet weak var alfrescoURLTextField: MDCTextField!
-    @IBOutlet weak var alfrescoURLInfoButton: UIButton!
-    @IBOutlet weak var processURLTextField: MDCTextField!
-    @IBOutlet weak var processURLInfoButton: UIButton!
-    @IBOutlet weak var processURLTextFieldHeightConstraint: NSLayoutConstraint!
     var alfrescoURLTextFieldController: MDCTextInputController?
-    var processURLTextFieldController: MDCTextInputController?
-    
-    // HTTPS section
-    @IBOutlet weak var httpsLabel: UILabel!
-    @IBOutlet weak var httpsSwitch: UISwitch!
     
     // Buttons section
-    @IBOutlet weak var loginButton: MDCButton!
+    @IBOutlet weak var connectToButton: MDCButton!
     @IBOutlet weak var cloudSignInButton: MDCButton!
     @IBOutlet weak var advancedSettingsButton: MDCButton!
+    @IBOutlet weak var needHelpButton: MDCButton!
     
     // Copyright section
     @IBOutlet weak var copyrightLabel: UILabel!
@@ -63,36 +55,33 @@ class AIMSLoginViewController: UIViewController {
         processServicesAppLabel.font = colorSchemeManager.defaultTypographyScheme.headline5
         
         // Alfresco URL section
-        alfrescoURLTextFieldController = MDCTextInputControllerOutlined(textInput: alfrescoURLTextField)
+        alfrescoURLTextField.font = colorSchemeManager.defaultTypographyScheme.subtitle2
+        alfrescoURLTextFieldController = MDCTextInputControllerUnderline(textInput: alfrescoURLTextField)
         alfrescoURLTextFieldController?.placeholderText = loginViewModel.alfrescoURLPlaceholderText
         if let alfrescoURLTextFieldController = self.alfrescoURLTextFieldController {
-            MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.defaultColorScheme, to: alfrescoURLTextFieldController)
+            MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.textfieldDefaultColorScheme, to: alfrescoURLTextFieldController)
         }
         
-        // Process URL section
-        processURLTextFieldController = MDCTextInputControllerOutlined(textInput: processURLTextField)
-        processURLTextFieldController?.placeholderText = loginViewModel.processURLPlaceholderText
-        processURLTextField.isHidden = true
-        processURLInfoButton.isHidden = true
-        
-        // HTTPS section
-        httpsLabel.text = loginViewModel.useHTTPSText
-        httpsLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
-        httpsLabel.textColor = colorSchemeManager.defaultColorScheme.onBackgroundColor
-        httpsSwitch.onTintColor = colorSchemeManager.defaultColorScheme.primaryColor
-        
         // Button section section
-        loginButton.setTitle(loginViewModel.connectButtonText, for: .normal)
-        loginButton.applyContainedTheme(withScheme: colorSchemeManager.flatButtonWithBackgroundScheme)
-        loginButton.setElevation(.none, for: .normal)
-        loginButton.setElevation(.none, for: .highlighted)
-        loginButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline4, for: .normal)
-        
+        connectToButton.setTitle(loginViewModel.connectButtonText, for: .normal)
+        connectToButton.applyContainedTheme(withScheme: colorSchemeManager.flatButtonWithBackgroundScheme)
+        connectToButton.setElevation(.none, for: .normal)
+        connectToButton.setElevation(.none, for: .highlighted)
+        connectToButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
+    
         advancedSettingsButton.setTitle(loginViewModel.advancedSettingsButtonText, for: .normal)
-        advancedSettingsButton.applyTextTheme(withScheme: colorSchemeManager.grayFlatButtonWithoutBackgroundScheme)
+        advancedSettingsButton.applyTextTheme(withScheme: colorSchemeManager.highlightedFlatButtonWithBackgroundScheme)
+        advancedSettingsButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline3, for: .normal)
         
         cloudSignInButton.setTitle(loginViewModel.cloudSignInButtonText, for: .normal)
-        cloudSignInButton.applyTextTheme(withScheme: colorSchemeManager.highlighterFlatButtonWithBackgroundScheme)
+        cloudSignInButton.applyOutlinedTheme(withScheme: colorSchemeManager.flatButtonWithoutBackgroundScheme)
+        cloudSignInButton.setElevation(.none, for: .normal)
+        cloudSignInButton.setElevation(.none, for: .highlighted)
+        cloudSignInButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
+        
+        needHelpButton.setTitle(loginViewModel.helpButtonText, for: .normal)
+        needHelpButton.applyTextTheme(withScheme: colorSchemeManager.blueFlatButtonWithoutBackgroundScheme)
+        needHelpButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline3, for: .normal)
         
         // Copyright section
         copyrightLabel.text = loginViewModel.copyrightText
@@ -107,55 +96,25 @@ class AIMSLoginViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           
-           self.navigationController?.setNavigationBarHidden(true, animated: true)
-       }
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     
     // MARK: Actions
-    
-    @IBAction func loginButtonTapped(_ sender: Any) {
+    @IBAction func connectButtonTapped(_ sender: Any) {
     }
     
-    @IBAction func alfrescoURLInfoButtonTapped(_ sender: Any) {
-        let alertController = MDCAlertController(title:NSLocalizedString(kLocalizationLoginScreenIndentityServiceURLHintTitleText, comment: "Title"), message: NSLocalizedString(kLocalizationLoginScreenIdentityServiceURLHintText, comment: "Hint message"))
-        let action = MDCAlertAction(title: NSLocalizedString(kLocalizationAlertDialogOkButtonText, comment: "OK")) { (action) in
-            
-        }
-        alertController.addAction(action)
-        present(alertController, animated: true, completion: nil)
+    @IBAction func cloudSignInButtonTapped(_ sender: Any) {
     }
     
-    @IBAction func processURLInfoButtonTapped(_ sender: Any) {
+    @IBAction func advancedButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func needHelpButtonTapped(_ sender: Any) {
     }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
-    }
-}
-
-extension AIMSLoginViewController: UITextFieldDelegate {
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if alfrescoURLTextField == textField {
-            alfrescoURLInfoButton.isHidden = true
-        } else {
-            processURLInfoButton.isHidden = true;
-        }
-        
-        return true;
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if alfrescoURLTextField == textField {
-            alfrescoURLInfoButton.isHidden = false
-        } else {
-            processURLInfoButton.isHidden = false
-        }
-    }
-}
-
-extension MDCTextField {
-    override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 40))
     }
 }

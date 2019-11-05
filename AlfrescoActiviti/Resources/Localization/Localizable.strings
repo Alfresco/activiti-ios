@@ -35,11 +35,11 @@
 "loginScreenCloudLoginButtonText"                        = "Alfresco Process Services Online";
 "loginScreenPremiseLoginButtonText"                      = "Process Services On Premise";
 "loginScreenProcessServicesAppText"                      = "Process Services App";
-"loginScreenAlfrescoURLPlaceholderText"                  = "Alfresco URL";
+"loginScreenAlfrescoURLPlaceholderText"                  = "Connect to";
 "loginScreenProcessURLPlaceholderText"                   = "Process URL";
 "loginScreenUseHTTPsText"                                = "USE HTTPS";
 "loginScreenConnectButtonText"                           = "CONNECT";
-"loginScreenCloudSignInButtonText"                       = "SIGN IN WITH CLOUD";
+"loginScreenCloudSignInButtonText"                       = "CLOUD SIGN IN";
 "loginScreenAdvancedSettingsButtonText"                  = "ADVANCED SETTINGS";
 "loginScreenCopyrightFormat"                             = "© 2017 - %d Alfresco Software, Inc. All rights reserved.";
 "loginScreenIndentityServiceURLHintTitleText"            = "How to connect to Alfresco";
