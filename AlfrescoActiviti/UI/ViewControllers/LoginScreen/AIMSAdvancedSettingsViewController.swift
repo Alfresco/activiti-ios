@@ -17,8 +17,6 @@
  ******************************************************************************/
 
 import UIKit
-import MaterialComponents.MDCButton
-import MaterialComponents.MDCTextField
 
 class AIMSAdvancedSettingsViewController: UIViewController {
     let helpVCIIdentifier = "AIMSHelpViewController"

@@ -5260,6 +5260,7 @@
                                 <state key="normal" title="CLOUD SIGN IN"/>
                                 <connections>
                                     <action selector="cloudSignInButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="avf-9m-rfy"/>
+                                    <segue destination="jv8-zv-gad" kind="show" id="xS8-1a-weC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwj-Bk-jf5" customClass="MDCButton">
@@ -5271,7 +5272,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01l-CZ-gwj" customClass="MDCButton">
-                                <rect key="frame" x="166.5" y="678" width="81" height="30"/>
+                                <rect key="frame" x="166.5" y="764.5" width="81" height="30"/>
                                 <state key="normal" title="NEED HELP"/>
                                 <connections>
                                     <action selector="needHelpButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="6AG-aa-yK1"/>
@@ -5311,11 +5312,11 @@
                         <constraints>
                             <constraint firstItem="oUU-t7-qeO" firstAttribute="centerY" secondItem="ayg-co-Jfc" secondAttribute="centerY" multiplier="1:2.4" id="2Mj-bN-bW1"/>
                             <constraint firstItem="3G4-Ef-5j2" firstAttribute="centerX" secondItem="ayg-co-Jfc" secondAttribute="centerX" id="3e1-n6-3mq"/>
-                            <constraint firstItem="01l-CZ-gwj" firstAttribute="top" secondItem="hwj-Bk-jf5" secondAttribute="bottom" constant="25" id="5iu-Nf-dQo"/>
                             <constraint firstItem="Jx5-3K-GGx" firstAttribute="leading" secondItem="ayg-co-Jfc" secondAttribute="leading" constant="32" id="7Es-XC-df9"/>
                             <constraint firstItem="ayg-co-Jfc" firstAttribute="trailing" secondItem="1j3-5s-Vsp" secondAttribute="trailing" constant="32" id="Bfh-BZ-87U"/>
                             <constraint firstItem="lCU-Jq-xrH" firstAttribute="leading" secondItem="o9U-5W-Hhk" secondAttribute="trailing" constant="8" id="C4i-Lv-mQo"/>
                             <constraint firstItem="oUU-t7-qeO" firstAttribute="leading" secondItem="ayg-co-Jfc" secondAttribute="leading" constant="32" id="Cxb-oy-Py3"/>
+                            <constraint firstItem="IKk-tT-hXT" firstAttribute="bottom" secondItem="ayg-co-Jfc" secondAttribute="bottom" id="EU5-M8-zpI"/>
                             <constraint firstItem="ayg-co-Jfc" firstAttribute="trailing" secondItem="Jx5-3K-GGx" secondAttribute="trailing" constant="32" id="Fpp-oq-qdD"/>
                             <constraint firstItem="lCU-Jq-xrH" firstAttribute="centerX" secondItem="ayg-co-Jfc" secondAttribute="centerX" id="G1Y-Xz-Pl0"/>
                             <constraint firstItem="3G4-Ef-5j2" firstAttribute="width" secondItem="3t8-IP-G8g" secondAttribute="width" id="G6X-9b-la7"/>
@@ -5330,6 +5331,7 @@
                             <constraint firstItem="3t8-IP-G8g" firstAttribute="centerX" secondItem="ayg-co-Jfc" secondAttribute="centerX" id="LX7-4h-aLt"/>
                             <constraint firstItem="3t8-IP-G8g" firstAttribute="width" secondItem="Jx5-3K-GGx" secondAttribute="width" id="MHb-jc-z9x"/>
                             <constraint firstItem="yva-zw-Nts" firstAttribute="top" secondItem="oUU-t7-qeO" secondAttribute="bottom" id="NIA-X8-xhu"/>
+                            <constraint firstItem="IKk-tT-hXT" firstAttribute="top" secondItem="01l-CZ-gwj" secondAttribute="bottom" constant="50" id="VNx-j3-tjN"/>
                             <constraint firstItem="1j3-5s-Vsp" firstAttribute="centerY" secondItem="lCU-Jq-xrH" secondAttribute="centerY" id="VOp-tw-Urv"/>
                             <constraint firstItem="1j3-5s-Vsp" firstAttribute="leading" secondItem="lCU-Jq-xrH" secondAttribute="trailing" constant="8" id="YsW-hX-mec"/>
                             <constraint firstItem="lCU-Jq-xrH" firstAttribute="centerY" secondItem="o9U-5W-Hhk" secondAttribute="centerY" id="cXe-OQ-x6E"/>
@@ -5359,6 +5361,121 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AHe-f3-VIx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-481.15942028985512" y="1370.7589285714284"/>
+        </scene>
+        <!--Cloud Login View Controller-->
+        <scene sceneID="TVl-om-qFt">
+            <objects>
+                <viewController id="jv8-zv-gad" customClass="CloudLoginViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oPi-oS-6ZQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COPYRIGHT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ks-9x-TFb">
+                                <rect key="frame" x="166.5" y="844.5" width="81" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gx-Gb-y45">
+                                <rect key="frame" x="32" y="220.5" width="350" height="30"/>
+                                <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alfrescoLogoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="zIe-Qf-AcH">
+                                <rect key="frame" x="32" y="152.5" width="200" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="gt6-Dl-Oz8"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-kT-Xnv">
+                                <rect key="frame" x="40" y="280.5" width="350" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x1o-cv-Ktx" customClass="MDCTextField">
+                                <rect key="frame" x="40" y="319" width="350" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="jv8-zv-gad" id="hVf-nP-dZz"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OWh-mu-oBt" customClass="MDCTextField">
+                                <rect key="frame" x="40" y="353" width="350" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="jv8-zv-gad" id="wyc-fI-k5G"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC0-X6-qax" customClass="MDCButton">
+                                <rect key="frame" x="40" y="407" width="350" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="QY0-0P-nee"/>
+                                </constraints>
+                                <state key="normal" title="Sign in"/>
+                                <connections>
+                                    <action selector="signInButtonPressed:" destination="jv8-zv-gad" eventType="touchUpInside" id="t9F-Dq-Gxq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MU8-cU-WxV" customClass="MDCButton">
+                                <rect key="frame" x="166.5" y="764.5" width="81" height="30"/>
+                                <state key="normal" title="NEED HELP"/>
+                                <connections>
+                                    <action selector="helpButtonPressed:" destination="jv8-zv-gad" eventType="touchUpInside" id="pcu-mb-Pc4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="OWh-mu-oBt" firstAttribute="trailing" secondItem="vBi-kT-Xnv" secondAttribute="trailing" id="3VJ-0e-pjJ"/>
+                            <constraint firstItem="h1y-au-CBR" firstAttribute="trailing" secondItem="1gx-Gb-y45" secondAttribute="trailing" constant="32" id="5QT-jC-42x"/>
+                            <constraint firstItem="vBi-kT-Xnv" firstAttribute="leading" secondItem="1gx-Gb-y45" secondAttribute="leading" constant="8" id="693-xV-wAX"/>
+                            <constraint firstItem="zIe-Qf-AcH" firstAttribute="centerY" secondItem="oPi-oS-6ZQ" secondAttribute="centerY" multiplier="1:2.4" id="805-hO-Ito"/>
+                            <constraint firstItem="x1o-cv-Ktx" firstAttribute="leading" secondItem="vBi-kT-Xnv" secondAttribute="leading" id="Bnp-nz-llv"/>
+                            <constraint firstItem="1gx-Gb-y45" firstAttribute="leading" secondItem="zIe-Qf-AcH" secondAttribute="leading" id="GHx-wL-lF6"/>
+                            <constraint firstItem="OWh-mu-oBt" firstAttribute="leading" secondItem="vBi-kT-Xnv" secondAttribute="leading" id="IEm-fY-DPd"/>
+                            <constraint firstItem="iC0-X6-qax" firstAttribute="trailing" secondItem="vBi-kT-Xnv" secondAttribute="trailing" id="IRz-dQ-O5R"/>
+                            <constraint firstItem="7Ks-9x-TFb" firstAttribute="centerX" secondItem="oPi-oS-6ZQ" secondAttribute="centerX" id="Nu0-o2-D8k"/>
+                            <constraint firstItem="MU8-cU-WxV" firstAttribute="centerX" secondItem="oPi-oS-6ZQ" secondAttribute="centerX" id="QKl-YG-YPc"/>
+                            <constraint firstItem="vBi-kT-Xnv" firstAttribute="trailing" secondItem="1gx-Gb-y45" secondAttribute="trailing" constant="8" id="YlH-Be-5rf"/>
+                            <constraint firstItem="x1o-cv-Ktx" firstAttribute="top" secondItem="vBi-kT-Xnv" secondAttribute="bottom" constant="20" id="cIp-up-gEZ"/>
+                            <constraint firstItem="7Ks-9x-TFb" firstAttribute="top" secondItem="MU8-cU-WxV" secondAttribute="bottom" constant="50" id="gX2-eT-2P0"/>
+                            <constraint firstItem="OWh-mu-oBt" firstAttribute="top" secondItem="x1o-cv-Ktx" secondAttribute="bottom" id="ho4-7r-tnq"/>
+                            <constraint firstItem="zIe-Qf-AcH" firstAttribute="leading" secondItem="h1y-au-CBR" secondAttribute="leading" constant="32" id="iqu-Kj-iDb"/>
+                            <constraint firstItem="1gx-Gb-y45" firstAttribute="top" secondItem="zIe-Qf-AcH" secondAttribute="bottom" id="kdD-Yw-P6g"/>
+                            <constraint firstItem="h1y-au-CBR" firstAttribute="bottom" secondItem="7Ks-9x-TFb" secondAttribute="bottom" id="t2k-dE-c6w"/>
+                            <constraint firstItem="x1o-cv-Ktx" firstAttribute="trailing" secondItem="vBi-kT-Xnv" secondAttribute="trailing" id="v3C-GZ-KkK"/>
+                            <constraint firstItem="vBi-kT-Xnv" firstAttribute="top" secondItem="1gx-Gb-y45" secondAttribute="bottom" constant="30" id="wnl-QF-PqB"/>
+                            <constraint firstItem="iC0-X6-qax" firstAttribute="top" secondItem="OWh-mu-oBt" secondAttribute="bottom" constant="20" id="yRv-tM-5Gw"/>
+                            <constraint firstItem="iC0-X6-qax" firstAttribute="leading" secondItem="vBi-kT-Xnv" secondAttribute="leading" id="yd1-cE-elM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="h1y-au-CBR"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="wAr-i1-39Z" appends="YES" id="0u8-rw-ZwD"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="copyrightLabel" destination="7Ks-9x-TFb" id="pYV-tO-Gcp"/>
+                        <outlet property="helpButton" destination="MU8-cU-WxV" id="tNH-O8-sHm"/>
+                        <outlet property="infoLabel" destination="vBi-kT-Xnv" id="OMk-em-RWf"/>
+                        <outlet property="passwordTextfield" destination="OWh-mu-oBt" id="XUZ-m6-GgZ"/>
+                        <outlet property="processServicesAppLabel" destination="1gx-Gb-y45" id="oid-Zu-wwN"/>
+                        <outlet property="signInButton" destination="iC0-X6-qax" id="kdg-AB-s5m"/>
+                        <outlet property="usernameTextfield" destination="x1o-cv-Ktx" id="9em-Zn-eXY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6lF-rs-7Wl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="wAr-i1-39Z">
+                    <connections>
+                        <action selector="backgroundViewPressed:" destination="jv8-zv-gad" id="RZh-64-eP5"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-480" y="2111"/>
         </scene>
         <!--Advanced Settings-->
         <scene sceneID="F2y-fc-Chy">
@@ -6584,7 +6701,7 @@
         <image name="menu-dots-icon" width="18" height="18.5"/>
         <image name="page-icon" width="30" height="30"/>
         <image name="process-list-icon" width="25" height="25"/>
-        <image name="show-password-icon" width="30" height="30"/>
+        <image name="show-password-icon" width="18" height="18"/>
         <image name="start-date-icon" width="30" height="30"/>
         <image name="task-list-icon" width="25" height="25"/>
         <image name="time-icon" width="30" height="30"/>

@@ -69,6 +69,12 @@ extern NSString *kLocalizationAdvancedSettingsScreenHelpText;
 extern NSString *kLocalizationAdvancedSettingsScreenHelpHintText;
 extern NSString *kLocalizationAdvancedSettingsScreenCloseText;
 
+//Cloud Login screen
+extern NSString *kLocalizationCloudLoginInfoText;
+extern NSString *kLocalizationCloudLoginUsernamePlaceholderText;
+extern NSString *kLocalizationCloudLoginPasswordPlaceholderText;
+extern NSString *kLocalizationCloudLoginSignInButtonText;
+
 // Applications screen
 extern NSString *kLocalizationAppScreenTitleText;
 

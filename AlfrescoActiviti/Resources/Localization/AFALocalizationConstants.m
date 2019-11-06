@@ -73,6 +73,13 @@ NSString *kLocalizationAdvancedSettingsScreenHelpText                           
 NSString *kLocalizationAdvancedSettingsScreenHelpHintText                           = @"advancedSettingsScreenHelpHintText";
 NSString *kLocalizationAdvancedSettingsScreenCloseText                             = @"advancedSettingsScreenCloseText";
 
+#pragma mark -
+#pragma mark Cloud Login screen
+
+NSString *kLocalizationCloudLoginInfoText = @"cloudLoginInfoText";
+NSString *kLocalizationCloudLoginUsernamePlaceholderText = @"cloudLoginUsernamePlaceholderText";
+NSString *kLocalizationCloudLoginPasswordPlaceholderText = @"cloudLoginPasswordPlaceholderText";
+NSString *kLocalizationCloudLoginSignInButtonText = @"cloudLoginSignInButtonText";
 
 #pragma mark -
 #pragma mark Application screen

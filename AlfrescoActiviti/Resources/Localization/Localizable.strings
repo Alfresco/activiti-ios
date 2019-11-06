@@ -66,6 +66,13 @@
 "advancedSettingsScreenCloseText" = "CLOSE";
 "advancedSettingsScreenHelpHintText" = "Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco\n\nYour system administrator will have setup a client id for this application. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
 
+// Cloud Login screen
+
+"cloudLoginInfoText" = "Helpful introduction and information text about APS";
+"cloudLoginUsernamePlaceholderText" = "Username or Email";
+"cloudLoginPasswordPlaceholderText" = "Password";
+"cloudLoginSignInButtonText" = "SIGN IN";
+
 // Applications screen
 "appScreenTitleText"                                     = "Applications";
 
