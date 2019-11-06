@@ -133,6 +133,7 @@ NSString *kSegueIDProcessInstanceDetailsAddCommentsUnwind       = @"ProcessInsta
 NSString *kSegueIDProcessInstanceViewCompletedStartForm         = @"ProcessInstanceViewCompletedStartFormSegueID";
 NSString *kSegueIDProcessInstanceViewCompletedStartFormUnwind   = @"ProcessInstanceViewCompletedStartFormUnwindSegueID";
 NSString *kSegueIDProfileContentPickerComponentEmbedding        = @"ProfileContentPickerComponentEmbeddingSegueID";
+NSString *kSegueIDLoginAIMSAdvancedSettings                     = @"LoginAIMSAdvancedSettingsSegueID";
 
 
 #pragma mark -

@@ -5268,7 +5268,7 @@
                                 <state key="normal" title="ADVANCED SETTINGS"/>
                                 <connections>
                                     <action selector="advancedButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="Gzh-nX-n1X"/>
-                                    <segue destination="9QT-z0-8do" kind="show" id="XD8-9y-zR3"/>
+                                    <segue destination="9QT-z0-8do" kind="show" identifier="LoginAIMSAdvancedSettingsSegueID" id="XD8-9y-zR3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01l-CZ-gwj" customClass="MDCButton">
@@ -5480,7 +5480,7 @@
         <!--Advanced Settings-->
         <scene sceneID="F2y-fc-Chy">
             <objects>
-                <viewController title="Advanced Settings" id="9QT-z0-8do" customClass="AIMSAdvancedSettings" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Advanced Settings" id="9QT-z0-8do" customClass="AIMSAdvancedSettingsViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ocl-5N-hrx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

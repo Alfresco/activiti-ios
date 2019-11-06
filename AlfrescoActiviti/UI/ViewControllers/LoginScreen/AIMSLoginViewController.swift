@@ -99,6 +99,7 @@ class AIMSLoginViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
     }
     
     // MARK: Actions
@@ -116,5 +117,13 @@ class AIMSLoginViewController: UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    // MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if kSegueIDLoginAIMSAdvancedSettings == segue.identifier  {
+            let advancedSettingsViewController = segue.destination as! AIMSAdvancedSettingsViewController
+            advancedSettingsViewController.model = loginViewModel.authenticationParameters
+        }
     }
 }
