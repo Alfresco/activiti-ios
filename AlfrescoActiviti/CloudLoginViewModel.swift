@@ -35,8 +35,15 @@ class CloudLoginViewModel {
             return String(format: NSLocalizedString(kLocalizationLoginScreenCopyrightFormat, comment: "Copyright text"), year)
         }
     }
-    
+
     func signIn(username: String, password: String) {
-        
+        let credentialModel = AFACredentialModel()
+        let aimsParameters = AdvancedSettingsParameters.parameters()
+        credentialModel.hostname = aimsParameters.hostname
+        credentialModel.isCommunicationOverSecureLayer = aimsParameters.https
+        credentialModel.port = aimsParameters.port
+        credentialModel.serviceDocument = aimsParameters.serviceDocument
+        credentialModel.username = username
+        credentialModel.password = password
     }
 }

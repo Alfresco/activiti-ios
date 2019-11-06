@@ -7,3 +7,5 @@
 #import "AFALog.h"
 #import "AFABusinessConstants.h"
 #import "AFAUIConstants.h"
+
+#import "AFACredentialModel.h"
