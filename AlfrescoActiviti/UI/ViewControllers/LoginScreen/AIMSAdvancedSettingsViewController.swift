@@ -26,7 +26,7 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     let copyrightCellIdentifier = "AScopyrightCell"
     let sectionCellIdentifier = "ASsectionCell"
     
-    var model: AIMSAdvancedSettingsViewModel?
+    var model = AIMSAdvancedSettingsViewModel()
     var dataSource: [ASModelSection]?
     var parameters: AdvancedSettingsParameters?
     
@@ -37,8 +37,8 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.dataSource = model?.datasource()
-        parameters = model?.getParameters()
+        self.dataSource = model.datasource()
+        parameters = model.getParameters()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -73,57 +73,38 @@ extension AIMSAdvancedSettingsViewController: ASCellsProtocol {
     }
     
     func result(cell: UITableViewCell, type: ASRows, response: AdvancedSettingsParameters) {
-        switch type {
-        case .https:
-            parameters?.https = response.https
-        case .port:
-            parameters?.port = response.port
-        case .serviceDocuments:
-            parameters?.serviceDocument = response.serviceDocument
-        case .realm:
-            parameters?.realm = response.realm
-        case .clientID:
-            parameters?.clientID = response.clientID
-        case .redirectURL:
-            parameters?.redirectURL = response.redirectURL
-        default:
-            break
-        }
-        
-        if let model = self.model {
-            tableView.reloadRows(at: [model.getIndexPathForSaveButton()], with: .none)
-        }
+        tableView.reloadRows(at: [model.getIndexPathForSaveButton()], with: .none)
     }
     
     func needHelpButtonPressed() {
         self.view.endEditing(true)
         let helpVC = storyboard?.instantiateViewController(withIdentifier: helpVCIIdentifier) as! AIMSHelpViewController
-        helpVC.hintText = model?.helpHintText
-        helpVC.titleText = model?.helpText
-        helpVC.closeText = model?.closeText
+        helpVC.hintText = model.helpHintText
+        helpVC.titleText = model.helpText
+        helpVC.closeText = model.closeText
         helpVC.modalPresentationStyle = .overCurrentContext
         self.navigationController?.present(helpVC, animated: false, completion: nil)
     }
     
     func saveButtonPressed() {
         self.view.endEditing(true)
-        model?.saveParameters(parameters!)
+        model.saveParameters(parameters!)
         self.navigationController?.popViewController(animated: true)
     }
 }
 extension AIMSAdvancedSettingsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return model?.datasource().count ?? 0
+        return model.datasource().count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.datasource()[section].numberOfRow ?? 0
+        return model.datasource()[section].numberOfRow
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = model?.datasource()[indexPath.section].arrayRows[indexPath.row]
+        let item = model.datasource()[indexPath.section].arrayRows[indexPath.row]
         var cell: ASCell
-        switch item?.type {
+        switch item.type {
         case .clientID, .port, .realm, .redirectURL, .serviceDocuments:
             cell = tableView.dequeueReusableCell(withIdentifier: fieldCellIdentifier, for: indexPath) as! ASFieldTableViewCell
         case .save, .help:
@@ -134,8 +115,6 @@ extension AIMSAdvancedSettingsViewController: UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: copyrightCellIdentifier, for: indexPath) as! ASCopyrightTableViewCell
         case .sectionTitle:
             cell = tableView.dequeueReusableCell(withIdentifier: sectionCellIdentifier, for: indexPath) as! ASSectionTableViewCell
-        case .none:
-            cell = tableView.dequeueReusableCell(withIdentifier: fieldCellIdentifier, for: indexPath) as! ASFieldTableViewCell
         }
         cell.delegate = self
         cell.parameters = self.parameters

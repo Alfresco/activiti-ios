@@ -43,20 +43,11 @@ class AIMSAdvancedSettingsViewModel {
     }
     
     func saveParameters(_ advancedSettingsParameters: AdvancedSettingsParameters) {
-        let defaults = UserDefaults.standard
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(advancedSettingsParameters),
-                                  forKey: kAdvancedSettingsParameters)
-        defaults.synchronize()
+        advancedSettingsParameters.save()
     }
     
     func getParameters() -> AdvancedSettingsParameters {
-        let defaults = UserDefaults.standard
-        if let data = defaults.value(forKey: kAdvancedSettingsParameters) as? Data {
-            if let params = try? PropertyListDecoder().decode(AdvancedSettingsParameters.self, from: data) {
-                return params
-            }
-        }
-        return AdvancedSettingsParameters()
+        return AdvancedSettingsParameters.parameters()
     }
     
     func datasource() -> [ASModelSection] {

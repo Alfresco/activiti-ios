@@ -18,47 +18,37 @@
 
 import Foundation
 
-struct AdvancedSettingsParameters: Codable {
-    
-    var https: Bool?
-    var port: String?
-    var serviceDocument: String?
-    var realm: String?
-    var clientID: String?
-    var redirectURL: String?
-    
-    init() {
-        self.https = false
-    }
-    
-    init(https: Bool, port: String, serviceDocument: String, realm: String, clientID: String, redirectURL: String) {
-        self.realm = realm
-        self.clientID = clientID
-        self.port = port
-        self.serviceDocument = serviceDocument
-        self.redirectURL = redirectURL
-        self.https = https
-    }
+class AdvancedSettingsParameters: Codable {
+
+    var https: Bool = true
+    var port: String = "80"
+    var serviceDocument: String = "activi-app"
+    var realm: String = "alfresco"
+    var clientID: String = "alfresco"
+    var redirectURL: String = "fakeurl.com"
+    var hostname: String = "activiti.alfresco.com"
     
     func empty() -> Bool {
-        if https == nil {
-            return true
-        }
-        if port == nil || port == "" {
-            return true
-        }
-        if clientID == nil || clientID == "" {
-            return true
-        }
-        if serviceDocument == nil || serviceDocument == "" {
-            return true
-        }
-        if redirectURL == nil || redirectURL == "" {
-            return true
-        }
-        if realm == nil || realm == "" {
+        if port == "" || clientID == "" || serviceDocument == "" || redirectURL == "" || realm == "" {
             return true
         }
         return false
+    }
+    
+    static func parameters() -> AdvancedSettingsParameters {
+        let defaults = UserDefaults.standard
+        if let data = defaults.value(forKey: kAdvancedSettingsParameters) as? Data {
+            if let params = try? PropertyListDecoder().decode(AdvancedSettingsParameters.self, from: data) {
+                return params
+            }
+        }
+        return AdvancedSettingsParameters()
+    }
+    
+    func save() {
+        let defaults = UserDefaults.standard
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(self),
+                                  forKey: kAdvancedSettingsParameters)
+        defaults.synchronize()
     }
 }

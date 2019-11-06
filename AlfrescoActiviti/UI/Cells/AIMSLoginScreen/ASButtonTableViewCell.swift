@@ -42,9 +42,10 @@ class ASButtonTableViewCell: UITableViewCell, ASCell {
             } else {
                 button.applyContainedTheme(withScheme: colorSchemeManager.grayFlatButtonWithoutBackgroundScheme)
             }
+            button.isEnabled = !parameters.empty()
             button.setElevation(.none, for: .normal)
             button.setElevation(.none, for: .highlighted)
-            button.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline4, for: .normal)
+            button.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
         } else if model.type == .help {
             button.applyTextTheme(withScheme: colorSchemeManager.blueFlatButtonWithoutBackgroundScheme)
         }

@@ -69,7 +69,7 @@ class CloudLoginViewController: UIViewController {
         showPasswordButton.setImage(UIImage(named: "show-password-icon"), for: .normal)
         showPasswordButton.setImage(UIImage(named: "hide-password-icon"), for: .selected)
         showPasswordButton.addTarget(self, action: #selector(showPasswordButtonPressed(_:)), for: .touchUpInside)
-        passwordTextfield.rightViewMode = .unlessEditing
+        passwordTextfield.rightViewMode = .always
         passwordTextfield.rightView = showPasswordButton
         passwordTextfield.rightView?.tintColor = #colorLiteral(red: 0.568627451, green: 0.568627451, blue: 0.568627451, alpha: 1)
         passwordTextfield.font = colorSchemeManager.textFieldTypographyScheme.headline1
