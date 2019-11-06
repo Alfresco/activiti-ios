@@ -1,16 +1,26 @@
-//
-//  AIMSAdvanedSettings.swift
-//  AlfrescoActiviti
-//
-//  Created by Florin Baincescu on 29/10/2019.
-//  Copyright © 2019 Emanuel Lupu-Marinei. All rights reserved.
-//
+/*******************************************************************************
+ * Copyright (C) 2005-2018 Alfresco Software Limited.
+ *
+ * This file is part of the Alfresco Activiti Mobile iOS App.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ ******************************************************************************/
 
 import UIKit
 import MaterialComponents.MDCButton
 import MaterialComponents.MDCTextField
 
-class AIMSAdvancedSettings: UIViewController {
+class AIMSAdvancedSettingsViewController: UIViewController {
     let helpVCIIdentifier = "AIMSHelpViewController"
     let httpsCellIdentifier = "AShttpsCell"
     let fieldCellIdentifier = "ASfieldCell"
@@ -18,9 +28,9 @@ class AIMSAdvancedSettings: UIViewController {
     let copyrightCellIdentifier = "AScopyrightCell"
     let sectionCellIdentifier = "ASsectionCell"
     
-    let model: AIMSAdvancedSettingsViewModel = AIMSAdvancedSettingsViewModel()
-    var dataSource: [ASModelSection]!
-    var parameters: AdvancedSettingsParameters!
+    var model: AIMSAdvancedSettingsViewModel?
+    var dataSource: [ASModelSection]?
+    var parameters: AdvancedSettingsParameters?
     
     var adjustViewForKeyboard: Bool = false
     
@@ -29,8 +39,8 @@ class AIMSAdvancedSettings: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.dataSource = model.datasource()
-        parameters = model.getParameters()
+        self.dataSource = model?.datasource()
+        parameters = model?.getParameters()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -55,7 +65,7 @@ class AIMSAdvancedSettings: UIViewController {
     }
 }
 
-extension AIMSAdvancedSettings: ASCellsProtocol {
+extension AIMSAdvancedSettingsViewController: ASCellsProtocol {
     func willBeginEditing(type: ASRows) {
         if type == .redirectURL {
             adjustViewForKeyboard = true
@@ -67,52 +77,55 @@ extension AIMSAdvancedSettings: ASCellsProtocol {
     func result(cell: UITableViewCell, type: ASRows, response: AdvancedSettingsParameters) {
         switch type {
         case .https:
-            parameters.https = response.https
+            parameters?.https = response.https
         case .port:
-            parameters.port = response.port
+            parameters?.port = response.port
         case .serviceDocuments:
-            parameters.serviceDocument = response.serviceDocument
+            parameters?.serviceDocument = response.serviceDocument
         case .realm:
-            parameters.realm = response.realm
+            parameters?.realm = response.realm
         case .clientID:
-            parameters.clientID = response.clientID
+            parameters?.clientID = response.clientID
         case .redirectURL:
-            parameters.redirectURL = response.redirectURL
+            parameters?.redirectURL = response.redirectURL
         default:
             break
         }
-        tableView.reloadRows(at: [model.getIndexPathForSaveButton()], with: .none)
+        
+        if let model = self.model {
+            tableView.reloadRows(at: [model.getIndexPathForSaveButton()], with: .none)
+        }
     }
     
     func needHelpButtonPressed() {
         self.view.endEditing(true)
         let helpVC = storyboard?.instantiateViewController(withIdentifier: helpVCIIdentifier) as! AIMSHelpViewController
-        helpVC.hintText = model.helpHintText
-        helpVC.titleText = model.helpText
-        helpVC.closeText = model.closeText
+        helpVC.hintText = model?.helpHintText
+        helpVC.titleText = model?.helpText
+        helpVC.closeText = model?.closeText
         helpVC.modalPresentationStyle = .overCurrentContext
         self.navigationController?.present(helpVC, animated: false, completion: nil)
     }
     
     func saveButtonPressed() {
         self.view.endEditing(true)
-        model.saveParameters(parameters!)
+        model?.saveParameters(parameters!)
         self.navigationController?.popViewController(animated: true)
     }
 }
-extension AIMSAdvancedSettings: UITableViewDataSource {
+extension AIMSAdvancedSettingsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return model.datasource().count
+        return model?.datasource().count ?? 0
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.datasource()[section].numberOfRow
+        return model?.datasource()[section].numberOfRow ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = model.datasource()[indexPath.section].arrayRows[indexPath.row]
+        let item = model?.datasource()[indexPath.section].arrayRows[indexPath.row]
         var cell: ASCell
-        switch item.type {
+        switch item?.type {
         case .clientID, .port, .realm, .redirectURL, .serviceDocuments:
             cell = tableView.dequeueReusableCell(withIdentifier: fieldCellIdentifier, for: indexPath) as! ASFieldTableViewCell
         case .save, .help:
@@ -123,11 +136,14 @@ extension AIMSAdvancedSettings: UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: copyrightCellIdentifier, for: indexPath) as! ASCopyrightTableViewCell
         case .sectionTitle:
             cell = tableView.dequeueReusableCell(withIdentifier: sectionCellIdentifier, for: indexPath) as! ASSectionTableViewCell
+        case .none:
+            cell = tableView.dequeueReusableCell(withIdentifier: fieldCellIdentifier, for: indexPath) as! ASFieldTableViewCell
         }
         cell.delegate = self
         cell.parameters = self.parameters
         cell.model = item
         cell.configureCell()
+        
         return cell
     }
 }

@@ -37,6 +37,9 @@ class AIMSLoginViewModel {
     
     // Authentication service
     var authenticationService: AIMSLoginService?
+    
+    // Authentication parameters
+    var authenticationParameters = AIMSAdvancedSettingsViewModel()
 
     func updateIdentityServiceParameters(with url: String, isSecureConnection: Bool) {
         let fullFormatURL = serviceURL(url: url, isSecureConnection: isSecureConnection)
