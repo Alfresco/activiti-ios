@@ -19,6 +19,10 @@
 import UIKit
 import MaterialComponents.MaterialButtons
 
+enum ControllerState {
+    case isLoading
+    case isIdle
+}
 
 class AIMSLoginViewController: UIViewController {
     let loginViewModel: AIMSLoginViewModel = AIMSLoginViewModel()
@@ -39,8 +43,24 @@ class AIMSLoginViewController: UIViewController {
     // Copyright section
     @IBOutlet weak var copyrightLabel: UILabel!
     
+    // Loading view
+    var overlayView: AIMSActivityView?
+    
     // Gesture recognizer
     var tapGestureRecognizer: UITapGestureRecognizer?
+    var controllerState: ControllerState? {
+        didSet {
+            switch controllerState {
+            case .isLoading:
+                if let loadingView = overlayView {
+                    self.view.isUserInteractionEnabled = false
+                    self.view.addSubview(loadingView)
+                }
+            case .isIdle, .none:
+                overlayView?.removeFromSuperview()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +108,11 @@ class AIMSLoginViewController: UIViewController {
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
+        // Loading view
+        overlayView = AIMSActivityView(frame: self.view.frame)
+        overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.grayColorScheme, typographyScheme: colorSchemeManager.defaultTypographyScheme)
+        overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
+        
         // Dismiss keyboard on taps outside text fields
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         if let gestureRecognizer = tapGestureRecognizer {
@@ -97,13 +122,14 @@ class AIMSLoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
+        updateConnectButtonState()
     }
     
     // MARK: Actions
     @IBAction func connectButtonTapped(_ sender: Any) {
+        controllerState = .isLoading
     }
     
     @IBAction func cloudSignInButtonTapped(_ sender: Any) {
@@ -118,4 +144,20 @@ class AIMSLoginViewController: UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+        }
+    }
+    
+    // MARK: Validations
+    
+    fileprivate func updateConnectButtonState() {
+        if let urlValue = alfrescoURLTextField.text {
+            connectToButton.isEnabled = !urlValue.isEmpty
+        }
+    }
+}
+
+extension AIMSLoginViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if alfrescoURLTextField == textField {
+            updateConnectButtonState()
 }

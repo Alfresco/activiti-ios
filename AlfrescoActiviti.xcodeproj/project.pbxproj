@@ -865,6 +865,7 @@
 		B96C65E92372C68A004E1402 /* ASButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E42372C689004E1402 /* ASButtonTableViewCell.swift */; };
 		B96C65EA2372C68A004E1402 /* ASHttpsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E52372C689004E1402 /* ASHttpsTableViewCell.swift */; };
 		B96C65EB2372C68A004E1402 /* ASCopyrightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E62372C68A004E1402 /* ASCopyrightTableViewCell.swift */; };
+		B971E48C2372E51D005DCB36 /* AIMSActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971E48B2372E51D005DCB36 /* AIMSActivityView.swift */; };
 		B9849849231554E40051F545 /* ASDKFormVariableCacheMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AA069E23154D6200D1B2AF /* ASDKFormVariableCacheMapper.m */; };
 		B9AA069A231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h in Headers */ = {isa = PBXBuildFile; fileRef = B9AA0698231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h */; };
 		B9AA069B231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AA0699231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m */; };
@@ -1958,6 +1959,7 @@
 		B96C65E42372C689004E1402 /* ASButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASButtonTableViewCell.swift; path = UI/Cells/AIMSLoginScreen/ASButtonTableViewCell.swift; sourceTree = "<group>"; };
 		B96C65E52372C689004E1402 /* ASHttpsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASHttpsTableViewCell.swift; path = UI/Cells/AIMSLoginScreen/ASHttpsTableViewCell.swift; sourceTree = "<group>"; };
 		B96C65E62372C68A004E1402 /* ASCopyrightTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASCopyrightTableViewCell.swift; path = UI/Cells/AIMSLoginScreen/ASCopyrightTableViewCell.swift; sourceTree = "<group>"; };
+		B971E48B2372E51D005DCB36 /* AIMSActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSActivityView.swift; path = UI/Components/AIMSActivityView/AIMSActivityView.swift; sourceTree = "<group>"; };
 		B9AA0698231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKFormVariablesCacheModelUpsert.h; path = CacheServices/CacheModelUpsert/FormVariablesModelUpsert/ASDKFormVariablesCacheModelUpsert.h; sourceTree = "<group>"; };
 		B9AA0699231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKFormVariablesCacheModelUpsert.m; path = CacheServices/CacheModelUpsert/FormVariablesModelUpsert/ASDKFormVariablesCacheModelUpsert.m; sourceTree = "<group>"; };
 		B9AA069D23154D6200D1B2AF /* ASDKFormVariableCacheMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKFormVariableCacheMapper.h; sourceTree = "<group>"; };
@@ -2821,6 +2823,7 @@
 				136DFF691DA3DB8600FA40E0 /* FilterHeaderView */,
 				132154D81F1E00A400A8C7F2 /* BannerAlertView */,
 				B94FE48723671BAA008BCA64 /* MaterialDesignColorSchemeComponent */,
+				B971E48D2372E526005DCB36 /* AIMSActivityView */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -6662,6 +6665,14 @@
 			name = AIMSHelpViewController;
 			sourceTree = "<group>";
 		};
+		B971E48D2372E526005DCB36 /* AIMSActivityView */ = {
+			isa = PBXGroup;
+			children = (
+				B971E48B2372E51D005DCB36 /* AIMSActivityView.swift */,
+			);
+			name = AIMSActivityView;
+			sourceTree = "<group>";
+		};
 		B9AA069C231412D700D1B2AF /* ASDKFormVariablesCacheModelUpsert */ = {
 			isa = PBXGroup;
 			children = (
@@ -7522,6 +7533,7 @@
 				136680071C89AEF9005E4AEA /* AFAQueryServices.m in Sources */,
 				13EBECBB1CFDBEB000EC8F96 /* AFAChecklistTableViewCell.m in Sources */,
 				13667FEA1C87355E005E4AEA /* AFAShowDiagramTableViewCell.m in Sources */,
+				B971E48C2372E51D005DCB36 /* AIMSActivityView.swift in Sources */,
 				137B8DE01BB99B1200F1A6DC /* AFATableControllerContentCellFactory.m in Sources */,
 				13BBAB091E9CF761009B2D43 /* AFAContentPickerDataSource.m in Sources */,
 				13A106A31E94DEC400506871 /* AFAListBaseViewModel.m in Sources */,
