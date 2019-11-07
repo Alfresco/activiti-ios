@@ -38,8 +38,8 @@ class AIMSActivityView: UIView {
     }
     
     func applySemanticColorScheme(colorScheme: MDCSemanticColorScheme, typographyScheme: MDCTypographyScheme) {
-        activityIndicator.cycleColors = [colorScheme.onSurfaceColor]
-        label.textColor = colorScheme.primaryColor
+        activityIndicator.cycleColors = [colorScheme.primaryColor]
+        label.textColor = colorScheme.secondaryColor
         label.font = typographyScheme.subtitle2
     }
     
