@@ -110,7 +110,8 @@ class AIMSLoginViewController: UIViewController {
         
         // Loading view
         overlayView = AIMSActivityView(frame: self.view.frame)
-        overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.grayColorScheme, typographyScheme: colorSchemeManager.defaultTypographyScheme)
+        overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
+                                              typographyScheme: colorSchemeManager.defaultTypographyScheme)
         overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
         
         // Dismiss keyboard on taps outside text fields

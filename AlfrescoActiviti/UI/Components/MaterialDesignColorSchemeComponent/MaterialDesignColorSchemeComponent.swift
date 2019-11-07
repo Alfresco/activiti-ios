@@ -92,6 +92,14 @@ class MaterialDesignColorSchemeComponent: NSObject {
         return scheme
     }()
     
+    public let activityViewColorScheme: MDCSemanticColorScheme = {
+        let scheme = MDCSemanticColorScheme(defaults: .material201804)
+        scheme.primaryColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
+        scheme.secondaryColor = #colorLiteral(red: 0.568627451, green: 0.568627451, blue: 0.568627451, alpha: 1)
+        
+        return scheme
+    }()
+    
     public let defaultTypographyScheme: MDCTypographyScheme = {
         let scheme = MDCTypographyScheme()
         
