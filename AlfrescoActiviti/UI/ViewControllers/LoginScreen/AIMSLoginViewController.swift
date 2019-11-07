@@ -144,8 +144,6 @@ class AIMSLoginViewController: UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-        }
-    }
     
     // MARK: Validations
     
@@ -160,4 +158,6 @@ extension AIMSLoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if alfrescoURLTextField == textField {
             updateConnectButtonState()
+        }
+    }
 }
