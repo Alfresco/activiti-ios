@@ -5226,7 +5226,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yva-zw-Nts">
-                                <rect key="frame" x="32" y="223" width="350" height="30"/>
+                                <rect key="frame" x="32" y="257" width="350" height="30"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -5240,7 +5240,7 @@
                                 </connections>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alfrescoLogoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="oUU-t7-qeO">
-                                <rect key="frame" x="32" y="155" width="200" height="68"/>
+                                <rect key="frame" x="32" y="121" width="200" height="136"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="w3e-kQ-Rkd"/>
                                 </constraints>
@@ -5365,7 +5365,7 @@
         <!--Cloud Login View Controller-->
         <scene sceneID="TVl-om-qFt">
             <objects>
-                <viewController id="jv8-zv-gad" customClass="CloudLoginViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CloudLoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jv8-zv-gad" customClass="CloudLoginViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oPi-oS-6ZQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5377,41 +5377,41 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gx-Gb-y45">
-                                <rect key="frame" x="32" y="254.5" width="350" height="30"/>
+                                <rect key="frame" x="32" y="220.5" width="350" height="30"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alfrescoLogoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="zIe-Qf-AcH">
-                                <rect key="frame" x="32" y="118.5" width="200" height="136"/>
+                                <rect key="frame" x="32" y="152.5" width="200" height="68"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="gt6-Dl-Oz8"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-kT-Xnv">
-                                <rect key="frame" x="40" y="314.5" width="350" height="18.5"/>
+                                <rect key="frame" x="40" y="280.5" width="334" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x1o-cv-Ktx" customClass="MDCTextField">
-                                <rect key="frame" x="40" y="353" width="350" height="34"/>
+                                <rect key="frame" x="40" y="319" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="jv8-zv-gad" id="hVf-nP-dZz"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OWh-mu-oBt" customClass="MDCTextField">
-                                <rect key="frame" x="40" y="387" width="350" height="34"/>
+                                <rect key="frame" x="40" y="353" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="jv8-zv-gad" id="wyc-fI-k5G"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC0-X6-qax" customClass="MDCButton">
-                                <rect key="frame" x="40" y="441" width="350" height="58"/>
+                                <rect key="frame" x="40" y="407" width="334" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="QY0-0P-nee"/>
                                 </constraints>
@@ -5441,7 +5441,7 @@
                             <constraint firstItem="iC0-X6-qax" firstAttribute="trailing" secondItem="vBi-kT-Xnv" secondAttribute="trailing" id="IRz-dQ-O5R"/>
                             <constraint firstItem="7Ks-9x-TFb" firstAttribute="centerX" secondItem="oPi-oS-6ZQ" secondAttribute="centerX" id="Nu0-o2-D8k"/>
                             <constraint firstItem="MU8-cU-WxV" firstAttribute="centerX" secondItem="oPi-oS-6ZQ" secondAttribute="centerX" id="QKl-YG-YPc"/>
-                            <constraint firstItem="vBi-kT-Xnv" firstAttribute="trailing" secondItem="1gx-Gb-y45" secondAttribute="trailing" constant="8" id="YlH-Be-5rf"/>
+                            <constraint firstItem="vBi-kT-Xnv" firstAttribute="trailing" secondItem="1gx-Gb-y45" secondAttribute="trailing" constant="-8" id="YlH-Be-5rf"/>
                             <constraint firstItem="x1o-cv-Ktx" firstAttribute="top" secondItem="vBi-kT-Xnv" secondAttribute="bottom" constant="20" id="cIp-up-gEZ"/>
                             <constraint firstItem="7Ks-9x-TFb" firstAttribute="top" secondItem="MU8-cU-WxV" secondAttribute="bottom" constant="50" id="gX2-eT-2P0"/>
                             <constraint firstItem="OWh-mu-oBt" firstAttribute="top" secondItem="x1o-cv-Ktx" secondAttribute="bottom" id="ho4-7r-tnq"/>
@@ -6678,6 +6678,121 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2510" y="-481"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="qaw-8G-lfr">
+            <objects>
+                <viewController storyboardIdentifier="AIMSSSOViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a8o-Yi-Qvy" customClass="AIMSSSOViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iov-D2-bTl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COPYRIGHT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L5A-ug-UCY">
+                                <rect key="frame" x="166.5" y="844.5" width="81" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xas-a7-Xwe">
+                                <rect key="frame" x="32" y="220.5" width="350" height="30"/>
+                                <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alfrescoLogoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="jrC-EV-0lf">
+                                <rect key="frame" x="32" y="152.5" width="200" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Qeb-bp-xOC"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Siging to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDg-Ta-wTf">
+                                <rect key="frame" x="40" y="280.5" width="334" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q96-c2-7DP" customClass="MDCTextField">
+                                <rect key="frame" x="48" y="366" width="318" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="a8o-Yi-Qvy" id="bDL-5i-ec7"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXp-o9-Ccd" customClass="MDCButton">
+                                <rect key="frame" x="48" y="420" width="318" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="N4A-QT-nEu"/>
+                                </constraints>
+                                <state key="normal" title="Sign in with sso"/>
+                                <connections>
+                                    <action selector="signInButtonPressed:" destination="a8o-Yi-Qvy" eventType="touchUpInside" id="lFK-wF-Qqj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Obg-Kl-7Qx" customClass="MDCButton">
+                                <rect key="frame" x="166.5" y="764.5" width="81" height="30"/>
+                                <state key="normal" title="NEED HELP"/>
+                                <connections>
+                                    <action selector="helpButtonPressed:" destination="a8o-Yi-Qvy" eventType="touchUpInside" id="YFc-Gl-qvn"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFI-ro-FgJ">
+                                <rect key="frame" x="48" y="314" width="318" height="37"/>
+                                <string key="text">To allow 
+success</string>
+                                <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="RFI-ro-FgJ" firstAttribute="trailing" secondItem="IDg-Ta-wTf" secondAttribute="trailing" constant="-8" id="0YT-nA-sIK"/>
+                            <constraint firstItem="VXp-o9-Ccd" firstAttribute="top" secondItem="q96-c2-7DP" secondAttribute="bottom" constant="20" id="2Og-xI-Bd7"/>
+                            <constraint firstItem="xas-a7-Xwe" firstAttribute="top" secondItem="jrC-EV-0lf" secondAttribute="bottom" id="2Q4-xn-Dz8"/>
+                            <constraint firstItem="IDg-Ta-wTf" firstAttribute="leading" secondItem="xas-a7-Xwe" secondAttribute="leading" constant="8" id="2bm-JT-CYW"/>
+                            <constraint firstItem="q96-c2-7DP" firstAttribute="top" secondItem="RFI-ro-FgJ" secondAttribute="bottom" constant="15" id="3GT-aw-nUh"/>
+                            <constraint firstItem="xas-a7-Xwe" firstAttribute="leading" secondItem="jrC-EV-0lf" secondAttribute="leading" id="401-MW-grB"/>
+                            <constraint firstItem="RFI-ro-FgJ" firstAttribute="leading" secondItem="IDg-Ta-wTf" secondAttribute="leading" constant="8" id="CE1-lX-91z"/>
+                            <constraint firstItem="L5A-ug-UCY" firstAttribute="top" secondItem="Obg-Kl-7Qx" secondAttribute="bottom" constant="50" id="F3t-6J-RCg"/>
+                            <constraint firstItem="VXp-o9-Ccd" firstAttribute="leading" secondItem="RFI-ro-FgJ" secondAttribute="leading" id="LHx-B7-cfh"/>
+                            <constraint firstItem="L5A-ug-UCY" firstAttribute="centerX" secondItem="iov-D2-bTl" secondAttribute="centerX" id="Pxi-aP-6UI"/>
+                            <constraint firstItem="q96-c2-7DP" firstAttribute="trailing" secondItem="RFI-ro-FgJ" secondAttribute="trailing" id="R4E-Cz-OgA"/>
+                            <constraint firstItem="IDg-Ta-wTf" firstAttribute="top" secondItem="xas-a7-Xwe" secondAttribute="bottom" constant="30" id="SpI-HK-qk6"/>
+                            <constraint firstItem="jrC-EV-0lf" firstAttribute="centerY" secondItem="iov-D2-bTl" secondAttribute="centerY" multiplier="1:2.4" id="dRZ-Z5-UE6"/>
+                            <constraint firstItem="q96-c2-7DP" firstAttribute="leading" secondItem="RFI-ro-FgJ" secondAttribute="leading" id="dsD-vh-9Ph"/>
+                            <constraint firstItem="zIK-tb-Dpv" firstAttribute="trailing" secondItem="xas-a7-Xwe" secondAttribute="trailing" constant="32" id="ezJ-ER-9YW"/>
+                            <constraint firstItem="IDg-Ta-wTf" firstAttribute="trailing" secondItem="xas-a7-Xwe" secondAttribute="trailing" constant="-8" id="iBs-Ao-yHe"/>
+                            <constraint firstItem="zIK-tb-Dpv" firstAttribute="bottom" secondItem="L5A-ug-UCY" secondAttribute="bottom" id="sA9-fS-mmm"/>
+                            <constraint firstItem="Obg-Kl-7Qx" firstAttribute="centerX" secondItem="iov-D2-bTl" secondAttribute="centerX" id="wyT-GK-0aa"/>
+                            <constraint firstItem="RFI-ro-FgJ" firstAttribute="top" secondItem="IDg-Ta-wTf" secondAttribute="bottom" constant="15" id="xpo-ch-0E0"/>
+                            <constraint firstItem="jrC-EV-0lf" firstAttribute="leading" secondItem="zIK-tb-Dpv" secondAttribute="leading" constant="32" id="zTA-mE-Yki"/>
+                            <constraint firstItem="VXp-o9-Ccd" firstAttribute="trailing" secondItem="RFI-ro-FgJ" secondAttribute="trailing" id="zTp-hx-c9P"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zIK-tb-Dpv"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="VQU-hl-TSa" appends="YES" id="ib2-gs-HHb"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="copyrightLabel" destination="L5A-ug-UCY" id="D0y-Vz-Syp"/>
+                        <outlet property="helpButton" destination="Obg-Kl-7Qx" id="Jhk-UQ-77k"/>
+                        <outlet property="processServiceAppLabel" destination="xas-a7-Xwe" id="jr7-Fx-ADI"/>
+                        <outlet property="repositoryTextField" destination="q96-c2-7DP" id="NpN-Ul-xWV"/>
+                        <outlet property="signInButton" destination="VXp-o9-Ccd" id="oAA-C9-iTM"/>
+                        <outlet property="subtitle1Label" destination="IDg-Ta-wTf" id="07n-LV-lbF"/>
+                        <outlet property="subtitle2Label" destination="RFI-ro-FgJ" id="wVe-MU-g2v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eOJ-tV-4di" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="VQU-hl-TSa">
+                    <connections>
+                        <action selector="backgroundViewPressed:" destination="a8o-Yi-Qvy" id="53h-J7-KsX"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="243" y="2106"/>
         </scene>
     </scenes>
     <resources>

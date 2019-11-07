@@ -73,6 +73,13 @@
 "cloudLoginPasswordPlaceholderText" = "Password";
 "cloudLoginSignInButtonText" = "SIGN IN";
 
+// SSO Login screen
+
+"ssoLoginSubtitle1Text" = "Singing in to \nwww.identity.myorg.com";
+"ssoLoginSubtitle2Text" = "To allow successful sinle sign on access, please provide the location of your Process Services environment.";
+"ssoLoginRepositoryPlaceholderText" = "Process repository location";
+"ssoLoginSignInSSOButtonText" = "SING IN WITH SSO";
+
 // Applications screen
 "appScreenTitleText"                                     = "Applications";
 
