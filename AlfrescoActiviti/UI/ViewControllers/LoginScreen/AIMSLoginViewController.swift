@@ -133,7 +133,7 @@ class AIMSLoginViewController: UIViewController {
     
     @IBAction func connectButtonTapped(_ sender: Any) {
 //        controllerState = .isLoading
-        var identifier = ssoViewControllerIdentifier
+        var identifier = kStoryboardIDAIMSSSOViewController
         let viewController = storyboard?.instantiateViewController(withIdentifier: identifier)
         if let viewController = viewController {
             self.navigationController?.pushViewController(viewController, animated: true)

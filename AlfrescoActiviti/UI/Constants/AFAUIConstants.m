@@ -42,6 +42,9 @@ NSString *kStoryboardIDListViewController                       = @"ListViewCont
 NSString *kStoryboardIDApplicationListViewController            = @"ApplicationListViewControllerID";
 NSString *kStoryboardIDProfileViewController                    = @"ProfileViewControllerID";
 NSString *kStoryboardIDSettingsViewController                   = @"SettingsViewControllerID";
+NSString *kStoryboardIDAIMSSSOViewController                    = @"AIMSSSOViewController";
+NSString *kStoryboardIDCloudLoginViewController                 = @"CloudLoginViewController";
+NSString *kStoryboardIDAIMSHelpViewController                   = @"AIMSHelpViewController";
 
 
 #pragma mark -
@@ -93,6 +96,11 @@ NSString *kCellIDAuditLog                                       = @"AuditLogCell
 NSString *kCellIDStartForm                                      = @"StartFormCellID";
 NSString *kCellIDTaskChecklist                                  = @"TaskChecklistCellID";
 NSString *kCellIDLoginSection                                   = @"LoginSectionCellID";
+NSString *kCellIDAdvancedSettingsHttps                          = @"AdvancedSettingsHttpsCellID";
+NSString *kCellIDAdvancedSettingsField                          = @"AdvancedSettingsTextfieldCellID";
+NSString *kCellIDAdvancedSettingsButton                         = @"AdvancedSettingsButtonCellID";
+NSString *kCellIDAdvancedSettingsCopyright                      = @"AdvancedSettingsCopyrightCellID";
+NSString *kCellIDAdvancedSettingsSection                        = @"AdvancedSettingsSectionCellID";
 
 
 #pragma mark -
