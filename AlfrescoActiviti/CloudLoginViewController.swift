@@ -21,7 +21,6 @@ import MaterialComponents.MDCButton
 import MaterialComponents.MDCTextField
 
 class CloudLoginViewController: UIViewController {
-    let helpVCIIdentifier = "AIMSHelpViewController"
 
     @IBOutlet weak var processServicesAppLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
@@ -109,7 +108,7 @@ class CloudLoginViewController: UIViewController {
     
     @IBAction func helpButtonPressed(_ sender: MDCButton) {
         self.view.endEditing(true)
-        let helpVC = storyboard?.instantiateViewController(withIdentifier: helpVCIIdentifier) as! AIMSHelpViewController
+        let helpVC = storyboard?.instantiateViewController(withIdentifier: helpViewControllerIdentifier) as! AIMSHelpViewController
         helpVC.hintText = model.helpHintText
         helpVC.titleText = model.helpText
         helpVC.closeText = model.closeText

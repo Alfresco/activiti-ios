@@ -18,12 +18,12 @@
 
 import Foundation
 
-class CloudLoginViewModel {
+class AIMSSSOViewModel {
     let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
-    let infoText = NSLocalizedString(kLocalizationCloudLoginInfoText, comment: "Info")
-    let usernamaPlaceholderText = NSLocalizedString(kLocalizationCloudLoginUsernamePlaceholderText, comment: "Username")
-    let passwordPlaceholderText = NSLocalizedString(kLocalizationCloudLoginPasswordPlaceholderText, comment: "Password")
-    let signInButtonText = NSLocalizedString(kLocalizationCloudLoginSignInButtonText, comment: "SIGN IN")
+    let subtitle1Text = NSLocalizedString(kLocalizationSSOLoginSubtitle1Text, comment: "Info")
+    let subtitle2Text = NSLocalizedString(kLocalizationSSOLoginSubtitle2Text, comment: "Info")
+    let repositoryPlaceholderText = NSLocalizedString(kLocalizationSSOLoginRepositoryPlaceholderText, comment: "Repository")
+    let signInSSOButtonText = NSLocalizedString(kLocalizationSSOLoginSignInSSOButtonText, comment: "SIGN IN WITH SSO")
     let closeText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCloseText, comment: "Close")
     let helpButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpButtonText, comment: "Need Help")
     let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
@@ -34,16 +34,5 @@ class CloudLoginViewModel {
             let year = calendar.component(.year, from: Date())
             return String(format: NSLocalizedString(kLocalizationLoginScreenCopyrightFormat, comment: "Copyright text"), year)
         }
-    }
-
-    func signIn(username: String, password: String) {
-//        let credentialModel = AFACredentialModel()
-//        let aimsParameters = AdvancedSettingsParameters.parameters()
-//        credentialModel.hostname = aimsParameters.hostname
-//        credentialModel.isCommunicationOverSecureLayer = aimsParameters.https
-//        credentialModel.port = aimsParameters.port
-//        credentialModel.serviceDocument = aimsParameters.serviceDocument
-//        credentialModel.username = username
-//        credentialModel.password = password
     }
 }

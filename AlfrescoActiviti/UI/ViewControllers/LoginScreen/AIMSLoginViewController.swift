@@ -25,6 +25,7 @@ enum ControllerState {
 }
 
 class AIMSLoginViewController: UIViewController {
+    
     let loginViewModel: AIMSLoginViewModel = AIMSLoginViewModel()
     
     // App name section
@@ -129,8 +130,14 @@ class AIMSLoginViewController: UIViewController {
     }
     
     // MARK: Actions
+    
     @IBAction func connectButtonTapped(_ sender: Any) {
-        controllerState = .isLoading
+//        controllerState = .isLoading
+        var identifier = ssoViewControllerIdentifier
+        let viewController = storyboard?.instantiateViewController(withIdentifier: identifier)
+        if let viewController = viewController {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     @IBAction func cloudSignInButtonTapped(_ sender: Any) {

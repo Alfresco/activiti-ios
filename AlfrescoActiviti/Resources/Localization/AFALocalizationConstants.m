@@ -82,6 +82,14 @@ NSString *kLocalizationCloudLoginPasswordPlaceholderText = @"cloudLoginPasswordP
 NSString *kLocalizationCloudLoginSignInButtonText = @"cloudLoginSignInButtonText";
 
 #pragma mark -
+#pragma mark SSO Login screen
+
+NSString *kLocalizationSSOLoginSubtitle1Text = @"ssoLoginSubtitle1Text";
+NSString *kLocalizationSSOLoginSubtitle2Text = @"ssoLoginSubtitle2Text";
+NSString *kLocalizationSSOLoginRepositoryPlaceholderText = @"ssoLoginRepositoryPlaceholderText";
+NSString *kLocalizationSSOLoginSignInSSOButtonText = @"ssoLoginSignInSSOButtonText";
+
+#pragma mark -
 #pragma mark Application screen
 
 NSString *kLocalizationAppScreenTitleText                        = @"appScreenTitleText";

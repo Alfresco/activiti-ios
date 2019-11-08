@@ -19,12 +19,6 @@
 import UIKit
 
 class AIMSAdvancedSettingsViewController: UIViewController {
-    let helpVCIIdentifier = "AIMSHelpViewController"
-    let httpsCellIdentifier = "AShttpsCell"
-    let fieldCellIdentifier = "ASfieldCell"
-    let buttonCellIdentifier = "ASbuttonCell"
-    let copyrightCellIdentifier = "AScopyrightCell"
-    let sectionCellIdentifier = "ASsectionCell"
     
     var model = AIMSAdvancedSettingsViewModel()
     var dataSource: [ASModelSection]?
@@ -78,7 +72,7 @@ extension AIMSAdvancedSettingsViewController: ASCellsProtocol {
     
     func needHelpButtonPressed() {
         self.view.endEditing(true)
-        let helpVC = storyboard?.instantiateViewController(withIdentifier: helpVCIIdentifier) as! AIMSHelpViewController
+        let helpVC = storyboard?.instantiateViewController(withIdentifier: helpViewControllerIdentifier) as! AIMSHelpViewController
         helpVC.hintText = model.helpHintText
         helpVC.titleText = model.helpText
         helpVC.closeText = model.closeText
