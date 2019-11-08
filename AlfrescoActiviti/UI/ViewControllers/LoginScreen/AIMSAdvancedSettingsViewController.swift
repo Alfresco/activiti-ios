@@ -72,7 +72,7 @@ extension AIMSAdvancedSettingsViewController: ASCellsProtocol {
     
     func needHelpButtonPressed() {
         self.view.endEditing(true)
-        let helpVC = storyboard?.instantiateViewController(withIdentifier: helpViewControllerIdentifier) as! AIMSHelpViewController
+        let helpVC = storyboard?.instantiateViewController(withIdentifier: kStoryboardIDAIMSHelpViewController) as! AIMSHelpViewController
         helpVC.hintText = model.helpHintText
         helpVC.titleText = model.helpText
         helpVC.closeText = model.closeText
@@ -100,15 +100,15 @@ extension AIMSAdvancedSettingsViewController: UITableViewDataSource {
         var cell: ASCell
         switch item.type {
         case .clientID, .port, .realm, .redirectURL, .serviceDocuments:
-            cell = tableView.dequeueReusableCell(withIdentifier: fieldCellIdentifier, for: indexPath) as! ASFieldTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsField, for: indexPath) as! ASFieldTableViewCell
         case .save, .help:
-            cell = tableView.dequeueReusableCell(withIdentifier: buttonCellIdentifier, for: indexPath) as! ASButtonTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsButton, for: indexPath) as! ASButtonTableViewCell
         case .https:
-            cell = tableView.dequeueReusableCell(withIdentifier: httpsCellIdentifier, for: indexPath) as! ASHttpsTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsHttps, for: indexPath) as! ASHttpsTableViewCell
         case .copyright:
-            cell = tableView.dequeueReusableCell(withIdentifier: copyrightCellIdentifier, for: indexPath) as! ASCopyrightTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsCopyright, for: indexPath) as! ASCopyrightTableViewCell
         case .sectionTitle:
-            cell = tableView.dequeueReusableCell(withIdentifier: sectionCellIdentifier, for: indexPath) as! ASSectionTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsSection, for: indexPath) as! ASSectionTableViewCell
         }
         cell.delegate = self
         cell.parameters = self.parameters

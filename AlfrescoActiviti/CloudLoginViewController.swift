@@ -108,7 +108,7 @@ class CloudLoginViewController: UIViewController {
     
     @IBAction func helpButtonPressed(_ sender: MDCButton) {
         self.view.endEditing(true)
-        let helpVC = storyboard?.instantiateViewController(withIdentifier: helpViewControllerIdentifier) as! AIMSHelpViewController
+        let helpVC = storyboard?.instantiateViewController(withIdentifier: kStoryboardIDAIMSHelpViewController) as! AIMSHelpViewController
         helpVC.hintText = model.helpHintText
         helpVC.titleText = model.helpText
         helpVC.closeText = model.closeText

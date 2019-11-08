@@ -132,8 +132,8 @@ class AIMSLoginViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func connectButtonTapped(_ sender: Any) {
-        controllerState = .isLoading
-        let identifier = ssoViewControllerIdentifier
+//        controllerState = .isLoading
+        var identifier = kStoryboardIDAIMSSSOViewController
         let viewController = storyboard?.instantiateViewController(withIdentifier: identifier)
         if let viewController = viewController {
             self.navigationController?.pushViewController(viewController, animated: true)
