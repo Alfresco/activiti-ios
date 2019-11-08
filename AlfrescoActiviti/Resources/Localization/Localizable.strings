@@ -43,7 +43,7 @@
 "loginScreenAdvancedSettingsButtonText"                  = "ADVANCED SETTINGS";
 "loginScreenCopyrightFormat"                             = "© 2017 - %d Alfresco Software, Inc. All rights reserved.";
 "loginScreenIndentityServiceURLHintTitleText"            = "How to connect to Alfresco";
-"loginScreenIdentityServiceURLHintText"                  = "Alfresco Process Services URL:\nYou can enter the URL of your Alfresco Process Services instance. This will require you to enter your username & password to authenticate.\n\nSign in with SSO:\nYou can enter the URL of your Alfresco Identity Management Service in order to authenticate with your organisations identity provider.\n\n*You will have to provide the URL of your Alfresco Process Services instance afterwards.\n\nTalk to your Alfresco administrator if you require help.";
+"loginScreenIdentityServiceURLHintText"                  = "<p><font size=\"6\">How to connect to Alfresco</font></p><p><font size=\"5\">Alfresco Process Services URL</font></p><p>You can enter the URL of your Alfresco Process Services instance. This will require you to enter your username &amp; password to authenticate.</p><p><font size=\"5\">Sign in with SSO</font></p><p>You can enter the URL of your Alfresco Identity Management Service in order to authenticate with your organisations identity provider.</p><p>*You will have to provide the URL of your Alfresco Process Services instance afterwards</p><p>Talk to your Alfresco administrator if you require help.</p>";
 
 // Advanced Settings screen
 "advancedSettingsScreenTransportProtocolText" = "Transport Protocol";
@@ -62,7 +62,7 @@
 "advancedSettingsScreenRedirectURLHintText" = " ";
 "advancedSettingsScreenSaveButtonText" = "SAVE";
 "advancedSettingsScreenHelpButtonText" = "NEED HELP";
-"advancedSettingsScreenHelpText" = "HELP";
+"advancedSettingsScreenHelpText" = "Help";
 "advancedSettingsScreenCloseText" = "CLOSE";
 "advancedSettingsScreenHelpHintText" = "Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco\n\nYour system administrator will have setup a client id for this application. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
 

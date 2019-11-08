@@ -28,10 +28,9 @@ class AIMSHelpViewController: UIViewController {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bgView: UIView!
     
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
-    var hintText: String!
-    var titleText: String!
-    var closeText: String!
+    var hintText = ""
+    var titleText = ""
+    var closeText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +39,17 @@ class AIMSHelpViewController: UIViewController {
             AFALog.logError("Color scheme manager could not be initiated")
             return
         }
-        textView.text = hintText
+        
+        textView.attributedText = NSAttributedString(withLocalizedHTMLString: hintText,
+                                                     font: colorSchemeManager.defaultTypographyScheme.button)
+        
         titleLabel.text = titleText
+        titleLabel.font = colorSchemeManager.defaultTypographyScheme.headline5
         
-        closeButton.applyContainedTheme(withScheme: colorSchemeManager.flatButtonWithoutBackgroundScheme)
+        closeButton.applyOutlinedTheme(withScheme: colorSchemeManager.flatButtonWithoutBackgroundScheme)
         closeButton.setTitle(closeText, for: .normal)
-        closeButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline4, for: .normal)
+        closeButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
         
-        topConstraint.constant = self.view.bounds.height
         bottomConstraint.constant = -1 * self.view.bounds.height
         bgView.alpha = 1.0
     }
@@ -58,7 +60,6 @@ class AIMSHelpViewController: UIViewController {
         UIView.animate(withDuration: 0.4) {
             self.view.layoutIfNeeded()
             self.bottomConstraint.constant = 100
-            self.topConstraint.constant = 0
             self.bgView.alpha = 0.4
             self.bgView.backgroundColor = .black
         }
@@ -68,7 +69,6 @@ class AIMSHelpViewController: UIViewController {
     
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.bottomConstraint.constant = self.view.bounds.height
-        self.topConstraint.constant = -1 * self.view.bounds.height
         UIView.animate(withDuration: 0.4) {
             self.view.layoutIfNeeded()
             self.bgView.alpha = 0.0

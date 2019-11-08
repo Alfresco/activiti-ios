@@ -27,6 +27,9 @@ class AIMSLoginViewModel {
     let cloudSignInButtonText = NSLocalizedString(kLocalizationLoginScreenCloudSignInButtonText, comment: "Cloud sign in button")
     let advancedSettingsButtonText = NSLocalizedString(kLocalizationLoginScreenAdvancedSettingsButtonText, comment: "Advanced settings button")
     let helpButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpButtonText, comment: "Need Help")
+    let closeText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCloseText, comment: "Close")
+    let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
+    let helpHintText = NSLocalizedString(kLocalizationLoginScreenIdentityServiceURLHintText, comment: "Hint text")
     var copyrightText: String {
         get {
             let calendar = Calendar.current
