@@ -31,9 +31,8 @@
 // Managers
 #import "AFAServiceRepository.h"
 #import "AFAKeychainWrapper.h"
-#import "ASDKReachabilityManager.h"
-
 @import ActivitiSDK;
+@import ActivitiSDK.Private;
 
 @interface AFALoginViewModel ()
 

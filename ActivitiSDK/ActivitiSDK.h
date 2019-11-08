@@ -84,6 +84,7 @@
 #import <ActivitiSDK/ASDKIntegrationFolderContentDataSource.h>
 
 // Network services and protocols
+#import <ActivitiSDK/ASDKHTTPCodes.h>
 #import <ActivitiSDK/ASDKRequestOperationManager.h>
 #import <ActivitiSDK/ASDKAppNetworkServiceProtocol.h>
 #import <ActivitiSDK/ASDKProfileNetworkServiceProtocol.h>

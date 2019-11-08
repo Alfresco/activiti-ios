@@ -23,8 +23,7 @@
 #import "AFAUIConstants.h"
 
 // Categories
-#import "UIFont+ASDKGlyphicons.h"
-#import "NSString+ASDKFontGlyphicons.h"
+@import ActivitiSDK.Private;
 #import "UIViewController+AFAAlertAddition.h"
 
 // Managers
