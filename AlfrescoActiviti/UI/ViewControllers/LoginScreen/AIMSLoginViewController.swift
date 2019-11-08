@@ -133,7 +133,7 @@ class AIMSLoginViewController: UIViewController {
     
     @IBAction func connectButtonTapped(_ sender: Any) {
 //        controllerState = .isLoading
-        var identifier = kStoryboardIDAIMSSSOViewController
+        let identifier = kStoryboardIDAIMSSSOViewController
         let viewController = storyboard?.instantiateViewController(withIdentifier: identifier)
         if let viewController = viewController {
             self.navigationController?.pushViewController(viewController, animated: true)
@@ -148,7 +148,7 @@ class AIMSLoginViewController: UIViewController {
     
     @IBAction func needHelpButtonTapped(_ sender: Any) {
         self.view.endEditing(true)
-        let helpVC = storyboard?.instantiateViewController(withIdentifier: helpViewControllerIdentifier) as! AIMSHelpViewController
+        let helpVC = storyboard?.instantiateViewController(withIdentifier: kStoryboardIDAIMSHelpViewController) as! AIMSHelpViewController
         helpVC.hintText = loginViewModel.helpHintText
         helpVC.titleText = loginViewModel.helpText
         helpVC.closeText = loginViewModel.closeText

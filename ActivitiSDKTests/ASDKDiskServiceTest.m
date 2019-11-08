@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 #import "ASDKBaseTest.h"
-#import "ASDKDiskServicesConstants.h"
+@import ActivitiSDK.Private;
 
 @interface ASDKDiskServiceTest : ASDKBaseTest
 
