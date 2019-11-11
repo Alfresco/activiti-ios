@@ -65,8 +65,8 @@ class CloudLoginViewController: UIViewController {
         }
         
         // Password Textfield
-        showPasswordButton.setImage(UIImage(named: "show-password-icon"), for: .normal)
-        showPasswordButton.setImage(UIImage(named: "hide-password-icon"), for: .selected)
+        showPasswordButton.setImage(UIImage(named: "hide-password-icon"), for: .normal)
+        showPasswordButton.setImage(UIImage(named: "show-password-icon"), for: .selected)
         showPasswordButton.addTarget(self, action: #selector(showPasswordButtonPressed(_:)), for: .touchUpInside)
         passwordTextfield.rightViewMode = .always
         passwordTextfield.rightView = showPasswordButton
