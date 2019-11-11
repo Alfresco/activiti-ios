@@ -167,6 +167,13 @@ class AIMSLoginViewController: UIViewController {
             connectToButton.isEnabled = !urlValue.isEmpty
         }
     }
+    
+    // MARK: - Navigation
+    
+    @IBAction func unwindToLoginController(_ sender: UIStoryboardSegue) {
+        
+    }
+    
 }
 
 extension AIMSLoginViewController: UITextFieldDelegate {

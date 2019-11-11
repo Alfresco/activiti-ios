@@ -24,9 +24,6 @@
 #import "UIViewController+AFAAlertAddition.h"
 #import "UIColor+AFATheme.h"
 
-// Models
-#import "AFALoginViewModel.h"
-
 // View models
 #import "AFATaskListViewModel.h"
 #import "AFAProcessListViewModel.h"
@@ -40,6 +37,7 @@
 #import "AFAUserServices.h"
 #import "AFAQueryServices.h"
 #import "AFAIntegrationServices.h"
+#import "AFAKeychainWrapper.h"
 @import ActivitiSDK;
 
 // Controllers
@@ -51,6 +49,8 @@
 #import "AFASettingsViewController.h"
 
 static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
+
+
 
 @interface AFAContainerViewController () <AFAContainerViewControllerDelegate>
 
@@ -342,7 +342,12 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
 #pragma mark Private interface
 
 - (void)handleUnAuthorizedRequestNotification {
-    [self.loginViewModel requestLogoutForUnauthorizedAccess];
+    [AFAKeychainWrapper deleteItemFromKeychainWithIdentifier: self.persistenceStackModelName];
+    
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+    
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:NSLocalizedString(kLocalizationLoginUnauthorizedRequestErrorText, @"Unauthorized request text")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
@@ -366,7 +371,13 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
 }
 
 - (void)requestUserLogout {
-    [self.loginViewModel requestLogout];
+    [AFAKeychainWrapper deleteItemFromKeychainWithIdentifier: self.persistenceStackModelName];
+    
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+    
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self performSegueWithIdentifier:kSegueIDLoginAuthorizedUnwind
                                   sender:nil];

@@ -8,5 +8,12 @@
 #import "AFABusinessConstants.h"
 #import "AFAUIConstants.h"
 #import "AFACredentialModel.h"
+#import "AFAProfileServices.h"
+#import "AFAContainerViewController.h"
+#import "AFALoginViewModel.h"
+#import "AFAModalReplaceAnimator.h"
+#import "AFAModalDismissAnimator.h"
+#import "AFAKeychainWrapper.h"
+
 @import ActivitiSDK;
 @import ActivitiSDK.Private;

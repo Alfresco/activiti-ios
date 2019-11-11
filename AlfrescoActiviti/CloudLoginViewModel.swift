@@ -19,6 +19,7 @@
 import Foundation
 
 class CloudLoginViewModel {
+    
     let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
     let infoText = NSLocalizedString(kLocalizationCloudLoginInfoText, comment: "Info")
     let usernamaPlaceholderText = NSLocalizedString(kLocalizationCloudLoginUsernamePlaceholderText, comment: "Username")
@@ -35,15 +36,57 @@ class CloudLoginViewModel {
             return String(format: NSLocalizedString(kLocalizationLoginScreenCopyrightFormat, comment: "Copyright text"), year)
         }
     }
+    let requestProfileService = AFAProfileServices()
+    var serverConfiguration: ASDKModelServerConfiguration!
 
-    func signIn(username: String, password: String) {
-//        let credentialModel = AFACredentialModel()
-//        let aimsParameters = AdvancedSettingsParameters.parameters()
-//        credentialModel.hostname = aimsParameters.hostname
-//        credentialModel.isCommunicationOverSecureLayer = aimsParameters.https
-//        credentialModel.port = aimsParameters.port
-//        credentialModel.serviceDocument = aimsParameters.serviceDocument
-//        credentialModel.username = username
-//        credentialModel.password = password
+    func signIn(username: String, password: String, completion: @escaping (Result<ASDKModelProfile, Error>) -> Void) {
+        serverConfiguration = setServerConfiguration(with: username, password)
+        let persistenceStackModelName = self.persistenceStackModelName()
+        let sdkBootstrap = ASDKBootstrap.sharedInstance()
+        sdkBootstrap?.setupServices(with: serverConfiguration)
+        
+        requestProfileService.requestProfile { [weak self] (profile, error) in
+            guard let sSelf = self else { return }
+            if let profile = profile {
+                sSelf.syncToUserDefaultsServerConfiguration()
+                if (AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName) != nil) {
+                    AFAKeychainWrapper.updateKeychainValue(sSelf.serverConfiguration.password,
+                                                           forIdentifier: persistenceStackModelName)
+                } else {
+                    AFAKeychainWrapper.createKeychainValue(sSelf.serverConfiguration.password,
+                                                           forIdentifier: persistenceStackModelName)
+                }
+
+                completion(.success(profile))
+            } else {
+                if let error = error {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func syncToUserDefaultsServerConfiguration() {
+        let sud = UserDefaults.standard
+        sud.set(kCloudAuthetificationCredentialIdentifier, forKey: kAuthentificationTypeCredentialIdentifier)
+        sud.set(serverConfiguration.hostAddressString, forKey: kCloudHostNameCredentialIdentifier)
+        sud.set(serverConfiguration.isCommunicationOverSecureLayer, forKey: kCloudSecureLayerCredentialIdentifier)
+        sud.set(serverConfiguration.username, forKey: kCloudUsernameCredentialIdentifier)
+        sud.synchronize()
+    }
+    
+    func setServerConfiguration(with username: String, _ password: String) -> ASDKModelServerConfiguration {
+        let aimsParameters = AdvancedSettingsParameters.parameters()
+        let serverConfiguration = ASDKModelServerConfiguration()
+        serverConfiguration.hostAddressString = aimsParameters.hostname
+        serverConfiguration.isCommunicationOverSecureLayer = aimsParameters.https
+        serverConfiguration.serviceDocument = aimsParameters.serviceDocument
+        serverConfiguration.username = username
+        serverConfiguration.password = password
+        return serverConfiguration
+    }
+    
+    func persistenceStackModelName() -> String {
+        return ASDKPersistenceStack.persistenceStackModelName(for: serverConfiguration)
     }
 }

@@ -39,6 +39,22 @@ class CloudLoginViewController: UIViewController {
     var enableSignInButton: Bool = false
     var showPasswordButton = UIButton()
     
+    // Loading view
+    var overlayView: AIMSActivityView?
+    var controllerState: ControllerState? {
+        didSet {
+            switch controllerState {
+            case .isLoading:
+                if let loadingView = overlayView {
+                    self.view.isUserInteractionEnabled = false
+                    self.view.addSubview(loadingView)
+                }
+            case .isIdle, .none:
+                overlayView?.removeFromSuperview()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,6 +106,12 @@ class CloudLoginViewController: UIViewController {
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
         shouldEnableSignInButton()
+        
+        // Loading view
+        overlayView = AIMSActivityView(frame: self.view.frame)
+        overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
+                                              typographyScheme: colorSchemeManager.defaultTypographyScheme)
+        overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
     }
     
     //MARK: - IBActions
@@ -102,7 +124,20 @@ class CloudLoginViewController: UIViewController {
     @IBAction func signInButtonPressed(_ sender: MDCButton) {
         self.view.endEditing(true)
         if let username = usernameTextfield.text, let password = passwordTextfield.text {
-            model.signIn(username: username, password: password)
+            controllerState = .isLoading
+            model.signIn(username: username, password: password) { [weak self] (result) in
+                guard let sSelf = self else { return }
+                sSelf.controllerState = .isIdle
+                switch result {
+                case .failure(let error):
+                    //TODO: Show UI error
+                    AFALog.logError(error.localizedDescription)
+                    break
+                case .success(_):
+                    sSelf.performSegue(withIdentifier: kSegueIDLoginAuthorized, sender: nil)
+                    break
+                }
+            }
         }
     }
     
@@ -138,7 +173,26 @@ class CloudLoginViewController: UIViewController {
         signInButton.setElevation(.none, for: .highlighted)
         signInButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
     }
+    //MARK: - Navigation
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == kSegueIDLoginAuthorized {
+            let cvc = segue.destination as! AFAContainerViewController
+            cvc.transitioningDelegate = self
+            cvc.persistenceStackModelName = model.persistenceStackModelName()
+        }
+    }
+}
+
+extension CloudLoginViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return AFAModalDismissAnimator()
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return AFAModalDismissAnimator()
+    }
 }
 
 extension CloudLoginViewController: UITextFieldDelegate {
