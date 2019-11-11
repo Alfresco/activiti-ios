@@ -21,8 +21,8 @@ import UIKit
 class AIMSAdvancedSettingsViewController: UIViewController {
     
     var model = AIMSAdvancedSettingsViewModel()
-    var dataSource: [ASModelSection]?
-    var parameters: AdvancedSettingsParameters?
+    var dataSource: [[AIMSAdvancedSettingsAction]]?
+    var parameters: AIMSAdvancedSettingsParameters?
     
     var adjustViewForKeyboard: Bool = false
     
@@ -30,12 +30,7 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let colorSchemeManager = self.colorSchemeManager else {
-            AFALog.logError("Color scheme manager could not be initiated")
-            return
-        }
-        
+ 
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "SAVE", style: .done, target: self, action: #selector(saveButtonPressed))
         
@@ -45,15 +40,7 @@ class AIMSAdvancedSettingsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 10))
-        footerView.backgroundColor = .clear
-        let copyrightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 10))
-        copyrightLabel.text = model.copyrightText
-        copyrightLabel.textAlignment = .center
-        copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
-        copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
-        footerView.addSubview(copyrightLabel)
-        tableView.tableFooterView = footerView
+        tableView.tableFooterView = footerView()
     }
     
     @IBAction func viewPressed(_ sender: UITapGestureRecognizer) {
@@ -73,18 +60,36 @@ class AIMSAdvancedSettingsViewController: UIViewController {
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
+    
+    //MARK: - Helpers
+    
+    func footerView() -> UIView {
+        guard let colorSchemeManager = self.colorSchemeManager else {
+            AFALog.logError("Color scheme manager could not be initiated")
+            return UIView()
+        }
+        
+        let copyrightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 10))
+        copyrightLabel.text = model.copyrightText
+        copyrightLabel.textAlignment = .center
+        copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
+        copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
+        
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 10))
+        footerView.backgroundColor = .clear
+        footerView.addSubview(copyrightLabel)
+        
+        return footerView
+    }
 }
 
-extension AIMSAdvancedSettingsViewController: ASCellsProtocol {
-    func willBeginEditing(type: ASRows) {
-        if type == .redirectURL {
-            adjustViewForKeyboard = true
-        } else {
-            adjustViewForKeyboard = false
-        }
+extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
+    
+    func willBeginEditing(type: AIMSAdvancedSettingsActionTypes) {
+        adjustViewForKeyboard = (type == .redirectURL)
     }
     
-    func result(cell: UITableViewCell, type: ASRows, response: AdvancedSettingsParameters) {
+    func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAdvancedSettingsParameters) {
         tableView.reloadRows(at: [model.getIndexPathForSaveButton()], with: .none)
     }
     
@@ -111,24 +116,26 @@ extension AIMSAdvancedSettingsViewController: UITableViewDataSource {
         return model.datasource().count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.datasource()[section].numberOfRow
+        return model.datasource()[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = model.datasource()[indexPath.section].arrayRows[indexPath.row]
-        var cell: ASCell
+        let item = model.datasource()[indexPath.section][indexPath.row]
+        var cell: AIMSAdvancedSettingsCellProtocol
+        
         switch item.type {
         case .clientID, .port, .realm, .redirectURL, .serviceDocuments:
-            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsField, for: indexPath) as! ASFieldTableViewCell
-        case .save, .help:
-            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsButton, for: indexPath) as! ASButtonTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsField, for: indexPath) as! AIMSAdvancedSettingsFieldCell
+        case .help:
+            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsButton, for: indexPath) as! AIMSAdvancedSettingsButtonCell
         case .https:
-            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsHttps, for: indexPath) as! ASHttpsTableViewCell
-        case .copyright:
-            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsCopyright, for: indexPath) as! ASCopyrightTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsHttps, for: indexPath) as! AIMSAdvancedSettingsHttpsCell
         case .sectionTitle:
-            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsSection, for: indexPath) as! ASSectionTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsSection, for: indexPath) as! AIMSAdvancedSettingsSectionCell
+        default:
+            return UITableViewCell()
         }
+        
         cell.delegate = self
         cell.parameters = self.parameters
         cell.model = item

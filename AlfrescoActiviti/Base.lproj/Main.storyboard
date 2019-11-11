@@ -329,11 +329,11 @@
             <objects>
                 <viewController id="6VM-Di-SZo" customClass="AFAContainerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m84-9b-bds">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tsm-Ga-oi0" userLabel="MenuContainerView">
-                                <rect key="frame" x="0.0" y="44" width="80" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="808"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="ZIt-Bw-Twp"/>
                                 </constraints>
@@ -342,7 +342,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="riE-Eu-TJQ" userLabel="DetailsContainerView">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <connections>
                                     <segue destination="Xjc-tR-raA" kind="embed" identifier="ApplicationListEmbeddingSegueID" id="B01-AZ-Hi8"/>
                                 </connections>
@@ -5503,7 +5503,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsHttpsCellID" rowHeight="100" id="88a-hN-kHD" customClass="ASHttpsTableViewCell" customModule="AlfrescoActiviti" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsHttpsCellID" rowHeight="100" id="88a-hN-kHD" customClass="AIMSAdvancedSettingsHttpsCell" customModule="AlfrescoActiviti" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="88a-hN-kHD" id="2xy-RT-BIV">
@@ -5537,7 +5537,7 @@
                                             <outlet property="httpsSwitch" destination="7fg-Ua-CBG" id="RRq-BZ-bMG"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsTextfieldCellID" rowHeight="100" id="Vjv-n7-SA7" customClass="ASFieldTableViewCell" customModule="AlfrescoActiviti" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsTextfieldCellID" rowHeight="100" id="Vjv-n7-SA7" customClass="AIMSAdvancedSettingsFieldCell" customModule="AlfrescoActiviti" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="128" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vjv-n7-SA7" id="x9A-ka-qj2">
@@ -5561,7 +5561,7 @@
                                             <outlet property="textField" destination="uB6-hu-I2N" id="kGb-Py-F8h"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsButtonCellID" rowHeight="95" id="wLS-vg-UHu" customClass="ASButtonTableViewCell" customModule="AlfrescoActiviti" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsButtonCellID" rowHeight="95" id="wLS-vg-UHu" customClass="AIMSAdvancedSettingsButtonCell" customModule="AlfrescoActiviti" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="228" width="414" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wLS-vg-UHu" id="fe9-ej-v58">
@@ -5589,33 +5589,8 @@
                                             <outlet property="button" destination="E4c-Bf-ebj" id="pI6-n8-18A"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsCopyrightCellID" rowHeight="95" id="dYa-cB-KwB" customClass="ASCopyrightTableViewCell" customModule="AlfrescoActiviti" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsSectionCellID" rowHeight="95" id="LDK-VN-7Cs" customClass="AIMSAdvancedSettingsSectionCell" customModule="AlfrescoActiviti" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="323" width="414" height="95"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dYa-cB-KwB" id="OiJ-sm-bZU">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opP-qA-dMR">
-                                                    <rect key="frame" x="30" y="15" width="354" height="65"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="opP-qA-dMR" secondAttribute="bottom" constant="15" id="DA9-Lw-Wfb"/>
-                                                <constraint firstItem="opP-qA-dMR" firstAttribute="top" secondItem="OiJ-sm-bZU" secondAttribute="top" constant="15" id="cBY-aH-C5U"/>
-                                                <constraint firstItem="opP-qA-dMR" firstAttribute="leading" secondItem="OiJ-sm-bZU" secondAttribute="leading" constant="30" id="kbX-um-Fal"/>
-                                                <constraint firstAttribute="trailing" secondItem="opP-qA-dMR" secondAttribute="trailing" constant="30" id="qLH-bF-LyY"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="label" destination="opP-qA-dMR" id="sb5-MC-xU9"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsSectionCellID" rowHeight="95" id="LDK-VN-7Cs" customClass="ASSectionTableViewCell" customModule="AlfrescoActiviti" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="418" width="414" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LDK-VN-7Cs" id="cTC-R7-blr">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
@@ -5623,7 +5598,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEN-uX-uWz">
                                                     <rect key="frame" x="30" y="15" width="354" height="75"/>
-                                                    <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -6841,6 +6816,6 @@ success</string>
         <segue reference="Axm-Tn-V6n"/>
         <segue reference="OCj-p8-qSZ"/>
         <segue reference="RF7-69-ZNi"/>
-        <segue reference="y12-Y5-JUJ"/>
+        <segue reference="LbM-H4-km2"/>
     </inferredMetricsTieBreakers>
 </document>

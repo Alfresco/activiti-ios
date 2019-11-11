@@ -17,19 +17,28 @@
  ******************************************************************************/
 
 import Foundation
-class ASSectionTableViewCell: UITableViewCell, ASCell {
+
+class AIMSAdvancedSettingsHttpsCell: UITableViewCell, AIMSAdvancedSettingsCellProtocol {
     
-    @IBOutlet weak var label: UILabel!
-    var model: ASModelRow!
-    var delegate: ASCellsProtocol!
-    var parameters: AdvancedSettingsParameters!
+    @IBOutlet weak var httpsLabel: UILabel!
+    @IBOutlet weak var httpsSwitch: UISwitch!
+    
+    var delegate: AIMSAdvancedSettingsCellDelegate!
+    var model: AIMSAdvancedSettingsAction!
+    var parameters: AIMSAdvancedSettingsParameters!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        label.text = ""
+        httpsSwitch.isOn = false
     }
     
     func configureCell() {
-        label.text = model.title
+        httpsLabel.text = model.title
+        httpsSwitch.isOn = parameters.https
+    }
+    
+    @IBAction func httpsSwitchPressed(_ sender: UISwitch) {
+        parameters.https = sender.isOn
+        delegate.result(cell: self, type: model.type, response: parameters)
     }
 }

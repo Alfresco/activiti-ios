@@ -19,15 +19,15 @@
 import Foundation
 import MaterialComponents.MDCTextField
 
-class ASFieldTableViewCell: UITableViewCell, ASCell {
+class AIMSAdvancedSettingsFieldCell: UITableViewCell, AIMSAdvancedSettingsCellProtocol {
     
     @IBOutlet weak var textField: MDCTextField!
     
     var textFieldController: MDCTextInputControllerUnderline?
     
-    var delegate: ASCellsProtocol!
-    var model: ASModelRow! 
-    var parameters: AdvancedSettingsParameters!
+    var delegate: AIMSAdvancedSettingsCellDelegate!
+    var model: AIMSAdvancedSettingsAction! 
+    var parameters: AIMSAdvancedSettingsParameters!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -76,7 +76,7 @@ class ASFieldTableViewCell: UITableViewCell, ASCell {
     }
 }
 
-extension ASFieldTableViewCell: UITextFieldDelegate {
+extension AIMSAdvancedSettingsFieldCell: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch model.type {

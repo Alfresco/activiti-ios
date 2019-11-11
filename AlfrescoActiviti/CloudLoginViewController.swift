@@ -173,6 +173,7 @@ class CloudLoginViewController: UIViewController {
         signInButton.setElevation(.none, for: .highlighted)
         signInButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
     }
+    
     //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -213,20 +214,12 @@ extension CloudLoginViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if usernameTextfield.text != ""  && passwordTextfield.text != "" {
-            enableSignInButton = true
-        } else {
-            enableSignInButton = false
-        }
+        enableSignInButton = (usernameTextfield.text != ""  && passwordTextfield.text != "")
         shouldEnableSignInButton()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if usernameTextfield.text != ""  && passwordTextfield.text != "" {
-            enableSignInButton = true
-        } else {
-            enableSignInButton = false
-        }
+        enableSignInButton = (usernameTextfield.text != ""  && passwordTextfield.text != "")
         shouldEnableSignInButton()
         return true
     }

@@ -18,16 +18,16 @@
 
 import Foundation
 
-protocol ASCellsProtocol {
-    func result(cell: UITableViewCell, type: ASRows, response: AdvancedSettingsParameters)
-    func willBeginEditing(type: ASRows)
+protocol AIMSAdvancedSettingsCellDelegate {
+    func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAdvancedSettingsParameters)
+    func willBeginEditing(type: AIMSAdvancedSettingsActionTypes)
     func needHelpButtonPressed()
     func saveButtonPressed()
 }
 
-protocol ASCell: UITableViewCell {
-    var delegate: ASCellsProtocol! { get set }
-    var model: ASModelRow! { get set }
-    var parameters: AdvancedSettingsParameters! { get set }
+protocol AIMSAdvancedSettingsCellProtocol: UITableViewCell {
+    var delegate: AIMSAdvancedSettingsCellDelegate! { get set }
+    var model: AIMSAdvancedSettingsAction! { get set }
+    var parameters: AIMSAdvancedSettingsParameters! { get set }
     func configureCell()
 }

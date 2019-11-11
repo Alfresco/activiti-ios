@@ -42,40 +42,28 @@ class AIMSAdvancedSettingsViewModel {
         }
     }
     
-    func saveParameters(_ advancedSettingsParameters: AdvancedSettingsParameters) {
+    func saveParameters(_ advancedSettingsParameters: AIMSAdvancedSettingsParameters) {
         advancedSettingsParameters.save()
     }
     
-    func getParameters() -> AdvancedSettingsParameters {
-        return AdvancedSettingsParameters.parameters()
+    func getParameters() -> AIMSAdvancedSettingsParameters {
+        return AIMSAdvancedSettingsParameters.parameters()
     }
     
-    func datasource() -> [ASModelSection] {
-        let transportProtocolSection = ASModelSection(type: .transportProtocol,
-                                                     numberOfRow: 3,
-                                                     title: transportProtocolText,
-                                                     rows: [ASModelRow(type: .sectionTitle, title: transportProtocolText),
-                                                            ASModelRow(type: .https, title: httpsText),
-                                                            ASModelRow(type: .port, title: portPlaceholderText)])
+    func datasource() -> [[AIMSAdvancedSettingsAction]] {
+        let transportProtocolSection = [AIMSAdvancedSettingsAction(type: .sectionTitle, title: transportProtocolText),
+                                        AIMSAdvancedSettingsAction(type: .https, title: httpsText),
+                                        AIMSAdvancedSettingsAction(type: .port, title: portPlaceholderText)]
         
-        let settingsSection = ASModelSection(type: .settings,
-                                            numberOfRow: 2,
-                                            title: processServicessAppText,
-                                            rows: [ASModelRow(type: .sectionTitle, title: processServicessAppText),
-                                                   ASModelRow(type: .serviceDocuments, title: serviceDocumentPlaceholderText)])
+        let settingsSection = [AIMSAdvancedSettingsAction(type: .sectionTitle, title: processServicessAppText),
+                               AIMSAdvancedSettingsAction(type: .serviceDocuments, title: serviceDocumentPlaceholderText)]
         
-        let authSection = ASModelSection(type: .authentication,
-                                        numberOfRow: 4,
-                                        title: authenticationText,
-                                        rows: [ASModelRow(type: .sectionTitle, title: authenticationText),
-                                               ASModelRow(type: .realm, title: realmPlaceholderText),
-                                               ASModelRow(type: .clientID, title: cliendIDPlaceholderText),
-                                               ASModelRow(type: .redirectURL, title: redirectURLPlaceholderText)])
+        let authSection = [AIMSAdvancedSettingsAction(type: .sectionTitle, title: authenticationText),
+                           AIMSAdvancedSettingsAction(type: .realm, title: realmPlaceholderText),
+                           AIMSAdvancedSettingsAction(type: .clientID, title: cliendIDPlaceholderText),
+                           AIMSAdvancedSettingsAction(type: .redirectURL, title: redirectURLPlaceholderText)]
         
-        let helpSection = ASModelSection(type: .help,
-                                        numberOfRow: 1,
-                                        title: helpButtonText,
-                                        rows: [ASModelRow(type: .help, title: helpButtonText, info: helpHintText)])
+        let helpSection = [AIMSAdvancedSettingsAction(type: .help, title: helpButtonText, info: helpHintText)]
         
         return [transportProtocolSection, settingsSection, authSection, helpSection]
     }
@@ -85,48 +73,24 @@ class AIMSAdvancedSettingsViewModel {
     }
 }
 
-enum ASSections {
-    case transportProtocol
-    case settings
-    case authentication
-    case save
-    case help
-    case copyright
-}
-
-enum ASRows {
+enum AIMSAdvancedSettingsActionTypes {
     case https
     case port
     case serviceDocuments
     case realm
     case clientID
     case redirectURL
-    case save
     case help
     case sectionTitle
     case copyright
+    case save
 }
-
-class ASModelSection {
-    let type: ASSections
-    let numberOfRow: NSInteger
-    let title: String
-    let arrayRows: [ASModelRow]
-    
-    init(type: ASSections, numberOfRow: NSInteger, title: String, rows: [ASModelRow]) {
-        self.type = type
-        self.numberOfRow = numberOfRow
-        self.title = title
-        self.arrayRows = rows
-    }
-}
-
-class ASModelRow {
-    let type: ASRows
+class AIMSAdvancedSettingsAction {
+    let type: AIMSAdvancedSettingsActionTypes
     let title: String
     let info: String?
     
-    init(type: ASRows, title: String, info: String = "") {
+    init(type: AIMSAdvancedSettingsActionTypes, title: String, info: String = "") {
         self.type = type
         self.title = title
         self.info = info

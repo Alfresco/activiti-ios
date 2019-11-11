@@ -137,6 +137,7 @@ class MaterialDesignColorSchemeComponent: NSObject {
         
         let boldFontName = "Muli-Bold"
         scheme.button = UIFont(name: boldFontName, size: 14)!
+        scheme.headline1 = UIFont(name: boldFontName, size: 17)!
         
         return scheme
     }()

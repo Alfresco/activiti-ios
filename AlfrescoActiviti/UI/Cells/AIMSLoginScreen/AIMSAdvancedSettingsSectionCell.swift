@@ -18,27 +18,24 @@
 
 import Foundation
 
-class ASHttpsTableViewCell: UITableViewCell, ASCell {
+class AIMSAdvancedSettingsSectionCell: UITableViewCell, AIMSAdvancedSettingsCellProtocol {
     
-    @IBOutlet weak var httpsLabel: UILabel!
-    @IBOutlet weak var httpsSwitch: UISwitch!
-    
-    var delegate: ASCellsProtocol!
-    var model: ASModelRow!
-    var parameters: AdvancedSettingsParameters!
+    @IBOutlet weak var label: UILabel!
+    var model: AIMSAdvancedSettingsAction!
+    var delegate: AIMSAdvancedSettingsCellDelegate!
+    var parameters: AIMSAdvancedSettingsParameters!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        httpsSwitch.isOn = false
+        guard let colorSchemeManager = self.colorSchemeManager else {
+            AFALog.logError("Color scheme manager could not be initiated")
+            return
+        }
+        label.text = ""
+        label.font = colorSchemeManager.boldTypographyScheme.headline1
     }
     
     func configureCell() {
-        httpsLabel.text = model.title
-        httpsSwitch.isOn = parameters.https
-    }
-    
-    @IBAction func httpsSwitchPressed(_ sender: UISwitch) {
-        parameters.https = sender.isOn
-        delegate.result(cell: self, type: model.type, response: parameters)
+        label.text = model.title
     }
 }

@@ -18,7 +18,7 @@
 
 import Foundation
 
-class AdvancedSettingsParameters: Codable {
+class AIMSAdvancedSettingsParameters: Codable {
 
     var https: Bool = true
     var port: String = "80"
@@ -35,14 +35,14 @@ class AdvancedSettingsParameters: Codable {
         return false
     }
     
-    static func parameters() -> AdvancedSettingsParameters {
+    static func parameters() -> AIMSAdvancedSettingsParameters {
         let defaults = UserDefaults.standard
         if let data = defaults.value(forKey: kAdvancedSettingsParameters) as? Data {
-            if let params = try? PropertyListDecoder().decode(AdvancedSettingsParameters.self, from: data) {
+            if let params = try? PropertyListDecoder().decode(AIMSAdvancedSettingsParameters.self, from: data) {
                 return params
             }
         }
-        return AdvancedSettingsParameters()
+        return AIMSAdvancedSettingsParameters()
     }
     
     func save() {

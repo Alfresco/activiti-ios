@@ -113,20 +113,12 @@ class AIMSSSOViewController: UIViewController {
 extension AIMSSSOViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.text != "" {
-            enableSignInButton = true
-        } else {
-            enableSignInButton = false
-        }
+        enableSignInButton = (textField.text != "")
         shouldEnableSignInButton()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField.text != "" {
-            enableSignInButton = true
-        } else {
-            enableSignInButton = false
-        }
+        enableSignInButton = (textField.text != "")
         shouldEnableSignInButton()
         return true
     }

@@ -708,7 +708,7 @@ DEPENDENCIES:
   - OCMock (~> 3.4)
 
 SPEC REPOS:
-  https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk:
+  https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk.git:
     - AlfrescoAuth
     - AlfrescoCore
   https://github.com/CocoaPods/Specs.git:
@@ -749,4 +749,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2fb9d3c3417a1cf6f28f3e6d855c7ba20001a5ab
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.8.0

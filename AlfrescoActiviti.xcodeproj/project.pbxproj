@@ -856,11 +856,10 @@
 		B94FE48D23672B72008BCA64 /* AFALog.m in Sources */ = {isa = PBXBuildFile; fileRef = B94FE48C23672B72008BCA64 /* AFALog.m */; };
 		B94FE48F23683392008BCA64 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B94FE48E23683392008BCA64 /* Muli-Regular.ttf */; };
 		B94FE49123683C84008BCA64 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B94FE49023683C83008BCA64 /* Muli-Bold.ttf */; };
-		B96C65E72372C68A004E1402 /* ASSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E22372C689004E1402 /* ASSectionTableViewCell.swift */; };
-		B96C65E82372C68A004E1402 /* ASFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E32372C689004E1402 /* ASFieldTableViewCell.swift */; };
-		B96C65E92372C68A004E1402 /* ASButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E42372C689004E1402 /* ASButtonTableViewCell.swift */; };
-		B96C65EA2372C68A004E1402 /* ASHttpsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E52372C689004E1402 /* ASHttpsTableViewCell.swift */; };
-		B96C65EB2372C68A004E1402 /* ASCopyrightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E62372C68A004E1402 /* ASCopyrightTableViewCell.swift */; };
+		B96C65E72372C68A004E1402 /* AIMSAdvancedSettingsSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E22372C689004E1402 /* AIMSAdvancedSettingsSectionCell.swift */; };
+		B96C65E82372C68A004E1402 /* AIMSAdvancedSettingsFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E32372C689004E1402 /* AIMSAdvancedSettingsFieldCell.swift */; };
+		B96C65E92372C68A004E1402 /* AIMSAdvancedSettingsButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E42372C689004E1402 /* AIMSAdvancedSettingsButtonCell.swift */; };
+		B96C65EA2372C68A004E1402 /* AIMSAdvancedSettingsHttpsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C65E52372C689004E1402 /* AIMSAdvancedSettingsHttpsCell.swift */; };
 		B971E48C2372E51D005DCB36 /* AIMSActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B971E48B2372E51D005DCB36 /* AIMSActivityView.swift */; };
 		B9849849231554E40051F545 /* ASDKFormVariableCacheMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AA069E23154D6200D1B2AF /* ASDKFormVariableCacheMapper.m */; };
 		B99DE6A12374618F00732531 /* ASDKHTTPCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 13F9BA371B73A8200068BB8C /* ASDKHTTPCodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -881,7 +880,7 @@
 		E356A0602371629600E3FD4F /* AIMSHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E356A05F2371629600E3FD4F /* AIMSHelpViewController.swift */; };
 		E371B6D02368312D000790DE /* AIMSAdvancedSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6CF2368312D000790DE /* AIMSAdvancedSettingsViewController.swift */; };
 		E371B6D223683302000790DE /* AIMSAdvancedSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */; };
-		E371B6D523685154000790DE /* AdvancedSettingsParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6D423685154000790DE /* AdvancedSettingsParameters.swift */; };
+		E371B6D523685154000790DE /* AIMSAdvancedSettingsParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6D423685154000790DE /* AIMSAdvancedSettingsParameters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1945,11 +1944,10 @@
 		B94FE48C23672B72008BCA64 /* AFALog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AFALog.m; path = Business/Logging/AFALog.m; sourceTree = "<group>"; };
 		B94FE48E23683392008BCA64 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Muli-Regular.ttf"; path = "AlfrescoActiviti/Resources/Fonts/Muli-Regular.ttf"; sourceTree = SOURCE_ROOT; };
 		B94FE49023683C83008BCA64 /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Muli-Bold.ttf"; path = "AlfrescoActiviti/Resources/Fonts/Muli-Bold.ttf"; sourceTree = SOURCE_ROOT; };
-		B96C65E22372C689004E1402 /* ASSectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASSectionTableViewCell.swift; path = UI/Cells/AIMSLoginScreen/ASSectionTableViewCell.swift; sourceTree = "<group>"; };
-		B96C65E32372C689004E1402 /* ASFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASFieldTableViewCell.swift; path = UI/Cells/AIMSLoginScreen/ASFieldTableViewCell.swift; sourceTree = "<group>"; };
-		B96C65E42372C689004E1402 /* ASButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASButtonTableViewCell.swift; path = UI/Cells/AIMSLoginScreen/ASButtonTableViewCell.swift; sourceTree = "<group>"; };
-		B96C65E52372C689004E1402 /* ASHttpsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASHttpsTableViewCell.swift; path = UI/Cells/AIMSLoginScreen/ASHttpsTableViewCell.swift; sourceTree = "<group>"; };
-		B96C65E62372C68A004E1402 /* ASCopyrightTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASCopyrightTableViewCell.swift; path = UI/Cells/AIMSLoginScreen/ASCopyrightTableViewCell.swift; sourceTree = "<group>"; };
+		B96C65E22372C689004E1402 /* AIMSAdvancedSettingsSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsSectionCell.swift; path = UI/Cells/AIMSLoginScreen/AIMSAdvancedSettingsSectionCell.swift; sourceTree = "<group>"; };
+		B96C65E32372C689004E1402 /* AIMSAdvancedSettingsFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsFieldCell.swift; path = UI/Cells/AIMSLoginScreen/AIMSAdvancedSettingsFieldCell.swift; sourceTree = "<group>"; };
+		B96C65E42372C689004E1402 /* AIMSAdvancedSettingsButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsButtonCell.swift; path = UI/Cells/AIMSLoginScreen/AIMSAdvancedSettingsButtonCell.swift; sourceTree = "<group>"; };
+		B96C65E52372C689004E1402 /* AIMSAdvancedSettingsHttpsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsHttpsCell.swift; path = UI/Cells/AIMSLoginScreen/AIMSAdvancedSettingsHttpsCell.swift; sourceTree = "<group>"; };
 		B971E48B2372E51D005DCB36 /* AIMSActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSActivityView.swift; path = UI/Components/AIMSActivityView/AIMSActivityView.swift; sourceTree = "<group>"; };
 		B99DE6A22375719B00732531 /* NSAttributedString+LocalizedHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSAttributedString+LocalizedHTML.swift"; path = "Business/Extensions/NSAttributedString+LocalizedHTML.swift"; sourceTree = "<group>"; };
 		B9AA0698231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKFormVariablesCacheModelUpsert.h; path = CacheServices/CacheModelUpsert/FormVariablesModelUpsert/ASDKFormVariablesCacheModelUpsert.h; sourceTree = "<group>"; };
@@ -1970,7 +1968,7 @@
 		E356A05F2371629600E3FD4F /* AIMSHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSHelpViewController.swift; path = UI/ViewControllers/LoginScreen/AIMSHelpViewController.swift; sourceTree = "<group>"; };
 		E371B6CF2368312D000790DE /* AIMSAdvancedSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsViewController.swift; path = UI/ViewControllers/LoginScreen/AIMSAdvancedSettingsViewController.swift; sourceTree = "<group>"; };
 		E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsViewModel.swift; path = ViewModel/AIMSViewModel/AIMSAdvancedSettingsViewModel.swift; sourceTree = "<group>"; };
-		E371B6D423685154000790DE /* AdvancedSettingsParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdvancedSettingsParameters.swift; path = Model/AdvancedSettingsParameters/AdvancedSettingsParameters.swift; sourceTree = "<group>"; };
+		E371B6D423685154000790DE /* AIMSAdvancedSettingsParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsParameters.swift; path = Model/AdvancedSettingsParameters/AIMSAdvancedSettingsParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -6612,11 +6610,10 @@
 		B96C65E12372C61C004E1402 /* AIMSLoginScreen */ = {
 			isa = PBXGroup;
 			children = (
-				B96C65E42372C689004E1402 /* ASButtonTableViewCell.swift */,
-				B96C65E62372C68A004E1402 /* ASCopyrightTableViewCell.swift */,
-				B96C65E32372C689004E1402 /* ASFieldTableViewCell.swift */,
-				B96C65E52372C689004E1402 /* ASHttpsTableViewCell.swift */,
-				B96C65E22372C689004E1402 /* ASSectionTableViewCell.swift */,
+				B96C65E42372C689004E1402 /* AIMSAdvancedSettingsButtonCell.swift */,
+				B96C65E32372C689004E1402 /* AIMSAdvancedSettingsFieldCell.swift */,
+				B96C65E52372C689004E1402 /* AIMSAdvancedSettingsHttpsCell.swift */,
+				B96C65E22372C689004E1402 /* AIMSAdvancedSettingsSectionCell.swift */,
 			);
 			name = AIMSLoginScreen;
 			sourceTree = "<group>";
@@ -6676,7 +6673,7 @@
 		E371B6D323685136000790DE /* AdvancedSettings */ = {
 			isa = PBXGroup;
 			children = (
-				E371B6D423685154000790DE /* AdvancedSettingsParameters.swift */,
+				E371B6D423685154000790DE /* AIMSAdvancedSettingsParameters.swift */,
 			);
 			name = AdvancedSettings;
 			sourceTree = "<group>";
@@ -7300,7 +7297,7 @@
 				13EBECAF1CFC59ED00EC8F96 /* AFATableControllerChecklistModel.m in Sources */,
 				13667FE51C8725DC005E4AEA /* AFATableControllerProcessInstanceDetailsModel.m in Sources */,
 				13DBF3531B79DE9A003E6938 /* UIView+AFAViewAnimations.m in Sources */,
-				E371B6D523685154000790DE /* AdvancedSettingsParameters.swift in Sources */,
+				E371B6D523685154000790DE /* AIMSAdvancedSettingsParameters.swift in Sources */,
 				13323B5E1E9E252900D45ABB /* AFAContentPickerTaskAuditLogDownloadBehavior.m in Sources */,
 				8D7C1A741C8090D10092EA81 /* AFAGenericFilterModel.m in Sources */,
 				E335FA782372C48A005EE76B /* CloudLoginViewModel.swift in Sources */,
@@ -7328,7 +7325,7 @@
 				13EBECB71CFD902700EC8F96 /* AFATaskChecklistCellFactory.m in Sources */,
 				1323CFCF1B87630800E66D6F /* UIImage+AFAThumbnailCreation.m in Sources */,
 				137DC2A41EC30A3A0044820D /* AFATaskDetailsDataSource.m in Sources */,
-				B96C65E82372C68A004E1402 /* ASFieldTableViewCell.swift in Sources */,
+				B96C65E82372C68A004E1402 /* AIMSAdvancedSettingsFieldCell.swift in Sources */,
 				130269691C57735800152F71 /* AFAFilterOptionTableViewCell.m in Sources */,
 				13667FE11C871C8A005E4AEA /* AFATableControllerProcessInstanceDetailsCellFactory.m in Sources */,
 				137C58AB1BF9C55C00DF41B3 /* UIView+AFAImageEffects.m in Sources */,
@@ -7337,7 +7334,6 @@
 				137B94421BD656E700134BF1 /* AFATaskFormViewController.m in Sources */,
 				133A23A41EA5F98B008E79C7 /* AFAProcessInstanceDetailsDataSource.m in Sources */,
 				B90CF3A72361C4F700C1D600 /* AIMSLoginService.swift in Sources */,
-				B96C65EB2372C68A004E1402 /* ASCopyrightTableViewCell.swift in Sources */,
 				131DCF471DAFB08400E08798 /* AFAModalTaskDetailsCreateTaskAction.m in Sources */,
 				1366800F1C8DEC57005E4AEA /* AFAProcessStartFormViewController.m in Sources */,
 				136680071C89AEF9005E4AEA /* AFAQueryServices.m in Sources */,
@@ -7362,7 +7358,7 @@
 				E371B6D223683302000790DE /* AIMSAdvancedSettingsViewModel.swift in Sources */,
 				1378D68C1F3DD8D00003FB14 /* AFAListResponseModel.m in Sources */,
 				1372B21A1BA6E47800E87F04 /* UIViewController+AFAAlertAddition.m in Sources */,
-				B96C65E72372C68A004E1402 /* ASSectionTableViewCell.swift in Sources */,
+				B96C65E72372C68A004E1402 /* AIMSAdvancedSettingsSectionCell.swift in Sources */,
 				1366800B1C89D296005E4AEA /* AFASimpleSectionHeaderCell.m in Sources */,
 				13DBF35C1B7A3C66003E6938 /* AFACredentialsPageViewController.m in Sources */,
 				8D7C1A751C8090D10092EA81 /* AFAUserFilterModel.m in Sources */,
@@ -7374,7 +7370,7 @@
 				136829A71F2F1C0300B74EAF /* AFAModalReplaceAnimator.m in Sources */,
 				13AE35861C47D69300BEB477 /* AFABaseThemedViewController.m in Sources */,
 				136130141D74788F00B23F71 /* AFATaskMembershipTableViewCell.m in Sources */,
-				B96C65EA2372C68A004E1402 /* ASHttpsTableViewCell.swift in Sources */,
+				B96C65EA2372C68A004E1402 /* AIMSAdvancedSettingsHttpsCell.swift in Sources */,
 				8D7C1A5E1C808D970092EA81 /* AFACommentHeaderTableViewCell.m in Sources */,
 				13667FEE1C887490005E4AEA /* AFATableControllerProcessInstanceTasksModel.m in Sources */,
 				13C444131BBA6CDB00868904 /* AFATableControllerCommentModel.m in Sources */,
@@ -7440,7 +7436,7 @@
 				132154D71F1E00A100A8C7F2 /* AFANavigationBarBannerAlertView.m in Sources */,
 				B9BF25B823631A520017B71D /* AIMSLoginViewController.swift in Sources */,
 				135443EF1B97409C0044157B /* AFASliderTitleView.m in Sources */,
-				B96C65E92372C68A004E1402 /* ASButtonTableViewCell.swift in Sources */,
+				B96C65E92372C68A004E1402 /* AIMSAdvancedSettingsButtonCell.swift in Sources */,
 				8D7C1A851C80921E0092EA81 /* AFAUserServices.m in Sources */,
 				133539FF1F30A84C0058B85E /* AFAPopFadeAnimator.m in Sources */,
 			);

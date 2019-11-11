@@ -19,12 +19,12 @@
 import Foundation
 import MaterialComponents.MDCTextField
 
-class ASButtonTableViewCell: UITableViewCell, ASCell {
+class AIMSAdvancedSettingsButtonCell: UITableViewCell, AIMSAdvancedSettingsCellProtocol {
     
     @IBOutlet weak var button: MDCButton!
-    var delegate: ASCellsProtocol!
-    var model: ASModelRow!
-    var parameters: AdvancedSettingsParameters!
+    var delegate: AIMSAdvancedSettingsCellDelegate!
+    var model: AIMSAdvancedSettingsAction!
+    var parameters: AIMSAdvancedSettingsParameters!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,28 +36,12 @@ class ASButtonTableViewCell: UITableViewCell, ASCell {
             return
         }
         button.setTitle(model.title, for: .normal)
-        if model.type == .save {
-            if !parameters.empty() {
-                button.applyContainedTheme(withScheme: colorSchemeManager.flatButtonWithBackgroundScheme)
-            } else {
-                button.applyContainedTheme(withScheme: colorSchemeManager.grayFlatButtonWithoutBackgroundScheme)
-            }
-            button.isEnabled = !parameters.empty()
-            button.setElevation(.none, for: .normal)
-            button.setElevation(.none, for: .highlighted)
-            button.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
-        } else if model.type == .help {
-            button.applyTextTheme(withScheme: colorSchemeManager.blueFlatButtonWithoutBackgroundScheme)
-        }
+        button.applyTextTheme(withScheme: colorSchemeManager.blueFlatButtonWithoutBackgroundScheme)
     }
     
     @IBAction func buttonPressed(_ sender: MDCButton) {
         if model.type == .help {
             delegate.needHelpButtonPressed()
-        } else if model.type == .save {
-            if !parameters.empty() {
-                delegate.saveButtonPressed()
-            }
         }
     }
 }

@@ -66,7 +66,7 @@ class AIMSLoginViewModel {
     }
     
     func availableAuthType(for url: String) {
-        let advancedSettingsParameters = AdvancedSettingsParameters.parameters()
+        let advancedSettingsParameters = AIMSAdvancedSettingsParameters.parameters()
         let fullFormatURL = serviceURL(url: url, isSecureConnection: advancedSettingsParameters.https)
         let authParameters = AIMSAuthenticationParameters(identityServiceURL: fullFormatURL,
                                                           realm: advancedSettingsParameters.realm)

@@ -76,7 +76,7 @@ class CloudLoginViewModel {
     }
     
     func setServerConfiguration(with username: String, _ password: String) -> ASDKModelServerConfiguration {
-        let aimsParameters = AdvancedSettingsParameters.parameters()
+        let aimsParameters = AIMSAdvancedSettingsParameters.parameters()
         let serverConfiguration = ASDKModelServerConfiguration()
         serverConfiguration.hostAddressString = aimsParameters.hostname
         serverConfiguration.isCommunicationOverSecureLayer = aimsParameters.https
