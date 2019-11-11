@@ -72,22 +72,12 @@ class AIMSAdvancedSettingsViewModel {
                                                ASModelRow(type: .clientID, title: cliendIDPlaceholderText),
                                                ASModelRow(type: .redirectURL, title: redirectURLPlaceholderText)])
         
-        let saveSection = ASModelSection(type: .save,
-                                        numberOfRow: 1,
-                                        title: saveButtonText,
-                                        rows: [ASModelRow(type: .save, title: saveButtonText)])
-        
         let helpSection = ASModelSection(type: .help,
                                         numberOfRow: 1,
                                         title: helpButtonText,
                                         rows: [ASModelRow(type: .help, title: helpButtonText, info: helpHintText)])
         
-        let copyRightSection = ASModelSection(type: .copyright,
-                                             numberOfRow: 1,
-                                             title: copyrightText,
-                                             rows: [ASModelRow(type: .copyright, title: copyrightText)])
-        
-        return [transportProtocolSection, settingsSection, authSection, saveSection, helpSection, copyRightSection]
+        return [transportProtocolSection, settingsSection, authSection, helpSection]
     }
     
     func getIndexPathForSaveButton() -> IndexPath {

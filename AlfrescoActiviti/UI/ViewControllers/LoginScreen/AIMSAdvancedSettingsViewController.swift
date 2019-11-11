@@ -30,12 +30,30 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let colorSchemeManager = self.colorSchemeManager else {
+            AFALog.logError("Color scheme manager could not be initiated")
+            return
+        }
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "SAVE", style: .done, target: self, action: #selector(saveButtonPressed))
+        
         self.dataSource = model.datasource()
         parameters = model.getParameters()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 10))
+        footerView.backgroundColor = .clear
+        let copyrightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 10))
+        copyrightLabel.text = model.copyrightText
+        copyrightLabel.textAlignment = .center
+        copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
+        copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
+        footerView.addSubview(copyrightLabel)
+        tableView.tableFooterView = footerView
     }
     
     @IBAction func viewPressed(_ sender: UITapGestureRecognizer) {
@@ -80,12 +98,13 @@ extension AIMSAdvancedSettingsViewController: ASCellsProtocol {
         self.navigationController?.present(helpVC, animated: false, completion: nil)
     }
     
-    func saveButtonPressed() {
+    @objc func saveButtonPressed() {
         self.view.endEditing(true)
         model.saveParameters(parameters!)
         self.navigationController?.popViewController(animated: true)
     }
 }
+
 extension AIMSAdvancedSettingsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
