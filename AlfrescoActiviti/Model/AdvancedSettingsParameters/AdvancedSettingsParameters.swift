@@ -22,7 +22,7 @@ class AdvancedSettingsParameters: Codable {
 
     var https: Bool = true
     var port: String = "80"
-    var serviceDocument: String = "activi-app"
+    var serviceDocument: String = "activiti-app"
     var realm: String = "alfresco"
     var clientID: String = "alfresco"
     var redirectURL: String = "fakeurl.com"

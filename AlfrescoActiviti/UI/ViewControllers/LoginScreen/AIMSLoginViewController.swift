@@ -18,6 +18,8 @@
 
 import UIKit
 import MaterialComponents.MaterialButtons
+import enum AlfrescoAuth.AvailableAuthType
+import struct AlfrescoCore.APIError
 
 enum ControllerState {
     case isLoading
@@ -58,6 +60,7 @@ class AIMSLoginViewController: UIViewController {
                     self.view.addSubview(loadingView)
                 }
             case .isIdle, .none:
+                self.view.isUserInteractionEnabled = true
                 overlayView?.removeFromSuperview()
             }
         }
@@ -70,6 +73,8 @@ class AIMSLoginViewController: UIViewController {
             AFALog.logError("Color scheme manager could not be initiated")
             return
         }
+        
+        loginViewModel.delegate = self
         
         // Title section
         processServicesAppLabel.text = NSLocalizedString(kLocalizationLoginProcessServicesAppText, comment: "App name")
@@ -126,17 +131,16 @@ class AIMSLoginViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        controllerState = .isIdle
         updateConnectButtonState()
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     
     @IBAction func connectButtonTapped(_ sender: Any) {
-//        controllerState = .isLoading
-        let identifier = kStoryboardIDAIMSSSOViewController
-        let viewController = storyboard?.instantiateViewController(withIdentifier: identifier)
-        if let viewController = viewController {
-            self.navigationController?.pushViewController(viewController, animated: true)
+        if let alfrescoURL = alfrescoURLTextField.text {
+            controllerState = .isLoading
+            loginViewModel.availableAuthType(for: alfrescoURL)
         }
     }
     
@@ -160,7 +164,7 @@ class AIMSLoginViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // MARK: Validations
+    // MARK: - Validations
     
     fileprivate func updateConnectButtonState() {
         if let urlValue = alfrescoURLTextField.text {
@@ -173,6 +177,34 @@ extension AIMSLoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if alfrescoURLTextField == textField {
             updateConnectButtonState()
+        }
+    }
+}
+
+extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
+    func authenticationServiceUnavailable(with error: APIError) {
+        
+    }
+    
+    func authenticationServiceAvailable(for authType: AvailableAuthType) {
+        var identifier: String?
+        
+        switch authType {
+        case .basicAuth:
+            AFALog.logVerbose("Available authentication type is: on premise")
+        case .aimsAuth:
+            AFALog.logVerbose("Available authentication type is: aims")
+            identifier = kStoryboardIDAIMSSSOViewController
+        }
+        
+        if let authenticationControllerIdentifier = identifier {
+            let viewController = storyboard?.instantiateViewController(withIdentifier: authenticationControllerIdentifier)
+            if let viewController = viewController {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    guard let sSelf = self else { return }
+                    sSelf.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
         }
     }
 }

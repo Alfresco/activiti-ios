@@ -30,12 +30,14 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     
     //MARK: - AIMSLoginServiceProtocol
     func login(onViewController: UIViewController, delegate: AlfrescoAuthDelegate) {
-        let authConfig = AuthConfiguration(baseUrl: authenticationParameters.identityServiceURL,
-                                           clientID: authenticationParameters.clientID,
-                                           realm: authenticationParameters.realm,
-                                           redirectURI: authenticationParameters.redirectURI)
-        alfrescoAuth = AlfrescoAuth.init(configuration: authConfig)
+        alfrescoAuth = authServiceForCurrentConfiguration()
         session = alfrescoAuth?.pkceAuth(onViewController: onViewController, delegate: delegate)
+        
+    }
+    
+    func availableAuthType(for url: String, handler: @escaping AvailableAuthTypeCallback<AvailableAuthType>) {
+        alfrescoAuth = authServiceForCurrentConfiguration()
+        alfrescoAuth?.availableAuthType(for: url, handler: handler)
     }
     
     func refreshSession(delegate: AlfrescoAuthDelegate) {
@@ -55,5 +57,22 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
         }
         
         return false
+    }
+    
+    
+    // MARK: - Private
+    
+    private func authConfiguration() -> AuthConfiguration {
+        let authConfig = AuthConfiguration(baseUrl: authenticationParameters.identityServiceURL,
+        clientID: authenticationParameters.clientID,
+        realm: authenticationParameters.realm,
+        redirectURI: authenticationParameters.redirectURI)
+        
+        return authConfig
+    }
+    
+    private func authServiceForCurrentConfiguration() -> AlfrescoAuth {
+        let authConfig = authConfiguration()
+        return AlfrescoAuth.init(configuration: authConfig)
     }
 }
