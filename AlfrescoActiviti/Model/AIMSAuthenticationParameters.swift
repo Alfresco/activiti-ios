@@ -26,12 +26,12 @@ class AIMSAuthenticationParameters: NSObject {
     let clientID: String
     let redirectURI: String
     
-    init(identityServiceURL:String,
-         contentURL:String,
-         processURL:String,
-         realm:String,
-         clientID:String,
-         redirectURI:String) {
+    init(identityServiceURL:String = "",
+         contentURL:String = "",
+         processURL:String = "",
+         realm:String = "",
+         clientID:String = "",
+         redirectURI:String = "") {
         self.identityServiceURL = identityServiceURL
         self.contentURL = contentURL
         self.processURL = processURL

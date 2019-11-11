@@ -19,6 +19,11 @@
 import Foundation
 import AlfrescoAuth
 
+protocol AIMSLoginViewModelDelegate: class {
+    func authenticationServiceAvailable(for authType:AvailableAuthType)
+    func authenticationServiceUnavailable(with error:APIError)
+}
+
 class AIMSLoginViewModel {
     // Localization
     let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
@@ -43,6 +48,8 @@ class AIMSLoginViewModel {
     
     // Authentication parameters
     var authenticationParameters = AIMSAdvancedSettingsViewModel()
+    
+    weak var delegate: AIMSLoginViewModelDelegate?
 
     func updateIdentityServiceParameters(with url: String, isSecureConnection: Bool) {
         let fullFormatURL = serviceURL(url: url, isSecureConnection: isSecureConnection)
@@ -58,7 +65,29 @@ class AIMSLoginViewModel {
         authenticationService?.login(onViewController: viewController, delegate: self)
     }
     
-    // MARK: Private
+    func availableAuthType(for url: String) {
+        let advancedSettingsParameters = AdvancedSettingsParameters.parameters()
+        let fullFormatURL = serviceURL(url: url, isSecureConnection: advancedSettingsParameters.https)
+        let authParameters = AIMSAuthenticationParameters(identityServiceURL: fullFormatURL,
+                                                          realm: advancedSettingsParameters.realm)
+        
+        authenticationService = AIMSLoginService(with: authParameters)
+        AFAServiceRepository.shared()?.registerServiceObject(authenticationService, forPurpose: .aimsLogin)
+        
+        authenticationService?.availableAuthType(for: authParameters.identityServiceURL, handler: { [weak self] (result) in
+            guard let sSelf = self else { return }
+            
+            switch result {
+            case .success(let authType):
+                sSelf.delegate?.authenticationServiceAvailable(for: authType)
+            case .failure(let error):
+                AFALog.logError(error.localizedDescription)
+                sSelf.delegate?.authenticationServiceUnavailable(with: error)
+            }
+        })
+    }
+    
+    // MARK: - Private
     
     func serviceURL(url: String, isSecureConnection: Bool) -> String {
         let fullFormatURL = String(format:"%@://%@", isSecureConnection ? "https" : "http", url)

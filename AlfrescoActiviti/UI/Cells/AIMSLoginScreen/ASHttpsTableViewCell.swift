@@ -34,7 +34,7 @@ class ASHttpsTableViewCell: UITableViewCell, ASCell {
     
     func configureCell() {
         httpsLabel.text = model.title
-        httpsSwitch.isOn = parameters.https ?? false
+        httpsSwitch.isOn = parameters.https
     }
     
     @IBAction func httpsSwitchPressed(_ sender: UISwitch) {

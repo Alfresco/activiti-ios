@@ -19,9 +19,12 @@
 import Foundation
 import AlfrescoAuth
 
+public typealias AvailableAuthTypeCallback<AuthType> = (Result<AuthType, APIError>) -> Void
+
 protocol AIMSLoginServiceProtocol {
     
     // Login related methods
+    func availableAuthType(for serviceDocument: String, handler:@escaping AvailableAuthTypeCallback<AvailableAuthType>)
     func login(onViewController: UIViewController, delegate: AlfrescoAuthDelegate)
     func refreshSession(delegate: AlfrescoAuthDelegate)
     func logout()
