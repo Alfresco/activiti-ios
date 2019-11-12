@@ -45,10 +45,6 @@ class AIMSLoginViewModel {
     
     // Authentication service
     var authenticationService: AIMSLoginService?
-    
-    // Authentication parameters
-    var authenticationParameters = AIMSAdvancedSettingsViewModel()
-    
     weak var delegate: AIMSLoginViewModelDelegate?
 
     func updateIdentityServiceParameters(with url: String, isSecureConnection: Bool) {
@@ -85,6 +81,17 @@ class AIMSLoginViewModel {
                 sSelf.delegate?.authenticationServiceUnavailable(with: error)
             }
         })
+    }
+    
+    func prepareViewModel(for viewController: UIViewController, authenticationType: AvailableAuthType) {
+        switch authenticationType {
+        case .aimsAuth:
+            if let destinationVC = viewController as? AIMSSSOViewController {
+                destinationVC.model.authParams = authenticationService?.authenticationParameters
+            }
+        default:
+            AFALog.logError("Cannot prepare view model for requested authentication type")
+        }
     }
     
     // MARK: - Private

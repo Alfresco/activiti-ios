@@ -174,10 +174,7 @@ class AIMSLoginViewController: UIViewController {
     
     // MARK: - Navigation
     
-    @IBAction func unwindToLoginController(_ sender: UIStoryboardSegue) {
-        
-    }
-    
+    @IBAction func unwindToLoginController(_ sender: UIStoryboardSegue) { }
 }
 
 extension AIMSLoginViewController: UITextFieldDelegate {
@@ -207,6 +204,8 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
         if let authenticationControllerIdentifier = identifier {
             let viewController = storyboard?.instantiateViewController(withIdentifier: authenticationControllerIdentifier)
             if let viewController = viewController {
+                loginViewModel.prepareViewModel(for: viewController, authenticationType: authType)
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                     guard let sSelf = self else { return }
                     sSelf.navigationController?.pushViewController(viewController, animated: true)

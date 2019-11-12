@@ -24,6 +24,7 @@ class AIMSSSOViewController: UIViewController {
     
     @IBOutlet weak var processServiceAppLabel: UILabel!
     @IBOutlet weak var subtitle1Label: UILabel!
+    @IBOutlet weak var serverURLLabel: UILabel!
     @IBOutlet weak var subtitle2Label: UILabel!
     @IBOutlet weak var repositoryTextField: MDCTextField!
     @IBOutlet weak var signInButton: MDCButton!
@@ -46,6 +47,7 @@ class AIMSSSOViewController: UIViewController {
         
         processServiceAppLabel.text = model.processServicessAppText
         subtitle1Label.text = model.subtitle1Text
+        serverURLLabel.text = model.serverURLText
         subtitle2Label.text = model.subtitle2Text
         
         // Repository textfield

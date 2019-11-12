@@ -35,4 +35,21 @@ class AIMSSSOViewModel {
             return String(format: NSLocalizedString(kLocalizationLoginScreenCopyrightFormat, comment: "Copyright text"), year)
         }
     }
+    
+    var serverURLText: String {
+        get {
+            if let searchIndex = authParams?.identityServiceURL.lastIndex(of: "/") {
+                if let domainNameIndex = authParams?.identityServiceURL.index(searchIndex, offsetBy: 1) {
+                    let identityServiceDomainName = String(authParams?.identityServiceURL[domainNameIndex...] ?? "")
+                    return identityServiceDomainName
+                }
+            }
+            
+            return ""
+        }
+    }
+    
+    
+    // Authentication service
+    var authParams: AIMSAuthenticationParameters?
 }
