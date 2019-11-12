@@ -18,7 +18,14 @@
 
 import Foundation
 
-class CloudLoginViewModel {
+protocol BaseAuthLoginViewModelProtocol {
+    var processServicessAppText: String { get }
+    
+}
+
+
+class BaseAuthLoginViewModel: BaseAuthLoginViewModelProtocol {
+    
     
     let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
     let infoText = NSLocalizedString(kLocalizationCloudLoginInfoText, comment: "Info")

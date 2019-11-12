@@ -20,7 +20,7 @@ import UIKit
 import MaterialComponents.MDCButton
 import MaterialComponents.MDCTextField
 
-class CloudLoginViewController: UIViewController {
+class BaseAuthLoginViewController: UIViewController {
 
     @IBOutlet weak var processServicesAppLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
@@ -34,7 +34,7 @@ class CloudLoginViewController: UIViewController {
     
     var usernameTextFieldController: MDCTextInputController?
     var passwordTextFieldController: MDCTextInputController?
-    let model: CloudLoginViewModel = CloudLoginViewModel()
+    let model: BaseAuthLoginViewModel = BaseAuthLoginViewModel()
     
     var enableSignInButton: Bool = false
     var showPasswordButton = UIButton()
@@ -185,7 +185,7 @@ class CloudLoginViewController: UIViewController {
     }
 }
 
-extension CloudLoginViewController: UIViewControllerTransitioningDelegate {
+extension BaseAuthLoginViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return AFAModalDismissAnimator()
@@ -196,7 +196,7 @@ extension CloudLoginViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
-extension CloudLoginViewController: UITextFieldDelegate {
+extension BaseAuthLoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
