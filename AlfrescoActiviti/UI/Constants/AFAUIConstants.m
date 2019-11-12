@@ -28,6 +28,7 @@ NSTimeInterval kLoginScreenBackgroundImageFadeInTime            = 1.2f;
 NSTimeInterval kModalReplaceAnimationTime                       = .55f;
 NSTimeInterval kPushPopAnimationTime                            = .40f;
 NSTimeInterval kOverlayAlphaChangeTime                          = .25f;
+NSTimeInterval kSplashScreenAnimationTime                       = 2.0;
 
 
 #pragma mark -
@@ -142,6 +143,7 @@ NSString *kSegueIDProcessInstanceViewCompletedStartForm         = @"ProcessInsta
 NSString *kSegueIDProcessInstanceViewCompletedStartFormUnwind   = @"ProcessInstanceViewCompletedStartFormUnwindSegueID";
 NSString *kSegueIDProfileContentPickerComponentEmbedding        = @"ProfileContentPickerComponentEmbeddingSegueID";
 NSString *kSegueIDLoginAIMSAdvancedSettings                     = @"LoginAIMSAdvancedSettingsSegueID";
+NSString *kSegueIDSplashScreen                                  = @"ShowAppFromSplashScreenSegueID";
 
 
 #pragma mark -

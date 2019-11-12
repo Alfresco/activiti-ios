@@ -27,6 +27,7 @@ extern NSTimeInterval kLoginScreenServerButtonsFadeInTime;
 extern NSTimeInterval kModalReplaceAnimationTime;
 extern NSTimeInterval kPushPopAnimationTime;
 extern NSTimeInterval kOverlayAlphaChangeTime;
+extern NSTimeInterval kSplashScreenAnimationTime;
 
 // Storyboard components IDs
 
@@ -135,6 +136,7 @@ extern NSString *kSegueIDProcessInstanceViewCompletedStartForm;
 extern NSString *kSegueIDProcessInstanceViewCompletedStartFormUnwind;
 extern NSString *kSegueIDProfileContentPickerComponentEmbedding;
 extern NSString *kSegueIDLoginAIMSAdvancedSettings;
+extern NSString *kSegueIDSplashScreen;
 
 // Thumbnail manager
 extern NSString *kProfileImageThumbnailIdentifier;
