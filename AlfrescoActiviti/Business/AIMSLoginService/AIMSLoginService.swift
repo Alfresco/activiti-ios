@@ -24,7 +24,7 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     private (set) var credential: AlfrescoCredential?
     private (set) var alfrescoAuth: AlfrescoAuth?
     
-    @objc init(with authenticationParameters: AIMSAuthenticationParameters) {
+    init(with authenticationParameters: AIMSAuthenticationParameters) {
         self.authenticationParameters = authenticationParameters
     }
     
@@ -63,7 +63,7 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     // MARK: - Private
     
     private func authConfiguration() -> AuthConfiguration {
-        let authConfig = AuthConfiguration(baseUrl: authenticationParameters.identityServiceURL,
+        let authConfig = AuthConfiguration(baseUrl: authenticationParameters.fullFormatURL,
         clientID: authenticationParameters.clientID,
         realm: authenticationParameters.realm,
         redirectURI: authenticationParameters.redirectURI)

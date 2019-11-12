@@ -24,7 +24,7 @@ class AIMSAdvancedSettingsButtonCell: UITableViewCell, AIMSAdvancedSettingsCellP
     @IBOutlet weak var button: MDCButton!
     var delegate: AIMSAdvancedSettingsCellDelegate!
     var model: AIMSAdvancedSettingsAction!
-    var parameters: AIMSAdvancedSettingsParameters!
+    var parameters: AIMSAuthenticationParameters!
     
     override func awakeFromNib() {
         super.awakeFromNib()

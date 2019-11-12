@@ -19,7 +19,7 @@
 import Foundation
 
 protocol AIMSAdvancedSettingsCellDelegate {
-    func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAdvancedSettingsParameters)
+    func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAuthenticationParameters)
     func willBeginEditing(type: AIMSAdvancedSettingsActionTypes)
     func needHelpButtonPressed()
     func saveButtonPressed()
@@ -28,6 +28,6 @@ protocol AIMSAdvancedSettingsCellDelegate {
 protocol AIMSAdvancedSettingsCellProtocol: UITableViewCell {
     var delegate: AIMSAdvancedSettingsCellDelegate! { get set }
     var model: AIMSAdvancedSettingsAction! { get set }
-    var parameters: AIMSAdvancedSettingsParameters! { get set }
+    var parameters: AIMSAuthenticationParameters! { get set }
     func configureCell()
 }

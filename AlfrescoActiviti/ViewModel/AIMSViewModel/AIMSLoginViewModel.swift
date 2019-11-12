@@ -46,31 +46,14 @@ class AIMSLoginViewModel {
     // Authentication service
     var authenticationService: AIMSLoginService?
     weak var delegate: AIMSLoginViewModelDelegate?
-
-    func updateIdentityServiceParameters(with url: String, isSecureConnection: Bool) {
-        let fullFormatURL = serviceURL(url: url, isSecureConnection: isSecureConnection)
-        authenticationService?.authenticationParameters.identityServiceURL = fullFormatURL
-    }
-    
-    func updateProcessParameters(with url: String, isSecureConnection: Bool) {
-        let fullFormatURL = serviceURL(url: url, isSecureConnection: isSecureConnection)
-        authenticationService?.authenticationParameters.processURL = fullFormatURL
-    }
-    
-    func login(onViewController viewController: UIViewController) {
-        authenticationService?.login(onViewController: viewController, delegate: self)
-    }
     
     func availableAuthType(for url: String) {
-        let advancedSettingsParameters = AIMSAdvancedSettingsParameters.parameters()
-        let fullFormatURL = serviceURL(url: url, isSecureConnection: advancedSettingsParameters.https)
-        let authParameters = AIMSAuthenticationParameters(identityServiceURL: fullFormatURL,
-                                                          realm: advancedSettingsParameters.realm)
-        
+        let authParameters = AIMSAuthenticationParameters.parameters()
+        authParameters.hostname = url
         authenticationService = AIMSLoginService(with: authParameters)
         AFAServiceRepository.shared()?.registerServiceObject(authenticationService, forPurpose: .aimsLogin)
         
-        authenticationService?.availableAuthType(for: authParameters.identityServiceURL, handler: { [weak self] (result) in
+        authenticationService?.availableAuthType(for: authParameters.fullFormatURL, handler: { [weak self] (result) in
             guard let sSelf = self else { return }
             
             switch result {
@@ -87,30 +70,10 @@ class AIMSLoginViewModel {
         switch authenticationType {
         case .aimsAuth:
             if let destinationVC = viewController as? AIMSSSOViewController {
-                destinationVC.model.authParams = authenticationService?.authenticationParameters
+                destinationVC.model.authParameters = authenticationService?.authenticationParameters
             }
         default:
             AFALog.logError("Cannot prepare view model for requested authentication type")
         }
-    }
-    
-    // MARK: - Private
-    
-    func serviceURL(url: String, isSecureConnection: Bool) -> String {
-        let fullFormatURL = String(format:"%@://%@", isSecureConnection ? "https" : "http", url)
-        return fullFormatURL
-    }
-}
-
-//MARK: - AlfrescoAuth Delegate
-extension AIMSLoginViewModel: AlfrescoAuthDelegate {
-    func didReceive(result: Result<AlfrescoCredential, APIError>) {
-//        switch result {
-//        case .success(let alfrescoCredential):
-//
-//
-//        case .failure(let error):
-//
-//        }
     }
 }
