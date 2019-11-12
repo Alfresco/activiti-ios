@@ -17,6 +17,7 @@
 ******************************************************************************/
 
 import Foundation
+import AlfrescoAuth
 
 class AIMSSSOViewModel {
     let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
@@ -27,7 +28,7 @@ class AIMSSSOViewModel {
     let closeText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCloseText, comment: "Close")
     let helpButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpButtonText, comment: "Need Help")
     let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
-    let helpHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpHintText, comment: "Help")
+    let helpHintText = NSLocalizedString(kLocalizationLoginScreenSSOHelpHintText, comment: "SSO Hint text")
     var copyrightText: String {
         get {
             let calendar = Calendar.current
@@ -38,11 +39,8 @@ class AIMSSSOViewModel {
     
     var serverURLText: String {
         get {
-            if let searchIndex = authParams?.identityServiceURL.lastIndex(of: "/") {
-                if let domainNameIndex = authParams?.identityServiceURL.index(searchIndex, offsetBy: 1) {
-                    let identityServiceDomainName = String(authParams?.identityServiceURL[domainNameIndex...] ?? "")
-                    return identityServiceDomainName
-                }
+            if let params = authParameters {
+                return params.hostname
             }
             
             return ""
@@ -51,5 +49,26 @@ class AIMSSSOViewModel {
     
     
     // Authentication service
-    var authParams: AIMSAuthenticationParameters?
+    var authParameters: AIMSAuthenticationParameters?
+    var authenticationService: AIMSLoginService?
+    
+    func login(onViewController viewController: UIViewController) {
+        if let authParameters = self.authParameters {
+            authenticationService = AIMSLoginService(with: authParameters)
+            authenticationService?.login(onViewController: viewController, delegate: self)
+        }
+    }
+}
+
+//MARK: - AlfrescoAuth Delegate
+extension AIMSSSOViewModel: AlfrescoAuthDelegate {
+    func didReceive(result: Result<AlfrescoCredential, APIError>) {
+//        switch result {
+//        case .success(let alfrescoCredential):
+//
+//
+//        case .failure(let error):
+//
+//        }
+    }
 }

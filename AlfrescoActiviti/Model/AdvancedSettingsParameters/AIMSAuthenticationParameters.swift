@@ -18,31 +18,38 @@
 
 import Foundation
 
-class AIMSAdvancedSettingsParameters: Codable {
-
+class AIMSAuthenticationParameters: Codable {
     var https: Bool = true
     var port: String = "80"
     var serviceDocument: String = "activiti-app"
     var realm: String = "alfresco"
     var clientID: String = "alfresco"
-    var redirectURL: String = "fakeurl.com"
+    var redirectURI: String = "fakeurl.com"
     var hostname: String = "activiti.alfresco.com"
+    var contentURL: String = ""
+    var processURL: String = ""
+    var fullFormatURL: String {
+        get {
+            let fullFormatURL = String(format:"%@://%@", https ? "https" : "http", hostname)
+            return fullFormatURL
+        }
+    }
     
     func empty() -> Bool {
-        if port == "" || clientID == "" || serviceDocument == "" || redirectURL == "" || realm == "" {
+        if port == "" || clientID == "" || serviceDocument == "" || redirectURI == "" || realm == "" {
             return true
         }
         return false
     }
     
-    static func parameters() -> AIMSAdvancedSettingsParameters {
+    static func parameters() -> AIMSAuthenticationParameters {
         let defaults = UserDefaults.standard
         if let data = defaults.value(forKey: kAdvancedSettingsParameters) as? Data {
-            if let params = try? PropertyListDecoder().decode(AIMSAdvancedSettingsParameters.self, from: data) {
+            if let params = try? PropertyListDecoder().decode(AIMSAuthenticationParameters.self, from: data) {
                 return params
             }
         }
-        return AIMSAdvancedSettingsParameters()
+        return AIMSAuthenticationParameters()
     }
     
     func save() {

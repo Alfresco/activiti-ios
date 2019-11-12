@@ -23,7 +23,7 @@ class AIMSAdvancedSettingsSectionCell: UITableViewCell, AIMSAdvancedSettingsCell
     @IBOutlet weak var label: UILabel!
     var model: AIMSAdvancedSettingsAction!
     var delegate: AIMSAdvancedSettingsCellDelegate!
-    var parameters: AIMSAdvancedSettingsParameters!
+    var parameters: AIMSAuthenticationParameters!
     
     override func awakeFromNib() {
         super.awakeFromNib()

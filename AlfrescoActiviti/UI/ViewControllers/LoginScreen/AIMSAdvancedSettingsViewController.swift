@@ -22,7 +22,7 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     
     var model = AIMSAdvancedSettingsViewModel()
     var dataSource: [[AIMSAdvancedSettingsAction]]?
-    var parameters: AIMSAdvancedSettingsParameters?
+    var parameters: AIMSAuthenticationParameters?
     
     var adjustViewForKeyboard: Bool = false
     
@@ -89,7 +89,7 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
         adjustViewForKeyboard = (type == .redirectURL)
     }
     
-    func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAdvancedSettingsParameters) {
+    func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAuthenticationParameters) {
         tableView.reloadRows(at: [model.getIndexPathForSaveButton()], with: .none)
     }
     

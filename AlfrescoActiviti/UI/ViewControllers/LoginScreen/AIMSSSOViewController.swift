@@ -76,6 +76,11 @@ class AIMSSSOViewController: UIViewController {
     
     @IBAction func signInButtonPressed(_ sender: MDCButton) {
         self.view.endEditing(true)
+        
+        if let apsURL = repositoryTextField.text {
+            model.authParameters?.processURL = apsURL
+            model.login(onViewController: self)
+        }
     }
     
     @IBAction func helpButtonPressed(_ sender: Any) {

@@ -27,7 +27,7 @@ class AIMSAdvancedSettingsFieldCell: UITableViewCell, AIMSAdvancedSettingsCellPr
     
     var delegate: AIMSAdvancedSettingsCellDelegate!
     var model: AIMSAdvancedSettingsAction! 
-    var parameters: AIMSAdvancedSettingsParameters!
+    var parameters: AIMSAuthenticationParameters!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,7 +68,7 @@ class AIMSAdvancedSettingsFieldCell: UITableViewCell, AIMSAdvancedSettingsCellPr
             textField.text = parameters.clientID
             break
         case .redirectURL:
-            textField.text = parameters.redirectURL
+            textField.text = parameters.redirectURI
             break
         default:
             break
@@ -93,7 +93,7 @@ extension AIMSAdvancedSettingsFieldCell: UITextFieldDelegate {
             parameters.clientID = textField.text ?? ""
             break
         case .redirectURL:
-            parameters.redirectURL = textField.text ?? ""
+            parameters.redirectURI = textField.text ?? ""
             break
         default:
             break

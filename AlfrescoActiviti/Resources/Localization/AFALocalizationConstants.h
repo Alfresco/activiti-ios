@@ -47,6 +47,7 @@ extern NSString *kLocalizationLoginScreenCopyrightFormat;
 extern NSString *kLocalizationLoginScreenIndentityServiceURLHintTitleText;
 extern NSString *kLocalizationLoginScreenIdentityServiceURLHintText;
 extern NSString *kLocalizationLoginScreenCopyrightFormat;
+extern NSString *kLocalizationLoginScreenSSOHelpHintText;
 
 // Advanced Settings screen
 extern NSString *kLocalizationAdvancedSettingsScreenTransportProtocolText;

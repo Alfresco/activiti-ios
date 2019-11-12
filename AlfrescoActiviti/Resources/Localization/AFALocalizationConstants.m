@@ -49,6 +49,7 @@ NSString *kLocalizationLoginScreenAdvancedSettingsButtonText     = @"loginScreen
 NSString *kLocalizationLoginScreenCopyrightFormat                = @"loginScreenCopyrightFormat";
 NSString *kLocalizationLoginScreenIndentityServiceURLHintTitleText = @"loginScreenIndentityServiceURLHintTitleText";
 NSString *kLocalizationLoginScreenIdentityServiceURLHintText     = @"loginScreenIdentityServiceURLHintText";
+NSString *kLocalizationLoginScreenSSOHelpHintText                = @"loginScreenSSOHelpHintText";
 
 #pragma mark -
 #pragma mark Advanced Settings screen
@@ -71,7 +72,7 @@ NSString *kLocalizationAdvancedSettingsScreenSaveButtonText                     
 NSString *kLocalizationAdvancedSettingsScreenHelpButtonText                         = @"advancedSettingsScreenHelpButtonText";
 NSString *kLocalizationAdvancedSettingsScreenHelpText                               = @"advancedSettingsScreenHelpText";
 NSString *kLocalizationAdvancedSettingsScreenHelpHintText                           = @"advancedSettingsScreenHelpHintText";
-NSString *kLocalizationAdvancedSettingsScreenCloseText                             = @"advancedSettingsScreenCloseText";
+NSString *kLocalizationAdvancedSettingsScreenCloseText                              = @"advancedSettingsScreenCloseText";
 
 #pragma mark -
 #pragma mark Cloud Login screen

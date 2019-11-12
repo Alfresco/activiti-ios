@@ -42,12 +42,12 @@ class AIMSAdvancedSettingsViewModel {
         }
     }
     
-    func saveParameters(_ advancedSettingsParameters: AIMSAdvancedSettingsParameters) {
+    func saveParameters(_ advancedSettingsParameters: AIMSAuthenticationParameters) {
         advancedSettingsParameters.save()
     }
     
-    func getParameters() -> AIMSAdvancedSettingsParameters {
-        return AIMSAdvancedSettingsParameters.parameters()
+    func getParameters() -> AIMSAuthenticationParameters {
+        return AIMSAuthenticationParameters.parameters()
     }
     
     func datasource() -> [[AIMSAdvancedSettingsAction]] {

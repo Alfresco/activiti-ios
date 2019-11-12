@@ -25,7 +25,7 @@ class AIMSAdvancedSettingsHttpsCell: UITableViewCell, AIMSAdvancedSettingsCellPr
     
     var delegate: AIMSAdvancedSettingsCellDelegate!
     var model: AIMSAdvancedSettingsAction!
-    var parameters: AIMSAdvancedSettingsParameters!
+    var parameters: AIMSAuthenticationParameters!
     
     override func awakeFromNib() {
         super.awakeFromNib()

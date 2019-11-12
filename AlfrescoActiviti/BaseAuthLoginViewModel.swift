@@ -18,7 +18,14 @@
 
 import Foundation
 
-class CloudLoginViewModel {
+protocol BaseAuthLoginViewModelProtocol {
+    var processServicessAppText: String { get }
+    
+}
+
+
+class BaseAuthLoginViewModel: BaseAuthLoginViewModelProtocol {
+    
     
     let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
     let infoText = NSLocalizedString(kLocalizationCloudLoginInfoText, comment: "Info")
@@ -76,7 +83,7 @@ class CloudLoginViewModel {
     }
     
     func setServerConfiguration(with username: String, _ password: String) -> ASDKModelServerConfiguration {
-        let aimsParameters = AIMSAdvancedSettingsParameters.parameters()
+        let aimsParameters = AIMSAuthenticationParameters.parameters()
         let serverConfiguration = ASDKModelServerConfiguration()
         serverConfiguration.hostAddressString = aimsParameters.hostname
         serverConfiguration.isCommunicationOverSecureLayer = aimsParameters.https
