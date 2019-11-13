@@ -863,6 +863,7 @@
 		B9849849231554E40051F545 /* ASDKFormVariableCacheMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AA069E23154D6200D1B2AF /* ASDKFormVariableCacheMapper.m */; };
 		B99DE6A12374618F00732531 /* ASDKHTTPCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 13F9BA371B73A8200068BB8C /* ASDKHTTPCodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B99DE6A32375719B00732531 /* NSAttributedString+LocalizedHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99DE6A22375719B00732531 /* NSAttributedString+LocalizedHTML.swift */; };
+		B99DE6A6237BF85D00732531 /* LoginStrategyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99DE6A5237BF85D00732531 /* LoginStrategyModel.swift */; };
 		B9AA069A231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h in Headers */ = {isa = PBXBuildFile; fileRef = B9AA0698231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B9AA069B231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AA0699231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m */; };
 		B9AA069F23154D6200D1B2AF /* ASDKFormVariableCacheMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B9AA069D23154D6200D1B2AF /* ASDKFormVariableCacheMapper.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -1949,6 +1950,7 @@
 		B96C65E52372C689004E1402 /* AIMSAdvancedSettingsHttpsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsHttpsCell.swift; path = UI/Cells/AIMSLoginScreen/AIMSAdvancedSettingsHttpsCell.swift; sourceTree = "<group>"; };
 		B971E48B2372E51D005DCB36 /* AIMSActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSActivityView.swift; path = UI/Components/AIMSActivityView/AIMSActivityView.swift; sourceTree = "<group>"; };
 		B99DE6A22375719B00732531 /* NSAttributedString+LocalizedHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSAttributedString+LocalizedHTML.swift"; path = "Business/Extensions/NSAttributedString+LocalizedHTML.swift"; sourceTree = "<group>"; };
+		B99DE6A5237BF85D00732531 /* LoginStrategyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginStrategyModel.swift; path = Model/LoginStrategyModel/LoginStrategyModel.swift; sourceTree = "<group>"; };
 		B9AA0698231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKFormVariablesCacheModelUpsert.h; path = CacheServices/CacheModelUpsert/FormVariablesModelUpsert/ASDKFormVariablesCacheModelUpsert.h; sourceTree = "<group>"; };
 		B9AA0699231412D100D1B2AF /* ASDKFormVariablesCacheModelUpsert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKFormVariablesCacheModelUpsert.m; path = CacheServices/CacheModelUpsert/FormVariablesModelUpsert/ASDKFormVariablesCacheModelUpsert.m; sourceTree = "<group>"; };
 		B9AA069D23154D6200D1B2AF /* ASDKFormVariableCacheMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKFormVariableCacheMapper.h; sourceTree = "<group>"; };
@@ -6077,6 +6079,7 @@
 				13A5D6041CA046D300EFA760 /* TaskCreateModel */,
 				1328D3531BB92D650010757C /* TableControllerModels */,
 				1378D68D1F3DD8D40003FB14 /* ListResponseModel */,
+				B99DE6A7237BF86000732531 /* LoginStrategyModel */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -6632,6 +6635,14 @@
 				B99DE6A22375719B00732531 /* NSAttributedString+LocalizedHTML.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		B99DE6A7237BF86000732531 /* LoginStrategyModel */ = {
+			isa = PBXGroup;
+			children = (
+				B99DE6A5237BF85D00732531 /* LoginStrategyModel.swift */,
+			);
+			name = LoginStrategyModel;
 			sourceTree = "<group>";
 		};
 		B9AA069C231412D700D1B2AF /* ASDKFormVariablesCacheModelUpsert */ = {
@@ -7329,6 +7340,7 @@
 				B96C65E82372C68A004E1402 /* AIMSAdvancedSettingsFieldCell.swift in Sources */,
 				130269691C57735800152F71 /* AFAFilterOptionTableViewCell.m in Sources */,
 				13667FE11C871C8A005E4AEA /* AFATableControllerProcessInstanceDetailsCellFactory.m in Sources */,
+				B99DE6A6237BF85D00732531 /* LoginStrategyModel.swift in Sources */,
 				137C58AB1BF9C55C00DF41B3 /* UIView+AFAImageEffects.m in Sources */,
 				13FEE5521E813F3F00FF30DB /* AFAProfileViewControllerDataSource.m in Sources */,
 				13EC7A1A1E6D97FC0073CB5E /* AFASettingsSwitchTableViewCell.m in Sources */,

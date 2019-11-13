@@ -440,7 +440,7 @@
         <!--Help View Controller-->
         <scene sceneID="88H-5t-gTo">
             <objects>
-                <viewController storyboardIdentifier="AIMSHelpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9U9-cA-FLW" customClass="AIMSHelpViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AIMSHelpViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9U9-cA-FLW" customClass="AIMSHelpViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eWQ-pa-eFH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5322,8 +5322,7 @@
                                 <rect key="frame" x="32" y="545" width="350" height="58"/>
                                 <state key="normal" title="CLOUD SIGN IN"/>
                                 <connections>
-                                    <action selector="cloudSignInButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="avf-9m-rfy"/>
-                                    <segue destination="jv8-zv-gad" kind="show" id="xS8-1a-weC"/>
+                                    <segue destination="jv8-zv-gad" kind="show" identifier="BaseAuthLoginSegueID" id="xS8-1a-weC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwj-Bk-jf5" customClass="MDCButton">
@@ -5428,7 +5427,7 @@
         <!--Base Auth Login View Controller-->
         <scene sceneID="TVl-om-qFt">
             <objects>
-                <viewController storyboardIdentifier="CloudLoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jv8-zv-gad" customClass="BaseAuthLoginViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BaseAuthViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jv8-zv-gad" customClass="BaseAuthLoginViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oPi-oS-6ZQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5452,13 +5451,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-kT-Xnv">
-                                <rect key="frame" x="40" y="280.66666666666669" width="334" height="18.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="15"/>
+                                <rect key="frame" x="40" y="280.66666666666669" width="334" height="17.333333333333314"/>
+                                <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x1o-cv-Ktx" customClass="MDCTextField">
-                                <rect key="frame" x="40" y="319.33333333333331" width="334" height="34"/>
+                                <rect key="frame" x="40" y="318" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                 <connections>
@@ -5466,7 +5465,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OWh-mu-oBt" customClass="MDCTextField">
-                                <rect key="frame" x="40" y="353.33333333333331" width="334" height="34"/>
+                                <rect key="frame" x="40" y="352" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                 <connections>
@@ -5474,7 +5473,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC0-X6-qax" customClass="MDCButton">
-                                <rect key="frame" x="40" y="407.33333333333331" width="334" height="58"/>
+                                <rect key="frame" x="40" y="406" width="334" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="QY0-0P-nee"/>
                                 </constraints>
@@ -6722,7 +6721,7 @@
         <!--View Controller-->
         <scene sceneID="qaw-8G-lfr">
             <objects>
-                <viewController storyboardIdentifier="AIMSSSOViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a8o-Yi-Qvy" customClass="AIMSSSOViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AIMSSSOViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a8o-Yi-Qvy" customClass="AIMSSSOViewController" customModule="AlfrescoActiviti" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iov-D2-bTl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6734,31 +6733,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xas-a7-Xwe">
-                                <rect key="frame" x="32" y="254.5" width="350" height="30"/>
+                                <rect key="frame" x="32" y="220.66666666666666" width="350" height="30"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alfrescoLogoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="jrC-EV-0lf">
-                                <rect key="frame" x="32" y="118.5" width="200" height="136"/>
+                                <rect key="frame" x="32" y="152.66666666666666" width="200" height="68"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="Qeb-bp-xOC"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Siging to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDg-Ta-wTf">
-                                <rect key="frame" x="40" y="314.5" width="334" height="18.5"/>
+                                <rect key="frame" x="40" y="280.66666666666669" width="334" height="18.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="15"/>
                                 <color key="textColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ServerURL" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0i-PO-rR6">
-                                <rect key="frame" x="40" y="341" width="334" height="18.5"/>
+                                <rect key="frame" x="40" y="307.33333333333331" width="334" height="18.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="15"/>
                                 <color key="textColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFI-ro-FgJ">
-                                <rect key="frame" x="48" y="367.5" width="318" height="37"/>
+                                <rect key="frame" x="48" y="334" width="318" height="37"/>
                                 <string key="text">To allow 
 success</string>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="15"/>
@@ -6766,7 +6765,7 @@ success</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q96-c2-7DP" customClass="MDCTextField">
-                                <rect key="frame" x="48" y="419.5" width="318" height="34"/>
+                                <rect key="frame" x="48" y="386" width="318" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                 <connections>
@@ -6774,7 +6773,7 @@ success</string>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXp-o9-Ccd" customClass="MDCButton">
-                                <rect key="frame" x="48" y="473.5" width="318" height="58"/>
+                                <rect key="frame" x="48" y="440" width="318" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="N4A-QT-nEu"/>
                                 </constraints>

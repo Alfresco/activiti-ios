@@ -24,8 +24,8 @@ class AIMSAuthenticationParameters: Codable {
     var serviceDocument: String = "activiti-app"
     var realm: String = "alfresco"
     var clientID: String = "alfresco"
-    var redirectURI: String = "fakeurl.com"
-    var hostname: String = "activiti.alfresco.com"
+    var redirectURI: String = "iosapp://fake.url.here/auth"
+    var hostname: String = ""
     var contentURL: String = ""
     var processURL: String = ""
     var fullFormatURL: String {

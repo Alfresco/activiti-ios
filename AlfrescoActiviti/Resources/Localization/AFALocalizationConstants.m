@@ -50,6 +50,7 @@ NSString *kLocalizationLoginScreenCopyrightFormat                = @"loginScreen
 NSString *kLocalizationLoginScreenIndentityServiceURLHintTitleText = @"loginScreenIndentityServiceURLHintTitleText";
 NSString *kLocalizationLoginScreenIdentityServiceURLHintText     = @"loginScreenIdentityServiceURLHintText";
 NSString *kLocalizationLoginScreenSSOHelpHintText                = @"loginScreenSSOHelpHintText";
+NSString *kLocalizationLoginScreenOnPremiseSigningInToHintFormat = @"loginScreenOnPremiseSigningInToHintFormat";
 
 #pragma mark -
 #pragma mark Advanced Settings screen

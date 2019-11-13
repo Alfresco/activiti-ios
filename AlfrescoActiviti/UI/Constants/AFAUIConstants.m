@@ -43,9 +43,9 @@ NSString *kStoryboardIDListViewController                       = @"ListViewCont
 NSString *kStoryboardIDApplicationListViewController            = @"ApplicationListViewControllerID";
 NSString *kStoryboardIDProfileViewController                    = @"ProfileViewControllerID";
 NSString *kStoryboardIDSettingsViewController                   = @"SettingsViewControllerID";
-NSString *kStoryboardIDAIMSSSOViewController                    = @"AIMSSSOViewController";
-NSString *kStoryboardIDCloudLoginViewController                 = @"CloudLoginViewController";
-NSString *kStoryboardIDAIMSHelpViewController                   = @"AIMSHelpViewController";
+NSString *kStoryboardIDAIMSSSOViewController                    = @"AIMSSSOViewControllerID";
+NSString *kStoryboardIDBaseAuthLoginViewController              = @"BaseAuthViewControllerID";
+NSString *kStoryboardIDAIMSHelpViewController                   = @"AIMSHelpViewControllerID";
 
 
 #pragma mark -
@@ -144,6 +144,7 @@ NSString *kSegueIDProcessInstanceViewCompletedStartFormUnwind   = @"ProcessInsta
 NSString *kSegueIDProfileContentPickerComponentEmbedding        = @"ProfileContentPickerComponentEmbeddingSegueID";
 NSString *kSegueIDLoginAIMSAdvancedSettings                     = @"LoginAIMSAdvancedSettingsSegueID";
 NSString *kSegueIDSplashScreen                                  = @"ShowAppFromSplashScreenSegueID";
+NSString *kSegueIDBaseAuthLoginSegueID                          = @"BaseAuthLoginSegueID";
 
 
 #pragma mark -
