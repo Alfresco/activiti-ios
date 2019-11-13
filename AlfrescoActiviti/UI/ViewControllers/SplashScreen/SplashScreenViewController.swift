@@ -14,6 +14,9 @@ class SplashScreenViewController: UIViewController {
     @IBOutlet weak var logoHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var logoWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var copyrightLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var iceEffectView: UIVisualEffectView!
+    
     
     var copyrightText: String {
         get {
@@ -35,6 +38,18 @@ class SplashScreenViewController: UIViewController {
         copyrightLabel.text = copyrightText
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
+
+//        containerView.layer.cornerRadius = 20
+
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.7
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowRadius = 50
+        containerView.layer.shadowPath = UIBezierPath(rect: containerView.bounds).cgPath
+        containerView.layer.shouldRasterize = true
+        containerView.layer.rasterizationScale = UIScreen.main.scale
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,7 +61,8 @@ class SplashScreenViewController: UIViewController {
             
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + kSplashScreenAnimationTime + 0.2, execute: {
-            self.performSegue(withIdentifier: kSegueIDSplashScreen, sender: nil)
+            self.view.bringSubviewToFront(self.iceEffectView)
+            self.view.bringSubviewToFront(self.containerView)
         })
     }
 }
