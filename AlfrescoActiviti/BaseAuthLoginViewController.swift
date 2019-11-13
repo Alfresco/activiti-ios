@@ -65,8 +65,13 @@ class BaseAuthLoginViewController: UIViewController {
             return
         }
         
-        processServicesAppLabel.text = model.processServicessAppText
-        infoLabel.text = model.infoText
+        processServicesAppLabel.text = model.loginStrategy?.processServicessAppText
+        infoLabel.text = model.loginStrategy?.infoText
+        
+        if (model.loginStrategy as? PremiseLoginStrategy) != nil {
+            infoLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
+            infoLabel.font = colorSchemeManager.defaultTypographyScheme.headline3
+        }
         
         // Username textfield
         usernameTextfield.rightViewMode = .unlessEditing
@@ -74,7 +79,7 @@ class BaseAuthLoginViewController: UIViewController {
         usernameTextfield.rightView?.tintColor = #colorLiteral(red: 0.568627451, green: 0.568627451, blue: 0.568627451, alpha: 1)
         usernameTextfield.font = colorSchemeManager.textFieldTypographyScheme.headline1
         usernameTextFieldController = MDCTextInputControllerUnderline(textInput: usernameTextfield)
-        usernameTextFieldController?.placeholderText = model.usernamaPlaceholderText
+        usernameTextFieldController?.placeholderText = model.loginStrategy?.usernamaPlaceholderText
         usernameTextFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
         if let usernameTextFieldController = self.usernameTextFieldController {
             MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.textfieldDefaultColorScheme, to: usernameTextFieldController)
@@ -89,19 +94,19 @@ class BaseAuthLoginViewController: UIViewController {
         passwordTextfield.rightView?.tintColor = #colorLiteral(red: 0.568627451, green: 0.568627451, blue: 0.568627451, alpha: 1)
         passwordTextfield.font = colorSchemeManager.textFieldTypographyScheme.headline1
         passwordTextFieldController = MDCTextInputControllerUnderline(textInput: passwordTextfield)
-        passwordTextFieldController?.placeholderText = model.passwordPlaceholderText
+        passwordTextFieldController?.placeholderText = model.loginStrategy?.passwordPlaceholderText
         passwordTextFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
         if let passwordTextFieldController = self.passwordTextFieldController {
             MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.textfieldDefaultColorScheme, to: passwordTextFieldController)
         }
         
         // Help button
-        helpButton.setTitle(model.helpButtonText, for: .normal)
+        helpButton.setTitle(model.loginStrategy?.helpButtonText, for: .normal)
         helpButton.applyTextTheme(withScheme: colorSchemeManager.blueFlatButtonWithoutBackgroundScheme)
         helpButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline3, for: .normal)
         
         // Copyright section
-        copyrightLabel.text = model.copyrightText
+        copyrightLabel.text = model.loginStrategy?.copyrightText
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
@@ -144,9 +149,13 @@ class BaseAuthLoginViewController: UIViewController {
     @IBAction func helpButtonPressed(_ sender: MDCButton) {
         self.view.endEditing(true)
         let helpVC = storyboard?.instantiateViewController(withIdentifier: kStoryboardIDAIMSHelpViewController) as! AIMSHelpViewController
-        helpVC.hintText = model.helpHintText
-        helpVC.titleText = model.helpText
-        helpVC.closeText = model.closeText
+        
+        if let loginStrategyModel = model.loginStrategy {
+            helpVC.hintText = loginStrategyModel.helpHintText
+            helpVC.titleText = loginStrategyModel.helpText
+            helpVC.closeText = loginStrategyModel.closeText
+        }
+
         helpVC.modalPresentationStyle = .overCurrentContext
         self.navigationController?.present(helpVC, animated: false, completion: nil)
     }
@@ -162,7 +171,7 @@ class BaseAuthLoginViewController: UIViewController {
             AFALog.logError("Color scheme manager could not be initiated")
             return
         }
-        signInButton.setTitle(model.signInButtonText, for: .normal)
+        signInButton.setTitle(model.loginStrategy?.signInButtonText, for: .normal)
         signInButton.isEnabled = enableSignInButton
         if enableSignInButton {
             signInButton.applyContainedTheme(withScheme: colorSchemeManager.flatButtonWithBackgroundScheme)

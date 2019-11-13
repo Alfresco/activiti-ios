@@ -94,7 +94,7 @@ class AIMSLoginViewController: UIViewController {
         connectToButton.setElevation(.none, for: .normal)
         connectToButton.setElevation(.none, for: .highlighted)
         connectToButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
-    
+        
         advancedSettingsButton.setTitle(loginViewModel.advancedSettingsButtonText, for: .normal)
         advancedSettingsButton.applyTextTheme(withScheme: colorSchemeManager.highlightedFlatButtonWithBackgroundScheme)
         advancedSettingsButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline3, for: .normal)
@@ -129,7 +129,7 @@ class AIMSLoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         controllerState = .isIdle
         updateConnectButtonState()
@@ -142,9 +142,6 @@ class AIMSLoginViewController: UIViewController {
             controllerState = .isLoading
             loginViewModel.availableAuthType(for: alfrescoURL)
         }
-    }
-    
-    @IBAction func cloudSignInButtonTapped(_ sender: Any) {
     }
     
     @IBAction func advancedButtonTapped(_ sender: Any) {
@@ -175,6 +172,14 @@ class AIMSLoginViewController: UIViewController {
     // MARK: - Navigation
     
     @IBAction func unwindToLoginController(_ sender: UIStoryboardSegue) { }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if kSegueIDBaseAuthLoginSegueID == segue.identifier {
+            if let destinationVC = segue.destination as? BaseAuthLoginViewController {
+                loginViewModel.prepareViewModel(for: destinationVC, authenticationType: .basicAuth, isCloud: true)
+            }
+        }
+    }
 }
 
 extension AIMSLoginViewController: UITextFieldDelegate {
@@ -187,7 +192,7 @@ extension AIMSLoginViewController: UITextFieldDelegate {
 
 extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
     func authenticationServiceUnavailable(with error: APIError) {
-        
+        controllerState = .isIdle
     }
     
     func authenticationServiceAvailable(for authType: AvailableAuthType) {
@@ -196,18 +201,19 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
         switch authType {
         case .basicAuth:
             AFALog.logVerbose("Available authentication type is: on premise")
+            identifier = kStoryboardIDBaseAuthLoginViewController
         case .aimsAuth:
             AFALog.logVerbose("Available authentication type is: aims")
             identifier = kStoryboardIDAIMSSSOViewController
         }
         
         if let authenticationControllerIdentifier = identifier {
-            let viewController = storyboard?.instantiateViewController(withIdentifier: authenticationControllerIdentifier)
-            if let viewController = viewController {
-                loginViewModel.prepareViewModel(for: viewController, authenticationType: authType)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                guard let sSelf = self else { return }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                    guard let sSelf = self else { return }
+                let viewController = sSelf.storyboard?.instantiateViewController(withIdentifier: authenticationControllerIdentifier)
+                if let viewController = viewController {
+                    sSelf.loginViewModel.prepareViewModel(for: viewController, authenticationType: authType)
                     sSelf.navigationController?.pushViewController(viewController, animated: true)
                 }
             }

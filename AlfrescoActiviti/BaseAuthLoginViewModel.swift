@@ -18,36 +18,12 @@
 
 import Foundation
 
-protocol BaseAuthLoginViewModelProtocol {
-    var processServicessAppText: String { get }
-    
-}
-
-
-class BaseAuthLoginViewModel: BaseAuthLoginViewModelProtocol {
-    
-    
-    let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
-    let infoText = NSLocalizedString(kLocalizationCloudLoginInfoText, comment: "Info")
-    let usernamaPlaceholderText = NSLocalizedString(kLocalizationCloudLoginUsernamePlaceholderText, comment: "Username")
-    let passwordPlaceholderText = NSLocalizedString(kLocalizationCloudLoginPasswordPlaceholderText, comment: "Password")
-    let signInButtonText = NSLocalizedString(kLocalizationCloudLoginSignInButtonText, comment: "SIGN IN")
-    let closeText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCloseText, comment: "Close")
-    let helpButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpButtonText, comment: "Need Help")
-    let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
-    let helpHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpHintText, comment: "Help")
-    var copyrightText: String {
-        get {
-            let calendar = Calendar.current
-            let year = calendar.component(.year, from: Date())
-            return String(format: NSLocalizedString(kLocalizationLoginScreenCopyrightFormat, comment: "Copyright text"), year)
-        }
-    }
+class BaseAuthLoginViewModel {
+    var loginStrategy: BaseAuthLoginStrategyProtocol?
     let requestProfileService = AFAProfileServices()
-    var serverConfiguration: ASDKModelServerConfiguration!
 
     func signIn(username: String, password: String, completion: @escaping (Result<ASDKModelProfile, Error>) -> Void) {
-        serverConfiguration = setServerConfiguration(with: username, password)
+        let serverConfiguration = loginStrategy?.serverConfiguration(for: username, password)
         let persistenceStackModelName = self.persistenceStackModelName()
         let sdkBootstrap = ASDKBootstrap.sharedInstance()
         sdkBootstrap?.setupServices(with: serverConfiguration)
@@ -55,13 +31,16 @@ class BaseAuthLoginViewModel: BaseAuthLoginViewModelProtocol {
         requestProfileService.requestProfile { [weak self] (profile, error) in
             guard let sSelf = self else { return }
             if let profile = profile {
-                sSelf.syncToUserDefaultsServerConfiguration()
-                if (AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName) != nil) {
-                    AFAKeychainWrapper.updateKeychainValue(sSelf.serverConfiguration.password,
-                                                           forIdentifier: persistenceStackModelName)
-                } else {
-                    AFAKeychainWrapper.createKeychainValue(sSelf.serverConfiguration.password,
-                                                           forIdentifier: persistenceStackModelName)
+                sSelf.loginStrategy?.syncToUserDefaultsServerConfiguration()
+                
+                if let serverConfiguration = sSelf.loginStrategy?.serverConfiguration {
+                    if (AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName) != nil) {
+                        AFAKeychainWrapper.updateKeychainValue(serverConfiguration.password,
+                                                               forIdentifier: persistenceStackModelName)
+                    } else {
+                        AFAKeychainWrapper.createKeychainValue(serverConfiguration.password,
+                                                               forIdentifier: persistenceStackModelName)
+                    }
                 }
 
                 completion(.success(profile))
@@ -73,27 +52,7 @@ class BaseAuthLoginViewModel: BaseAuthLoginViewModelProtocol {
         }
     }
     
-    func syncToUserDefaultsServerConfiguration() {
-        let sud = UserDefaults.standard
-        sud.set(kCloudAuthetificationCredentialIdentifier, forKey: kAuthentificationTypeCredentialIdentifier)
-        sud.set(serverConfiguration.hostAddressString, forKey: kCloudHostNameCredentialIdentifier)
-        sud.set(serverConfiguration.isCommunicationOverSecureLayer, forKey: kCloudSecureLayerCredentialIdentifier)
-        sud.set(serverConfiguration.username, forKey: kCloudUsernameCredentialIdentifier)
-        sud.synchronize()
-    }
-    
-    func setServerConfiguration(with username: String, _ password: String) -> ASDKModelServerConfiguration {
-        let aimsParameters = AIMSAuthenticationParameters.parameters()
-        let serverConfiguration = ASDKModelServerConfiguration()
-        serverConfiguration.hostAddressString = aimsParameters.hostname
-        serverConfiguration.isCommunicationOverSecureLayer = aimsParameters.https
-        serverConfiguration.serviceDocument = aimsParameters.serviceDocument
-        serverConfiguration.username = username
-        serverConfiguration.password = password
-        return serverConfiguration
-    }
-    
     func persistenceStackModelName() -> String {
-        return ASDKPersistenceStack.persistenceStackModelName(for: serverConfiguration)
+        return ASDKPersistenceStack.persistenceStackModelName(for: self.loginStrategy?.serverConfiguration)
     }
 }

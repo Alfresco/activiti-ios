@@ -66,14 +66,16 @@ class AIMSLoginViewModel {
         })
     }
     
-    func prepareViewModel(for viewController: UIViewController, authenticationType: AvailableAuthType) {
+    func prepareViewModel(for viewController: UIViewController, authenticationType: AvailableAuthType, isCloud: Bool = false) {
         switch authenticationType {
         case .aimsAuth:
             if let destinationVC = viewController as? AIMSSSOViewController {
                 destinationVC.model.authParameters = authenticationService?.authenticationParameters
             }
-        default:
-            AFALog.logError("Cannot prepare view model for requested authentication type")
+        case .basicAuth:
+            if let destinationVC = viewController as? BaseAuthLoginViewController {
+                destinationVC.model.loginStrategy = isCloud ? CloudLoginStrategy() : PremiseLoginStrategy()
+            }
         }
     }
 }

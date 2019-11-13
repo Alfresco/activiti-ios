@@ -41,7 +41,7 @@ extern NSString *kStoryboardIDApplicationListViewController;
 extern NSString *kStoryboardIDProfileViewController;
 extern NSString *kStoryboardIDSettingsViewController;
 extern NSString *kStoryboardIDAIMSSSOViewController;
-extern NSString *kStoryboardIDCloudLoginViewController;
+extern NSString *kStoryboardIDBaseAuthLoginViewController;
 extern NSString *kStoryboardIDAIMSHelpViewController;
 
 // Cell IDs
@@ -137,6 +137,7 @@ extern NSString *kSegueIDProcessInstanceViewCompletedStartFormUnwind;
 extern NSString *kSegueIDProfileContentPickerComponentEmbedding;
 extern NSString *kSegueIDLoginAIMSAdvancedSettings;
 extern NSString *kSegueIDSplashScreen;
+extern NSString *kSegueIDBaseAuthLoginSegueID;
 
 // Thumbnail manager
 extern NSString *kProfileImageThumbnailIdentifier;
