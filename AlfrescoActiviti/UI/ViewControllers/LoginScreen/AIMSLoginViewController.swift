@@ -26,7 +26,7 @@ enum ControllerState {
     case isIdle
 }
 
-class AIMSLoginViewController: UIViewController {
+class AIMSLoginViewController: AFABaseThemedViewController {
     
     let loginViewModel: AIMSLoginViewModel = AIMSLoginViewModel()
     
@@ -182,6 +182,8 @@ class AIMSLoginViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
+
 extension AIMSLoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if alfrescoURLTextField == textField {
@@ -190,9 +192,16 @@ extension AIMSLoginViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - AIMSLoginViewModelDelegate
+
 extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
     func authenticationServiceUnavailable(with error: APIError) {
-        controllerState = .isIdle
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            
+            sSelf.controllerState = .isIdle
+            sSelf.showErrorMessage(error.localizedDescription)
+        }
     }
     
     func authenticationServiceAvailable(for authType: AvailableAuthType) {

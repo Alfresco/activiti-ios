@@ -78,18 +78,19 @@ NSString *kLocalizationAdvancedSettingsScreenCloseText                          
 #pragma mark -
 #pragma mark Cloud Login screen
 
-NSString *kLocalizationCloudLoginInfoText = @"cloudLoginInfoText";
+NSString *kLocalizationCloudLoginInfoText                = @"cloudLoginInfoText";
 NSString *kLocalizationCloudLoginUsernamePlaceholderText = @"cloudLoginUsernamePlaceholderText";
 NSString *kLocalizationCloudLoginPasswordPlaceholderText = @"cloudLoginPasswordPlaceholderText";
-NSString *kLocalizationCloudLoginSignInButtonText = @"cloudLoginSignInButtonText";
+NSString *kLocalizationCloudLoginSignInButtonText        = @"cloudLoginSignInButtonText";
 
 #pragma mark -
 #pragma mark SSO Login screen
 
-NSString *kLocalizationSSOLoginSubtitle1Text = @"ssoLoginSubtitle1Text";
-NSString *kLocalizationSSOLoginSubtitle2Text = @"ssoLoginSubtitle2Text";
-NSString *kLocalizationSSOLoginRepositoryPlaceholderText = @"ssoLoginRepositoryPlaceholderText";
-NSString *kLocalizationSSOLoginSignInSSOButtonText = @"ssoLoginSignInSSOButtonText";
+NSString *kLocalizationSSOLoginSubtitle1Text                    = @"ssoLoginSubtitle1Text";
+NSString *kLocalizationSSOLoginSubtitle2Text                    = @"ssoLoginSubtitle2Text";
+NSString *kLocalizationSSOLoginRepositoryPlaceholderText        = @"ssoLoginRepositoryPlaceholderText";
+NSString *kLocalizationSSOLoginSignInSSOButtonText              = @"ssoLoginSignInSSOButtonText";
+NSString *kLocalizationSSOLoginScreenSigningInText              = @"ssoLoginScreenSigningInText";
 
 #pragma mark -
 #pragma mark Application screen

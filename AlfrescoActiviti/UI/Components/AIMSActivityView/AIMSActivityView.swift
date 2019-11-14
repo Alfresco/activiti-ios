@@ -26,6 +26,7 @@ class AIMSActivityView: UIView {
     var activityIndicator = MDCActivityIndicator()
     var overlayView: UIView?
     var label: UILabel = UILabel()
+    var imageView: UIImageView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,6 +48,8 @@ class AIMSActivityView: UIView {
         self.isUserInteractionEnabled = false
         
         overlayView = UIView(frame: frame)
+        imageView = UIImageView(frame: frame)
+        imageView?.contentMode = .topLeft
         
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -56,11 +59,12 @@ class AIMSActivityView: UIView {
         activityIndicator.strokeWidth = 7
         activityIndicator.center = CGPoint(x: self.center.x, y: self.center.y - self.frame.height / 7)
         
-        if let overlayView = overlayView {
+        if let overlayView = self.overlayView, let imageView = self.imageView {
             overlayView.backgroundColor = .white
             overlayView.alpha = 0.87
             
             self.addSubview(overlayView)
+            self.addSubview(imageView)
             self.addSubview(activityIndicator)
             self.addSubview(label)
             

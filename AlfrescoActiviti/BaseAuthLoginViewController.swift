@@ -20,7 +20,7 @@ import UIKit
 import MaterialComponents.MDCButton
 import MaterialComponents.MDCTextField
 
-class BaseAuthLoginViewController: UIViewController {
+class BaseAuthLoginViewController: AFABaseThemedViewController {
 
     @IBOutlet weak var processServicesAppLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
@@ -50,6 +50,7 @@ class BaseAuthLoginViewController: UIViewController {
                     self.view.addSubview(loadingView)
                 }
             case .isIdle, .none:
+                self.view.isUserInteractionEnabled = true
                 overlayView?.removeFromSuperview()
             }
         }
@@ -135,8 +136,8 @@ class BaseAuthLoginViewController: UIViewController {
                 sSelf.controllerState = .isIdle
                 switch result {
                 case .failure(let error):
-                    //TODO: Show UI error
                     AFALog.logError(error.localizedDescription)
+                    sSelf.showErrorMessage(error.localizedDescription)
                     break
                 case .success(_):
                     sSelf.performSegue(withIdentifier: kSegueIDLoginAuthorized, sender: nil)

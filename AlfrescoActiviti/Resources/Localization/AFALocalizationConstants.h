@@ -82,6 +82,7 @@ extern NSString *kLocalizationSSOLoginSubtitle1Text;
 extern NSString *kLocalizationSSOLoginSubtitle2Text;
 extern NSString *kLocalizationSSOLoginRepositoryPlaceholderText;
 extern NSString *kLocalizationSSOLoginSignInSSOButtonText;
+extern NSString *kLocalizationSSOLoginScreenSigningInText;
 
 // Applications screen
 extern NSString *kLocalizationAppScreenTitleText;

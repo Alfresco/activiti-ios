@@ -14,10 +14,10 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AlfrescoAuth (0.3.1):
+  - AlfrescoAuth (0.3.2):
     - AlfrescoCore
     - AppAuth
-  - AlfrescoCore (0.2.0)
+  - AlfrescoCore (0.2.1)
   - AppAuth (1.2.0):
     - AppAuth/Core (= 1.2.0)
     - AppAuth/ExternalUserAgent (= 1.2.0)
@@ -730,8 +730,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AlfrescoAuth: 00810b6357ec20e73d9e9901691feede848f6d62
-  AlfrescoCore: ab6c6563687127d693230c85ae11f06f02991733
+  AlfrescoAuth: 6d9082150760c673eb47884fa305554372878178
+  AlfrescoCore: 74f15e5bf69af5ae8a8eee6c46ffd9ffcd95a000
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   Buglife: bc8e4931ebe37b2901c6dbcb0ca6dd76f62a98c3
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
