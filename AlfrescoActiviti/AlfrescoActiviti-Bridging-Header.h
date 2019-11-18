@@ -14,6 +14,7 @@
 #import "AFAModalReplaceAnimator.h"
 #import "AFAModalDismissAnimator.h"
 #import "AFAKeychainWrapper.h"
+#import "AFABaseThemedViewController.h"
 
 @import ActivitiSDK;
 @import ActivitiSDK.Private;

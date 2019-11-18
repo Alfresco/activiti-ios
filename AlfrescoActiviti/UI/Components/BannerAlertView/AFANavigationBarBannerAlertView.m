@@ -20,7 +20,8 @@
 #import "UIColor+AFATheme.h"
 #import "AFAUIConstants.h"
 
-static const CGFloat kTopMargin = 10.f;
+static const CGFloat kVerticalMargin = 16.0f;
+static const CGFloat kTopMarginWithoutNavigationBar = 44.0f;
 static const NSTimeInterval kHideTimeout = 2.f;
 
 typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
@@ -76,7 +77,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     [super updateConstraints];
     
     UINavigationBar *navigationBar = self.parentViewController.navigationController.navigationBar;
-    self.topSpacingConstraint.constant = CGRectGetMaxY(navigationBar.frame);
+    self.topSpacingConstraint.constant = navigationBar.isHidden ? 0 : CGRectGetMaxY(navigationBar.frame);;
     
     if (!self.isBannerVisible) {
         self.topSpacingConstraint.constant += -self.frame.size.height;
@@ -103,11 +104,12 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
                                                                              metrics:nil
                                                                                views:@{@"alertLabel" : self.alertTextLabel}];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(top)-[alertLabel]-(bottom)-|"
-                                                                           options:kNilOptions
-                                                                           metrics:@{@"top"         : @(kTopMargin),
-                                                                                     @"bottom"      : @(kTopMargin),}
-                                                                             views:@{@"alertLabel"  : self.alertTextLabel}];
+    NSArray *verticalConstraints =
+    [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(top)-[alertLabel]-(bottom)-|"
+                                            options:kNilOptions
+                                            metrics:@{@"top"         : self.parentViewController.navigationController.navigationBar.isHidden ? @(kVerticalMargin) : @(kTopMarginWithoutNavigationBar),
+                                                      @"bottom"      : @(kVerticalMargin),}
+                                              views:@{@"alertLabel"  : self.alertTextLabel}];
     [self addConstraints:horizontalConstraints];
     [self addConstraints:verticalConstraints];
 }
@@ -128,7 +130,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
         backgroundColor = [UIColor connectivityWarningColor];
         alertTextColor = [UIColor darkGreyTextColor];
     } else if (AFABannerAlertStyleError == self.alertStyle) {
-        backgroundColor = [UIColor redColor];
+        backgroundColor = [UIColor alertWithErrorColor];
         alertTextColor = [UIColor whiteColor];
     } else if (AFABannerAlertStyleSuccess == self.alertStyle) {
         backgroundColor = [UIColor connectivityRestoredColor];
@@ -144,16 +146,23 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     _isBannerVisible = YES;
     
     UINavigationBar *navigationBar = self.parentViewController.navigationController.navigationBar;
-    [navigationBar.superview insertSubview:self
-                              belowSubview:navigationBar];
+    CGFloat topOffset;
     
-    CGFloat topOffset = CGRectGetMaxY(navigationBar.frame);
+    if (!navigationBar.isHidden) {
+        [navigationBar.superview insertSubview:self
+        belowSubview:navigationBar];
+        topOffset = CGRectGetMaxY(navigationBar.frame);
+    } else {
+        [self.parentViewController.view addSubview:self];
+        topOffset = 0;
+    }
+
     NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[banner]|"
-                                                                             options:0
+                                                                             options:kNilOptions
                                                                              metrics:nil
                                                                                views:@{@"banner": self}];
     NSArray *topConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(offset)-[banner]"
-                                                                      options:0
+                                                                      options:kNilOptions
                                                                       metrics:@{@"offset": @(topOffset)}
                                                                         views:@{@"banner": self}];
     self.topSpacingConstraint = topConstraints.firstObject;

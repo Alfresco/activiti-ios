@@ -19,6 +19,11 @@
 import Foundation
 import AlfrescoAuth
 
+protocol AIMSSSOViewModelDelegate: class {
+    func logInFailed(with error: APIError)
+    func logInSuccessful()
+}
+
 class AIMSSSOViewModel {
     let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
     let subtitle1Text = NSLocalizedString(kLocalizationSSOLoginSubtitle1Text, comment: "Info")
@@ -47,6 +52,8 @@ class AIMSSSOViewModel {
         }
     }
     
+    fileprivate var alfrescoCredential: AlfrescoCredential?
+    weak var delegate: AIMSSSOViewModelDelegate?
     
     // Authentication service
     var authParameters: AIMSAuthenticationParameters?
@@ -62,13 +69,37 @@ class AIMSSSOViewModel {
 
 //MARK: - AlfrescoAuth Delegate
 extension AIMSSSOViewModel: AlfrescoAuthDelegate {
+    var serverConfiguration: ASDKModelServerConfiguration {
+        get {
+            let serverConfiguration = ASDKModelServerConfiguration()
+            
+            if let authParameters = self.authParameters {
+                serverConfiguration.hostAddressString = authParameters.hostname
+                serverConfiguration.isCommunicationOverSecureLayer = authParameters.https
+                serverConfiguration.serviceDocument = authParameters.serviceDocument
+                serverConfiguration.port = authParameters.port
+                serverConfiguration.acessToken = alfrescoCredential?.accessToken
+            }
+        
+            return serverConfiguration
+        }
+    }
+    
     func didReceive(result: Result<AlfrescoCredential, APIError>) {
-//        switch result {
-//        case .success(let alfrescoCredential):
-//
-//
-//        case .failure(let error):
-//
-//        }
+        switch result {
+        case .success(let alfrescoCredential):
+            self.alfrescoCredential = alfrescoCredential
+            let persistenceStackModelName = self.persistenceStackModelName()
+            let sdkBootstrap = ASDKBootstrap.sharedInstance()
+            sdkBootstrap?.setupServices(with: serverConfiguration)
+            
+            self.delegate?.logInSuccessful()
+        case .failure(let error):
+            self.delegate?.logInFailed(with: error)
+        }
+    }
+    
+    func persistenceStackModelName() -> String {
+        return ASDKPersistenceStack.persistenceStackModelName(for: self.serverConfiguration)
     }
 }

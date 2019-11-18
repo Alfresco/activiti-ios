@@ -19,8 +19,9 @@
 import UIKit
 import MaterialComponents.MDCButton
 import MaterialComponents.MDCTextField
+import AlfrescoCore
 
-class AIMSSSOViewController: UIViewController {
+class AIMSSSOViewController: AFABaseThemedViewController {
     
     @IBOutlet weak var processServiceAppLabel: UILabel!
     @IBOutlet weak var subtitle1Label: UILabel!
@@ -36,6 +37,23 @@ class AIMSSSOViewController: UIViewController {
     
     var enableSignInButton: Bool = false
     
+    // Loading view
+    var overlayView: AIMSActivityView?
+    var controllerState: ControllerState? {
+        didSet {
+            switch controllerState {
+            case .isLoading:
+                if let loadingView = overlayView {
+                    self.view.isUserInteractionEnabled = false
+                    self.view.addSubview(loadingView)
+                }
+            case .isIdle, .none:
+                self.view.isUserInteractionEnabled = true
+                overlayView?.removeFromSuperview()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -44,6 +62,8 @@ class AIMSSSOViewController: UIViewController {
             AFALog.logError("Color scheme manager could not be initiated")
             return
         }
+        
+        self.model.delegate = self
         
         processServiceAppLabel.text = model.processServicessAppText
         subtitle1Label.text = model.subtitle1Text
@@ -70,12 +90,22 @@ class AIMSSSOViewController: UIViewController {
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
         shouldEnableSignInButton()
+        
+        // Loading view
+        overlayView = AIMSActivityView(frame: self.view.frame)
+        overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
+                                              typographyScheme: colorSchemeManager.defaultTypographyScheme)
+        overlayView?.label.text = NSLocalizedString(kLocalizationSSOLoginScreenSigningInText, comment: "Signing In")
+        overlayView?.overlayView?.alpha = 1
+        overlayView?.imageView?.image = UIImage(named: "splash-wallpaper")
     }
     
     //MARK: - IBActions
     
     @IBAction func signInButtonPressed(_ sender: MDCButton) {
         self.view.endEditing(true)
+        self.controllerState = .isLoading
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         if let apsURL = repositoryTextField.text {
             model.authParameters?.processURL = apsURL
@@ -117,6 +147,8 @@ class AIMSSSOViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
+
 extension AIMSSSOViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -133,5 +165,36 @@ extension AIMSSSOViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+// MARK: - AIMSSSOViewModelDelegate
+
+extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
+    func logInSuccessful() {
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            
+            sSelf.navigationController?.setNavigationBarHidden(false, animated: false)
+            sSelf.controllerState = .isIdle
+            sSelf.performSegue(withIdentifier: kSegueIDLoginAuthorized, sender: nil)
+        }
+    }
+    
+    func logInFailed(with error: APIError) {
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            
+            sSelf.navigationController?.setNavigationBarHidden(false, animated: true)
+            sSelf.controllerState = .isIdle
+            
+            AFALog.logError(error.localizedDescription)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + kOverlayAlphaChangeTime) { [weak self] in
+                guard let sSelf = self else { return }
+                
+                sSelf.showErrorMessage(error.localizedDescription)
+            }
+        }
     }
 }

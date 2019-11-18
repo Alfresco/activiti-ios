@@ -45,5 +45,6 @@
 + (UIColor *)checkmarkedActionColor;
 + (UIColor *)connectivityWarningColor;
 + (UIColor *)connectivityRestoredColor;
++ (UIColor *)alertWithErrorColor;
 
 @end

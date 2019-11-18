@@ -68,7 +68,6 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
 
 + (NSString *)persistenceStackModelNameForServerConfiguration:(ASDKModelServerConfiguration *)serverConfiguration {
     if (serverConfiguration.hostAddressString.length &&
-        serverConfiguration.username.length &&
         serverConfiguration.serviceDocument.length) {
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_]+"
                                                                                options:kNilOptions
@@ -79,16 +78,24 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                                                                        options:kNilOptions
                                                                          range:NSMakeRange(0, serverConfiguration.hostAddressString.length)
                                                                   withTemplate:@""];
-        NSString *normalizedUserName = [regex stringByReplacingMatchesInString:serverConfiguration.username
-                                                                       options:kNilOptions
-                                                                         range:NSMakeRange(0, serverConfiguration.username.length)
-                                                                  withTemplate:@""];
+        NSString *normalizedUserName;
+        if (serverConfiguration.username.length) {
+            normalizedHostName = [regex stringByReplacingMatchesInString:serverConfiguration.username
+                 options:kNilOptions
+                   range:NSMakeRange(0, serverConfiguration.username.length)
+            withTemplate:@""];
+        }
+        
         NSString *normalizedServiceDocument = [regex stringByReplacingMatchesInString:serverConfiguration.serviceDocument
                                                                               options:kNilOptions
                                                                                 range:NSMakeRange(0, serverConfiguration.serviceDocument.length)
                                                                          withTemplate:@""];
         
-        return [NSString stringWithFormat:@"%@@%@@%@", normalizedHostName, normalizedServiceDocument, normalizedUserName];
+        if (normalizedUserName) {
+            return [NSString stringWithFormat:@"%@@%@@%@", normalizedHostName, normalizedServiceDocument, normalizedUserName];
+        } else {
+            return [NSString stringWithFormat:@"%@@%@", normalizedHostName, normalizedServiceDocument];
+        }
     }
     
     return nil;

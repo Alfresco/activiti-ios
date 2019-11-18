@@ -48,39 +48,40 @@
 "loginScreenOnPremiseSigningInToHintFormat"              = "Signing in to \n %@";
 
 // Advanced Settings screen
-"advancedSettingsScreenTransportProtocolText" = "Transport Protocol";
-"advancedSettingsScreenHttpsPlaceholderText" = "HTTPS";
-"advancedSettingsScreenPortPlaceholderText" = "Port";
-"advancedSettingsScreenPortHintText" = "You can connect using a custom port number here";
-"advancedSettingProcessServiceSettingsText" = "Alfresco Process Services Settings";
-"advancedSettingsScreenServiceDocumentPlaceholderText" = "Service Documents";
-"advancedSettingsScreenServiceDocumentHintText" = " ";
-"advancedSettingsScreenAuthenticationText" = "Authentication";
-"advancedSettingsScreenRealmPlaceholderText" = "Realm";
-"advancedSettingsScreenRealmHintText" = "Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
-"advancedSettingsScreeClientIDPlaceholderText" = "Client ID";
-"advancedSettingsScreenClientIDHintText" = "Your system administrator will have setup a client id for this application. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
-"advancedSettingsScreenRedirectURLPlaceHolderText" = "Redirect URL";
-"advancedSettingsScreenRedirectURLHintText" = " ";
-"advancedSettingsScreenSaveButtonText" = "SAVE";
-"advancedSettingsScreenHelpButtonText" = "NEED HELP";
-"advancedSettingsScreenHelpText" = "Help";
-"advancedSettingsScreenCloseText" = "CLOSE";
-"advancedSettingsScreenHelpHintText" = "Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco\n\nYour system administrator will have setup a client id for this application. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
+"advancedSettingsScreenTransportProtocolText"            = "Transport Protocol";
+"advancedSettingsScreenHttpsPlaceholderText"             = "HTTPS";
+"advancedSettingsScreenPortPlaceholderText"              = "Port";
+"advancedSettingsScreenPortHintText"                     = "You can connect using a custom port number here";
+"advancedSettingProcessServiceSettingsText"              = "Alfresco Process Services Settings";
+"advancedSettingsScreenServiceDocumentPlaceholderText"   = "Service Documents";
+"advancedSettingsScreenServiceDocumentHintText"          = " ";
+"advancedSettingsScreenAuthenticationText"               = "Authentication";
+"advancedSettingsScreenRealmPlaceholderText"             = "Realm";
+"advancedSettingsScreenRealmHintText"                    = "Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
+"advancedSettingsScreeClientIDPlaceholderText"           = "Client ID";
+"advancedSettingsScreenClientIDHintText"                 = "Your system administrator will have setup a client id for this application. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
+"advancedSettingsScreenRedirectURLPlaceHolderText"       = "Redirect URL";
+"advancedSettingsScreenRedirectURLHintText"              = " ";
+"advancedSettingsScreenSaveButtonText"                   = "SAVE";
+"advancedSettingsScreenHelpButtonText"                   = "NEED HELP";
+"advancedSettingsScreenHelpText"                         = "Help";
+"advancedSettingsScreenCloseText"                        = "CLOSE";
+"advancedSettingsScreenHelpHintText"                     = "Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco\n\nYour system administrator will have setup a client id for this application. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
 
 // Cloud Login screen
 
-"cloudLoginInfoText" = "Helpful introduction and information text about Process Services Cloud.";
-"cloudLoginUsernamePlaceholderText" = "Username or Email";
-"cloudLoginPasswordPlaceholderText" = "Password";
-"cloudLoginSignInButtonText" = "SIGN IN";
+"cloudLoginInfoText"                                     = "Helpful introduction and information text about Process Services Cloud.";
+"cloudLoginUsernamePlaceholderText"                      = "Username or Email";
+"cloudLoginPasswordPlaceholderText"                      = "Password";
+"cloudLoginSignInButtonText"                             = "SIGN IN";
 
 // SSO Login screen
 
-"ssoLoginSubtitle1Text" = "Singing in to";
-"ssoLoginSubtitle2Text" = "To allow successful single sign on access, please provide the location of your Process Services environment.";
-"ssoLoginRepositoryPlaceholderText" = "Process repository location";
-"ssoLoginSignInSSOButtonText" = "SING IN WITH SSO";
+"ssoLoginSubtitle1Text"                                  = "Singing in to";
+"ssoLoginSubtitle2Text"                                  = "To allow successful single sign on access, please provide the location of your Process Services environment.";
+"ssoLoginRepositoryPlaceholderText"                      = "Process repository location";
+"ssoLoginSignInSSOButtonText"                            = "SING IN WITH SSO";
+"ssoLoginScreenSigningInText"                            = "Signing In";
 
 // Applications screen
 "appScreenTitleText"                                     = "Applications";
