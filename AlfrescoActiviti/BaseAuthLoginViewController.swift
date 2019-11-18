@@ -89,6 +89,14 @@ class BaseAuthLoginViewController: UIViewController {
         showPasswordButton.setImage(UIImage(named: "hide-password-icon"), for: .normal)
         showPasswordButton.setImage(UIImage(named: "show-password-icon"), for: .selected)
         showPasswordButton.addTarget(self, action: #selector(showPasswordButtonPressed(_:)), for: .touchUpInside)
+        
+        if #available(iOS 13, *) {
+            
+        } else {
+            showPasswordButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -22.5)
+            showPasswordButton.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
+        }
+        
         passwordTextfield.rightViewMode = .always
         passwordTextfield.rightView = showPasswordButton
         passwordTextfield.rightView?.tintColor = #colorLiteral(red: 0.568627451, green: 0.568627451, blue: 0.568627451, alpha: 1)
@@ -171,6 +179,7 @@ class BaseAuthLoginViewController: UIViewController {
             AFALog.logError("Color scheme manager could not be initiated")
             return
         }
+        
         signInButton.setTitle(model.loginStrategy?.signInButtonText, for: .normal)
         signInButton.isEnabled = enableSignInButton
         if enableSignInButton {
@@ -181,6 +190,7 @@ class BaseAuthLoginViewController: UIViewController {
         signInButton.setElevation(.none, for: .normal)
         signInButton.setElevation(.none, for: .highlighted)
         signInButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
+        signInButton.semanticContentAttribute = .forceRightToLeft
     }
     
     //MARK: - Navigation

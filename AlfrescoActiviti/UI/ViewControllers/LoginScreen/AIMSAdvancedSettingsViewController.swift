@@ -38,9 +38,15 @@ class AIMSAdvancedSettingsViewController: UIViewController {
         parameters = model.getParameters()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil) 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        tableView.tableFooterView = footerView()
+        if (self.view.traitCollection.horizontalSizeClass == .compact) {
+            tableView.tableFooterView = footerView()
+        }
     }
     
     @IBAction func viewPressed(_ sender: UITapGestureRecognizer) {
@@ -69,13 +75,13 @@ class AIMSAdvancedSettingsViewController: UIViewController {
             return UIView()
         }
         
-        let copyrightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 10))
-        copyrightLabel.text = model.copyrightText
+        let copyrightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 10))
         copyrightLabel.textAlignment = .center
+        copyrightLabel.text = model.copyrightText
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 10))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 15))
         footerView.backgroundColor = .clear
         footerView.addSubview(copyrightLabel)
         

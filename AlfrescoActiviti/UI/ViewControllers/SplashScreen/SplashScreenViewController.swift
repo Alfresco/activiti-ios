@@ -38,18 +38,20 @@ class SplashScreenViewController: UIViewController {
         copyrightLabel.text = copyrightText
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
+        copyrightLabel.isHidden = true
 
-//        containerView.layer.cornerRadius = 20
-
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 0.7
-        containerView.layer.shadowOffset = .zero
-        containerView.layer.shadowRadius = 50
-        containerView.layer.shadowPath = UIBezierPath(rect: containerView.bounds).cgPath
-        containerView.layer.shouldRasterize = true
-        containerView.layer.rasterizationScale = UIScreen.main.scale
-        
-
+        applyShadow(to: containerView)
+    }
+    
+    func applyShadow(to view: UIView) {
+        view.layer.cornerRadius = 20
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.4
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 10
+        view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
+        view.layer.shouldRasterize = true
+        view.layer.rasterizationScale = UIScreen.main.scale
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,6 +65,8 @@ class SplashScreenViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + kSplashScreenAnimationTime + 0.2, execute: {
             self.view.bringSubviewToFront(self.iceEffectView)
             self.view.bringSubviewToFront(self.containerView)
+            self.copyrightLabel.isHidden = false
+            self.logoImageView.isHidden = true
         })
     }
 }
