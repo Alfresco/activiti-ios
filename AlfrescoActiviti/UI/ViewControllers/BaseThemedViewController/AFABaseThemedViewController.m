@@ -52,14 +52,13 @@
                                  switch (reachability) {
                                      case ASDKNetworkReachabilityStatusNotReachable: {
                                          if (strongSelf.isControllerViewVisible) {
-                                             [self didLoseNetworkConnectivity];
+                                             [strongSelf didLoseNetworkConnectivity];
                                          }
                                      }
                                          break;
                                          
                                      case ASDKNetworkReachabilityStatusReachableViaWWANOrWifi: {
                                          if (strongSelf.isControllerViewVisible) {
-                                             [strongSelf showWarningMessage:NSLocalizedString(kLocalizationOfflineConnectivityRetryText, @"Reconnect text")];
                                              [strongSelf didRestoredNetworkConnectivity];
                                          }
                                      }

@@ -120,6 +120,10 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
     }
     
+    override func didRestoredNetworkConnectivity() {
+        // Don't display network connectivity alerts on this screen
+    }
+    
     //MARK: - IBActions
     
     @objc func showPasswordButtonPressed(_ sender: UIButton) {
@@ -190,7 +194,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         if segue.identifier == kSegueIDLoginAuthorized {
             let cvc = segue.destination as! AFAContainerViewController
             cvc.transitioningDelegate = self
-            cvc.persistenceStackModelName = model.persistenceStackModelName()
+            cvc.viewModel = AFAContainerViewModel.init(persistenceStackModelName: model.persistenceStackModelName())
         }
     }
 }

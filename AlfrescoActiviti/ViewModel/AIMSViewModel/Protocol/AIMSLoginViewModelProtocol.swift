@@ -16,25 +16,8 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-@class AFAContainerViewModel;
-
-@protocol AFAContainerViewControllerDelegate <NSObject>
-
-- (BOOL)isDrawerMenuOpen;
-- (void)toggleDrawerMenuWithThemeColor:(UIColor *)themeColor;
-- (void)changeThemeColor:(UIColor *)themeColor;
-- (void)logoutUser;
-- (void)showAdhocTasks;
-- (void)showApplications;
-- (void)showUserProfile;
-- (void)showSettings;
-
-@end
-
-@interface AFAContainerViewController : UIViewController
-
-@property AFAContainerViewModel *viewModel;
-
-@end
+protocol AIMSLoginViewModelProtocol {
+    func persistenceStackModelName() -> String
+}

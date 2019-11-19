@@ -62,14 +62,15 @@ NSString *uuidKeychainIdentifier = @"uuidKeychainIdentifier";
 #pragma mark -
 #pragma mark Keychain utility methods
 
-+ (BOOL)createKeychainValue:(NSString *)value
-              forIdentifier:(NSString *)identifier {
++ (BOOL)createKeychainData:(NSData *)data
+             forIdentifier:(NSString *)identifier {
     NSMutableDictionary *dictionary = [self keychainAccessAttributesDictionaryForIdentifier:identifier];
-    NSData *valueData = [value dataUsingEncoding:NSUTF8StringEncoding];
-    [dictionary setObject:valueData forKey:(__bridge id)kSecValueData];
+    [dictionary setObject:data
+                   forKey:(__bridge id)kSecValueData];
     
     // Protect the keychain entry so it's only valid when the device is unlocked.
-    [dictionary setObject:(__bridge id)kSecAttrAccessibleWhenUnlocked forKey:(__bridge id)kSecAttrAccessible];
+    [dictionary setObject:(__bridge id)kSecAttrAccessibleWhenUnlocked
+                   forKey:(__bridge id)kSecAttrAccessible];
     
     // Add.
     OSStatus status = SecItemAdd((__bridge CFDictionaryRef)dictionary, NULL);
@@ -79,19 +80,26 @@ NSString *uuidKeychainIdentifier = @"uuidKeychainIdentifier";
         AFALogVerbose(@"Added value to Keychain for identifier:%@", identifier);
         return YES;
     } else if (status == errSecDuplicateItem){
-        return [self updateKeychainValue:value forIdentifier:identifier];
+        return [self updateKeychainData:data
+                          forIdentifier:identifier];
     } else {
         AFALogError(@"Cannot add value to Keychain for identifier:%@", identifier);
         return NO;
     }
 }
 
-+ (BOOL)updateKeychainValue:(NSString *)value
++ (BOOL)createKeychainValue:(NSString *)value
               forIdentifier:(NSString *)identifier {
+    NSData *valueData = [value dataUsingEncoding:NSUTF8StringEncoding];
+    return [self createKeychainData:valueData
+                      forIdentifier:identifier];
+}
+
++ (BOOL)updateKeychainData:(NSData *)data
+             forIdentifier:(NSString *)identifier {
     NSMutableDictionary *searchDictionary = [self keychainAccessAttributesDictionaryForIdentifier:identifier];
     NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
-    NSData *valueData = [value dataUsingEncoding:NSUTF8StringEncoding];
-    [updateDictionary setObject:valueData forKey:(__bridge id)kSecValueData];
+    [updateDictionary setObject:data forKey:(__bridge id)kSecValueData];
     
     // Update.
     OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)searchDictionary,
@@ -104,6 +112,13 @@ NSString *uuidKeychainIdentifier = @"uuidKeychainIdentifier";
         AFALogError(@"Cannot update value in Keychain for identifier:%@", identifier);
         return NO;
     }
+}
+
++ (BOOL)updateKeychainValue:(NSString *)value
+              forIdentifier:(NSString *)identifier {
+    NSData *valueData = [value dataUsingEncoding:NSUTF8StringEncoding];
+    return [self updateKeychainData:valueData
+                      forIdentifier:identifier];
 }
 
 + (void)deleteItemFromKeychainWithIdentifier:(NSString *)identifier {
@@ -126,6 +141,11 @@ NSString *uuidKeychainIdentifier = @"uuidKeychainIdentifier";
         return nil;
     }
 }
+
++ (NSData *)dataForMatchingIdentifier:(NSString *)identifier {
+    return [self searchKeychainCopyMatchingIdentifier:identifier];
+}
+
 
 #pragma mark - 
 #pragma mark Utilities

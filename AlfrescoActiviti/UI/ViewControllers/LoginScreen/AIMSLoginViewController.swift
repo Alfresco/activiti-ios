@@ -171,7 +171,9 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     
     // MARK: - Navigation
     
-    @IBAction func unwindToLoginController(_ sender: UIStoryboardSegue) { }
+    @IBAction func unwindToAIMSLoginViewController(_ sender: UIStoryboardSegue) {
+        alfrescoURLTextField.text = nil
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if kSegueIDBaseAuthLoginSegueID == segue.identifier {
@@ -189,6 +191,11 @@ extension AIMSLoginViewController: UITextFieldDelegate {
         if alfrescoURLTextField == textField {
             updateConnectButtonState()
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

@@ -26,11 +26,13 @@ class AIMSAuthenticationParameters: Codable {
     var clientID: String = "alfresco"
     var redirectURI: String = "iosapp://fake.url.here/auth"
     var hostname: String = ""
-    var contentURL: String = ""
     var processURL: String = ""
     var fullFormatURL: String {
         get {
-            let fullFormatURL = String(format:"%@://%@", https ? "https" : "http", hostname)
+            var fullFormatURL = String(format:"%@://%@", https ? "https" : "http", hostname)
+            if port.count != 0 {
+                fullFormatURL.append(contentsOf: String(format:":%@", port))
+            }
             return fullFormatURL
         }
     }

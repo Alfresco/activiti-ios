@@ -27,6 +27,7 @@
 // View models
 #import "AFATaskListViewModel.h"
 #import "AFAProcessListViewModel.h"
+#import "AFAContainerViewModel.h"
 
 // Managers
 #import "AFAServiceRepository.h"
@@ -177,7 +178,7 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
     [self toggleDrawerMenu];
     
     AFAApplicationListViewController *applicationListViewController = [self.storyboard instantiateViewControllerWithIdentifier:kStoryboardIDApplicationListViewController];
-    applicationListViewController.delegate = self;  
+    applicationListViewController.delegate = self;
     
     [self.detailsNavigationController setViewControllers:@[applicationListViewController]
                                                 animated:NO];
@@ -213,16 +214,16 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
     UIAlertAction *yesButtonAction = [UIAlertAction actionWithTitle:NSLocalizedString(kLocalizationAlertDialogYesButtonText, @"YES button title")
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction *action) {
-                                                                __strong typeof(self) strongSelf = weakSelf;
-
-                                                                [strongSelf requestUserLogout];
-                                                            }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [strongSelf requestUserLogout];
+    }];
     UIAlertAction *cancelButtonAction = [UIAlertAction actionWithTitle:NSLocalizedString(kLocalizationAlertDialogCancelButtonText, @"Cancel button title")
                                                                  style:UIAlertActionStyleDefault
                                                                handler:^(UIAlertAction *action) {
-                                                                   [alertController dismissViewControllerAnimated:YES
-                                                                                                       completion:nil];
-                                                               }];
+        [alertController dismissViewControllerAnimated:YES
+                                            completion:nil];
+    }];
     [alertController addAction:yesButtonAction];
     [alertController addAction:cancelButtonAction];
     
@@ -323,15 +324,15 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
           initialSpringVelocity:10.0f
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         [self.view layoutIfNeeded];
-                     }
+        [self.view layoutIfNeeded];
+    }
                      completion:^(BOOL finished) {
-                         // After the reverse animation finished there is no need to keep the menu container
-                         // visible, hide it till the next toggle
-                         if (isReverseAnimation) {
-                             self.menuContainerView.hidden = YES;
-                         }
-                     }];
+        // After the reverse animation finished there is no need to keep the menu container
+        // visible, hide it till the next toggle
+        if (isReverseAnimation) {
+            self.menuContainerView.hidden = YES;
+        }
+    }];
     
     [self changeContainerBackgroundColor:containerBackgroundColor
                                withDelay:backgroundColorAnimationDelay];
@@ -342,45 +343,38 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
 #pragma mark Private interface
 
 - (void)handleUnAuthorizedRequestNotification {
-    [AFAKeychainWrapper deleteItemFromKeychainWithIdentifier: self.persistenceStackModelName];
-    
-    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
-    }
-    
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:NSLocalizedString(kLocalizationLoginUnauthorizedRequestErrorText, @"Unauthorized request text")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
+    
     __weak typeof(self) weakSelf = self;
     UIAlertAction *okButtonAction = [UIAlertAction actionWithTitle:NSLocalizedString(kLocalizationAlertDialogOkButtonText, @"OK button title")
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction *action) {
-                                                               __strong typeof(self) strongSelf = weakSelf;
-                                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                                   [strongSelf performSegueWithIdentifier:kSegueIDLoginAuthorizedUnwind
-                                                                                                   sender:nil];
-                                                               });
-                                                           }];
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf requestUserLogout];
+    }];
     [alertController addAction:okButtonAction];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self presentViewController:alertController
-                           animated:YES
-                         completion:nil];
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf presentViewController:alertController
+                                 animated:YES
+                               completion:nil];
     });
 }
 
 - (void)requestUserLogout {
-    [AFAKeychainWrapper deleteItemFromKeychainWithIdentifier: self.persistenceStackModelName];
+    [self.viewModel requestLogout];
     
-    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
-    }
-    
-    
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self performSegueWithIdentifier:kSegueIDLoginAuthorizedUnwind
-                                  sender:nil];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [strongSelf dismissViewControllerAnimated:YES
+                                       completion:nil];
+        [strongSelf performSegueWithIdentifier:kSegueIDLoginAuthorizedUnwind
+                                        sender:nil];
     });
 }
 
@@ -390,8 +384,8 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
                           delay:backgroundColorAnimationDelay
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.view.backgroundColor = containerBackgroundColor;
-                     }
+        self.view.backgroundColor = containerBackgroundColor;
+    }
                      completion:nil];
 }
 

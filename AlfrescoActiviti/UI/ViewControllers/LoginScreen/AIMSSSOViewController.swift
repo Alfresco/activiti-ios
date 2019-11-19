@@ -100,6 +100,10 @@ class AIMSSSOViewController: AFABaseThemedViewController {
         overlayView?.imageView?.image = UIImage(named: "splash-wallpaper")
     }
     
+    override func didRestoredNetworkConnectivity() {
+        // Don't display network connectivity alerts on this screen
+    }
+    
     //MARK: - IBActions
     
     @IBAction func signInButtonPressed(_ sender: MDCButton) {
@@ -125,6 +129,16 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     
     @IBAction func backgroundViewPressed(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == kSegueIDLoginAuthorized {
+            let cvc = segue.destination as! AFAContainerViewController
+            cvc.transitioningDelegate = self
+            cvc.viewModel = AFAContainerViewModel.init(persistenceStackModelName: model.persistenceStackModelName())
+        }
     }
     
     //MARK: - Helpers
@@ -196,5 +210,16 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
                 sSelf.showErrorMessage(error.localizedDescription)
             }
         }
+    }
+}
+
+extension AIMSSSOViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return AFAModalDismissAnimator()
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return AFAModalDismissAnimator()
     }
 }

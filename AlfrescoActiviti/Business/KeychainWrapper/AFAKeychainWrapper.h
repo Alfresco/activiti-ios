@@ -37,10 +37,22 @@
 // Keychain access methods
 
 /*
- * Store a value in the keychain for a given identifier
+* Persist a data structure in the keychain for a given identifier
+*/
++ (BOOL)createKeychainData:(NSData *)data
+             forIdentifier:(NSString *)identifier;
+
+/*
+ * Persist a value in the keychain for a given identifier
  */
 + (BOOL)createKeychainValue:(NSString *)value
               forIdentifier:(NSString *)identifier;
+
+/*
+* Updates the data structure in keychain for a given identifier
+*/
++ (BOOL)updateKeychainData:(NSData *)data
+             forIdentifier:(NSString *)identifier;
 
 /*
  * Updates the value in keychain for a given identifier
@@ -57,5 +69,10 @@
  * Search the keychain value for a given identifier
  */
 + (NSString *)keychainStringFromMatchingIdentifier:(NSString *)identifier;
+
+/*
+* Search data structure in keychain for a given identifier
+*/
++ (NSData *)dataForMatchingIdentifier:(NSString *)identifier;
 
 @end

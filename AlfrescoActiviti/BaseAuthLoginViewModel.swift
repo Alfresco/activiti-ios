@@ -18,7 +18,7 @@
 
 import Foundation
 
-class BaseAuthLoginViewModel {
+class BaseAuthLoginViewModel: AIMSLoginViewModelProtocol {
     var loginStrategy: BaseAuthLoginStrategyProtocol?
     let requestProfileService = AFAProfileServices()
 

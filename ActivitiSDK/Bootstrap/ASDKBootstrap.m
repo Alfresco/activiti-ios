@@ -115,10 +115,11 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     ASDKLogVerbose(@"Registering services...");
     
     // Create a service path factory with the passed server configuration
-    ASDKServicePathFactory *servicePathFactory = [[ASDKServicePathFactory alloc] initWithHostAddress:self.serverConfiguration.hostAddressString
-                                                                                 serviceDocumentPath:self.serverConfiguration.serviceDocument
-                                                                                                port:self.serverConfiguration.port
-                                                                                     overSecureLayer:self.serverConfiguration.isCommunicationOverSecureLayer];
+    ASDKServicePathFactory *servicePathFactory =
+    [[ASDKServicePathFactory alloc] initWithHostAddress:self.serverConfiguration.hostAddressString
+                                    serviceDocumentPath:self.serverConfiguration.serviceDocument
+                                                   port:self.serverConfiguration.port
+                                        overSecureLayer:self.serverConfiguration.isCommunicationOverSecureLayer];
     
     // Set up the request manager
     AFJSONRequestSerializer *authenticationProvider = [self authenticationProviderForServerConfiguration:serverConfiguration];
