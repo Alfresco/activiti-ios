@@ -97,7 +97,9 @@ class AIMSSSOViewController: AFABaseThemedViewController {
                                               typographyScheme: colorSchemeManager.defaultTypographyScheme)
         overlayView?.label.text = NSLocalizedString(kLocalizationSSOLoginScreenSigningInText, comment: "Signing In")
         overlayView?.overlayView?.alpha = 1
-        overlayView?.imageView?.image = UIImage(named: "splash-wallpaper")
+        if (self.view.traitCollection.horizontalSizeClass == .compact) {
+            overlayView?.imageView?.image = UIImage(named: "splash-wallpaper")
+        }
     }
     
     //MARK: - IBActions

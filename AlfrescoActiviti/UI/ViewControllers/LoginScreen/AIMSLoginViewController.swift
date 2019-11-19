@@ -56,8 +56,9 @@ class AIMSLoginViewController: AFABaseThemedViewController {
             switch controllerState {
             case .isLoading:
                 if let loadingView = overlayView {
+                    let window = UIApplication.shared.keyWindow!
                     self.view.isUserInteractionEnabled = false
-                    self.view.addSubview(loadingView)
+                    window.addSubview(loadingView)
                 }
             case .isIdle, .none:
                 self.view.isUserInteractionEnabled = true
