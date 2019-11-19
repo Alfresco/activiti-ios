@@ -56,9 +56,8 @@ class AIMSLoginViewController: AFABaseThemedViewController {
             switch controllerState {
             case .isLoading:
                 if let loadingView = overlayView {
-                    let window = UIApplication.shared.keyWindow!
                     self.view.isUserInteractionEnabled = false
-                    window.addSubview(loadingView)
+                    self.view.addSubview(loadingView)
                 }
             case .isIdle, .none:
                 self.view.isUserInteractionEnabled = true
@@ -115,17 +114,28 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
-        // Loading view
-        overlayView = AIMSActivityView(frame: self.view.frame)
-        overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
-                                              typographyScheme: colorSchemeManager.defaultTypographyScheme)
-        overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
+        
         
         // Dismiss keyboard on taps outside text fields
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         if let gestureRecognizer = tapGestureRecognizer {
             self.view .addGestureRecognizer(gestureRecognizer)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        guard let colorSchemeManager = self.colorSchemeManager else {
+            AFALog.logError("Color scheme manager could not be initiated")
+            return
+        }
+        
+        // Loading view
+        overlayView = AIMSActivityView(frame: self.view.bounds)
+        overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
+                                              typographyScheme: colorSchemeManager.defaultTypographyScheme)
+        overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
     }
     
     override func viewWillAppear(_ animated: Bool) {
