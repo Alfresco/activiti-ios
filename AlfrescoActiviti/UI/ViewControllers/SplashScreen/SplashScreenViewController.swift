@@ -46,9 +46,9 @@ class SplashScreenViewController: UIViewController {
     func applyShadow(to view: UIView) {
         view.layer.cornerRadius = 20
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.4
+        view.layer.shadowOpacity = 0.2
         view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 10
+        view.layer.shadowRadius = 50
         view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
         view.layer.shouldRasterize = true
         view.layer.rasterizationScale = UIScreen.main.scale
@@ -56,7 +56,7 @@ class SplashScreenViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.containerView.alpha = 0.0
         self.logoWidthConstraint.constant = self.logoWidthConstraint.constant + 50
         UIView.animate(withDuration: kSplashScreenAnimationTime) {
             self.view.layoutIfNeeded()
@@ -65,6 +65,9 @@ class SplashScreenViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + kSplashScreenAnimationTime + 0.2, execute: {
             self.view.bringSubviewToFront(self.iceEffectView)
             self.view.bringSubviewToFront(self.containerView)
+            UIView.animate(withDuration: 0.5) {
+                self.containerView.alpha = 1.0
+            }
             self.copyrightLabel.isHidden = false
             self.logoImageView.isHidden = true
         })
