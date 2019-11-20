@@ -58,6 +58,7 @@ class AIMSLoginViewModel {
             
             switch result {
             case .success(let authType):
+                authParameters.save()
                 sSelf.delegate?.authenticationServiceAvailable(for: authType)
             case .failure(let error):
                 AFALog.logError(error.localizedDescription)

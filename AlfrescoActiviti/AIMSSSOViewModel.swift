@@ -24,7 +24,7 @@ protocol AIMSSSOViewModelDelegate: class {
     func logInSuccessful()
 }
 
-class AIMSSSOViewModel {
+class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
     let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
     let subtitle1Text = NSLocalizedString(kLocalizationSSOLoginSubtitle1Text, comment: "Info")
     let subtitle2Text = NSLocalizedString(kLocalizationSSOLoginSubtitle2Text, comment: "Info")
@@ -88,8 +88,31 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
     func didReceive(result: Result<AlfrescoCredential, APIError>) {
         switch result {
         case .success(let alfrescoCredential):
+
+            // Persist the login type identifier
+            let sud = UserDefaults.standard
+            sud.set(kAIMSAuthenticationCredentialIdentifier, forKey: kAuthentificationTypeCredentialIdentifier)
+            sud.synchronize()
+            
+            // Save Alfresco credentials and server connection parameters
             self.alfrescoCredential = alfrescoCredential
+            authParameters?.save()
+            
             let persistenceStackModelName = self.persistenceStackModelName()
+            
+            let encoder = JSONEncoder()
+            var credentialData: Data?
+            do {
+                credentialData = try encoder.encode(alfrescoCredential)
+            } catch {
+                AFALog.logError("Unable to persist credentials to Keychain")
+            }
+            
+            if let data = credentialData {
+                AFAKeychainWrapper.createKeychainData(data, forIdentifier: persistenceStackModelName)
+            }
+            
+            // Initialize ActivitiSDK
             let sdkBootstrap = ASDKBootstrap.sharedInstance()
             sdkBootstrap?.setupServices(with: serverConfiguration)
             

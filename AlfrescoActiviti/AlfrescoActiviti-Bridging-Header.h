@@ -15,6 +15,7 @@
 #import "AFAModalDismissAnimator.h"
 #import "AFAKeychainWrapper.h"
 #import "AFABaseThemedViewController.h"
+#import "AFAContainerViewModel.h"
 
 @import ActivitiSDK;
 @import ActivitiSDK.Private;

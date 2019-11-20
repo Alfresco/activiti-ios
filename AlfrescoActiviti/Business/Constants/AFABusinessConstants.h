@@ -40,6 +40,7 @@ extern NSUInteger kTaskPreloadCellThreshold;
 // Credential related
 extern NSString *kCloudAuthetificationCredentialIdentifier;
 extern NSString *kPremiseAuthentificationCredentialIdentifier;
+extern NSString *kAIMSAuthenticationCredentialIdentifier;
 extern NSString *kCloudUsernameCredentialIdentifier;
 extern NSString *kPremiseUsernameCredentialIdentifier;
 extern NSString *kCloudHostNameCredentialIdentifier;

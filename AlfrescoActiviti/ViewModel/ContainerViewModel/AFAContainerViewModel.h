@@ -16,25 +16,16 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@class AFAContainerViewModel;
+NS_ASSUME_NONNULL_BEGIN
 
-@protocol AFAContainerViewControllerDelegate <NSObject>
+@interface AFAContainerViewModel : NSObject
 
-- (BOOL)isDrawerMenuOpen;
-- (void)toggleDrawerMenuWithThemeColor:(UIColor *)themeColor;
-- (void)changeThemeColor:(UIColor *)themeColor;
-- (void)logoutUser;
-- (void)showAdhocTasks;
-- (void)showApplications;
-- (void)showUserProfile;
-- (void)showSettings;
+- (instancetype)initWithPersistenceStackModelName:(NSString *)persistenceStackModelName;
+
+- (void)requestLogout;
 
 @end
 
-@interface AFAContainerViewController : UIViewController
-
-@property AFAContainerViewModel *viewModel;
-
-@end
+NS_ASSUME_NONNULL_END

@@ -41,6 +41,7 @@ NSInteger  kDefaultTaskListFetchSize                = 25;
 
 NSString *kCloudAuthetificationCredentialIdentifier     = @"kCloudAuthetificationCredentialIdentifier";
 NSString *kPremiseAuthentificationCredentialIdentifier  = @"kPremiseAuthentificationCredentialIdentifier";
+NSString *kAIMSAuthenticationCredentialIdentifier       = @"kAIMSAuthenticationCredentialIdentifier";
 NSString *kCloudUsernameCredentialIdentifier            = @"kCloudUsernameCredentialIdentifier";
 NSString *kPremiseUsernameCredentialIdentifier          = @"kPremiseUsernameCredentialIdentifier";
 NSString *kUsernameCredentialIdentifier                 = @"kUsernameCredentialIdentifier";
