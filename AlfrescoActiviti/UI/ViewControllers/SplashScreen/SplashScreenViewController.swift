@@ -53,14 +53,10 @@ class SplashScreenViewController: UIViewController {
         copyrightLabel.text = copyrightText
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
+        copyrightLabel.alpha = 0.0
         
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 0.7
-        containerView.layer.shadowOffset = .zero
-        containerView.layer.shadowRadius = 50
-        containerView.layer.shadowPath = UIBezierPath(rect: containerView.bounds).cgPath
-        containerView.layer.shouldRasterize = true
-        containerView.layer.rasterizationScale = UIScreen.main.scale
+        self.view.layoutIfNeeded()
+        applyShadow(to: containerView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,8 +104,24 @@ class SplashScreenViewController: UIViewController {
     //MARK: - Helpers
     
     func showContainerView() {
+        self.logoImageView.isHidden = true
+        containerView.alpha = 0.0
         self.view.bringSubviewToFront(self.iceEffectView)
         self.view.bringSubviewToFront(self.containerView)
+        UIView.animate(withDuration: 0.5) {
+            self.containerView.alpha = 1.0
+            self.copyrightLabel.alpha = 1.0
+        }
+    }
+    
+    func applyShadow(to baseView: UIView) {
+        baseView.layer.shadowColor = UIColor.black.cgColor
+        baseView.layer.shadowOpacity = 0.4
+        baseView.layer.shadowOffset = .zero
+        baseView.layer.shadowRadius = 10
+        baseView.layer.shadowPath = UIBezierPath(rect: baseView.bounds).cgPath
+        baseView.layer.shouldRasterize = true
+        baseView.layer.rasterizationScale = UIScreen.main.scale
     }
 }
 
@@ -123,4 +135,3 @@ extension SplashScreenViewController: UIViewControllerTransitioningDelegate {
         return AFAModalDismissAnimator()
     }
 }
-

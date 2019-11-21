@@ -884,7 +884,7 @@
 		E371B6D02368312D000790DE /* AIMSAdvancedSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6CF2368312D000790DE /* AIMSAdvancedSettingsViewController.swift */; };
 		E371B6D223683302000790DE /* AIMSAdvancedSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */; };
 		E371B6D523685154000790DE /* AIMSAuthenticationParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6D423685154000790DE /* AIMSAuthenticationParameters.swift */; };
-		E3B7E59D237AD83200A5F725 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B7E59C237AD83200A5F725 /* SplashScreenViewController.swift */; };
+		E3DEBE1E238564E10056118A /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DEBE1D238564E10056118A /* SplashScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1977,7 +1977,7 @@
 		E371B6CF2368312D000790DE /* AIMSAdvancedSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsViewController.swift; path = UI/ViewControllers/LoginScreen/AIMSAdvancedSettingsViewController.swift; sourceTree = "<group>"; };
 		E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsViewModel.swift; path = ViewModel/AIMSViewModel/AIMSAdvancedSettingsViewModel.swift; sourceTree = "<group>"; };
 		E371B6D423685154000790DE /* AIMSAuthenticationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAuthenticationParameters.swift; path = Model/AdvancedSettingsParameters/AIMSAuthenticationParameters.swift; sourceTree = "<group>"; };
-		E3B7E59C237AD83200A5F725 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SplashScreenViewController.swift; path = ../UI/ViewControllers/SplashScreen/SplashScreenViewController.swift; sourceTree = "<group>"; };
+		E3DEBE1D238564E10056118A /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashScreenViewController.swift; path = AlfrescoActiviti/UI/ViewControllers/SplashScreen/SplashScreenViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -6711,7 +6711,7 @@
 		E3B7E59B237AD81500A5F725 /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
-				E3B7E59C237AD83200A5F725 /* SplashScreenViewController.swift */,
+				E3DEBE1D238564E10056118A /* SplashScreenViewController.swift */,
 			);
 			path = SplashScreen;
 			sourceTree = "<group>";
@@ -7380,7 +7380,6 @@
 				13EBECBB1CFDBEB000EC8F96 /* AFAChecklistTableViewCell.m in Sources */,
 				13667FEA1C87355E005E4AEA /* AFAShowDiagramTableViewCell.m in Sources */,
 				B971E48C2372E51D005DCB36 /* AIMSActivityView.swift in Sources */,
-				E3B7E59D237AD83200A5F725 /* SplashScreenViewController.swift in Sources */,
 				137B8DE01BB99B1200F1A6DC /* AFATableControllerContentCellFactory.m in Sources */,
 				13BBAB091E9CF761009B2D43 /* AFAContentPickerDataSource.m in Sources */,
 				13A106A31E94DEC400506871 /* AFAListBaseViewModel.m in Sources */,
@@ -7430,6 +7429,7 @@
 				B911EF832383E8DF005DF211 /* AIMSLoginViewModelProtocol.swift in Sources */,
 				132167101B8AF37500B7406B /* AFAAvatarView.m in Sources */,
 				13C4441B1BBAD8C100868904 /* AFATableControllerCellFactory.m in Sources */,
+				E3DEBE1E238564E10056118A /* SplashScreenViewController.swift in Sources */,
 				139DF5C21C5B6BB00062D01D /* AFATaskServices.m in Sources */,
 				1323CFC31B87065000E66D6F /* UIImage+AFAFontGlyphicons.m in Sources */,
 				13CE8ED51B85B32E0022F17A /* AFAContainerViewController.m in Sources */,
