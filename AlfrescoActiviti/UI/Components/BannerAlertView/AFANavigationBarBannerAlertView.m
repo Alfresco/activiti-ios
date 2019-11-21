@@ -20,18 +20,28 @@
 #import "UIColor+AFATheme.h"
 #import "AFAUIConstants.h"
 
-static const CGFloat kVerticalMargin = 16.0f;
-static const CGFloat kTopMarginWithoutNavigationBar = 44.0f;
-static const NSTimeInterval kHideTimeout = 2.f;
+static const CGFloat kVerticalMargin                = 8.0f;
+static const CGFloat kNotchVerticalPadding          = 8.0f;
+static const CGFloat kTopMarginWithoutNavigationBar = 32.0f;
+static const CGFloat kHorizontalPadding             = 8.0f;
+static const CGFloat kAlertImageViewRectangleSize   = 20.0f;
+static const CGFloat kCloseButtonRectangleSize      = 20.0f;
+static const NSTimeInterval kHideTimeout            = 2.f;
 
 typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
 
 @interface AFANavigationBarBannerAlertView()
 
+@property (strong, nonatomic) UIView                *containerView;
+@property (strong, nonatomic) UILabel               *alertTitleLabel;
 @property (strong, nonatomic) UILabel               *alertTextLabel;
+@property (strong, nonatomic) UIButton              *closeButton;
+@property (strong, nonatomic) UIImageView           *alertImageView;
+@property (strong, nonatomic) UIView                *separator;
 @property (strong, nonatomic) NSLayoutConstraint    *topSpacingConstraint;
 @property (weak, nonatomic) UIViewController        *parentViewController;
 @property (strong, nonatomic) NSTimer               *hideTimer;
+@property (assign, nonatomic) BOOL                  hasSetConstraints;
 
 @end
 
@@ -84,34 +94,146 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     }
 }
 
+- (BOOL)navigationHidden {
+    return self.parentViewController.navigationController.navigationBar.isHidden;
+}
+
 - (void)setUpBannerComponents {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
+    self.containerView = [UIView new];
+    self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:self.containerView];
+    
+    // Set up alert image view
+    self.alertImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"username-icon"]];
+    self.alertImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.alertImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.alertImageView.tintColor = UIColor.whiteColor;
+    
+    [self.containerView addSubview:self.alertImageView];
+    
+    // Set up alert title
+    self.alertTitleLabel = [UILabel new];
+    self.alertTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.alertTitleLabel.numberOfLines = 1;
+    self.alertTitleLabel.textAlignment = NSTextAlignmentLeft;
+    self.alertTitleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    self.alertTitleLabel.backgroundColor = UIColor.clearColor;
+    self.alertTitleLabel.font = [UIFont fontWithName:@"Muli-Bold"
+                                                size:14.0f];
+    self.alertTitleLabel.textColor = UIColor.whiteColor;
+    self.alertTitleLabel.text = @"Notification";
+    [self.containerView addSubview:self.alertTitleLabel];
+    
     // Set up alert label
-    self.alertTextLabel = [[UILabel alloc] init];
+    self.alertTextLabel = [UILabel new];
     self.alertTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.alertTextLabel.numberOfLines = 0;
-    self.alertTextLabel.textAlignment = NSTextAlignmentCenter;
+    self.alertTextLabel.numberOfLines = 2;
+    self.alertTextLabel.textAlignment = NSTextAlignmentLeft;
     self.alertTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.alertTextLabel.backgroundColor = [UIColor clearColor];
-    self.alertTextLabel.font = [UIFont fontWithName:@"Avenir-Book"
+    self.alertTextLabel.backgroundColor = UIColor.clearColor;
+    self.alertTextLabel.font = [UIFont fontWithName:@"Muli-Light"
                                                size:14.0f];
-    [self addSubview:self.alertTextLabel];
+    [self.containerView addSubview:self.alertTextLabel];
     
-    // Configure alert label constraints
-    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[alertLabel]-|"
-                                                                             options:kNilOptions
-                                                                             metrics:nil
-                                                                               views:@{@"alertLabel" : self.alertTextLabel}];
+    // Set up view separator
+    self.separator = [UIView new];
+    self.separator.backgroundColor = UIColor.darkGreyTextColor;
+    self.separator.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.containerView addSubview:self.separator];
     
-    NSArray *verticalConstraints =
-    [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(top)-[alertLabel]-(bottom)-|"
-                                            options:kNilOptions
-                                            metrics:@{@"top"         : self.parentViewController.navigationController.navigationBar.isHidden ? @(kVerticalMargin) : @(kTopMarginWithoutNavigationBar),
-                                                      @"bottom"      : @(kVerticalMargin),}
-                                              views:@{@"alertLabel"  : self.alertTextLabel}];
-    [self addConstraints:horizontalConstraints];
-    [self addConstraints:verticalConstraints];
+    self.closeButton = [UIButton new];
+    [self.closeButton setTitle:@"✕"
+                      forState:UIControlStateNormal];
+    self.closeButton.translatesAutoresizingMaskIntoConstraints = false;
+    [self.closeButton addTarget:self
+                         action:@selector(hide)
+               forControlEvents:UIControlEventTouchUpInside];
+    [self.containerView addSubview:self.closeButton];
+}
+
+- (void)setBannerComponentConstraints {
+    CGFloat topMarginWithoutNavigationBar = kTopMarginWithoutNavigationBar + ([self isNotchPresent] ? kNotchVerticalPadding : 0);
+    
+    // Container view constraints
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[containerView]|"
+                                                                 options:kNilOptions
+                                                                 metrics:nil
+                                                                   views:@{@"containerView" : self.containerView}]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(top)-[containerView]|"
+                                                                 options:kNilOptions
+                                                                 metrics:@{@"top" : (self.navigationHidden) ?
+                                                                           @(topMarginWithoutNavigationBar) : @(kVerticalMargin)}
+                                                                   views:@{@"containerView" : self.containerView}]];
+    
+    // Alert image view size constraints
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:[alertImageView(rectangleSize)]"
+                                                                 options: kNilOptions
+                                                                 metrics: @{@"rectangleSize"  : @(kAlertImageViewRectangleSize)}
+                                                                   views: @{@"alertImageView" : self.alertImageView}]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:[alertImageView(rectangleSize)]"
+                                                                 options: kNilOptions
+                                                                 metrics: @{@"rectangleSize"  : @(kAlertImageViewRectangleSize)}
+                                                                   views: @{@"alertImageView" : self.alertImageView}]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:[superview]-(<=1)-[alertImageView]"
+                                                                 options: NSLayoutFormatAlignAllCenterY
+                                                                 metrics: nil
+                                                                   views: @{@"superview"      : self.containerView,
+                                                                            @"alertImageView" : self.alertImageView}]];
+    
+    // Separator constraints
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:[separator(1)]"
+                                                                 options: kNilOptions
+                                                                 metrics: nil
+                                                                   views: @{@"separator" : self.separator}]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|-[separator]-|"
+                                                                 options: kNilOptions
+                                                                 metrics: nil
+                                                                   views: @{@"separator" : self.separator}]];
+    
+    // Close button constraints
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:[closeButton(rectangleSize)]"
+                                                                 options: kNilOptions
+                                                                 metrics: @{@"rectangleSize": @(kCloseButtonRectangleSize)}
+                                                                   views: @{@"closeButton"  : self.closeButton}]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:[closeButton(rectangleSize)]"
+                                                                 options: kNilOptions
+                                                                 metrics: @{@"rectangleSize" : @(kCloseButtonRectangleSize)}
+                                                                   views: @{@"closeButton"   : self.closeButton}]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:[superview]-(<=1)-[closeButton]"
+                                                                 options: NSLayoutFormatAlignAllCenterY
+                                                                 metrics: nil
+                                                                   views: @{@"superview"    : self.containerView,
+                                                                            @"closeButton"  : self.closeButton}]];
+    
+    // Layout constraints
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:|-[alertImageView]-(horizontalPadding)-[separator]-(horizontalPadding)-[alertTitle]-[closeButton]-|"
+                                                                 options: kNilOptions
+                                                                 metrics: @{@"horizontalPadding" : @(kHorizontalPadding)}
+                                                                   views: @{@"alertImageView"    : self.alertImageView,
+                                                                            @"separator"         : self.separator,
+                                                                            @"alertTitle"        : self.alertTitleLabel,
+                                                                            @"closeButton"       : self.closeButton}]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:[separator]-(horizontalPadding)-[alertText]-[closeButton]-|"
+                                                                 options: kNilOptions
+                                                                 metrics: @{@"horizontalPadding" : @(kHorizontalPadding)}
+                                                                   views: @{@"separator"         : self.separator,
+                                                                            @"alertText"         : self.alertTextLabel,
+                                                                            @"closeButton"       : self.closeButton}]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|-[alertTitle][alertText]-|"
+                                                                 options: kNilOptions
+                                                                 metrics: nil
+                                                                   views: @{@"alertTitle"  : self.alertTitleLabel,
+                                                                            @"alertText"   : self.alertTextLabel}]];
 }
 
 - (void)updateUI {
@@ -143,6 +265,11 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
 }
 
 - (void)show {
+    if (!self.hasSetConstraints) {
+        [self setBannerComponentConstraints];
+        self.hasSetConstraints = YES;
+    }
+    
     _isBannerVisible = YES;
     
     UINavigationBar *navigationBar = self.parentViewController.navigationController.navigationBar;
@@ -150,13 +277,13 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     
     if (!navigationBar.isHidden) {
         [navigationBar.superview insertSubview:self
-        belowSubview:navigationBar];
+                                  belowSubview:navigationBar];
         topOffset = CGRectGetMaxY(navigationBar.frame);
     } else {
         [self.parentViewController.view addSubview:self];
         topOffset = 0;
     }
-
+    
     NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[banner]|"
                                                                              options:kNilOptions
                                                                              metrics:nil
@@ -176,8 +303,8 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     self.transform = CGAffineTransformMakeTranslation(0, -self.frame.size.height);
     [UIView animateWithDuration:kDefaultAnimationTime
                      animations:^{
-                         self.transform = CGAffineTransformIdentity;
-                     }];
+        self.transform = CGAffineTransformIdentity;
+    }];
 }
 
 - (void)hide:(AFANavigationBarBannerAlertHideCompletionBlock)hideCompletionBlock {
@@ -224,11 +351,15 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
         __weak typeof(self) weakSelf = self;
         [self hide:^{
             __strong typeof(self) strongSelf = weakSelf;
-            [strongSelf showAndHideWithTimeout:kHideTimeout];
+            [strongSelf show];
         }];
     } else {
-        [self showAndHideWithTimeout:kHideTimeout];
+        [self show];
     }
+}
+
+- (BOOL)isNotchPresent {
+    return UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom > 0;
 }
 
 @end

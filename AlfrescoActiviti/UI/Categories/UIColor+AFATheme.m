@@ -172,7 +172,7 @@
 }
 
 + (UIColor *)alertWithErrorColor {
-    return [UIColor colorWithRed:169 / 255.0f green:37 / 255.0f blue:48 / 255.0f alpha:1.0f];
+    return [UIColor colorWithRed:201 / 255.0f green:47 / 255.0f blue:60 / 255.0f alpha:1.0f];
 }
 
 @end
