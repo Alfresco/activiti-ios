@@ -23,20 +23,30 @@ import AlfrescoCore
 
 class AIMSSSOViewController: AFABaseThemedViewController {
     
+    let model: AIMSSSOViewModel = AIMSSSOViewModel()
+    
+    // App name section
     @IBOutlet weak var processServiceAppLabel: UILabel!
     @IBOutlet weak var subtitle1Label: UILabel!
+    
+    // URLs section
     @IBOutlet weak var serverURLLabel: UILabel!
     @IBOutlet weak var subtitle2Label: UILabel!
     @IBOutlet weak var repositoryTextField: MDCTextField!
+    var repositoryTextFieldController: MDCTextInputController?
+    
+    // Buttons section
     @IBOutlet weak var signInButton: MDCButton!
     @IBOutlet weak var helpButton: MDCButton!
-    @IBOutlet weak var copyrightLabel: UILabel!
-    
-    var repositoryTextFieldController: MDCTextInputController?
-    let model: AIMSSSOViewModel = AIMSSSOViewModel()
-    
     var enableSignInButton: Bool = false
     
+    // Copyright section
+    @IBOutlet weak var copyrightLabel: UILabel!
+    
+    // Constraints
+    @IBOutlet weak var separatorSpace1HeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var separatorSpace2HeightConstraint: NSLayoutConstraint!
+
     // Loading view
     var overlayView: AIMSActivityView?
     var controllerState: ControllerState? {
@@ -53,6 +63,8 @@ class AIMSSSOViewController: AFABaseThemedViewController {
             }
         }
     }
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,7 +175,7 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate
+// MARK: - UITextField Delegate
 
 extension AIMSSSOViewController: UITextFieldDelegate {
     
@@ -184,7 +196,7 @@ extension AIMSSSOViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - AIMSSSOViewModelDelegate
+// MARK: - AIMSSSOViewModel Delegate
 
 extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
     func logInSuccessful() {
@@ -214,6 +226,8 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
         }
     }
 }
+
+//MARK: - UIViewControllerTransitioning Delegate
 
 extension AIMSSSOViewController: UIViewControllerTransitioningDelegate {
     

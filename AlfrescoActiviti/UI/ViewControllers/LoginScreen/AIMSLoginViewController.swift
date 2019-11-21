@@ -46,11 +46,15 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     // Copyright section
     @IBOutlet weak var copyrightLabel: UILabel!
     
-    // Loading view
-    var overlayView: AIMSActivityView?
+    // Constraints
+    @IBOutlet weak var separatorSpace1HeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var separatorSpace2HeightConstraint: NSLayoutConstraint!
     
     // Gesture recognizer
     var tapGestureRecognizer: UITapGestureRecognizer?
+    
+    // Loading view
+    var overlayView: AIMSActivityView?
     var controllerState: ControllerState? {
         didSet {
             switch controllerState {
@@ -65,6 +69,8 @@ class AIMSLoginViewController: AFABaseThemedViewController {
             }
         }
     }
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,8 +120,6 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
-        
-        
         // Dismiss keyboard on taps outside text fields
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         if let gestureRecognizer = tapGestureRecognizer {
@@ -140,6 +144,9 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        separatorSpace1HeightConstraint.rate(in: self.view)
+        separatorSpace2HeightConstraint.rate(in: self.view)
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         controllerState = .isIdle
@@ -179,7 +186,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
             connectToButton.isEnabled = !urlValue.isEmpty
         }
     }
-    
+
     // MARK: - Navigation
     
     @IBAction func unwindToAIMSLoginViewController(_ sender: UIStoryboardSegue) {
@@ -195,7 +202,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate
+// MARK: - UITextField Delegate
 
 extension AIMSLoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -210,7 +217,7 @@ extension AIMSLoginViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - AIMSLoginViewModelDelegate
+// MARK: - AIMSLoginViewModel Delegate
 
 extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
     func authenticationServiceUnavailable(with error: APIError) {

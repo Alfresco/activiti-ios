@@ -881,6 +881,7 @@
 		E335FA7D23741137005EE76B /* AIMSSSOViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E335FA7C23741137005EE76B /* AIMSSSOViewModel.swift */; };
 		E356A05C237045E200E3FD4F /* AIMSAdvancedSettingsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E356A05B237045E200E3FD4F /* AIMSAdvancedSettingsProtocols.swift */; };
 		E356A0602371629600E3FD4F /* AIMSHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E356A05F2371629600E3FD4F /* AIMSHelpViewController.swift */; };
+		E361FF1E2386CDE1001377DC /* NSLayoutConstraint+Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E361FF1D2386CDE1001377DC /* NSLayoutConstraint+Rate.swift */; };
 		E371B6D02368312D000790DE /* AIMSAdvancedSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6CF2368312D000790DE /* AIMSAdvancedSettingsViewController.swift */; };
 		E371B6D223683302000790DE /* AIMSAdvancedSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */; };
 		E371B6D523685154000790DE /* AIMSAuthenticationParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6D423685154000790DE /* AIMSAuthenticationParameters.swift */; };
@@ -1974,6 +1975,7 @@
 		E335FA7C23741137005EE76B /* AIMSSSOViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIMSSSOViewModel.swift; sourceTree = "<group>"; };
 		E356A05B237045E200E3FD4F /* AIMSAdvancedSettingsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsProtocols.swift; path = ViewModel/AIMSViewModel/Protocol/AIMSAdvancedSettingsProtocols.swift; sourceTree = "<group>"; };
 		E356A05F2371629600E3FD4F /* AIMSHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSHelpViewController.swift; path = UI/ViewControllers/LoginScreen/AIMSHelpViewController.swift; sourceTree = "<group>"; };
+		E361FF1D2386CDE1001377DC /* NSLayoutConstraint+Rate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Rate.swift"; sourceTree = "<group>"; };
 		E371B6CF2368312D000790DE /* AIMSAdvancedSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsViewController.swift; path = UI/ViewControllers/LoginScreen/AIMSAdvancedSettingsViewController.swift; sourceTree = "<group>"; };
 		E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsViewModel.swift; path = ViewModel/AIMSViewModel/AIMSAdvancedSettingsViewModel.swift; sourceTree = "<group>"; };
 		E371B6D423685154000790DE /* AIMSAuthenticationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAuthenticationParameters.swift; path = Model/AdvancedSettingsParameters/AIMSAuthenticationParameters.swift; sourceTree = "<group>"; };
@@ -6625,6 +6627,7 @@
 			isa = PBXGroup;
 			children = (
 				B94FE4882367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift */,
+				E361FF1D2386CDE1001377DC /* NSLayoutConstraint+Rate.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -7375,6 +7378,7 @@
 				133A23A41EA5F98B008E79C7 /* AFAProcessInstanceDetailsDataSource.m in Sources */,
 				B90CF3A72361C4F700C1D600 /* AIMSLoginService.swift in Sources */,
 				131DCF471DAFB08400E08798 /* AFAModalTaskDetailsCreateTaskAction.m in Sources */,
+				E361FF1E2386CDE1001377DC /* NSLayoutConstraint+Rate.swift in Sources */,
 				1366800F1C8DEC57005E4AEA /* AFAProcessStartFormViewController.m in Sources */,
 				136680071C89AEF9005E4AEA /* AFAQueryServices.m in Sources */,
 				13EBECBB1CFDBEB000EC8F96 /* AFAChecklistTableViewCell.m in Sources */,

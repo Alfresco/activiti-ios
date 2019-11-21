@@ -22,23 +22,32 @@ import MaterialComponents.MDCTextField
 
 class BaseAuthLoginViewController: AFABaseThemedViewController {
 
-    @IBOutlet weak var processServicesAppLabel: UILabel!
-    @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var copyrightLabel: UILabel!
-    
-    @IBOutlet weak var usernameTextfield: MDCTextField!
-    @IBOutlet weak var passwordTextfield: MDCTextField!
-    
-    @IBOutlet weak var signInButton: MDCButton!
-    @IBOutlet weak var helpButton: MDCButton!
-    
-    var usernameTextFieldController: MDCTextInputController?
-    var passwordTextFieldController: MDCTextInputController?
     let model: BaseAuthLoginViewModel = BaseAuthLoginViewModel()
     
+    // App name section
+    @IBOutlet weak var processServicesAppLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
+    
+    // Copyrigh section
+    @IBOutlet weak var copyrightLabel: UILabel!
+    
+    
+    // Fields section
+    @IBOutlet weak var usernameTextfield: MDCTextField!
+    @IBOutlet weak var passwordTextfield: MDCTextField!
+    var usernameTextFieldController: MDCTextInputController?
+    var passwordTextFieldController: MDCTextInputController?
+    
+    // Buttons section
+    @IBOutlet weak var signInButton: MDCButton!
+    @IBOutlet weak var helpButton: MDCButton!
     var enableSignInButton: Bool = false
     var showPasswordButton = UIButton()
     
+    //Constraints section
+    @IBOutlet weak var separatorSpace1HeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var separatorSpace2HeightConstraint: NSLayoutConstraint!
+
     // Loading view
     var overlayView: AIMSActivityView?
     var controllerState: ControllerState? {
@@ -55,6 +64,11 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
             }
         }
     }
+    
+    // Keyboard handling
+    var adjustViewForKeyboard: Bool = false
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +140,17 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
                                               typographyScheme: colorSchemeManager.defaultTypographyScheme)
         overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
+        
+        // Keyboard notification
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        separatorSpace1HeightConstraint.rate(in: self.view)
+        separatorSpace2HeightConstraint.rate(in: self.view)
     }
     
     override func didRestoredNetworkConnectivity() {
@@ -198,6 +223,27 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         signInButton.semanticContentAttribute = .forceRightToLeft
     }
     
+    //MARK: - Keyboard Notification
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let endPasswordTextField = passwordTextfield.frame.origin.y + passwordTextfield.frame.size.height
+            let viewHeight = self.view.bounds.size.height
+            let keyboardHeight =  keyboardFrame.cgRectValue.height
+            if adjustViewForKeyboard && viewHeight - endPasswordTextField < keyboardHeight {
+                if self.view.frame.origin.y == 0 {
+                    self.view.frame.origin.y -= 150
+                }
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -208,6 +254,8 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         }
     }
 }
+
+// MARK: - UIViewControllerTransitioning Delegate
 
 extension BaseAuthLoginViewController: UIViewControllerTransitioningDelegate {
     
@@ -220,6 +268,8 @@ extension BaseAuthLoginViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
+// MARK: - UITextField Delegate
+
 extension BaseAuthLoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -229,6 +279,11 @@ extension BaseAuthLoginViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.rightView?.tintColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
+        if textField == usernameTextfield {
+            adjustViewForKeyboard = false
+        } else if textField == passwordTextfield {
+            adjustViewForKeyboard = true
+        }
         return true
     }
     

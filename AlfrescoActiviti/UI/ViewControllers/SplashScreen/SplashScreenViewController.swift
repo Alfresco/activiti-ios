@@ -20,19 +20,26 @@ import UIKit
 
 class SplashScreenViewController: UIViewController {
     
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var logoHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var logoWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var copyrightLabel: UILabel!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var iceEffectView: UIVisualEffectView!
-    
     private static let model = AIMSSplashscreenViewModel()
     private static let isAuthSessionRestored: Bool = {
         return model.restoreLastSuccessfullSession()
     }()
     private var performedRestoreOperation = false
     
+    // Logo section
+    @IBOutlet weak var logoImageView: UIImageView!
+    
+    // Container section
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var iceEffectView: UIVisualEffectView!
+    
+    
+    // Constraints section
+    @IBOutlet weak var logoHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var logoWidthConstraint: NSLayoutConstraint!
+    
+    // Copyright section
+    @IBOutlet weak var copyrightLabel: UILabel!
     var copyrightText: String {
         get {
             let calendar = Calendar.current
@@ -40,6 +47,8 @@ class SplashScreenViewController: UIViewController {
             return String(format: NSLocalizedString(kLocalizationLoginScreenCopyrightFormat, comment: "Copyright text"), year)
         }
     }
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

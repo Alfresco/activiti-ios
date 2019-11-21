@@ -28,6 +28,8 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
  
@@ -48,6 +50,8 @@ class AIMSAdvancedSettingsViewController: UIViewController {
             tableView.tableFooterView = footerView()
         }
     }
+    
+    //MARK: - IBActions
     
     @IBAction func viewPressed(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
@@ -75,11 +79,12 @@ class AIMSAdvancedSettingsViewController: UIViewController {
             return UIView()
         }
         
-        let copyrightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 10))
+        let copyrightLabel = UILabel(frame: CGRect(x: 30, y: 0, width: self.view.bounds.size.width - 60, height: 15))
         copyrightLabel.textAlignment = .center
         copyrightLabel.text = model.copyrightText
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
+        copyrightLabel.adjustsFontSizeToFitWidth = true;
         
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 15))
         footerView.backgroundColor = .clear
@@ -88,6 +93,8 @@ class AIMSAdvancedSettingsViewController: UIViewController {
         return footerView
     }
 }
+
+// MARK: - AIMSAdvancedSettingsCell Delegate
 
 extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
     
@@ -115,6 +122,8 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
         self.navigationController?.popViewController(animated: true)
     }
 }
+
+// MARK: - UITableView DataSource
 
 extension AIMSAdvancedSettingsViewController: UITableViewDataSource {
     
