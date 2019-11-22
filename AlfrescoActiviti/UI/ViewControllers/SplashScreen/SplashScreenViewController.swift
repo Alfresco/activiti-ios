@@ -35,8 +35,8 @@ class SplashScreenViewController: UIViewController {
     
     
     // Constraints section
-    @IBOutlet weak var logoHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var logoWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
     
     // Copyright section
     @IBOutlet weak var copyrightLabel: UILabel!
@@ -71,6 +71,8 @@ class SplashScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        logoTopConstraint.rate(in: self.view)
+        
         if performedRestoreOperation {
             showContainerView()
         }
@@ -80,7 +82,7 @@ class SplashScreenViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if !performedRestoreOperation {
-            self.logoWidthConstraint.constant = self.logoWidthConstraint.constant + 50
+            self.logoWidthConstraint.constant = self.logoWidthConstraint.constant + 30
             UIView.animate(withDuration: kSplashScreenAnimationTime) {}
             UIView.animate(withDuration: kSplashScreenAnimationTime, animations: {
                 self.view.layoutIfNeeded()

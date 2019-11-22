@@ -27,6 +27,7 @@ class AIMSHelpViewController: UIViewController {
     @IBOutlet weak var closeButton: MDCButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet var constraintsToScale: [NSLayoutConstraint]!
     
     var hintText = ""
     var titleText = ""
@@ -50,28 +51,38 @@ class AIMSHelpViewController: UIViewController {
         closeButton.setTitle(closeText, for: .normal)
         closeButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
         
-        bottomConstraint.constant = -1 * self.view.bounds.height
         bgView.alpha = 1.0
+        bgView.backgroundColor = .clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        UIView.animate(withDuration: 0.4) {
-            self.view.layoutIfNeeded()
-            self.bottomConstraint.constant = 100
+        if (self.view.traitCollection.horizontalSizeClass == .compact) {
+            for constraint in constraintsToScale {
+                constraint.rate(in: self.view)
+            }
+        }
+        self.view.bounds.origin.y = self.view.bounds.size.height
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.bounds.origin.y = 0
+        }) { (bool) in
             self.bgView.alpha = 0.4
             self.bgView.backgroundColor = .black
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        textView.scrollRangeToVisible(NSRange(location: 0, length: 0))
+    }
+    
     //MARK: - IBActions
     
     @IBAction func closeButtonPressed(_ sender: Any) {
-        self.bottomConstraint.constant = self.view.bounds.height
+        self.bgView.alpha = 0.0
         UIView.animate(withDuration: 0.4) {
-            self.view.layoutIfNeeded()
-            self.bgView.alpha = 0.0
+            self.view.bounds.origin.y = self.view.bounds.height
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             self.dismiss(animated: false, completion: nil)
