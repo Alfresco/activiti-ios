@@ -66,12 +66,11 @@ class SplashScreenViewController: UIViewController {
         
         self.view.layoutIfNeeded()
         applyShadow(to: containerView)
+        logoTopConstraint.rate(in: self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        logoTopConstraint.rate(in: self.view)
         
         if performedRestoreOperation {
             showContainerView()

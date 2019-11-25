@@ -53,16 +53,20 @@ class AIMSHelpViewController: UIViewController {
         
         bgView.alpha = 1.0
         bgView.backgroundColor = .clear
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
+        
+        //Constraints scale
+        self.view.layoutIfNeeded()
         if (self.view.traitCollection.horizontalSizeClass == .compact) {
             for constraint in constraintsToScale {
                 constraint.rate(in: self.view)
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        
         self.view.bounds.origin.y = self.view.bounds.size.height
         UIView.animate(withDuration: 0.4, animations: {
             self.view.bounds.origin.y = 0

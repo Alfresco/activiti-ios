@@ -144,11 +144,9 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         // Keyboard notification
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
+        // Constraints scale
+        self.view.layoutIfNeeded()
         separatorSpace1HeightConstraint.rate(in: self.view)
         separatorSpace2HeightConstraint.rate(in: self.view)
     }

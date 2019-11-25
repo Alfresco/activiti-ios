@@ -125,6 +125,11 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         if let gestureRecognizer = tapGestureRecognizer {
             self.view .addGestureRecognizer(gestureRecognizer)
         }
+        
+        //Constraints Scale
+        self.view.layoutIfNeeded()
+        separatorSpace1HeightConstraint.rate(in: self.view)
+        separatorSpace2HeightConstraint.rate(in: self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -144,10 +149,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        separatorSpace1HeightConstraint.rate(in: self.view)
-        separatorSpace2HeightConstraint.rate(in: self.view)
-        
+    
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         controllerState = .isIdle
         updateConnectButtonState()
