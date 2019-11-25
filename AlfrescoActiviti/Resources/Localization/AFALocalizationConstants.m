@@ -75,6 +75,14 @@ NSString *kLocalizationAdvancedSettingsScreenHelpText                           
 NSString *kLocalizationAdvancedSettingsScreenHelpHintText                           = @"advancedSettingsScreenHelpHintText";
 NSString *kLocalizationAdvancedSettingsScreenCloseText                              = @"advancedSettingsScreenCloseText";
 
+
+#pragma mark -
+#pragma mark Banner view component
+
+NSString *kLocalizationBannerViewErrorText              = @"bannerViewErrorText";
+NSString *kLocalizationBannerViewWarningText            = @"bannerViewWarningText";
+NSString *kLocalizationBannerViewConfirmationText       = @"bannerViewConfirmationText";
+
 #pragma mark -
 #pragma mark Cloud Login screen
 
