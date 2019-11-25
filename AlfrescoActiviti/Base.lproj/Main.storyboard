@@ -3731,24 +3731,24 @@
             <objects>
                 <viewController id="zbk-Q7-77a" customClass="AFAFilterViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DAK-RH-v10">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="235"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="235"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z1L-yg-S6H" userLabel="FilterTableView">
-                                <rect key="frame" x="0.0" y="74" width="1024" height="80"/>
+                                <rect key="frame" x="0.0" y="74" width="414" height="114"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="PpM-C3-lY6">
-                                    <rect key="frame" x="0.0" y="100" width="1024" height="1"/>
+                                    <rect key="frame" x="0.0" y="100" width="414" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterOptionCellID" id="2cj-1b-y9T" customClass="AFAFilterOptionTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2cj-1b-y9T" id="XwZ-ym-4co">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqz-T5-sGS" customClass="ASDKFormCheckbox">
@@ -3765,13 +3765,13 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NzO-Bn-rQ2">
-                                                    <rect key="frame" x="40" y="10.666666666666664" width="976" height="23"/>
+                                                    <rect key="frame" x="40" y="10.666666666666664" width="366" height="23"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AV4-dc-Pig" userLabel="Filter Button">
-                                                    <rect key="frame" x="8" y="11" width="1008" height="22"/>
+                                                    <rect key="frame" x="8" y="11" width="398" height="22"/>
                                                     <connections>
                                                         <action selector="onFilter:" destination="2cj-1b-y9T" eventType="touchUpInside" id="fjJ-8x-d2Q"/>
                                                     </connections>
@@ -3801,14 +3801,14 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXb-1J-IHN" userLabel="HairlineView">
-                                <rect key="frame" x="0.0" y="154" width="1024" height="1"/>
+                                <rect key="frame" x="0.0" y="188" width="414" height="1"/>
                                 <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="d6y-dU-gcc"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWg-ZN-a96">
-                                <rect key="frame" x="15" y="163" width="994" height="30"/>
+                                <rect key="frame" x="15" y="197" width="384" height="30"/>
                                 <state key="normal" title="Search">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -5550,12 +5550,15 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC0-X6-qax" customClass="MDCButton">
                                 <rect key="frame" x="32" y="392.33333333333331" width="350" height="58"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="QY0-0P-nee"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
-                                <state key="normal" title="Sign in" image="user-icon">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Sign in" image="signin-icon">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="signInButtonPressed:" destination="jv8-zv-gad" eventType="touchUpInside" id="t9F-Dq-Gxq"/>
@@ -5699,18 +5702,15 @@
                                             <outlet property="textField" destination="uB6-hu-I2N" id="kGb-Py-F8h"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsButtonCellID" rowHeight="95" id="wLS-vg-UHu" customClass="AIMSAdvancedSettingsButtonCell" customModule="AlfrescoActiviti" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="228" width="414" height="95"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsButtonCellID" id="wLS-vg-UHu" customClass="AIMSAdvancedSettingsButtonCell" customModule="AlfrescoActiviti" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="228" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wLS-vg-UHu" id="fe9-ej-v58">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4c-Bf-ebj" customClass="MDCButton">
-                                                    <rect key="frame" x="30" y="15" width="354" height="65"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="58" id="URs-d1-c4J"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="30" y="15" width="354" height="30"/>
                                                     <connections>
                                                         <action selector="buttonPressed:" destination="wLS-vg-UHu" eventType="touchUpInside" id="fnK-Rs-ZV8"/>
                                                     </connections>
@@ -5728,14 +5728,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdvancedSettingsSectionCellID" rowHeight="95" id="LDK-VN-7Cs" customClass="AIMSAdvancedSettingsSectionCell" customModule="AlfrescoActiviti" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="323" width="414" height="95"/>
+                                        <rect key="frame" x="0.0" y="288" width="414" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LDK-VN-7Cs" id="cTC-R7-blr">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEN-uX-uWz">
-                                                    <rect key="frame" x="30" y="15" width="354" height="75"/>
+                                                    <rect key="frame" x="30.000000000000004" y="15" width="41.333333333333343" height="75"/>
                                                     <fontDescription key="fontDescription" name="Muli" family="Muli" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -5745,7 +5745,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="OEN-uX-uWz" secondAttribute="bottom" constant="5" id="K6R-pe-HZ5"/>
                                                 <constraint firstItem="OEN-uX-uWz" firstAttribute="top" secondItem="cTC-R7-blr" secondAttribute="top" constant="15" id="av2-Qu-9Cb"/>
                                                 <constraint firstItem="OEN-uX-uWz" firstAttribute="leading" secondItem="cTC-R7-blr" secondAttribute="leading" constant="30" id="u7f-Dq-Ltl"/>
-                                                <constraint firstAttribute="trailing" secondItem="OEN-uX-uWz" secondAttribute="trailing" constant="30" id="znI-6e-oXc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -6544,11 +6543,11 @@
             <objects>
                 <viewController id="uLp-53-rQC" customClass="AFAProcessStartFormViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LJj-xc-lu6">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1107"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="627"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6z-EC-sRx" customClass="AFAActivityView">
-                                <rect key="frame" x="492" y="533.66666666666663" width="40" height="40"/>
+                                <rect key="frame" x="187" y="293.66666666666669" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="iuj-Db-Ma2"/>
@@ -6573,10 +6572,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPd-Df-Ah6" userLabel="No content view" customClass="AFANoContentView">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1073"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="627"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NVi-Bh-zza">
-                                        <rect key="frame" x="448" y="422.66666666666669" width="128" height="128.00000000000006"/>
+                                        <rect key="frame" x="143" y="199.66666666666669" width="128" height="128"/>
                                         <color key="tintColor" red="0.20392156859999999" green="0.63529411759999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="ddj-EP-V3p"/>
@@ -6584,7 +6583,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no available content but you can add some by using the + button." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQi-x4-ehb">
-                                        <rect key="frame" x="50" y="558.66666666666663" width="924" height="18"/>
+                                        <rect key="frame" x="50" y="335.66666666666669" width="314" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -6967,6 +6966,7 @@ success</string>
         <image name="page-icon" width="30" height="30"/>
         <image name="process-list-icon" width="25" height="25"/>
         <image name="show-password-icon" width="22" height="16"/>
+        <image name="signin-icon" width="24" height="24"/>
         <image name="splash-wallpaper" width="960" height="668.66668701171875"/>
         <image name="start-date-icon" width="30" height="30"/>
         <image name="task-list-icon" width="25" height="25"/>
@@ -6979,7 +6979,7 @@ success</string>
         <segue reference="Axm-Tn-V6n"/>
         <segue reference="OCj-p8-qSZ"/>
         <segue reference="RF7-69-ZNi"/>
-        <segue reference="6Sl-EL-XUc"/>
+        <segue reference="k63-kf-nLH"/>
         <segue reference="DnA-gY-0TX"/>
     </inferredMetricsTieBreakers>
 </document>
