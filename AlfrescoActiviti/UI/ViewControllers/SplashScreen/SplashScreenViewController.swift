@@ -36,7 +36,6 @@ class SplashScreenViewController: UIViewController {
     
     // Constraints section
     @IBOutlet weak var logoWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
     
     // Copyright section
     @IBOutlet weak var copyrightLabel: UILabel!
@@ -66,7 +65,6 @@ class SplashScreenViewController: UIViewController {
         
         self.view.layoutIfNeeded()
         applyShadow(to: containerView)
-        logoTopConstraint.rate(in: self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +116,7 @@ class SplashScreenViewController: UIViewController {
         containerView.alpha = 0.0
         self.view.bringSubviewToFront(self.iceEffectView)
         self.view.bringSubviewToFront(self.containerView)
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 1.5) {
             self.containerView.alpha = 1.0
             self.copyrightLabel.alpha = 1.0
         }

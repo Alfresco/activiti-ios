@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 extension NSLayoutConstraint {
-    func rate(in view: UIView) {
+    func rate(in view: UIView, heightNavigationBar: CGFloat = 0) {
         let spaceMax: CGFloat = self.constant
         let spaceMin: CGFloat = self.constant * 0.2
         let heightMax: CGFloat = 896.0
         let heightMin: CGFloat = 568.0
         let height = view.bounds.size.height
         let rate: CGFloat = (heightMax - heightMin) / (spaceMax - spaceMin)
-        self.constant = (height - heightMin) / rate + spaceMin
+        self.constant = (height - heightMin) / rate + spaceMin - heightNavigationBar
     }
 }

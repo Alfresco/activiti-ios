@@ -68,6 +68,8 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     // Keyboard handling
     var adjustViewForKeyboard: Bool = false
     
+    var rateConstraintsOnce: Bool = true
+    
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -145,14 +147,22 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        // Constraints scale
-        self.view.layoutIfNeeded()
-        separatorSpace1HeightConstraint.rate(in: self.view)
-        separatorSpace2HeightConstraint.rate(in: self.view)
     }
     
     override func didRestoredNetworkConnectivity() {
         // Don't display network connectivity alerts on this screen
+    }
+    
+   override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Constraints scale
+        if rateConstraintsOnce {
+            rateConstraintsOnce = false
+            self.view.layoutIfNeeded()
+            separatorSpace1HeightConstraint.rate(in: self.view, heightNavigationBar: self.navigationController?.navigationBar.bounds.size.height ?? 0)
+            separatorSpace2HeightConstraint.rate(in: self.view)
+        }
     }
     
     //MARK: - IBActions

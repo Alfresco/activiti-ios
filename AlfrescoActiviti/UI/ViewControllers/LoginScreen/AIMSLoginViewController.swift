@@ -70,6 +70,8 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         }
     }
     
+    var rateConstraintsOnce: Bool = true
+    
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -125,11 +127,6 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         if let gestureRecognizer = tapGestureRecognizer {
             self.view .addGestureRecognizer(gestureRecognizer)
         }
-        
-        //Constraints Scale
-        self.view.layoutIfNeeded()
-        separatorSpace1HeightConstraint.rate(in: self.view)
-        separatorSpace2HeightConstraint.rate(in: self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -153,6 +150,14 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         controllerState = .isIdle
         updateConnectButtonState()
+        
+        // Constraints Scale
+        if rateConstraintsOnce {
+            rateConstraintsOnce = false
+            self.view.setNeedsLayout()
+            separatorSpace1HeightConstraint.rate(in: self.view)
+            separatorSpace2HeightConstraint.rate(in: self.view)
+        }
     }
     
     // MARK: - Actions

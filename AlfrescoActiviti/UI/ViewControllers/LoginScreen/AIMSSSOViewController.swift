@@ -64,6 +64,8 @@ class AIMSSSOViewController: AFABaseThemedViewController {
         }
     }
     
+    var rateConstraintsOnce: Bool = true
+    
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -116,6 +118,18 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     
     override func didRestoredNetworkConnectivity() {
         // Don't display network connectivity alerts on this screen
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Constraints scale
+        if rateConstraintsOnce {
+            rateConstraintsOnce = false
+            self.view.layoutIfNeeded()
+            separatorSpace1HeightConstraint.rate(in: self.view, heightNavigationBar: self.navigationController?.navigationBar.bounds.size.height ?? 0)
+            separatorSpace2HeightConstraint.rate(in: self.view)
+        }
     }
     
     //MARK: - IBActions
