@@ -24,6 +24,7 @@ static const CGFloat kVerticalMargin                = 8.0f;
 static const CGFloat kNotchVerticalPadding          = 8.0f;
 static const CGFloat kTopMarginWithoutNavigationBar = 32.0f;
 static const CGFloat kHorizontalPadding             = 8.0f;
+static const CGFloat kHorizontalImageViewPadding    = 12.0f;
 static const CGFloat kAlertImageViewRectangleSize   = 20.0f;
 static const CGFloat kCloseButtonRectangleSize      = 20.0f;
 static const NSTimeInterval kHideTimeout            = 2.f;
@@ -48,11 +49,13 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
 @implementation AFANavigationBarBannerAlertView
 
 - (instancetype)initWithAlertText:(NSString *)alertText
+                            title:(NSString *)alertTitle
                        alertStyle:(AFABannerAlertStyle)alertStyle
              parentViewController:(UIViewController *)parentViewController {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         _alertText = alertText;
+        _alertTitle = alertTitle;
         _alertStyle = alertStyle;
         _parentViewController = parentViewController;
         
@@ -62,9 +65,11 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
 }
 
 + (instancetype)showAlertWithText:(NSString *)alertText
+                            title:(NSString *)alertTitle
                             style:(AFABannerAlertStyle)alertStyle
                  inViewController:(UIViewController *)viewController {
     AFANavigationBarBannerAlertView *bannerAlert = [[AFANavigationBarBannerAlertView alloc] initWithAlertText:alertText
+                                                                                                        title:alertTitle
                                                                                                    alertStyle:alertStyle
                                                                                          parentViewController:viewController];
     [bannerAlert showAndHideWithTimeout:kHideTimeout];
@@ -74,6 +79,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
 
 - (instancetype)initWithParentViewController:(UIViewController *)parentViewController {
     return [self initWithAlertText:nil
+                             title:nil
                         alertStyle:AFABannerAlertStyleUndefined
               parentViewController:parentViewController];
 }
@@ -106,7 +112,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     [self addSubview:self.containerView];
     
     // Set up alert image view
-    self.alertImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"username-icon"]];
+    self.alertImageView = [UIImageView new];
     self.alertImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.alertImageView.translatesAutoresizingMaskIntoConstraints = NO;
     self.alertImageView.tintColor = UIColor.whiteColor;
@@ -123,7 +129,6 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     self.alertTitleLabel.font = [UIFont fontWithName:@"Muli-Bold"
                                                 size:14.0f];
     self.alertTitleLabel.textColor = UIColor.whiteColor;
-    self.alertTitleLabel.text = @"Notification";
     [self.containerView addSubview:self.alertTitleLabel];
     
     // Set up alert label
@@ -214,9 +219,10 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
                                                                             @"closeButton"  : self.closeButton}]];
     
     // Layout constraints
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:|-[alertImageView]-(horizontalPadding)-[separator]-(horizontalPadding)-[alertTitle]-[closeButton]-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"H:|-(imageViewPadding)-[alertImageView]-(imageViewPadding)-[separator]-(horizontalPadding)-[alertTitle]-[closeButton]-|"
                                                                  options: kNilOptions
-                                                                 metrics: @{@"horizontalPadding" : @(kHorizontalPadding)}
+                                                                 metrics: @{@"horizontalPadding" : @(kHorizontalPadding),
+                                                                            @"imageViewPadding"  : @(kHorizontalImageViewPadding)}
                                                                    views: @{@"alertImageView"    : self.alertImageView,
                                                                             @"separator"         : self.separator,
                                                                             @"alertTitle"        : self.alertTitleLabel,
@@ -229,7 +235,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
                                                                             @"alertText"         : self.alertTextLabel,
                                                                             @"closeButton"       : self.closeButton}]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|-[alertTitle][alertText]-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|-[alertTitle]-(4)-[alertText]-|"
                                                                  options: kNilOptions
                                                                  metrics: nil
                                                                    views: @{@"alertTitle"  : self.alertTitleLabel,
@@ -246,22 +252,23 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
 - (void)updateAlertStyleAndText {
     // Set up background and text color based on the style of the alert
     UIColor *backgroundColor = nil;
-    UIColor *alertTextColor = nil;
+    UIImage *alertImage = nil;
     
     if (AFABannerAlertStyleWarning == self.alertStyle) {
         backgroundColor = [UIColor connectivityWarningColor];
-        alertTextColor = [UIColor darkGreyTextColor];
+        alertImage = [UIImage imageNamed:@"warning-icon"];
     } else if (AFABannerAlertStyleError == self.alertStyle) {
         backgroundColor = [UIColor alertWithErrorColor];
-        alertTextColor = [UIColor whiteColor];
     } else if (AFABannerAlertStyleSuccess == self.alertStyle) {
         backgroundColor = [UIColor connectivityRestoredColor];
-        alertTextColor = [UIColor whiteColor];
+        alertImage = [UIImage imageNamed:@"confirmation-icon"];
     }
     
     self.backgroundColor = backgroundColor;
-    self.alertTextLabel.textColor = alertTextColor;
+    self.alertImageView.image = alertImage;
+    self.alertTextLabel.textColor = [UIColor whiteColor];
     self.alertTextLabel.text = self.alertText;
+    self.alertTitleLabel.text = self.alertTitle;
 }
 
 - (void)show {
@@ -282,6 +289,10 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     } else {
         [self.parentViewController.view addSubview:self];
         topOffset = 0;
+    }
+    
+    if (!self.superview) {
+        return;
     }
     
     NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[banner]|"
@@ -343,8 +354,10 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
 }
 
 - (void)showAndHideWithText:(NSString *)alertText
+                      title:(NSString *)alertTitle
                       style:(AFABannerAlertStyle)alertStyle {
     _alertText = alertText;
+    _alertTitle = alertTitle;
     _alertStyle = alertStyle;
     
     if (self.isBannerVisible) {

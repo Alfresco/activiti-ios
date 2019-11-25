@@ -164,11 +164,11 @@
 }
 
 + (UIColor *)connectivityWarningColor {
-    return [UIColor colorWithRed:254 / 255.0f green:167 / 255.0f blue:77 / 255.0f alpha:1.0f];
+    return [UIColor colorWithRed:238 / 255.0f green:115 / 255.0f blue:47 / 255.0f alpha:1.0f];
 }
 
 + (UIColor *)connectivityRestoredColor {
-    return [UIColor colorWithRed:112 / 255.0f green:156 / 255.0f blue:70 / 255.0f alpha:1.0f];
+    return [UIColor colorWithRed:84 / 255.0f green:152 / 255.0f blue:67 / 255.0f alpha:1.0f];
 }
 
 + (UIColor *)alertWithErrorColor {
