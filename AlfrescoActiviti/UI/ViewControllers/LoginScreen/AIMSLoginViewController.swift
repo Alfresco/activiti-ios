@@ -174,7 +174,8 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     
     @IBAction func needHelpButtonTapped(_ sender: Any) {
         self.view.endEditing(true)
-        let helpVC = storyboard?.instantiateViewController(withIdentifier: kStoryboardIDAIMSHelpViewController) as! AIMSHelpViewController
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let helpVC = storyboard.instantiateViewController(withIdentifier: kStoryboardIDAIMSHelpViewController) as! AIMSHelpViewController
         helpVC.hintText = loginViewModel.helpHintText
         helpVC.titleText = loginViewModel.helpText
         helpVC.closeText = loginViewModel.closeText
