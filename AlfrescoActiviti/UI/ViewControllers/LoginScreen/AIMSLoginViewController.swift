@@ -180,7 +180,8 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         helpVC.titleText = loginViewModel.helpText
         helpVC.closeText = loginViewModel.closeText
         helpVC.modalPresentationStyle = .overCurrentContext
-        self.navigationController?.present(helpVC, animated: false, completion: nil)
+        self.present(helpVC, animated: false, completion: nil)
+//        self.navigationController?.present(helpVC, animated: false, completion: nil)
     }
     
     @objc func dismissKeyboard() {
@@ -188,7 +189,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     }
     
     // MARK: - Validations
-    
+     
     fileprivate func updateConnectButtonState() {
         if let urlValue = alfrescoURLTextField.text {
             connectToButton.isEnabled = !urlValue.isEmpty
