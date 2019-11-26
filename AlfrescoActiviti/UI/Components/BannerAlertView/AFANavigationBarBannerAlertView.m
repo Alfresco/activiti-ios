@@ -21,11 +21,11 @@
 #import "AFAUIConstants.h"
 
 static const CGFloat kVerticalMargin                = 8.0f;
-static const CGFloat kNotchVerticalPadding          = 8.0f;
-static const CGFloat kTopMarginWithoutNavigationBar = 32.0f;
+static const CGFloat kNotchVerticalPadding          = 16.0f;
+static const CGFloat kTopMarginWithoutNavigationBar = 16.0f;
 static const CGFloat kHorizontalPadding             = 8.0f;
 static const CGFloat kHorizontalImageViewPadding    = 12.0f;
-static const CGFloat kAlertImageViewRectangleSize   = 20.0f;
+static const CGFloat kAlertImageViewRectangleSize   = 25.0f;
 static const CGFloat kCloseButtonRectangleSize      = 20.0f;
 static const NSTimeInterval kHideTimeout            = 2.f;
 
@@ -259,6 +259,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
         alertImage = [UIImage imageNamed:@"warning-icon"];
     } else if (AFABannerAlertStyleError == self.alertStyle) {
         backgroundColor = [UIColor alertWithErrorColor];
+        alertImage = [UIImage imageNamed:@"error-icon"];
     } else if (AFABannerAlertStyleSuccess == self.alertStyle) {
         backgroundColor = [UIColor connectivityRestoredColor];
         alertImage = [UIImage imageNamed:@"confirmation-icon"];
