@@ -182,7 +182,10 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
                 switch result {
                 case .failure(let error):
                     AFALog.logError(error.localizedDescription)
+                    sSelf.usernameTextFieldController?.setErrorText("", errorAccessibilityValue: "")
+                    sSelf.passwordTextFieldController?.setErrorText("", errorAccessibilityValue: "")
                     sSelf.showErrorMessage(error.localizedDescription)
+                    
                     break
                 case .success(_):
                     sSelf.performSegue(withIdentifier: kSegueIDLoginAuthorized, sender: nil)

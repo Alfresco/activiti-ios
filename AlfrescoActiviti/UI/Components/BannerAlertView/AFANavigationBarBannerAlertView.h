@@ -46,6 +46,7 @@ typedef NS_ENUM(NSInteger, AFABannerAlertStyle) {
 
 - (void)show;
 - (void)hide;
+- (void)hide:(BOOL)animated;
 - (void)showAndHideWithTimeout:(NSTimeInterval)timeout;
 - (void)showAndHideWithText:(NSString *)alertText
                       title:(NSString *)alertTitle

@@ -235,6 +235,7 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + kOverlayAlphaChangeTime) { [weak self] in
                 guard let sSelf = self else { return }
                 
+                sSelf.repositoryTextFieldController?.setErrorText("", errorAccessibilityValue: "")
                 sSelf.showErrorMessage(error.localizedDescription)
             }
         }

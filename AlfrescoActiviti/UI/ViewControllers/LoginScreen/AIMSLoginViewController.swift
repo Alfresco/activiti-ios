@@ -233,6 +233,8 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
             guard let sSelf = self else { return }
             
             sSelf.controllerState = .isIdle
+            
+            sSelf.alfrescoURLTextFieldController?.setErrorText("", errorAccessibilityValue: "")
             sSelf.showErrorMessage(error.localizedDescription)
         }
     }

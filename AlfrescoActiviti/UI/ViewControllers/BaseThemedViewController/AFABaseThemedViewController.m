@@ -91,11 +91,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.isControllerViewVisible = NO;
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [self.bannerAlertView hide];
+    [self.bannerAlertView hide:NO];
 }
 
 

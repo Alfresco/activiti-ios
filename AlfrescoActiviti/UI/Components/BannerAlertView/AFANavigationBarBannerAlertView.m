@@ -20,9 +20,8 @@
 #import "UIColor+AFATheme.h"
 #import "AFAUIConstants.h"
 
-static const CGFloat kVerticalMargin                = 8.0f;
-static const CGFloat kNotchVerticalPadding          = 16.0f;
-static const CGFloat kTopMarginWithoutNavigationBar = 16.0f;
+static const CGFloat kNotchVerticalPadding          = 10.0f;
+static const CGFloat kVerticalPadding               = 20.0f;
 static const CGFloat kHorizontalPadding             = 8.0f;
 static const CGFloat kHorizontalImageViewPadding    = 12.0f;
 static const CGFloat kAlertImageViewRectangleSize   = 25.0f;
@@ -122,6 +121,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     // Set up alert title
     self.alertTitleLabel = [UILabel new];
     self.alertTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.alertTitleLabel.contentMode = UIViewContentModeTopLeft;
     self.alertTitleLabel.numberOfLines = 1;
     self.alertTitleLabel.textAlignment = NSTextAlignmentLeft;
     self.alertTitleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -159,7 +159,16 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
 }
 
 - (void)setBannerComponentConstraints {
-    CGFloat topMarginWithoutNavigationBar = kTopMarginWithoutNavigationBar + ([self isNotchPresent] ? kNotchVerticalPadding : 0);
+    // Compute top offset
+    CGFloat topOffset = 0;
+    UINavigationBar *navigationBar = self.parentViewController.navigationController.navigationBar;
+    if (navigationBar.isHidden && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        topOffset += kVerticalPadding;
+        
+        if ([self isNotchPresent]) {
+            topOffset += kNotchVerticalPadding;
+        }
+    }
     
     // Container view constraints
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[containerView]|"
@@ -167,10 +176,9 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
                                                                  metrics:nil
                                                                    views:@{@"containerView" : self.containerView}]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(top)-[containerView]|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(topOffset)-[containerView]|"
                                                                  options:kNilOptions
-                                                                 metrics:@{@"top" : (self.navigationHidden) ?
-                                                                           @(topMarginWithoutNavigationBar) : @(kVerticalMargin)}
+                                                                 metrics:@{@"topOffset" : @(topOffset)}
                                                                    views:@{@"containerView" : self.containerView}]];
     
     // Alert image view size constraints
@@ -196,7 +204,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
                                                                  metrics: nil
                                                                    views: @{@"separator" : self.separator}]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|-[separator]-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|-(8)-[separator]-(8)-|"
                                                                  options: kNilOptions
                                                                  metrics: nil
                                                                    views: @{@"separator" : self.separator}]];
@@ -235,7 +243,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
                                                                             @"alertText"         : self.alertTextLabel,
                                                                             @"closeButton"       : self.closeButton}]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|-[alertTitle]-(4)-[alertText]-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|-(2)-[alertTitle]-(4)-[alertText]-|"
                                                                  options: kNilOptions
                                                                  metrics: nil
                                                                    views: @{@"alertTitle"  : self.alertTitleLabel,
@@ -262,7 +270,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
         alertImage = [UIImage imageNamed:@"error-icon"];
     } else if (AFABannerAlertStyleSuccess == self.alertStyle) {
         backgroundColor = [UIColor connectivityRestoredColor];
-        alertImage = [UIImage imageNamed:@"confirmation-icon"];
+        alertImage = [UIImage imageNamed:@"notice-icon"];
     }
     
     self.backgroundColor = backgroundColor;
@@ -281,15 +289,11 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     _isBannerVisible = YES;
     
     UINavigationBar *navigationBar = self.parentViewController.navigationController.navigationBar;
-    CGFloat topOffset;
-    
     if (!navigationBar.isHidden) {
         [navigationBar.superview insertSubview:self
                                   belowSubview:navigationBar];
-        topOffset = CGRectGetMaxY(navigationBar.frame);
     } else {
         [self.parentViewController.view addSubview:self];
-        topOffset = 0;
     }
     
     if (!self.superview) {
@@ -300,9 +304,9 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
                                                                              options:kNilOptions
                                                                              metrics:nil
                                                                                views:@{@"banner": self}];
-    NSArray *topConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(offset)-[banner]"
+    NSArray *topConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[banner]"
                                                                       options:kNilOptions
-                                                                      metrics:@{@"offset": @(topOffset)}
+                                                                      metrics:nil
                                                                         views:@{@"banner": self}];
     self.topSpacingConstraint = topConstraints.firstObject;
     
@@ -319,7 +323,13 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     }];
 }
 
-- (void)hide:(AFANavigationBarBannerAlertHideCompletionBlock)hideCompletionBlock {
+- (void)hide:(BOOL)animated {
+    [self hideWithCompletionBlock:nil
+                         animated:NO];
+}
+
+- (void)hideWithCompletionBlock:(AFANavigationBarBannerAlertHideCompletionBlock)hideCompletionBlock
+                       animated:(BOOL)animated {
     if (self.hideTimer) {
         [self.hideTimer invalidate];
         self.hideTimer = nil;
@@ -330,18 +340,27 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     [self updateUI];
     
     self.transform = CGAffineTransformMakeTranslation(0, self.frame.size.height);
-    [UIView animateWithDuration:kDefaultAnimationTime animations:^{
-        self.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished) {
+    
+    if (animated) {
+        [UIView animateWithDuration:kDefaultAnimationTime animations:^{
+            self.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+            if (hideCompletionBlock) {
+                hideCompletionBlock();
+            }
+        }];
+    } else {
         [self removeFromSuperview];
         if (hideCompletionBlock) {
             hideCompletionBlock();
         }
-    }];
+    }
 }
 
 - (void)hide {
-    [self hide:nil];
+    [self hideWithCompletionBlock:nil
+                         animated:YES];
 }
 
 - (void)showAndHideWithTimeout:(NSTimeInterval)timeout {
@@ -363,17 +382,17 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     
     if (self.isBannerVisible) {
         __weak typeof(self) weakSelf = self;
-        [self hide:^{
+        [self hideWithCompletionBlock:^{
             __strong typeof(self) strongSelf = weakSelf;
             [strongSelf show];
-        }];
+        } animated:YES];
     } else {
         [self show];
     }
 }
 
 - (BOOL)isNotchPresent {
-    return UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom > 0;
+    return UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom > 0 && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone;
 }
 
 @end
