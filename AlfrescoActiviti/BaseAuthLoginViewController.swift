@@ -238,10 +238,24 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
             let endPasswordTextField = passwordTextfield.frame.origin.y + passwordTextfield.frame.size.height
             let viewHeight = self.view.bounds.size.height
             let keyboardHeight =  keyboardFrame.cgRectValue.height
-            if adjustViewForKeyboard && viewHeight - endPasswordTextField < keyboardHeight {
-                if self.view.frame.origin.y == 0 {
-                    self.view.frame.origin.y -= 150
-                }
+            var shouldChange = false
+            
+            if UIDevice.current.userInterfaceIdiom == .pad &&
+                UIDevice.current.orientation != .portrait &&
+                UIDevice.current.orientation != .portraitUpsideDown &&
+                adjustViewForKeyboard &&
+                viewHeight - endPasswordTextField < keyboardHeight {
+                shouldChange = true
+            }
+
+            if UIDevice.current.userInterfaceIdiom == .phone &&
+                adjustViewForKeyboard &&
+                viewHeight - endPasswordTextField < keyboardHeight {
+                shouldChange = true
+            }
+            
+            if self.view.frame.origin.y == 0 && shouldChange {
+                self.view.frame.origin.y -= 150
             }
         }
     }
