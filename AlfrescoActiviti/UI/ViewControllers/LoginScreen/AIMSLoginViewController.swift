@@ -29,6 +29,7 @@ enum ControllerState {
 class AIMSLoginViewController: AFABaseThemedViewController {
     
     let loginViewModel: AIMSLoginViewModel = AIMSLoginViewModel()
+    weak var delegate: SplashScreenDelegate?
     
     // App name section
     @IBOutlet weak var processServicesAppLabel: UILabel!
@@ -236,7 +237,12 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
             sSelf.controllerState = .isIdle
             
             sSelf.alfrescoURLTextFieldController?.setErrorText("", errorAccessibilityValue: "")
-            sSelf.showErrorMessage(error.localizedDescription)
+            
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                sSelf.delegate?.showError(message: error.localizedDescription)
+            } else {
+                sSelf.showErrorMessage(error.localizedDescription)
+            }
         }
     }
     
