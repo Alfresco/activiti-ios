@@ -28,4 +28,4 @@ NSInteger const  kASDKPersistenceStackSaveViewContextErrorCode          = 2;
 NSInteger const  kASDKPersistenceStackCleanCacheStalledDataErrorCode    = 3;
 
 #pragma mark -
-NSInteger const  kASDKPersistenceStackNameDefault                       = @"PersistenceStackNameDefault";
+NSString*  const  kASDKPersistenceStackNameDefault                       = @"PersistenceStackNameDefault";
