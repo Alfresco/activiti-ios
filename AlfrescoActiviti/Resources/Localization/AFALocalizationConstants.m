@@ -99,6 +99,7 @@ NSString *kLocalizationSSOLoginSubtitle2Text                    = @"ssoLoginSubt
 NSString *kLocalizationSSOLoginRepositoryPlaceholderText        = @"ssoLoginRepositoryPlaceholderText";
 NSString *kLocalizationSSOLoginSignInSSOButtonText              = @"ssoLoginSignInSSOButtonText";
 NSString *kLocalizationSSOLoginScreenSigningInText              = @"ssoLoginScreenSigningInText";
+NSString *kLocalizationSSOLoginWarningLoginRedirectURL          = @"ssoLoginWarningLoginRedirectURL";
 
 #pragma mark -
 #pragma mark Application screen

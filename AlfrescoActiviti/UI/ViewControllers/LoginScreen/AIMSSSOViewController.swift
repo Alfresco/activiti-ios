@@ -186,6 +186,7 @@ class AIMSSSOViewController: AFABaseThemedViewController {
         signInButton.setElevation(.none, for: .normal)
         signInButton.setElevation(.none, for: .highlighted)
         signInButton.setTitleFont(colorSchemeManager.defaultTypographyScheme.headline6, for: .normal)
+        signInButton.semanticContentAttribute = .forceRightToLeft
     }
 }
 
@@ -213,6 +214,22 @@ extension AIMSSSOViewController: UITextFieldDelegate {
 // MARK: - AIMSSSOViewModel Delegate
 
 extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
+    func logInWarning(with message: String) {
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            
+            sSelf.navigationController?.setNavigationBarHidden(false, animated: true)
+            sSelf.controllerState = .isIdle
+            
+            AFALog.logWarning(message)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + kOverlayAlphaChangeTime) { [weak self] in
+                guard let sSelf = self else { return }
+                sSelf.showWarningMessage(message)
+            }
+        }
+    }
+    
     func logInSuccessful() {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }

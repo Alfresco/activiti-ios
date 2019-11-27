@@ -22,6 +22,7 @@ import AlfrescoAuth
 protocol AIMSSSOViewModelDelegate: class {
     func logInFailed(with error: APIError)
     func logInSuccessful()
+    func logInWarning(with message: String)
 }
 
 class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
@@ -41,7 +42,6 @@ class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
             return String(format: NSLocalizedString(kLocalizationLoginScreenCopyrightFormat, comment: "Copyright text"), year)
         }
     }
-    
     var serverURLText: String {
         get {
             if let params = authParameters {
@@ -51,6 +51,7 @@ class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
             return ""
         }
     }
+    let warningLogInRedirectURLText = NSLocalizedString(kLocalizationSSOLoginWarningLoginRedirectURL, comment: "Warning")
     
     fileprivate var alfrescoCredential: AlfrescoCredential?
     weak var delegate: AIMSSSOViewModelDelegate?
@@ -61,9 +62,19 @@ class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
     
     func login(onViewController viewController: UIViewController) {
         if let authParameters = self.authParameters {
-            authenticationService = AIMSLoginService(with: authParameters)
-            authenticationService?.login(onViewController: viewController, delegate: self)
+            if check(authParameters) {
+                authenticationService = AIMSLoginService(with: authParameters)
+                authenticationService?.login(onViewController: viewController, delegate: self)
+            }
         }
+    }
+    
+    func check(_ authParameters: AIMSAuthenticationParameters) -> Bool {
+        if authParameters.serviceDocument.isEmpty {
+            delegate?.logInWarning(with: warningLogInRedirectURLText)
+            return false
+        }
+        return true
     }
 }
 

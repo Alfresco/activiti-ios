@@ -83,8 +83,9 @@
 "ssoLoginSubtitle1Text"                                  = "Singing in to";
 "ssoLoginSubtitle2Text"                                  = "To allow successful single sign on access, please provide the location of your Process Services environment.";
 "ssoLoginRepositoryPlaceholderText"                      = "Process repository location";
-"ssoLoginSignInSSOButtonText"                            = "SING IN WITH SSO";
+"ssoLoginSignInSSOButtonText"                            = "SIGN IN WITH SSO";
 "ssoLoginScreenSigningInText"                            = "Signing In";
+"ssoLoginWarningLoginRedirectURL"                        = "RedirectURL shouldn't be empty, go to Advanced Settings.";
 
 // Applications screen
 "appScreenTitleText"                                     = "Applications";
