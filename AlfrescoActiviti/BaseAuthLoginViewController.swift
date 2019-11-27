@@ -184,7 +184,11 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
                     AFALog.logError(error.localizedDescription)
                     sSelf.usernameTextFieldController?.setErrorText("", errorAccessibilityValue: "")
                     sSelf.passwordTextFieldController?.setErrorText("", errorAccessibilityValue: "")
-                    sSelf.showErrorMessage(error.localizedDescription)
+                    if (error as NSError).domain == AFALoginViewModelWarningDomain {
+                        sSelf.showWarningMessage(error.localizedDescription)
+                    } else {
+                        sSelf.showErrorMessage(error.localizedDescription)
+                    }
                     
                     break
                 case .success(_):

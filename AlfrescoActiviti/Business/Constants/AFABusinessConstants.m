@@ -79,5 +79,6 @@ NSString  *kCellFactoryCellParameterActionType      = @"kCellFactoryCellParamete
 #pragma mark Error domains
 
 NSString * const AFALoginViewModelErrorDomain                   = @"AFALoginViewModelErrorDomain";
+NSString * const AFALoginViewModelWarningDomain                 = @"AFALoginViewModelWarningDomain";
 NSInteger const kAFALoginViewModelInvalidCredentialErrorCode    = 1;
 

@@ -26,11 +26,13 @@ class BaseAuthLoginViewModel: AIMSLoginViewModelProtocol {
     func signIn(username: String, password: String, completion: @escaping (Result<ASDKModelProfile, Error>) -> Void) {
         let serverConfiguration = loginStrategy?.serverConfiguration(for: username, password)
         let persistenceStackModelName = self.persistenceStackModelName()
-        if persistenceStackModelName.isEmpty {
-            completion(.failure(NSError(domain: AFALoginViewModelErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey : warningText])))
-            return
-        }
         let sdkBootstrap = ASDKBootstrap.sharedInstance()
+        if let serverConfiguration = serverConfiguration {
+            if !serverConfiguration.hostAddressString.isEmpty || !serverConfiguration.serviceDocument.isEmpty {
+                completion(.failure(NSError(domain: AFALoginViewModelWarningDomain, code: 0, userInfo: [NSLocalizedDescriptionKey : warningText])))
+                return
+            }
+        }
         sdkBootstrap?.setupServices(with: serverConfiguration)
         
         requestProfileService.requestProfile { [weak self] (profile, error) in

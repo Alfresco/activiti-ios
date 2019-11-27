@@ -67,4 +67,5 @@ extern NSString *kCellFactoryCellParameterActionType;
 
 // Error domains
 extern NSString * const AFALoginViewModelErrorDomain;
+extern NSString * const AFALoginViewModelWarningDomain;
 extern NSInteger const kAFALoginViewModelInvalidCredentialErrorCode;
