@@ -145,6 +145,7 @@ NSString *kSegueIDProfileContentPickerComponentEmbedding        = @"ProfileConte
 NSString *kSegueIDLoginAIMSAdvancedSettings                     = @"LoginAIMSAdvancedSettingsSegueID";
 NSString *kSegueIDSplashScreen                                  = @"ShowAppFromSplashScreenSegueID";
 NSString *kSegueIDBaseAuthLoginSegueID                          = @"BaseAuthLoginSegueID";
+NSString *kSegueIDSplashScreenContainerSegueID                  = @"SplashScreenContainerSegueID";
 
 
 #pragma mark -

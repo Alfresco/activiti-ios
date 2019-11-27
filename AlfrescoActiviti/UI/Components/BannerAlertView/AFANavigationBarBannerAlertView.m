@@ -162,7 +162,16 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     // Compute top offset
     CGFloat topOffset = 0;
     UINavigationBar *navigationBar = self.parentViewController.navigationController.navigationBar;
-    if (navigationBar.isHidden && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+
+    BOOL assessForNavigationBar = NO;
+    
+    if (!navigationBar) {
+        assessForNavigationBar = YES;
+    } else {
+        assessForNavigationBar = navigationBar.isHidden;
+    }
+    
+    if (assessForNavigationBar) {
         topOffset += kVerticalPadding;
         
         if ([self isNotchPresent]) {
@@ -289,7 +298,7 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
     _isBannerVisible = YES;
     
     UINavigationBar *navigationBar = self.parentViewController.navigationController.navigationBar;
-    if (!navigationBar.isHidden) {
+    if (navigationBar && !navigationBar.isHidden) {
         [navigationBar.superview insertSubview:self
                                   belowSubview:navigationBar];
     } else {
@@ -373,9 +382,9 @@ typedef void  (^AFANavigationBarBannerAlertHideCompletionBlock) (void);
                                                      repeats:NO];
 }
 
-- (void)showAndHideWithText:(NSString *)alertText
-                      title:(NSString *)alertTitle
-                      style:(AFABannerAlertStyle)alertStyle {
+- (void)showWithText:(NSString *)alertText
+               title:(NSString *)alertTitle
+               style:(AFABannerAlertStyle)alertStyle {
     _alertText = alertText;
     _alertTitle = alertTitle;
     _alertStyle = alertStyle;

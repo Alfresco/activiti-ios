@@ -138,21 +138,21 @@
 #pragma mark Public interface
 
 - (void)showWarningMessage:(NSString *)warningMessage {
-    [self.bannerAlertView showAndHideWithText:warningMessage
-                                        title:NSLocalizedString(kLocalizationBannerViewWarningText, @"Warning title")
-                                        style:AFABannerAlertStyleWarning];
+    [self.bannerAlertView showWithText:warningMessage
+                                 title:NSLocalizedString(kLocalizationBannerViewWarningText, @"Warning title")
+                                 style:AFABannerAlertStyleWarning];
 }
 
 - (void)showErrorMessage:(NSString *)errorMessage {
-    [self.bannerAlertView showAndHideWithText:errorMessage
-                                        title:NSLocalizedString(kLocalizationBannerViewErrorText, @"Error title")
-                                        style:AFABannerAlertStyleError];
+    [self.bannerAlertView showWithText:errorMessage
+                                 title:NSLocalizedString(kLocalizationBannerViewErrorText, @"Error title")
+                                 style:AFABannerAlertStyleError];
 }
 
 - (void)showConfirmationMessage:(NSString *)confirmationMessage {
-    [self.bannerAlertView showAndHideWithText:confirmationMessage
-                                        title:NSLocalizedString(kLocalizationBannerViewConfirmationText, @"Confirmation title")
-                                        style:AFABannerAlertStyleSuccess];
+    [self.bannerAlertView showWithText:confirmationMessage
+                                 title:NSLocalizedString(kLocalizationBannerViewConfirmationText, @"Confirmation title")
+                                 style:AFABannerAlertStyleSuccess];
 }
 
 - (void)didRestoredNetworkConnectivity {

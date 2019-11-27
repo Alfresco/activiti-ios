@@ -138,6 +138,7 @@ extern NSString *kSegueIDProfileContentPickerComponentEmbedding;
 extern NSString *kSegueIDLoginAIMSAdvancedSettings;
 extern NSString *kSegueIDSplashScreen;
 extern NSString *kSegueIDBaseAuthLoginSegueID;
+extern NSString *kSegueIDSplashScreenContainerSegueID;
 
 // Thumbnail manager
 extern NSString *kProfileImageThumbnailIdentifier;

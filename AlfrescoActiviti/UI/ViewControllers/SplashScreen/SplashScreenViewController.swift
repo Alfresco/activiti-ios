@@ -18,6 +18,10 @@
 
 import UIKit
 
+protocol SplashScreenDelegate: class {
+    func showError(message: String);
+}
+
 class SplashScreenViewController: UIViewController {
     
     private static let model = AIMSSplashscreenViewModel()
@@ -25,6 +29,7 @@ class SplashScreenViewController: UIViewController {
         return model.restoreLastSuccessfullSession()
     }()
     private var performedRestoreOperation = false
+    private var bannerView: AFANavigationBarBannerAlertView?
     
     // Logo section
     @IBOutlet weak var logoImageView: UIImageView!
@@ -56,6 +61,9 @@ class SplashScreenViewController: UIViewController {
             AFALog.logError("Color scheme manager could not be initiated")
             return
         }
+        
+        // Banner view
+        bannerView = AFANavigationBarBannerAlertView.init(parentViewController: self)
         
         // Copyright section
         copyrightLabel.text = copyrightText
@@ -106,6 +114,11 @@ class SplashScreenViewController: UIViewController {
             let cvc = segue.destination as! AFAContainerViewController
             cvc.transitioningDelegate = self
             cvc.viewModel = AFAContainerViewModel.init(persistenceStackModelName: SplashScreenViewController.model.persistenceStackModelName())
+        } else if segue.identifier == kSegueIDSplashScreenContainerSegueID {
+            let destinationVC = segue.destination as! UINavigationController
+            if let loginVC = destinationVC.viewControllers.first as? AIMSLoginViewController {
+                loginVC.delegate = self
+            }
         }
     }
     
@@ -133,6 +146,7 @@ class SplashScreenViewController: UIViewController {
     }
 }
 
+// MARK: UIViewControllerTransitioningDelegate
 extension SplashScreenViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -141,5 +155,12 @@ extension SplashScreenViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return AFAModalDismissAnimator()
+    }
+}
+
+// MARK: SplashScreenDelegate
+extension SplashScreenViewController: SplashScreenDelegate {
+    func showError(message: String) {
+        self.bannerView?.show(withText: message, title: NSLocalizedString(kLocalizationBannerViewErrorText, comment: "Error title"), style: .error)
     }
 }
