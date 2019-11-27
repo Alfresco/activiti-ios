@@ -98,7 +98,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
         }
     }
     
-    return nil;
+    return kASDKPersistenceStackNameDefault;
 }
 
 

@@ -23,3 +23,6 @@ extern NSString * const ASDKPersistenceStackErrorDomain;
 extern NSInteger const  kASDKPersistenceStackInitializationErrorCode;
 extern NSInteger const  kASDKPersistenceStackSaveViewContextErrorCode;
 extern NSInteger const  kASDKPersistenceStackCleanCacheStalledDataErrorCode;
+
+//
+extern NSInteger const  kASDKPersistenceStackNameDefault;
