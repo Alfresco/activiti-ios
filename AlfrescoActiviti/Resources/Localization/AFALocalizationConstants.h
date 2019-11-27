@@ -82,6 +82,7 @@ extern NSString *kLocalizationCloudLoginInfoText;
 extern NSString *kLocalizationCloudLoginUsernamePlaceholderText;
 extern NSString *kLocalizationCloudLoginPasswordPlaceholderText;
 extern NSString *kLocalizationCloudLoginSignInButtonText;
+extern NSString *kLocalizationCloudLoginWarningText;
 
 //SSO Login screen
 extern NSString *kLocalizationSSOLoginSubtitle1Text;

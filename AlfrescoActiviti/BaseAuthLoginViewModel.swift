@@ -21,10 +21,15 @@ import Foundation
 class BaseAuthLoginViewModel: AIMSLoginViewModelProtocol {
     var loginStrategy: BaseAuthLoginStrategyProtocol?
     let requestProfileService = AFAProfileServices()
+    let warningText = NSLocalizedString(kLocalizationCloudLoginWarningText, comment: "Warning Text")
 
     func signIn(username: String, password: String, completion: @escaping (Result<ASDKModelProfile, Error>) -> Void) {
         let serverConfiguration = loginStrategy?.serverConfiguration(for: username, password)
         let persistenceStackModelName = self.persistenceStackModelName()
+        if persistenceStackModelName.isEmpty {
+            completion(.failure(NSError(domain: AFALoginViewModelErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey : warningText])))
+            return
+        }
         let sdkBootstrap = ASDKBootstrap.sharedInstance()
         sdkBootstrap?.setupServices(with: serverConfiguration)
         
@@ -53,6 +58,9 @@ class BaseAuthLoginViewModel: AIMSLoginViewModelProtocol {
     }
     
     func persistenceStackModelName() -> String {
-        return ASDKPersistenceStack.persistenceStackModelName(for: self.loginStrategy?.serverConfiguration)
+        if let persistenceStackModelName = ASDKPersistenceStack.persistenceStackModelName(for: self.loginStrategy?.serverConfiguration) {
+            return persistenceStackModelName
+        }
+        return ""
     }
 }

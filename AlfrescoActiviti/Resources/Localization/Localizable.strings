@@ -78,6 +78,7 @@
 "cloudLoginUsernamePlaceholderText"                      = "Username or Email";
 "cloudLoginPasswordPlaceholderText"                      = "Password";
 "cloudLoginSignInButtonText"                             = "SIGN IN";
+"cloudLoginWarningText"                                  = "Service Document shouldn't be empty, go to Advanced Settings.";
 
 // SSO Login screen
 "ssoLoginSubtitle1Text"                                  = "Singing in to";

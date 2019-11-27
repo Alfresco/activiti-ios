@@ -90,6 +90,7 @@ NSString *kLocalizationCloudLoginInfoText                = @"cloudLoginInfoText"
 NSString *kLocalizationCloudLoginUsernamePlaceholderText = @"cloudLoginUsernamePlaceholderText";
 NSString *kLocalizationCloudLoginPasswordPlaceholderText = @"cloudLoginPasswordPlaceholderText";
 NSString *kLocalizationCloudLoginSignInButtonText        = @"cloudLoginSignInButtonText";
+NSString *kLocalizationCloudLoginWarningText             = @"cloudLoginWarningText";
 
 #pragma mark -
 #pragma mark SSO Login screen
