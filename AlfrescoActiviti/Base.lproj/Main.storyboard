@@ -39,6 +39,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpS-lw-atg">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ZDZ-8w-afo" appends="YES" id="m2Z-ai-GZI"/>
+                                </connections>
+                            </view>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ti6-ky-sTX">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -91,15 +99,19 @@
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="trailing" secondItem="H1G-VJ-WCv" secondAttribute="trailing" id="Ej2-d1-W4b"/>
                             <constraint firstItem="gTU-ov-94U" firstAttribute="bottom" secondItem="Ti6-ky-sTX" secondAttribute="bottom" id="ElM-ZY-6Pp"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="centerY" secondItem="gEx-RQ-8qm" secondAttribute="centerY" id="F2h-x0-wP4"/>
+                            <constraint firstItem="tpS-lw-atg" firstAttribute="trailing" secondItem="Ti6-ky-sTX" secondAttribute="trailing" id="IrL-Qy-Edy"/>
+                            <constraint firstItem="tpS-lw-atg" firstAttribute="leading" secondItem="Ti6-ky-sTX" secondAttribute="leading" id="J1I-bb-uE9"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="top" secondItem="H1G-VJ-WCv" secondAttribute="top" id="JXz-My-Psk"/>
                             <constraint firstItem="leA-tB-0i6" firstAttribute="leading" secondItem="fQL-cF-gMZ" secondAttribute="leading" constant="5" id="LDU-bs-Prh"/>
                             <constraint firstItem="gTU-ov-94U" firstAttribute="leading" secondItem="Ti6-ky-sTX" secondAttribute="leading" id="Mb1-mf-Lkp"/>
                             <constraint firstAttribute="trailing" secondItem="Ti6-ky-sTX" secondAttribute="trailing" id="N47-Yc-HqC"/>
                             <constraint firstAttribute="bottom" secondItem="n7K-wj-QTx" secondAttribute="bottom" id="Qgb-h6-h5r"/>
+                            <constraint firstItem="tpS-lw-atg" firstAttribute="top" secondItem="Ti6-ky-sTX" secondAttribute="top" id="Qrf-3L-AZp"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="leading" secondItem="gEx-RQ-8qm" secondAttribute="leading" id="SiM-CB-wMk"/>
                             <constraint firstItem="gTU-ov-94U" firstAttribute="trailing" secondItem="Ti6-ky-sTX" secondAttribute="trailing" id="TF4-gU-XJl"/>
                             <constraint firstItem="fQL-cF-gMZ" firstAttribute="trailing" secondItem="leA-tB-0i6" secondAttribute="trailing" constant="5" id="UMm-kf-1Of"/>
                             <constraint firstItem="gTU-ov-94U" firstAttribute="top" secondItem="Ti6-ky-sTX" secondAttribute="top" id="UOd-wo-50l"/>
+                            <constraint firstItem="tpS-lw-atg" firstAttribute="bottom" secondItem="Ti6-ky-sTX" secondAttribute="bottom" id="Uxf-kY-1bd"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="leading" secondItem="H1G-VJ-WCv" secondAttribute="leading" id="e04-3g-clH"/>
                             <constraint firstItem="n7K-wj-QTx" firstAttribute="leading" secondItem="gEx-RQ-8qm" secondAttribute="leading" id="m5P-YM-Ljx"/>
                             <constraint firstItem="sEu-O8-yid" firstAttribute="centerX" secondItem="gEx-RQ-8qm" secondAttribute="centerX" id="p7P-kR-At1"/>
@@ -134,11 +146,17 @@
                         <outlet property="logoImageView" destination="sEu-O8-yid" id="YNa-Sc-5FJ"/>
                         <outlet property="logoWidthConstraint" destination="IVt-oB-xv7" id="QpX-gs-Vdb"/>
                         <outlet property="shadowView" destination="gTU-ov-94U" id="og4-Gc-0oh"/>
+                        <outlet property="whiteView" destination="tpS-lw-atg" id="thl-RW-BgI"/>
                         <segue destination="2sj-96-gBg" kind="presentation" identifier="ShowAppFromSplashScreenSegueID" animates="NO" modalPresentationStyle="fullScreen" id="EG2-po-uYF"/>
                         <segue destination="6VM-Di-SZo" kind="presentation" identifier="LoginAuthorizedSegueID" modalPresentationStyle="fullScreen" id="6Sl-EL-XUc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXi-BV-cL9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ZDZ-8w-afo">
+                    <connections>
+                        <action selector="whiteViewTapped:" destination="gxN-sD-gXt" id="AOT-ZI-qL5"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1383" y="238"/>
         </scene>
@@ -5719,17 +5737,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4c-Bf-ebj" customClass="MDCButton">
-                                                    <rect key="frame" x="30" y="15" width="354" height="30"/>
+                                                    <rect key="frame" x="192" y="15" width="30" height="30"/>
                                                     <connections>
                                                         <action selector="buttonPressed:" destination="wLS-vg-UHu" eventType="touchUpInside" id="fnK-Rs-ZV8"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="E4c-Bf-ebj" secondAttribute="trailing" constant="30" id="0ZA-do-OxJ"/>
+                                                <constraint firstItem="E4c-Bf-ebj" firstAttribute="centerX" secondItem="fe9-ej-v58" secondAttribute="centerX" id="Iv1-gp-FPw"/>
                                                 <constraint firstItem="E4c-Bf-ebj" firstAttribute="top" secondItem="fe9-ej-v58" secondAttribute="top" constant="15" id="Mlo-In-QSU"/>
                                                 <constraint firstAttribute="bottom" secondItem="E4c-Bf-ebj" secondAttribute="bottom" constant="15" id="fbl-tR-Txm"/>
-                                                <constraint firstItem="E4c-Bf-ebj" firstAttribute="leading" secondItem="fe9-ej-v58" secondAttribute="leading" constant="30" id="rIZ-oJ-wvD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

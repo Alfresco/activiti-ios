@@ -66,25 +66,21 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     //MARK: - Keyboard Notification
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let viewHeight = self.view.bounds.size.height
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+            let window = UIApplication.shared.keyWindow {
+            let viewHeight = window.frame.size.height
             let keyboardHeight =  keyboardFrame.cgRectValue.height
             let margin = viewHeight - endTextFieldOpened
-            var shouldChange = false
-            
-            if UIDevice.current.userInterfaceIdiom == .pad &&
-                UIDevice.current.orientation != .portrait &&
-                UIDevice.current.orientation != .portraitUpsideDown &&
-                viewHeight - endTextFieldOpened < keyboardHeight {
-                shouldChange = true
-            }
 
-            if UIDevice.current.userInterfaceIdiom == .phone &&
+            if self.view.frame.origin.y == 0 &&
+                UIDevice.current.userInterfaceIdiom == .pad &&
                 margin < keyboardHeight {
-                shouldChange = true
+                self.view.frame.origin.y -= (keyboardHeight - margin)
             }
             
-            if self.view.frame.origin.y == 0 && shouldChange {
+            if self.view.frame.origin.y == 0 &&
+                UIDevice.current.userInterfaceIdiom == .phone &&
+                margin < keyboardHeight {
                 self.view.frame.origin.y -= (keyboardHeight - margin + heightTextFieldOpened)
             }
         }
@@ -124,14 +120,19 @@ class AIMSAdvancedSettingsViewController: UIViewController {
 extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
     
     func willBeginEditing(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes) {
-        endTextFieldOpened = cell.frame.origin.y + cell.frame.size.height + view.safeAreaInsets.bottom
         heightTextFieldOpened = cell.frame.size.height + view.safeAreaInsets.bottom
+        endTextFieldOpened = cell.frame.origin.y + heightTextFieldOpened
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let frameInSuperview =  self.view.convert(cell.frame, to: UIApplication.shared.keyWindow)
+            endTextFieldOpened = frameInSuperview.origin.y + heightTextFieldOpened
+        }
     }
     
     func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAuthenticationParameters) {
         if type == .https {
             self.view.endEditing(true)
-            response.port = (response.https) ? String(kDefaultLoginUnsecuredPort) : String(kDefaultLoginSecuredPort)
+            response.port = (response.https) ? String(kDefaultLoginSecuredPort) : String(kDefaultLoginUnsecuredPort)
             tableView.reloadRows(at: [model.getIndexPathForPortField()], with: .none)
         }
     }

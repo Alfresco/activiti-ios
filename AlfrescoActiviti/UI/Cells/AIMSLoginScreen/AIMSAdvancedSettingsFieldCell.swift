@@ -31,9 +31,16 @@ class AIMSAdvancedSettingsFieldCell: UITableViewCell, AIMSAdvancedSettingsCellPr
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        guard let colorSchemeManager = self.colorSchemeManager else {
+            AFALog.logError("Color scheme manager could not be initiated")
+            return
+        }
+        
         textField.text = ""
         textField.delegate = self
-        textFieldController = nil
+        textFieldController = MDCTextInputControllerUnderline(textInput: textField)
+        textFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
+        textField.font = colorSchemeManager.textFieldTypographyScheme.headline1
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,11 +52,7 @@ class AIMSAdvancedSettingsFieldCell: UITableViewCell, AIMSAdvancedSettingsCellPr
             AFALog.logError("Color scheme manager could not be initiated")
             return
         }
-        
-        textFieldController = MDCTextInputControllerUnderline(textInput: textField)
-        textFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
-        textField.font = colorSchemeManager.textFieldTypographyScheme.headline1
-        
+
         if let textFieldController = self.textFieldController {
             textFieldController.placeholderText = model.title
             MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.advancedSettingsTextFieldColorScheme, to: textFieldController )
