@@ -37,6 +37,7 @@ class SplashScreenViewController: UIViewController {
     // Container section
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var iceEffectView: UIVisualEffectView!
+    @IBOutlet weak var shadowView: UIView!
     
     
     // Constraints section
@@ -72,7 +73,7 @@ class SplashScreenViewController: UIViewController {
         copyrightLabel.alpha = 0.0
         
         self.view.layoutIfNeeded()
-        applyShadow(to: containerView)
+        applyShadow(to: shadowView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,11 +128,19 @@ class SplashScreenViewController: UIViewController {
     func showContainerView() {
         self.logoImageView.isHidden = true
         containerView.alpha = 0.0
-        self.view.bringSubviewToFront(self.iceEffectView)
+        shadowView.alpha = 0.0
+        self.view.bringSubviewToFront(self.shadowView)
         self.view.bringSubviewToFront(self.containerView)
-        UIView.animate(withDuration: 1.5) {
+        
+        UIView.animate(withDuration: 1.5, animations: {
             self.containerView.alpha = 1.0
+            self.shadowView.alpha = 1.0
             self.copyrightLabel.alpha = 1.0
+            self.containerView.layer.cornerRadius = 5.0
+            self.containerView.layer.masksToBounds = true
+            self.shadowView.backgroundColor = .clear
+        }) { (_) in
+            
         }
     }
     

@@ -33,6 +33,7 @@ class AIMSAdvancedSettingsFieldCell: UITableViewCell, AIMSAdvancedSettingsCellPr
         super.awakeFromNib()
         textField.text = ""
         textField.delegate = self
+        textFieldController = nil
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -102,7 +103,7 @@ extension AIMSAdvancedSettingsFieldCell: UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        delegate.willBeginEditing(type: model.type)
+        delegate.willBeginEditing(cell: self, type: model.type)
         return true;
     }
     

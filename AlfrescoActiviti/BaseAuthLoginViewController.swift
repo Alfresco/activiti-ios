@@ -66,7 +66,8 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     }
     
     // Keyboard handling
-    var adjustViewForKeyboard: Bool = false
+    var endTextFieldOpened: CGFloat = 0.0
+    var heightTextFieldOpened: CGFloat = 0.0
     
     var rateConstraintsOnce: Bool = true
     
@@ -242,31 +243,29 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let endPasswordTextField = passwordTextfield.frame.origin.y + passwordTextfield.frame.size.height
             let viewHeight = self.view.bounds.size.height
             let keyboardHeight =  keyboardFrame.cgRectValue.height
+            let margin = viewHeight - endTextFieldOpened
             var shouldChange = false
             
             if UIDevice.current.userInterfaceIdiom == .pad &&
                 UIDevice.current.orientation != .portrait &&
                 UIDevice.current.orientation != .portraitUpsideDown &&
-                adjustViewForKeyboard &&
-                viewHeight - endPasswordTextField < keyboardHeight {
+                viewHeight - endTextFieldOpened < keyboardHeight {
                 shouldChange = true
             }
-
+            
             if UIDevice.current.userInterfaceIdiom == .phone &&
-                adjustViewForKeyboard &&
-                viewHeight - endPasswordTextField < keyboardHeight {
+                margin < keyboardHeight {
                 shouldChange = true
             }
             
             if self.view.frame.origin.y == 0 && shouldChange {
-                self.view.frame.origin.y -= 150
+                self.view.frame.origin.y -= (keyboardHeight - margin + heightTextFieldOpened)
             }
         }
     }
-
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
@@ -308,11 +307,9 @@ extension BaseAuthLoginViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.rightView?.tintColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
-        if textField == usernameTextfield {
-            adjustViewForKeyboard = false
-        } else if textField == passwordTextfield {
-            adjustViewForKeyboard = true
-        }
+        endTextFieldOpened = textField.frame.origin.y + textField.frame.size.height + view.safeAreaInsets.bottom
+        heightTextFieldOpened = textField.frame.size.height + view.safeAreaInsets.bottom
+
         return true
     }
     

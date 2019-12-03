@@ -68,10 +68,11 @@ class AIMSAdvancedSettingsViewModel {
         return [transportProtocolSection, settingsSection, authSection, helpSection]
     }
     
-    func getIndexPathForSaveButton() -> IndexPath {
-        return IndexPath(row: 0, section: 3)
+    func getIndexPathForPortField() -> IndexPath {
+        return IndexPath(row:2, section: 0)
     }
 }
+
 
 enum AIMSAdvancedSettingsActionTypes {
     case https

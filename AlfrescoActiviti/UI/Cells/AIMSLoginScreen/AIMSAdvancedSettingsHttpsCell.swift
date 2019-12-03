@@ -34,11 +34,14 @@ class AIMSAdvancedSettingsHttpsCell: UITableViewCell, AIMSAdvancedSettingsCellPr
     
     func configureCell() {
         httpsLabel.text = model.title
+        httpsLabel.textColor = (parameters.https) ? .black : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3)
         httpsSwitch.isOn = parameters.https
     }
     
     @IBAction func httpsSwitchPressed(_ sender: UISwitch) {
         parameters.https = sender.isOn
+        httpsLabel.textColor = (sender.isOn) ? .black : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3)
+    
         delegate.result(cell: self, type: model.type, response: parameters)
     }
 }

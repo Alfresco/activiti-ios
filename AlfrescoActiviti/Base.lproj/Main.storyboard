@@ -35,7 +35,11 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ti6-ky-sTX">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTU-ov-94U">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ti6-ky-sTX">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -85,13 +89,17 @@
                             <constraint firstAttribute="bottom" secondItem="Ti6-ky-sTX" secondAttribute="bottom" id="E9I-1e-Gkd"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="top" secondItem="gEx-RQ-8qm" secondAttribute="top" id="EbK-1A-EhE"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="trailing" secondItem="H1G-VJ-WCv" secondAttribute="trailing" id="Ej2-d1-W4b"/>
+                            <constraint firstItem="gTU-ov-94U" firstAttribute="bottom" secondItem="Ti6-ky-sTX" secondAttribute="bottom" id="ElM-ZY-6Pp"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="centerY" secondItem="gEx-RQ-8qm" secondAttribute="centerY" id="F2h-x0-wP4"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="top" secondItem="H1G-VJ-WCv" secondAttribute="top" id="JXz-My-Psk"/>
                             <constraint firstItem="leA-tB-0i6" firstAttribute="leading" secondItem="fQL-cF-gMZ" secondAttribute="leading" constant="5" id="LDU-bs-Prh"/>
+                            <constraint firstItem="gTU-ov-94U" firstAttribute="leading" secondItem="Ti6-ky-sTX" secondAttribute="leading" id="Mb1-mf-Lkp"/>
                             <constraint firstAttribute="trailing" secondItem="Ti6-ky-sTX" secondAttribute="trailing" id="N47-Yc-HqC"/>
                             <constraint firstAttribute="bottom" secondItem="n7K-wj-QTx" secondAttribute="bottom" id="Qgb-h6-h5r"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="leading" secondItem="gEx-RQ-8qm" secondAttribute="leading" id="SiM-CB-wMk"/>
+                            <constraint firstItem="gTU-ov-94U" firstAttribute="trailing" secondItem="Ti6-ky-sTX" secondAttribute="trailing" id="TF4-gU-XJl"/>
                             <constraint firstItem="fQL-cF-gMZ" firstAttribute="trailing" secondItem="leA-tB-0i6" secondAttribute="trailing" constant="5" id="UMm-kf-1Of"/>
+                            <constraint firstItem="gTU-ov-94U" firstAttribute="top" secondItem="Ti6-ky-sTX" secondAttribute="top" id="UOd-wo-50l"/>
                             <constraint firstItem="Ti6-ky-sTX" firstAttribute="leading" secondItem="H1G-VJ-WCv" secondAttribute="leading" id="e04-3g-clH"/>
                             <constraint firstItem="n7K-wj-QTx" firstAttribute="leading" secondItem="gEx-RQ-8qm" secondAttribute="leading" id="m5P-YM-Ljx"/>
                             <constraint firstItem="sEu-O8-yid" firstAttribute="centerX" secondItem="gEx-RQ-8qm" secondAttribute="centerX" id="p7P-kR-At1"/>
@@ -125,6 +133,7 @@
                         <outlet property="iceEffectView" destination="H1G-VJ-WCv" id="xOg-Tj-a63"/>
                         <outlet property="logoImageView" destination="sEu-O8-yid" id="YNa-Sc-5FJ"/>
                         <outlet property="logoWidthConstraint" destination="IVt-oB-xv7" id="QpX-gs-Vdb"/>
+                        <outlet property="shadowView" destination="gTU-ov-94U" id="og4-Gc-0oh"/>
                         <segue destination="2sj-96-gBg" kind="presentation" identifier="ShowAppFromSplashScreenSegueID" animates="NO" modalPresentationStyle="fullScreen" id="EG2-po-uYF"/>
                         <segue destination="6VM-Di-SZo" kind="presentation" identifier="LoginAuthorizedSegueID" modalPresentationStyle="fullScreen" id="6Sl-EL-XUc"/>
                     </connections>
@@ -5357,19 +5366,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alfrescoLogoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="oUU-t7-qeO">
-                                <rect key="frame" x="32" y="164" width="200" height="68"/>
+                                <rect key="frame" x="32" y="164" width="200" height="136"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="w3e-kQ-Rkd"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yva-zw-Nts">
-                                <rect key="frame" x="32" y="232" width="350" height="30"/>
+                                <rect key="frame" x="32" y="300" width="350" height="30"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jx5-3K-GGx" customClass="MDCTextField">
-                                <rect key="frame" x="32" y="397" width="350" height="34"/>
+                                <rect key="frame" x="32" y="465" width="350" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
@@ -5377,7 +5386,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3t8-IP-G8g" customClass="MDCButton">
-                                <rect key="frame" x="32" y="435" width="350" height="58"/>
+                                <rect key="frame" x="32" y="503" width="350" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="fm3-cy-nBm"/>
                                 </constraints>
@@ -5387,14 +5396,14 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="o9U-5W-Hhk" userLabel="separator">
-                                <rect key="frame" x="32" y="523" width="155" height="1"/>
+                                <rect key="frame" x="32" y="591" width="155" height="1"/>
                                 <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="2T4-2x-oQr"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCU-Jq-xrH">
-                                <rect key="frame" x="195" y="513" width="24" height="21"/>
+                                <rect key="frame" x="195" y="581" width="24" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="Vyn-P2-fZa"/>
                                 </constraints>
@@ -5403,21 +5412,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="1j3-5s-Vsp" userLabel="separator">
-                                <rect key="frame" x="227" y="523" width="155" height="1"/>
+                                <rect key="frame" x="227" y="591" width="155" height="1"/>
                                 <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="bBD-87-YVN"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G4-Ef-5j2" customClass="MDCButton">
-                                <rect key="frame" x="32" y="554" width="350" height="58"/>
+                                <rect key="frame" x="32" y="622" width="350" height="58"/>
                                 <state key="normal" title="CLOUD SIGN IN"/>
                                 <connections>
                                     <segue destination="jv8-zv-gad" kind="show" identifier="BaseAuthLoginSegueID" id="xS8-1a-weC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwj-Bk-jf5" customClass="MDCButton">
-                                <rect key="frame" x="129" y="632" width="156" height="30"/>
+                                <rect key="frame" x="129" y="700" width="156" height="30"/>
                                 <state key="normal" title="ADVANCED SETTINGS"/>
                                 <connections>
                                     <action selector="advancedButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="Gzh-nX-n1X"/>
@@ -5425,7 +5434,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01l-CZ-gwj" customClass="MDCButton">
-                                <rect key="frame" x="166.66666666666666" y="692" width="81" height="30"/>
+                                <rect key="frame" x="166.66666666666666" y="760" width="81" height="30"/>
                                 <state key="normal" title="NEED HELP"/>
                                 <connections>
                                     <action selector="needHelpButtonTapped:" destination="wzB-9P-BSv" eventType="touchUpInside" id="6AG-aa-yK1"/>
@@ -5515,25 +5524,25 @@
                                 <variation key="heightClass=regular-widthClass=regular" hidden="YES"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gx-Gb-y45">
-                                <rect key="frame" x="32" y="232" width="350" height="30"/>
+                                <rect key="frame" x="32" y="300" width="350" height="30"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alfrescoLogoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="zIe-Qf-AcH">
-                                <rect key="frame" x="32" y="164" width="200" height="68"/>
+                                <rect key="frame" x="32" y="164" width="200" height="136"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="gt6-Dl-Oz8"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Process Services App" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-kT-Xnv">
-                                <rect key="frame" x="32" y="287" width="350" height="17.333333333333314"/>
+                                <rect key="frame" x="32" y="355" width="350" height="17.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Muli-Light" family="Muli" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x1o-cv-Ktx" customClass="MDCTextField">
-                                <rect key="frame" x="32" y="314.33333333333331" width="350" height="34"/>
+                                <rect key="frame" x="32" y="382.33333333333331" width="350" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                 <connections>
@@ -5541,7 +5550,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OWh-mu-oBt" customClass="MDCTextField">
-                                <rect key="frame" x="32" y="348.33333333333331" width="350" height="34"/>
+                                <rect key="frame" x="32" y="416.33333333333331" width="350" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                 <connections>
@@ -5549,7 +5558,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC0-X6-qax" customClass="MDCButton">
-                                <rect key="frame" x="32" y="402.33333333333331" width="350" height="58"/>
+                                <rect key="frame" x="32" y="470.33333333333331" width="350" height="57.999999999999943"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="QY0-0P-nee"/>
@@ -5565,7 +5574,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MU8-cU-WxV" customClass="MDCButton">
-                                <rect key="frame" x="166.66666666666666" y="490.33333333333331" width="81" height="29.999999999999943"/>
+                                <rect key="frame" x="166.66666666666666" y="558.33333333333337" width="81" height="30"/>
                                 <state key="normal" title="NEED HELP"/>
                                 <connections>
                                     <action selector="helpButtonPressed:" destination="jv8-zv-gad" eventType="touchUpInside" id="pcu-mb-Pc4"/>
@@ -6982,7 +6991,7 @@ success</string>
         <segue reference="Axm-Tn-V6n"/>
         <segue reference="OCj-p8-qSZ"/>
         <segue reference="RF7-69-ZNi"/>
-        <segue reference="SbH-Il-4GU"/>
+        <segue reference="6Sl-EL-XUc"/>
         <segue reference="DnA-gY-0TX"/>
     </inferredMetricsTieBreakers>
 </document>
