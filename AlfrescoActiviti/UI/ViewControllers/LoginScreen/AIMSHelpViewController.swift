@@ -58,14 +58,6 @@ class AIMSHelpViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Constraints scale
-        self.view.layoutIfNeeded()
-        if (self.view.traitCollection.horizontalSizeClass == .compact) {
-            for constraint in constraintsToScale {
-                constraint.rate(in: self.view)
-            }
-        }
-        
         // Animation appears
         self.view.bounds.origin.y = self.view.bounds.size.height
         UIView.animate(withDuration: 0.4, animations: {
@@ -78,6 +70,12 @@ class AIMSHelpViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // Constraints scale
+//        self.view.setNeedsLayout()
+        for constraint in constraintsToScale {
+            constraint.rate(in: self.view)
+        }
+        
         textView.scrollRangeToVisible(NSRange(location: 0, length: 0))
     }
     

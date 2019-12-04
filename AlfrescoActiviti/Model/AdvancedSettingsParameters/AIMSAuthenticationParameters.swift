@@ -27,7 +27,7 @@ enum AuthenticationType {
 
 class AIMSAuthenticationParameters: Codable {
     var https: Bool = true
-    var port: String = "80"
+    var port: String = "443"
     var serviceDocument: String = "activiti-app"
     var realm: String = "alfresco"
     var clientID: String = "alfresco"
