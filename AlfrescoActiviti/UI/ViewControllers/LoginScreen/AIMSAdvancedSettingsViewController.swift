@@ -25,7 +25,8 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     var parameters: AIMSAuthenticationParameters?
     
     // Keyboard handling
-    var endTextFieldOpened: CGFloat = 0.0
+    var positionEndTextFieldOpenedInSuperview: CGFloat = 0.0
+    var positionEndTextFieldOpenedInView: CGFloat = 0.0
     var heightTextFieldOpened: CGFloat = 0.0
     
     @IBOutlet weak var tableView: UITableView!
@@ -68,20 +69,22 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
             let window = UIApplication.shared.keyWindow {
-            let viewHeight = window.frame.size.height
+            let superviewHeight = window.frame.size.height
+            let viewHeight = view.frame.size.height
             let keyboardHeight =  keyboardFrame.cgRectValue.height
-            let margin = viewHeight - endTextFieldOpened
+            let marginInSuperView = superviewHeight - positionEndTextFieldOpenedInSuperview
+            let marginInView = viewHeight - positionEndTextFieldOpenedInView
 
             if self.view.frame.origin.y == 0 &&
                 UIDevice.current.userInterfaceIdiom == .pad &&
-                margin < keyboardHeight {
-                self.view.frame.origin.y -= (keyboardHeight - margin)
+                marginInSuperView < keyboardHeight {
+                self.view.frame.origin.y -= (keyboardHeight - marginInSuperView)
             }
             
             if self.view.frame.origin.y == 0 &&
                 UIDevice.current.userInterfaceIdiom == .phone &&
-                margin < keyboardHeight {
-                self.view.frame.origin.y -= (keyboardHeight - margin + heightTextFieldOpened)
+                marginInView < keyboardHeight {
+                self.view.frame.origin.y -= (keyboardHeight - marginInView)
             }
         }
     }
@@ -120,12 +123,14 @@ class AIMSAdvancedSettingsViewController: UIViewController {
 extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
     
     func willBeginEditing(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes) {
+        let cellRect = tableView.rectForRow(at: tableView.indexPath(for: cell)!)
+        let cellRectInTableView = self.tableView.convert(cellRect, to: tableView.superview)
         heightTextFieldOpened = cell.frame.size.height + view.safeAreaInsets.bottom
-        endTextFieldOpened = cell.frame.origin.y + heightTextFieldOpened
+        positionEndTextFieldOpenedInView = cellRectInTableView.origin.y + heightTextFieldOpened
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let frameInSuperview =  self.view.convert(cell.frame, to: UIApplication.shared.keyWindow)
-            endTextFieldOpened = frameInSuperview.origin.y + heightTextFieldOpened
+            let frameInSuperview =  self.view.convert(cellRectInTableView, to: UIApplication.shared.keyWindow)
+            positionEndTextFieldOpenedInSuperview = frameInSuperview.origin.y + heightTextFieldOpened
         }
     }
     

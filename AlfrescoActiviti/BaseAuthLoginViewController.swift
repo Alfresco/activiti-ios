@@ -66,7 +66,8 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     }
     
     // Keyboard handling
-    var endTextFieldOpened: CGFloat = 0.0
+    var positionEndTextFieldOpenedInSuperview: CGFloat = 0.0
+    var positionEndTextFieldOpenedInView: CGFloat = 0.0
     var heightTextFieldOpened: CGFloat = 0.0
     
     var rateConstraintsOnce: Bool = true
@@ -242,26 +243,24 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     //MARK: - Keyboard Notification
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let viewHeight = self.view.bounds.size.height
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+            let window = UIApplication.shared.keyWindow {
+            let superviewHeight = window.frame.size.height
+            let viewHeight = view.frame.size.height
             let keyboardHeight =  keyboardFrame.cgRectValue.height
-            let margin = viewHeight - endTextFieldOpened
-            var shouldChange = false
-            
-            if UIDevice.current.userInterfaceIdiom == .pad &&
-                UIDevice.current.orientation != .portrait &&
-                UIDevice.current.orientation != .portraitUpsideDown &&
-                viewHeight - endTextFieldOpened < keyboardHeight {
-                shouldChange = true
+            let marginInSuperView = superviewHeight - positionEndTextFieldOpenedInSuperview
+            let marginInView = viewHeight - positionEndTextFieldOpenedInView
+
+            if self.view.frame.origin.y == 0 &&
+                UIDevice.current.userInterfaceIdiom == .pad &&
+                marginInSuperView < keyboardHeight {
+                self.view.frame.origin.y -= (keyboardHeight - marginInSuperView)
             }
             
-            if UIDevice.current.userInterfaceIdiom == .phone &&
-                margin < keyboardHeight {
-                shouldChange = true
-            }
-            
-            if self.view.frame.origin.y == 0 && shouldChange {
-                self.view.frame.origin.y -= (keyboardHeight - margin + heightTextFieldOpened)
+            if self.view.frame.origin.y == 0 &&
+                UIDevice.current.userInterfaceIdiom == .phone &&
+                marginInView < keyboardHeight {
+                self.view.frame.origin.y -= (keyboardHeight - marginInView)
             }
         }
     }
@@ -307,8 +306,15 @@ extension BaseAuthLoginViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.rightView?.tintColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
-        endTextFieldOpened = textField.frame.origin.y + textField.frame.size.height + view.safeAreaInsets.bottom
-        heightTextFieldOpened = textField.frame.size.height + view.safeAreaInsets.bottom
+        
+        let textFieldRect = textField.frame
+        heightTextFieldOpened = textFieldRect.size.height + view.safeAreaInsets.bottom
+        positionEndTextFieldOpenedInView = textFieldRect.origin.y + heightTextFieldOpened
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let frameInSuperview =  self.view.convert(textFieldRect, to: UIApplication.shared.keyWindow)
+            positionEndTextFieldOpenedInSuperview = frameInSuperview.origin.y + heightTextFieldOpened
+        }
 
         return true
     }
