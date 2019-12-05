@@ -40,6 +40,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     
     // Buttons section
     @IBOutlet weak var connectToButton: MDCButton!
+    var enableConnectButton: Bool = false
     @IBOutlet weak var cloudSignInButton: MDCButton!
     @IBOutlet weak var advancedSettingsButton: MDCButton!
     @IBOutlet weak var needHelpButton: MDCButton!
@@ -148,7 +149,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         controllerState = .isIdle
         updateConnectButtonState()
         
@@ -164,6 +165,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     // MARK: - Actions
     
     @IBAction func connectButtonTapped(_ sender: Any) {
+        self.view.endEditing(true)
         if let alfrescoURL = alfrescoURLTextField.text {
             controllerState = .isLoading
             loginViewModel.availableAuthType(for: alfrescoURL)
@@ -192,9 +194,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     // MARK: - Validations
      
     fileprivate func updateConnectButtonState() {
-        if let urlValue = alfrescoURLTextField.text {
-            connectToButton.isEnabled = !urlValue.isEmpty
-        }
+        connectToButton.isEnabled = enableConnectButton
     }
 
     // MARK: - Navigation
@@ -215,14 +215,31 @@ class AIMSLoginViewController: AFABaseThemedViewController {
 // MARK: - UITextField Delegate
 
 extension AIMSLoginViewController: UITextFieldDelegate {
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if alfrescoURLTextField == textField {
+            enableConnectButton = (textField.text != "")
             updateConnectButtonState()
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var shouldEnable = false
+        if alfrescoURLTextField == textField {
+            if let text = textField.text {
+                if  let textRange = Range(range, in: text) {
+                    let updatedText = text.replacingCharacters(in: textRange, with: string)
+                    shouldEnable = (updatedText != "")
+                }
+            }
+            enableConnectButton = shouldEnable
+            updateConnectButtonState()
+        }
         return true
     }
 }

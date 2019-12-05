@@ -51,7 +51,6 @@ class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
             return ""
         }
     }
-    let warningLogInRedirectURLText = NSLocalizedString(kLocalizationSSOLoginWarningLoginRedirectURL, comment: "Warning")
     
     fileprivate var alfrescoCredential: AlfrescoCredential?
     weak var delegate: AIMSSSOViewModelDelegate?
@@ -62,19 +61,14 @@ class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
     
     func login(onViewController viewController: UIViewController) {
         if let authParameters = self.authParameters {
-            if check(authParameters) {
+            switch authParameters.checkAvailable(authentication: .sso) {
+            case .failure(let error):
+                delegate?.logInWarning(with: error.localizedDescription)
+            case .success(_):
                 authenticationService = AIMSLoginService(with: authParameters)
                 authenticationService?.login(onViewController: viewController, delegate: self)
             }
         }
-    }
-    
-    func check(_ authParameters: AIMSAuthenticationParameters) -> Bool {
-        if authParameters.serviceDocument.isEmpty {
-            delegate?.logInWarning(with: warningLogInRedirectURLText)
-            return false
-        }
-        return true
     }
 }
 

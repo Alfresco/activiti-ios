@@ -18,9 +18,16 @@
 
 import Foundation
 
+enum AuthenticationType {
+    case connect
+    case baseAuthOnPremise
+    case baseAuthCloud
+    case sso
+}
+
 class AIMSAuthenticationParameters: Codable {
     var https: Bool = true
-    var port: String = "80"
+    var port: String = "443"
     var serviceDocument: String = "activiti-app"
     var realm: String = "alfresco"
     var clientID: String = "iosapsapp"
@@ -59,5 +66,27 @@ class AIMSAuthenticationParameters: Codable {
         UserDefaults.standard.set(try? PropertyListEncoder().encode(self),
                                   forKey: kAdvancedSettingsParameters)
         defaults.synchronize()
+    }
+    
+    func checkAvailable(authentication: AuthenticationType) -> Result<Any, NSError> {
+        var available = true
+        var warningText = ""
+        switch authentication {
+        case .connect:
+            warningText = NSLocalizedString("", comment: "Warning Text")
+            available = !hostname.isEmpty
+        case .baseAuthOnPremise:
+            warningText = NSLocalizedString(kLocalizationCloudLoginWarningText, comment: "Warning Text")
+            available = !serviceDocument.isEmpty
+        case .sso:
+            warningText = NSLocalizedString(kLocalizationSSOLoginWarningLoginRedirectURL, comment: "Warning Text")
+            available = !redirectURI.isEmpty
+        default: break
+        }
+        return (available) ? .success(true) : .failure(generateError(with: warningText))
+    }
+    
+    func generateError(with message: String) -> NSError {
+        return NSError(domain: AFALoginViewModelWarningDomain, code: 0, userInfo: [NSLocalizedDescriptionKey : message])
     }
 }

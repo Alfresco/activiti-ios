@@ -66,7 +66,9 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     }
     
     // Keyboard handling
-    var adjustViewForKeyboard: Bool = false
+    var positionEndTextFieldOpenedInSuperview: CGFloat = 0.0
+    var positionEndTextFieldOpenedInView: CGFloat = 0.0
+    var heightTextFieldOpened: CGFloat = 0.0
     
     var rateConstraintsOnce: Bool = true
     
@@ -241,32 +243,28 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     //MARK: - Keyboard Notification
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let endPasswordTextField = passwordTextfield.frame.origin.y + passwordTextfield.frame.size.height
-            let viewHeight = self.view.bounds.size.height
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+            let window = UIApplication.shared.keyWindow {
+            let superviewHeight = window.frame.size.height
+            let viewHeight = view.frame.size.height
             let keyboardHeight =  keyboardFrame.cgRectValue.height
-            var shouldChange = false
-            
-            if UIDevice.current.userInterfaceIdiom == .pad &&
-                UIDevice.current.orientation != .portrait &&
-                UIDevice.current.orientation != .portraitUpsideDown &&
-                adjustViewForKeyboard &&
-                viewHeight - endPasswordTextField < keyboardHeight {
-                shouldChange = true
-            }
+            let marginInSuperView = superviewHeight - positionEndTextFieldOpenedInSuperview
+            let marginInView = viewHeight - positionEndTextFieldOpenedInView
 
-            if UIDevice.current.userInterfaceIdiom == .phone &&
-                adjustViewForKeyboard &&
-                viewHeight - endPasswordTextField < keyboardHeight {
-                shouldChange = true
+            if self.view.frame.origin.y == 0 &&
+                UIDevice.current.userInterfaceIdiom == .pad &&
+                marginInSuperView < keyboardHeight {
+                self.view.frame.origin.y -= (keyboardHeight - marginInSuperView)
             }
             
-            if self.view.frame.origin.y == 0 && shouldChange {
-                self.view.frame.origin.y -= 150
+            if self.view.frame.origin.y == 0 &&
+                UIDevice.current.userInterfaceIdiom == .phone &&
+                marginInView < keyboardHeight {
+                self.view.frame.origin.y -= (keyboardHeight - marginInView)
             }
         }
     }
-
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
@@ -308,11 +306,16 @@ extension BaseAuthLoginViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.rightView?.tintColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
-        if textField == usernameTextfield {
-            adjustViewForKeyboard = false
-        } else if textField == passwordTextfield {
-            adjustViewForKeyboard = true
+        
+        let textFieldRect = textField.frame
+        heightTextFieldOpened = textFieldRect.size.height + view.safeAreaInsets.bottom
+        positionEndTextFieldOpenedInView = textFieldRect.origin.y + heightTextFieldOpened
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let frameInSuperview =  self.view.convert(textFieldRect, to: UIApplication.shared.keyWindow)
+            positionEndTextFieldOpenedInSuperview = frameInSuperview.origin.y + heightTextFieldOpened
         }
+
         return true
     }
     

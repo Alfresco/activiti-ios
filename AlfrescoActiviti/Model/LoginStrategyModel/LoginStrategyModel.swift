@@ -31,7 +31,7 @@ protocol BaseAuthLoginStrategyProtocol {
     var copyrightText: String { get }
     var serverConfiguration: ASDKModelServerConfiguration? { get set }
     
-    func serverConfiguration(for username: String, _ password: String) -> ASDKModelServerConfiguration
+    func serverConfiguration(for username: String, _ password: String) -> Result<ASDKModelServerConfiguration, NSError>
     func syncToUserDefaultsServerConfiguration()
 }
 
@@ -57,17 +57,15 @@ class CloudLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
     let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
     var serverConfiguration: ASDKModelServerConfiguration?
     
-    func serverConfiguration(for username: String, _ password: String) -> ASDKModelServerConfiguration {
+    func serverConfiguration(for username: String, _ password: String) -> Result<ASDKModelServerConfiguration, NSError> {
         let serverConfiguration = ASDKModelServerConfiguration()
         serverConfiguration.hostAddressString = kASDKAPICloudHostnamePath
         serverConfiguration.isCommunicationOverSecureLayer = true
         serverConfiguration.serviceDocument = kASDKAPIApplicationPath
         serverConfiguration.username = username
         serverConfiguration.password = password
-        
         self.serverConfiguration = serverConfiguration
-        
-        return serverConfiguration
+        return .success(serverConfiguration)
     }
     
     func syncToUserDefaultsServerConfiguration() {
@@ -94,18 +92,21 @@ class PremiseLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
     let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
     var serverConfiguration: ASDKModelServerConfiguration?
     
-    func serverConfiguration(for username: String, _ password: String) -> ASDKModelServerConfiguration {
+    func serverConfiguration(for username: String, _ password: String) -> Result<ASDKModelServerConfiguration, NSError> {
         let aimsParameters = AIMSAuthenticationParameters.parameters()
-        let serverConfiguration = ASDKModelServerConfiguration()
-        serverConfiguration.hostAddressString = aimsParameters.hostname
-        serverConfiguration.isCommunicationOverSecureLayer = aimsParameters.https
-        serverConfiguration.serviceDocument = aimsParameters.serviceDocument
-        serverConfiguration.username = username
-        serverConfiguration.password = password
-        
-        self.serverConfiguration = serverConfiguration
-        
-        return serverConfiguration
+        switch aimsParameters.checkAvailable(authentication: .baseAuthOnPremise) {
+        case .success(_):
+            let serverConfiguration = ASDKModelServerConfiguration()
+            serverConfiguration.hostAddressString = aimsParameters.hostname
+            serverConfiguration.isCommunicationOverSecureLayer = aimsParameters.https
+            serverConfiguration.serviceDocument = aimsParameters.serviceDocument
+            serverConfiguration.username = username
+            serverConfiguration.password = password
+            self.serverConfiguration = serverConfiguration
+            return .success(serverConfiguration)
+        case .failure(let error):
+            return .failure(error)
+        }
     }
     
     func syncToUserDefaultsServerConfiguration() {

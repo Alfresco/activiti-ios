@@ -21,41 +21,38 @@ import Foundation
 class BaseAuthLoginViewModel: AIMSLoginViewModelProtocol {
     var loginStrategy: BaseAuthLoginStrategyProtocol?
     let requestProfileService = AFAProfileServices()
-    let warningText = NSLocalizedString(kLocalizationCloudLoginWarningText, comment: "Warning Text")
 
     func signIn(username: String, password: String, completion: @escaping (Result<ASDKModelProfile, Error>) -> Void) {
-        let serverConfiguration = loginStrategy?.serverConfiguration(for: username, password)
-        let persistenceStackModelName = self.persistenceStackModelName()
-        let sdkBootstrap = ASDKBootstrap.sharedInstance()
-        if let serverConfiguration = serverConfiguration {
-            if !serverConfiguration.hostAddressString.isEmpty || !serverConfiguration.serviceDocument.isEmpty {
-                completion(.failure(NSError(domain: AFALoginViewModelWarningDomain, code: 0, userInfo: [NSLocalizedDescriptionKey : warningText])))
-                return
-            }
-        }
-        sdkBootstrap?.setupServices(with: serverConfiguration)
-        
-        requestProfileService.requestProfile { [weak self] (profile, error) in
-            guard let sSelf = self else { return }
-            if let profile = profile {
-                sSelf.loginStrategy?.syncToUserDefaultsServerConfiguration()
-                
-                if let serverConfiguration = sSelf.loginStrategy?.serverConfiguration {
-                    if (AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName) != nil) {
-                        AFAKeychainWrapper.updateKeychainValue(serverConfiguration.password,
-                                                               forIdentifier: persistenceStackModelName)
-                    } else {
-                        AFAKeychainWrapper.createKeychainValue(serverConfiguration.password,
-                                                               forIdentifier: persistenceStackModelName)
+        switch loginStrategy?.serverConfiguration(for: username, password) {
+        case .failure(let error):
+            completion(.failure(error))
+        case .success(let serverConfiguration):
+            let persistenceStackModelName = self.persistenceStackModelName()
+            let sdkBootstrap = ASDKBootstrap.sharedInstance()
+            sdkBootstrap?.setupServices(with: serverConfiguration)
+            requestProfileService.requestProfile { [weak self] (profile, error) in
+                guard let sSelf = self else { return }
+                if let profile = profile {
+                    sSelf.loginStrategy?.syncToUserDefaultsServerConfiguration()
+                    
+                    if let serverConfiguration = sSelf.loginStrategy?.serverConfiguration {
+                        if (AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName) != nil) {
+                            AFAKeychainWrapper.updateKeychainValue(serverConfiguration.password,
+                                                                   forIdentifier: persistenceStackModelName)
+                        } else {
+                            AFAKeychainWrapper.createKeychainValue(serverConfiguration.password,
+                                                                   forIdentifier: persistenceStackModelName)
+                        }
+                    }
+
+                    completion(.success(profile))
+                } else {
+                    if let error = error {
+                        completion(.failure(error))
                     }
                 }
-
-                completion(.success(profile))
-            } else {
-                if let error = error {
-                    completion(.failure(error))
-                }
             }
+        default: break
         }
     }
     

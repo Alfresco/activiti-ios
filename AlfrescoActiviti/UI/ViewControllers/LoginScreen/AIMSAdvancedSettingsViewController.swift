@@ -24,7 +24,10 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     var dataSource: [[AIMSAdvancedSettingsAction]]?
     var parameters: AIMSAuthenticationParameters?
     
-    var adjustViewForKeyboard: Bool = false
+    // Keyboard handling
+    var positionEndTextFieldOpenedInSuperview: CGFloat = 0.0
+    var positionEndTextFieldOpenedInView: CGFloat = 0.0
+    var heightTextFieldOpened: CGFloat = 0.0
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -51,6 +54,10 @@ class AIMSAdvancedSettingsViewController: UIViewController {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //MARK: - IBActions
     
     @IBAction func viewPressed(_ sender: UITapGestureRecognizer) {
@@ -60,14 +67,31 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     //MARK: - Keyboard Notification
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+            let window = UIApplication.shared.keyWindow {
+            let superviewHeight = window.frame.size.height
+            let viewHeight = view.frame.size.height
+            let keyboardHeight =  keyboardFrame.cgRectValue.height
+            let marginInSuperView = superviewHeight - positionEndTextFieldOpenedInSuperview
+            let marginInView = viewHeight - positionEndTextFieldOpenedInView
+
+            if self.view.frame.origin.y == 0 &&
+                UIDevice.current.userInterfaceIdiom == .pad &&
+                marginInSuperView < keyboardHeight {
+                self.view.frame.origin.y -= (keyboardHeight - marginInSuperView)
+            }
+            
+            if self.view.frame.origin.y == 0 &&
+                UIDevice.current.userInterfaceIdiom == .phone &&
+                marginInView < keyboardHeight {
+                self.view.frame.origin.y -= (keyboardHeight - marginInView)
+            }
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
         }
     }
     
@@ -98,12 +122,24 @@ class AIMSAdvancedSettingsViewController: UIViewController {
 
 extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
     
-    func willBeginEditing(type: AIMSAdvancedSettingsActionTypes) {
-        adjustViewForKeyboard = (type == .redirectURL)
+    func willBeginEditing(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes) {
+        let cellRect = tableView.rectForRow(at: tableView.indexPath(for: cell)!)
+        let cellRectInTableView = self.tableView.convert(cellRect, to: tableView.superview)
+        heightTextFieldOpened = cell.frame.size.height + view.safeAreaInsets.bottom
+        positionEndTextFieldOpenedInView = cellRectInTableView.origin.y + heightTextFieldOpened
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let frameInSuperview =  self.view.convert(cellRectInTableView, to: UIApplication.shared.keyWindow)
+            positionEndTextFieldOpenedInSuperview = frameInSuperview.origin.y + heightTextFieldOpened
+        }
     }
     
     func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAuthenticationParameters) {
-        tableView.reloadRows(at: [model.getIndexPathForSaveButton()], with: .none)
+        if type == .https {
+            self.view.endEditing(true)
+            response.port = (response.https) ? String(kDefaultLoginSecuredPort) : String(kDefaultLoginUnsecuredPort)
+            tableView.reloadRows(at: [model.getIndexPathForPortField()], with: .none)
+        }
     }
     
     func needHelpButtonPressed() {
