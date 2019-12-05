@@ -31,8 +31,7 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     //MARK: - AIMSLoginServiceProtocol
     func login(onViewController: UIViewController, delegate: AlfrescoAuthDelegate) {
         alfrescoAuth = authServiceForCurrentConfiguration()
-        session = alfrescoAuth?.pkceAuth(onViewController: onViewController, delegate: delegate)
-        
+        alfrescoAuth?.pkceAuth(onViewController: onViewController, delegate: delegate)
     }
     
     func availableAuthType(for url: String, handler: @escaping AvailableAuthTypeCallback<AvailableAuthType>) {
@@ -40,8 +39,33 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
         alfrescoAuth?.availableAuthType(for: url, handler: handler)
     }
     
-    func refreshSession(delegate: AlfrescoAuthDelegate) {
-        alfrescoAuth?.pkceRefreshSession(delegate: delegate)
+    func refreshSession(keychainIdentifier: String, delegate: AlfrescoAuthDelegate) {
+        alfrescoAuth = authServiceForCurrentConfiguration()
+        if let session = self.session {
+            alfrescoAuth?.pkceRefresh(session: session, delegate: delegate)
+        } else {
+            // Restore last valid session from Keychain
+            let errorDomain = Bundle.main.bundleName ?? AFAAIMSLoginErrorDomain
+            let errorMessage = "Unable to refresh session"
+            
+            guard let data = AFAKeychainWrapper.dataFor(matchingIdentifier: keychainIdentifier) else {
+                delegate.didReceive(result: .failure(APIError(domain: errorDomain, message: errorMessage)), session: nil)
+                
+                return
+            }
+            
+            do {
+                if let session = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? AlfrescoAuthSession {
+                    self.session = session
+                    alfrescoAuth?.pkceRefresh(session: session, delegate: delegate)
+                } else {
+                    delegate.didReceive(result: .failure(APIError(domain: errorDomain, message: errorMessage)), session: nil)
+                }
+            } catch {
+                AFALog.logError("Unable to restore last valid session.")
+                delegate.didReceive(result: .failure(APIError(domain: errorDomain, message: errorMessage)), session: nil)
+            }
+        }
     }
     
     func logout() {
@@ -52,7 +76,7 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     }
     
     @objc func resumeExternalUserAgentFlow(with url: URL) -> Bool {
-        if var authSession = session {
+        if let authSession = session {
             return authSession.resumeExternalUserAgentFlow(with: url)
         }
         

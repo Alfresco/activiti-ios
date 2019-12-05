@@ -20,11 +20,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AFAContainerViewModel : NSObject
+@protocol AFAContainerViewModelDelegate <NSObject>
 
-- (instancetype)initWithPersistenceStackModelName:(NSString *)persistenceStackModelName;
-
-- (void)requestLogout;
+- (void)redirectToLoginViewController;
 
 @end
 

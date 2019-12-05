@@ -20,6 +20,9 @@
 #import "AFAUIConstants.h"
 #import "AFALocalizationConstants.h"
 
+// Protocols
+#import "AFAContainerViewModelDelegate.h"
+
 // Categories
 #import "UIViewController+AFAAlertAddition.h"
 #import "UIColor+AFATheme.h"
@@ -27,7 +30,6 @@
 // View models
 #import "AFATaskListViewModel.h"
 #import "AFAProcessListViewModel.h"
-#import "AFAContainerViewModel.h"
 
 // Managers
 #import "AFAServiceRepository.h"
@@ -40,6 +42,7 @@
 #import "AFAIntegrationServices.h"
 #import "AFAKeychainWrapper.h"
 @import ActivitiSDK;
+#import "AlfrescoActiviti-Swift.h"
 
 // Controllers
 #import "AFAContainerViewController.h"
@@ -53,7 +56,7 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
 
 
 
-@interface AFAContainerViewController () <AFAContainerViewControllerDelegate>
+@interface AFAContainerViewController () <AFAContainerViewControllerDelegate, AFAContainerViewModelDelegate>
 
 // Constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint     *detailsContainerViewLeadingConstraint;
@@ -115,6 +118,8 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
     
     // Only draw the menu view when the menu is toggled
     self.menuContainerView.hidden = YES;
+    
+    self.viewModel.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -270,6 +275,17 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
 
 
 #pragma mark -
+#pragma mark AFAContainerViewModelDelegate
+
+- (void)redirectToLoginViewController {
+    [self dismissViewControllerAnimated:YES
+                                   completion:nil];
+    [self performSegueWithIdentifier:kSegueIDLoginAuthorizedUnwind
+                                    sender:nil];
+}
+
+
+#pragma mark -
 #pragma mark Animations
 
 - (void)openQuickAccessDrawerMenu {
@@ -343,17 +359,26 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
 #pragma mark Private interface
 
 - (void)handleUnAuthorizedRequestNotification {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
-                                                                             message:NSLocalizedString(kLocalizationLoginUnauthorizedRequestErrorText, @"Unauthorized request text")
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    if (self.viewModel.isLogoutRequestInProgress) {
+        return;
+    }
+    
+    self.viewModel.isLogoutRequestInProgress = YES;
+    
+    UIAlertController *alertController =
+    [UIAlertController alertControllerWithTitle:nil
+                                        message:NSLocalizedString(kLocalizationLoginUnauthorizedRequestErrorText, @"Unauthorized request text")
+                                 preferredStyle:UIAlertControllerStyleAlert];
     
     __weak typeof(self) weakSelf = self;
-    UIAlertAction *okButtonAction = [UIAlertAction actionWithTitle:NSLocalizedString(kLocalizationAlertDialogOkButtonText, @"OK button title")
-                                                             style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction *action) {
+    UIAlertAction *okButtonAction =
+    [UIAlertAction actionWithTitle:NSLocalizedString(kLocalizationAlertDialogOkButtonText, @"OK button title")
+                             style:UIAlertActionStyleDefault
+                           handler:^(UIAlertAction *action) {
         __strong typeof(self) strongSelf = weakSelf;
-        [strongSelf requestUserLogout];
+        [strongSelf.viewModel handleUnAuthorizedRequest];
     }];
+    
     [alertController addAction:okButtonAction];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -371,10 +396,7 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
     dispatch_async(dispatch_get_main_queue(), ^{
         __strong typeof(self) strongSelf = weakSelf;
         
-        [strongSelf dismissViewControllerAnimated:YES
-                                       completion:nil];
-        [strongSelf performSegueWithIdentifier:kSegueIDLoginAuthorizedUnwind
-                                        sender:nil];
+        [strongSelf redirectToLoginViewController];
     });
 }
 

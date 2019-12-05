@@ -22,7 +22,8 @@
 // Login related
 extern NSUInteger kDefaultLoginUnsecuredPort;
 extern NSUInteger kDefaultLoginSecuredPort;
-extern NSString *kAdvancedSettingsParameters;
+extern NSString  *kAdvancedSettingsParameters;
+extern NSString  *kPersistenceStackSessionParameter;
 
 // Task related
 extern NSInteger  kDayDifferenceForHighPriorityTasks;
@@ -69,3 +70,4 @@ extern NSString *kCellFactoryCellParameterActionType;
 extern NSString * const AFALoginViewModelErrorDomain;
 extern NSString * const AFALoginViewModelWarningDomain;
 extern NSInteger const kAFALoginViewModelInvalidCredentialErrorCode;
+extern NSString * const AFAAIMSLoginErrorDomain;

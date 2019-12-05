@@ -165,7 +165,7 @@ class AIMSSSOViewController: AFABaseThemedViewController {
         if segue.identifier == kSegueIDLoginAuthorized {
             let cvc = segue.destination as! AFAContainerViewController
             cvc.transitioningDelegate = self
-            cvc.viewModel = AFAContainerViewModel.init(persistenceStackModelName: model.persistenceStackModelName())
+            cvc.viewModel = ContainerViewModel.init(with: model.persistenceStackModelName())
         }
     }
     

@@ -30,6 +30,7 @@
 
 // Services interface
 - (void)setupServicesWithServerConfiguration:(ASDKModelServerConfiguration *)serverConfiguration;
+- (void)updateServerConfigurationForAccessToken:(NSString *)accessToken;
 - (void)updateServerConfigurationCredentialsForUsername:(NSString *)username
                                                password:(NSString *)password;
 
