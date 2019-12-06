@@ -56,10 +56,12 @@ class AIMSSSOViewController: AFABaseThemedViewController {
             case .isLoading:
                 if let loadingView = overlayView {
                     self.view.isUserInteractionEnabled = false
-                    self.view.addSubview(loadingView)
+                    self.navigationController?.navigationBar.isUserInteractionEnabled = false
+                    self.navigationController?.view.addSubview(loadingView)
                 }
             case .isIdle, .none:
                 self.view.isUserInteractionEnabled = true
+                self.navigationController?.navigationBar.isUserInteractionEnabled = true
                 overlayView?.removeFromSuperview()
             }
         }
@@ -106,20 +108,6 @@ class AIMSSSOViewController: AFABaseThemedViewController {
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
         shouldEnableSignInButton()
-        
-        // Loading view
-        overlayView = AIMSActivityView(frame: self.view.frame)
-        overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
-                                              typographyScheme: colorSchemeManager.defaultTypographyScheme)
-        overlayView?.label.text = NSLocalizedString(kLocalizationSSOLoginScreenSigningInText, comment: "Signing In")
-        overlayView?.overlayView?.alpha = 1
-        if (self.view.traitCollection.horizontalSizeClass == .compact) {
-            overlayView?.imageView?.image = UIImage(named: "splash-wallpaper")
-        }
-    }
-    
-    override func didRestoredNetworkConnectivity() {
-        // Don't display network connectivity alerts on this screen
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,6 +120,29 @@ class AIMSSSOViewController: AFABaseThemedViewController {
             separatorSpace1HeightConstraint.rate(in: self.view, heightNavigationBar: self.navigationController?.navigationBar.bounds.size.height ?? 0)
             separatorSpace2HeightConstraint.rate(in: self.view)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        guard let colorSchemeManager = self.colorSchemeManager else {
+            AFALog.logError("Color scheme manager could not be initiated")
+            return
+        }
+        
+        // Loading view
+        overlayView = AIMSActivityView(frame: self.view.frame)
+        overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
+                                              typographyScheme: colorSchemeManager.defaultTypographyScheme)
+        overlayView?.label.text = NSLocalizedString(kLocalizationSSOLoginScreenSigningInText, comment: "Signing In")
+        overlayView?.overlayView?.alpha = 1
+        if (self.view.traitCollection.horizontalSizeClass == .compact) {
+            overlayView?.imageView?.image = UIImage(named: "splash-wallpaper")
+        }
+    }
+
+    override func didRestoredNetworkConnectivity() {
+        // Don't display network connectivity alerts on this screen
     }
     
     //MARK: - IBActions

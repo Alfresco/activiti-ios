@@ -63,10 +63,12 @@ class AIMSLoginViewController: AFABaseThemedViewController {
             case .isLoading:
                 if let loadingView = overlayView {
                     self.view.isUserInteractionEnabled = false
-                    self.view.addSubview(loadingView)
+                    self.navigationController?.navigationBar.isUserInteractionEnabled = false
+                    self.navigationController?.view.addSubview(loadingView)
                 }
             case .isIdle, .none:
                 self.view.isUserInteractionEnabled = true
+                self.navigationController?.navigationBar.isUserInteractionEnabled = true
                 overlayView?.removeFromSuperview()
             }
         }
@@ -131,6 +133,22 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        controllerState = .isIdle
+        updateConnectButtonState()
+        
+        // Constraints Scale
+        if rateConstraintsOnce {
+            rateConstraintsOnce = false
+            self.view.setNeedsLayout()
+            separatorSpace1HeightConstraint.rate(in: self.view)
+            separatorSpace2HeightConstraint.rate(in: self.view)
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -146,21 +164,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        controllerState = .isIdle
-        updateConnectButtonState()
-        
-        // Constraints Scale
-        if rateConstraintsOnce {
-            rateConstraintsOnce = false
-            self.view.setNeedsLayout()
-            separatorSpace1HeightConstraint.rate(in: self.view)
-            separatorSpace2HeightConstraint.rate(in: self.view)
-        }
-    }
+   
     
     // MARK: - Actions
     
@@ -184,7 +188,6 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         helpVC.closeText = loginViewModel.closeText
         helpVC.modalPresentationStyle = .overCurrentContext
         self.present(helpVC, animated: false, completion: nil)
-//        self.navigationController?.present(helpVC, animated: false, completion: nil)
     }
     
     @objc func dismissKeyboard() {
@@ -278,6 +281,8 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
         if let authenticationControllerIdentifier = identifier {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 guard let sSelf = self else { return }
+                
+                sSelf.controllerState = .isIdle
                 
                 let viewController = sSelf.storyboard?.instantiateViewController(withIdentifier: authenticationControllerIdentifier)
                 if let viewController = viewController {

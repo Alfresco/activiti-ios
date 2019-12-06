@@ -57,10 +57,12 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
             case .isLoading:
                 if let loadingView = overlayView {
                     self.view.isUserInteractionEnabled = false
-                    self.view.addSubview(loadingView)
+                    self.navigationController?.navigationBar.isUserInteractionEnabled = false
+                    self.navigationController?.view.addSubview(loadingView)
                 }
             case .isIdle, .none:
                 self.view.isUserInteractionEnabled = true
+                self.navigationController?.navigationBar.isUserInteractionEnabled = true
                 overlayView?.removeFromSuperview()
             }
         }
@@ -135,6 +137,27 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
         shouldEnableSignInButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Constraints scale
+        if rateConstraintsOnce {
+            rateConstraintsOnce = false
+            self.view.layoutIfNeeded()
+            separatorSpace1HeightConstraint.rate(in: self.view, heightNavigationBar: self.navigationController?.navigationBar.bounds.size.height ?? 0)
+            separatorSpace2HeightConstraint.rate(in: self.view)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        guard let colorSchemeManager = self.colorSchemeManager else {
+            AFALog.logError("Color scheme manager could not be initiated")
+            return
+        }
         
         // Loading view
         overlayView = AIMSActivityView(frame: self.view.frame)
@@ -145,18 +168,6 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     
     override func didRestoredNetworkConnectivity() {
         // Don't display network connectivity alerts on this screen
-    }
-    
-   override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Constraints scale
-        if rateConstraintsOnce {
-            rateConstraintsOnce = false
-            self.view.layoutIfNeeded()
-            separatorSpace1HeightConstraint.rate(in: self.view, heightNavigationBar: self.navigationController?.navigationBar.bounds.size.height ?? 0)
-            separatorSpace2HeightConstraint.rate(in: self.view)
-        }
     }
     
     //MARK: - IBActions
