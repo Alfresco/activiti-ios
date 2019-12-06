@@ -44,8 +44,7 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     @IBOutlet weak var copyrightLabel: UILabel!
     
     // Constraints
-    @IBOutlet weak var separatorSpace1HeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var separatorSpace2HeightConstraint: NSLayoutConstraint!
+    @IBOutlet var rateDefaultConstraints: [NSLayoutConstraint]!
     var rateConstraintsOnce: Bool = true
 
     // Loading view
@@ -74,7 +73,9 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.backItem?.title = ""
         
         guard let colorSchemeManager = self.colorSchemeManager else {
             AFALog.logError("Color scheme manager could not be initiated")
@@ -112,14 +113,7 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Constraints scale
-        if rateConstraintsOnce {
-            rateConstraintsOnce = false
-            self.view.layoutIfNeeded()
-            separatorSpace1HeightConstraint.rate(in: self.view, heightNavigationBar: self.navigationController?.navigationBar.bounds.size.height ?? 0)
-            separatorSpace2HeightConstraint.rate(in: self.view)
-        }
+        rateConstraints()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -183,6 +177,22 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     }
     
     //MARK: - Helpers
+    
+    func rateConstraints() {
+        guard rateConstraintsOnce else {
+            return
+        }
+        rateConstraintsOnce = false
+        self.view.setNeedsLayout()
+        let heightNavigationBar = self.navigationController?.navigationBar.bounds.size.height ?? 0
+        for constraint in rateDefaultConstraints {
+            if constraint.identifier == kConstraintIDFirstOnTop {
+                constraint.scale(in: view, heightNavigationBar: heightNavigationBar)
+            } else {
+                constraint.scale(in: view)
+            }
+        }
+    }
     
     func shouldEnableSignInButton() {
         guard let colorSchemeManager = self.colorSchemeManager else {

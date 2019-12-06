@@ -98,6 +98,10 @@ extern NSString *kCellIDAdvancedSettingsButton;
 extern NSString *kCellIDAdvancedSettingsCopyright;
 extern NSString *kCellIDAdvancedSettingsSection;
 
+// Constraints IDs
+
+extern NSString *kConstraintIDFirstOnTop;
+
 // Segue IDs
 
 extern NSString *kSegueIDLoginAuthorized;

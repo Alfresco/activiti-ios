@@ -44,9 +44,8 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     var enableSignInButton: Bool = false
     var showPasswordButton = UIButton()
     
-    //Constraints section
-    @IBOutlet weak var separatorSpace1HeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var separatorSpace2HeightConstraint: NSLayoutConstraint!
+    // Constraints
+    @IBOutlet var rateDefaultConstraints: [NSLayoutConstraint]!
     var rateConstraintsOnce: Bool = true
 
     // Loading view
@@ -77,6 +76,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         super.viewDidLoad()
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.backItem?.title = ""
         
         guard let colorSchemeManager = self.colorSchemeManager else {
             AFALog.logError("Color scheme manager could not be initiated")
@@ -94,7 +94,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         // Username textfield
         usernameTextfield.rightViewMode = .unlessEditing
         usernameTextfield.rightView = UIImageView(image: UIImage(named: "username-icon"))
-        usernameTextfield.rightView?.tintColor = #colorLiteral(red: 0.568627451, green: 0.568627451, blue: 0.568627451, alpha: 1)
+        usernameTextfield.rightView?.tintColor = #colorLiteral(red: 0.7254338861, green: 0.7255221009, blue: 0.7254036665, alpha: 1)
         usernameTextfield.font = colorSchemeManager.textFieldTypographyScheme.headline1
         usernameTextFieldController = MDCTextInputControllerUnderline(textInput: usernameTextfield)
         usernameTextFieldController?.placeholderText = model.loginStrategy?.usernamaPlaceholderText
@@ -117,7 +117,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         
         passwordTextfield.rightViewMode = .always
         passwordTextfield.rightView = showPasswordButton
-        passwordTextfield.rightView?.tintColor = #colorLiteral(red: 0.568627451, green: 0.568627451, blue: 0.568627451, alpha: 1)
+        passwordTextfield.rightView?.tintColor = #colorLiteral(red: 0.7254338861, green: 0.7255221009, blue: 0.7254036665, alpha: 1)
         passwordTextfield.font = colorSchemeManager.textFieldTypographyScheme.headline1
         passwordTextFieldController = MDCTextInputControllerUnderline(textInput: passwordTextfield)
         passwordTextFieldController?.placeholderText = model.loginStrategy?.passwordPlaceholderText
@@ -141,14 +141,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Constraints scale
-        if rateConstraintsOnce {
-            rateConstraintsOnce = false
-            self.view.layoutIfNeeded()
-            separatorSpace1HeightConstraint.rate(in: self.view, heightNavigationBar: self.navigationController?.navigationBar.bounds.size.height ?? 0)
-            separatorSpace2HeightConstraint.rate(in: self.view)
-        }
+        rateConstraints()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -224,6 +217,22 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     
     //MARK: - Helpers
     
+    func rateConstraints() {
+        guard rateConstraintsOnce else {
+            return
+        }
+        rateConstraintsOnce = false
+        self.view.setNeedsLayout()
+        let heightNavigationBar = self.navigationController?.navigationBar.bounds.size.height ?? 0
+        for constraint in rateDefaultConstraints {
+            if constraint.identifier == kConstraintIDFirstOnTop {
+                constraint.scale(in: view, heightNavigationBar: heightNavigationBar)
+            } else {
+                constraint.scale(in: view)
+            }
+        }
+    }
+    
     func shouldEnableSignInButton() {
         guard let colorSchemeManager = self.colorSchemeManager else {
             AFALog.logError("Color scheme manager could not be initiated")
@@ -292,7 +301,7 @@ extension BaseAuthLoginViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.rightView?.tintColor = #colorLiteral(red: 0.568627451, green: 0.568627451, blue: 0.568627451, alpha: 1)
+        textField.rightView?.tintColor = #colorLiteral(red: 0.7254338861, green: 0.7255221009, blue: 0.7254036665, alpha: 1)
         return true
     }
     

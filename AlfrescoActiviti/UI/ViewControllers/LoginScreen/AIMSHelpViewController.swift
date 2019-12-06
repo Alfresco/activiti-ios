@@ -73,7 +73,7 @@ class AIMSHelpViewController: UIViewController {
         
         // Constraints scale
         for constraint in constraintsToScale {
-            constraint.rate(in: self.view)
+            constraint.scale(in: self.view)
         }
         
         textView.contentOffset = .zero

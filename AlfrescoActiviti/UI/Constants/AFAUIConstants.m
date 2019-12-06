@@ -47,6 +47,11 @@ NSString *kStoryboardIDAIMSSSOViewController                    = @"AIMSSSOViewC
 NSString *kStoryboardIDBaseAuthLoginViewController              = @"BaseAuthViewControllerID";
 NSString *kStoryboardIDAIMSHelpViewController                   = @"AIMSHelpViewControllerID";
 
+#pragma mark -
+#pragma mark Constraints IDs
+
+NSString *kConstraintIDFirstOnTop                               = @"FirstConstrainOnTop";
+
 
 #pragma mark -
 #pragma mark Cell IDs

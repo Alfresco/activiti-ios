@@ -77,7 +77,7 @@ class MaterialDesignColorSchemeComponent: NSObject {
     public let textfieldDefaultColorScheme: MDCSemanticColorScheme = {
         let scheme = MDCSemanticColorScheme(defaults: .material201804)
         scheme.primaryColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
-        scheme.onSurfaceColor = #colorLiteral(red: 0.568627451, green: 0.568627451, blue: 0.568627451, alpha: 1)
+        scheme.onSurfaceColor = #colorLiteral(red: 0.7254338861, green: 0.7255221009, blue: 0.7254036665, alpha: 1)
         
         return scheme
     }()
@@ -133,12 +133,10 @@ class MaterialDesignColorSchemeComponent: NSObject {
     public let textFieldTypographyScheme: MDCTypographyScheme = {
         let scheme = MDCTypographyScheme()
         
-        let lightFontName = "Muli-Light"
-        let boldFontName = "Muli-Bold"
+        let regularFontName = "Muli"
         
-        scheme.headline1 = UIFont(name: lightFontName, size: 16)!
-        scheme.subtitle1 = UIFont(name: lightFontName, size: 16)!
-        scheme.subtitle2 = UIFont(name: lightFontName, size: 1)!
+        scheme.headline1 = UIFont(name: regularFontName, size: 16)!
+        scheme.subtitle2 = UIFont(name: regularFontName, size: 1)!
         
         return scheme
     }()

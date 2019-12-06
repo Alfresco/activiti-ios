@@ -34,9 +34,14 @@ class AIMSAdvancedSettingsViewController: UIViewController {
         super.viewDidLoad()
  
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "SAVE", style: .done, target: self, action: #selector(saveButtonPressed))
-        
+        self.navigationController?.navigationBar.backItem?.title = ""
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "SAVE",
+                                                                 style: .done,
+                                                                 target: self,
+                                                                 action: #selector(saveButtonPressed))
+        self.title = model.screenTitleText
         self.dataSource = model.datasource()
+        
         parameters = model.getParameters()
     }
     

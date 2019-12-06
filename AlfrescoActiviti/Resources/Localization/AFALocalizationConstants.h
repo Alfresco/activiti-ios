@@ -51,6 +51,7 @@ extern NSString *kLocalizationLoginScreenSSOHelpHintText;
 extern NSString *kLocalizationLoginScreenOnPremiseSigningInToHintFormat;
 
 // Advanced Settings screen
+extern NSString *kLocalizationAdvancedSettingsScreenTittle;
 extern NSString *kLocalizationAdvancedSettingsScreenTransportProtocolText;
 extern NSString *kLocalizationAdvancedSettingsScreenHttpsText;
 extern NSString *kLocalizationAdvancedSettingsScreenPortPlaceholderText;

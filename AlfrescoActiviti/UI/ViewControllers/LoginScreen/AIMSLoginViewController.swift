@@ -49,8 +49,8 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     @IBOutlet weak var copyrightLabel: UILabel!
     
     // Constraints
-    @IBOutlet weak var separatorSpace1HeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var separatorSpace2HeightConstraint: NSLayoutConstraint!
+    var rateConstraintsOnce: Bool = true
+    @IBOutlet var rateDefaultConstraints: [NSLayoutConstraint]!
     
     // Gesture recognizer
     var tapGestureRecognizer: UITapGestureRecognizer?
@@ -74,8 +74,6 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         }
     }
     
-    var rateConstraintsOnce: Bool = true
-    
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -93,7 +91,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         processServicesAppLabel.font = colorSchemeManager.defaultTypographyScheme.headline5
         
         // Alfresco URL section
-        alfrescoURLTextField.font = colorSchemeManager.defaultTypographyScheme.subtitle2
+        alfrescoURLTextField.font = colorSchemeManager.textFieldTypographyScheme.headline1
         alfrescoURLTextFieldController = MDCTextInputControllerUnderline(textInput: alfrescoURLTextField)
         alfrescoURLTextFieldController?.placeholderText = loginViewModel.alfrescoURLPlaceholderText
         if let alfrescoURLTextFieldController = self.alfrescoURLTextFieldController {
@@ -137,16 +135,10 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         controllerState = .isIdle
         updateConnectButtonState()
-        
-        // Constraints Scale
-        if rateConstraintsOnce {
-            rateConstraintsOnce = false
-            self.view.setNeedsLayout()
-            separatorSpace1HeightConstraint.rate(in: self.view)
-            separatorSpace2HeightConstraint.rate(in: self.view)
-        }
+        rateConstraints()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -194,10 +186,21 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         view.endEditing(true)
     }
     
-    // MARK: - Validations
+    // MARK: - Helpers
      
     fileprivate func updateConnectButtonState() {
         connectToButton.isEnabled = enableConnectButton
+    }
+    
+    func rateConstraints() {
+        guard rateConstraintsOnce else {
+            return
+        }
+        rateConstraintsOnce = false
+        self.view.setNeedsLayout()
+        for constraint in rateDefaultConstraints {
+            constraint.scale(in: view)
+        }
     }
 
     // MARK: - Navigation

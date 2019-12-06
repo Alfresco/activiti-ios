@@ -55,6 +55,7 @@ NSString *kLocalizationLoginScreenOnPremiseSigningInToHintFormat = @"loginScreen
 #pragma mark -
 #pragma mark Advanced Settings screen
 
+NSString *kLocalizationAdvancedSettingsScreenTittle                                 = @"advancedSettingsScreenTitle";
 NSString *kLocalizationAdvancedSettingsScreenTransportProtocolText                  = @"advancedSettingsScreenTransportProtocolText";
 NSString *kLocalizationAdvancedSettingsScreenHttpsText                              = @"advancedSettingsScreenHttpsPlaceholderText";
 NSString *kLocalizationAdvancedSettingsScreenPortPlaceholderText                    = @"advancedSettingsScreenPortPlaceholderText";

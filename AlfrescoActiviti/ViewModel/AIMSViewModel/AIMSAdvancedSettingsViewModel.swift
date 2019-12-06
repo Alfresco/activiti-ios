@@ -20,6 +20,7 @@ import Foundation
 
 class AIMSAdvancedSettingsViewModel {
     // Localization
+    let screenTitleText = NSLocalizedString(kLocalizationAdvancedSettingsScreenTittle, comment: "Advanced Settings")
     let transportProtocolText = NSLocalizedString(kLocalizationAdvancedSettingsScreenTransportProtocolText, comment: "Transport Protocol")
     let httpsText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHttpsText, comment: "HTTPS")
     let portPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenPortPlaceholderText, comment: "Port")
