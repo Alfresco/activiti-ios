@@ -70,13 +70,13 @@ class AIMSHelpViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         // Constraints scale
-//        self.view.setNeedsLayout()
         for constraint in constraintsToScale {
             constraint.rate(in: self.view)
         }
         
-        textView.scrollRangeToVisible(NSRange(location: 0, length: 0))
+        textView.contentOffset = .zero
     }
     
     //MARK: - IBActions
