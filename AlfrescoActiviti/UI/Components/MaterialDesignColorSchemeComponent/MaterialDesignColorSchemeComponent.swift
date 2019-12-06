@@ -37,6 +37,9 @@ class MaterialDesignColorSchemeComponent: NSObject {
         self.blueFlatButtonWithoutBackgroundScheme.colorScheme = self.blueColorScheme
         self.blueFlatButtonWithoutBackgroundScheme.typographyScheme = self.defaultTypographyScheme
         
+        self.greenFlatButtonWithoutBackgroundScheme.colorScheme = self.greenColorScheme
+        self.greenFlatButtonWithoutBackgroundScheme.typographyScheme = self.defaultTypographyScheme
+        
         super.init()
     }
     
@@ -45,6 +48,7 @@ class MaterialDesignColorSchemeComponent: NSObject {
     public let highlightedFlatButtonWithBackgroundScheme = MDCContainerScheme()
     public let grayFlatButtonWithoutBackgroundScheme = MDCContainerScheme()
     public let blueFlatButtonWithoutBackgroundScheme = MDCContainerScheme()
+    public let greenFlatButtonWithoutBackgroundScheme = MDCContainerScheme()
     
     public let defaultColorScheme: MDCSemanticColorScheme = {
         let scheme = MDCSemanticColorScheme(defaults: .material201804)
@@ -81,6 +85,13 @@ class MaterialDesignColorSchemeComponent: NSObject {
     public let blueColorScheme: MDCSemanticColorScheme = {
         let scheme = MDCSemanticColorScheme(defaults: .material201804)
         scheme.primaryColor = #colorLiteral(red: 0, green: 0.3333333333, blue: 0.7215686275, alpha: 1)
+        
+        return scheme
+    }()
+    
+    public let greenColorScheme: MDCSemanticColorScheme = {
+        let scheme = MDCSemanticColorScheme(defaults: .material201804)
+        scheme.primaryColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
         
         return scheme
     }()

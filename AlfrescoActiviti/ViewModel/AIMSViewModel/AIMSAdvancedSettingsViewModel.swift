@@ -30,6 +30,7 @@ class AIMSAdvancedSettingsViewModel {
     let cliendIDPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText, comment: "Client ID")
     let redirectURLPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenRedirectURLPlaceholderText, comment: "Redirect URL")
     let saveButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenSaveButtonText, comment: "Save")
+    let resetButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenResetButtonText, comment: "Reset to default")
     let helpButtonText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpButtonText, comment: "Need Help")
     let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
     let helpHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpHintText, comment: "Hint Help")
@@ -63,9 +64,10 @@ class AIMSAdvancedSettingsViewModel {
                            AIMSAdvancedSettingsAction(type: .clientID, title: cliendIDPlaceholderText),
                            AIMSAdvancedSettingsAction(type: .redirectURL, title: redirectURLPlaceholderText)]
         
-        let helpSection = [AIMSAdvancedSettingsAction(type: .help, title: helpButtonText, info: helpHintText)]
+        let buttonsSection = [AIMSAdvancedSettingsAction(type: .resetDefault, title: resetButtonText),
+                              AIMSAdvancedSettingsAction(type: .help, title: helpButtonText, info: helpHintText)]
         
-        return [transportProtocolSection, settingsSection, authSection, helpSection]
+        return [transportProtocolSection, settingsSection, authSection, buttonsSection]
     }
     
     func getIndexPathForPortField() -> IndexPath {
@@ -85,6 +87,7 @@ enum AIMSAdvancedSettingsActionTypes {
     case sectionTitle
     case copyright
     case save
+    case resetDefault
 }
 class AIMSAdvancedSettingsAction {
     let type: AIMSAdvancedSettingsActionTypes

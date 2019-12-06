@@ -36,12 +36,15 @@ class AIMSAdvancedSettingsButtonCell: UITableViewCell, AIMSAdvancedSettingsCellP
             return
         }
         button.setTitle(model.title, for: .normal)
-        button.applyTextTheme(withScheme: colorSchemeManager.blueFlatButtonWithoutBackgroundScheme)
+        switch model.type {
+        case .resetDefault:
+            button.applyTextTheme(withScheme: colorSchemeManager.greenFlatButtonWithoutBackgroundScheme)
+        default:
+            button.applyTextTheme(withScheme: colorSchemeManager.blueFlatButtonWithoutBackgroundScheme)
+        }
     }
     
     @IBAction func buttonPressed(_ sender: MDCButton) {
-        if model.type == .help {
-            delegate.needHelpButtonPressed()
-        }
+        delegate.buttonPressed(cell: self, type: model.type)
     }
 }

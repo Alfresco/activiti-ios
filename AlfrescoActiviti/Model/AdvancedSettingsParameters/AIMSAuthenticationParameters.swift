@@ -51,6 +51,10 @@ class AIMSAuthenticationParameters: Codable {
         return false
     }
     
+    static func resetToDefault() -> AIMSAuthenticationParameters {
+        return AIMSAuthenticationParameters()
+    }
+    
     static func parameters() -> AIMSAuthenticationParameters {
         let defaults = UserDefaults.standard
         if let data = defaults.value(forKey: kAdvancedSettingsParameters) as? Data {

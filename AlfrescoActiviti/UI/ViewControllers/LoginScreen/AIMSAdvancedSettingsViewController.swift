@@ -106,16 +106,22 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
         }
     }
     
-    func needHelpButtonPressed() {
+    func buttonPressed(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes) {
         self.view.endEditing(true)
-        let helpVC = storyboard?.instantiateViewController(withIdentifier: kStoryboardIDAIMSHelpViewController) as! AIMSHelpViewController
-        helpVC.hintText = model.helpHintText
-        helpVC.titleText = model.helpText
-        helpVC.closeText = model.closeText
-        helpVC.modalPresentationStyle = .overCurrentContext
-        self.navigationController?.present(helpVC, animated: false, completion: nil)
+        
+        if type == .help {
+            let helpVC = storyboard?.instantiateViewController(withIdentifier: kStoryboardIDAIMSHelpViewController) as! AIMSHelpViewController
+            helpVC.hintText = model.helpHintText
+            helpVC.titleText = model.helpText
+            helpVC.closeText = model.closeText
+            helpVC.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.present(helpVC, animated: false, completion: nil)
+        } else if type == .resetDefault {
+            parameters = AIMSAuthenticationParameters.resetToDefault()
+            tableView.reloadData()
+        }
     }
-    
+
     @objc func saveButtonPressed() {
         self.view.endEditing(true)
         model.saveParameters(parameters!)
@@ -141,7 +147,7 @@ extension AIMSAdvancedSettingsViewController: UITableViewDataSource {
         switch item.type {
         case .clientID, .port, .realm, .redirectURL, .serviceDocuments:
             cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsField, for: indexPath) as! AIMSAdvancedSettingsFieldCell
-        case .help:
+        case .help, .resetDefault:
             cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsButton, for: indexPath) as! AIMSAdvancedSettingsButtonCell
         case .https:
             cell = tableView.dequeueReusableCell(withIdentifier: kCellIDAdvancedSettingsHttps, for: indexPath) as! AIMSAdvancedSettingsHttpsCell
