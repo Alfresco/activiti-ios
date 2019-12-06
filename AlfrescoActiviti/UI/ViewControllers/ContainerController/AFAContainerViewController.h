@@ -18,7 +18,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class AFAContainerViewModel;
+@class ContainerViewModel;
 
 @protocol AFAContainerViewControllerDelegate <NSObject>
 
@@ -35,6 +35,6 @@
 
 @interface AFAContainerViewController : UIViewController
 
-@property AFAContainerViewModel *viewModel;
+@property ContainerViewModel *viewModel;
 
 @end

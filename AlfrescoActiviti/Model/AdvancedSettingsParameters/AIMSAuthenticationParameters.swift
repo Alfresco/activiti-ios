@@ -30,8 +30,8 @@ class AIMSAuthenticationParameters: Codable {
     var port: String = "443"
     var serviceDocument: String = "activiti-app"
     var realm: String = "alfresco"
-    var clientID: String = "alfresco"
-    var redirectURI: String = "iosapp://fake.url.here/auth"
+    var clientID: String = "iosapsapp"
+    var redirectURI: String = "iosapsapp://aims/auth"
     var hostname: String = ""
     var processURL: String = ""
     var fullFormatURL: String {

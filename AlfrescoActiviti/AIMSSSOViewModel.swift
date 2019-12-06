@@ -90,7 +90,7 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
         }
     }
     
-    func didReceive(result: Result<AlfrescoCredential, APIError>) {
+    func didReceive(result: Result<AlfrescoCredential, APIError>, session: AlfrescoAuthSession?) {
         switch result {
         case .success(let alfrescoCredential):
 
@@ -107,14 +107,21 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
             
             let encoder = JSONEncoder()
             var credentialData: Data?
+            var sessionData: Data?
+           
             do {
                 credentialData = try encoder.encode(alfrescoCredential)
+                
+                if let authSession = session {
+                    sessionData = try NSKeyedArchiver.archivedData(withRootObject: authSession, requiringSecureCoding: true)
+                }
             } catch {
-                AFALog.logError("Unable to persist credentials to Keychain")
+                AFALog.logError("Unable to persist credentials to Keychain.")
             }
             
-            if let data = credentialData {
-                AFAKeychainWrapper.createKeychainData(data, forIdentifier: persistenceStackModelName)
+            if let cData = credentialData, let sData = sessionData {
+                AFAKeychainWrapper.createKeychainData(cData, forIdentifier: persistenceStackModelName)
+                AFAKeychainWrapper.createKeychainData(sData, forIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter))
             }
             
             // Initialize ActivitiSDK

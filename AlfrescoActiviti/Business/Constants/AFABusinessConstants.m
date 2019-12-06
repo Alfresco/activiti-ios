@@ -24,8 +24,8 @@
 
 NSUInteger kDefaultLoginUnsecuredPort                = 80;
 NSUInteger kDefaultLoginSecuredPort                  = 443;
-NSString *kAdvancedSettingsParameters                = @"kAdvancedSettingsParameters";
-
+NSString  *kAdvancedSettingsParameters               = @"kAdvancedSettingsParameters";
+NSString  *kPersistenceStackSessionParameter         = @"AlfrescoSession";
 
 #pragma mark -
 #pragma mark Task related
@@ -81,4 +81,5 @@ NSString  *kCellFactoryCellParameterActionType      = @"kCellFactoryCellParamete
 NSString * const AFALoginViewModelErrorDomain                   = @"AFALoginViewModelErrorDomain";
 NSString * const AFALoginViewModelWarningDomain                 = @"AFALoginViewModelWarningDomain";
 NSInteger const kAFALoginViewModelInvalidCredentialErrorCode    = 1;
+NSString * const AFAAIMSLoginErrorDomain                        = @"AFAAIMSLoginErrorDomain";
 

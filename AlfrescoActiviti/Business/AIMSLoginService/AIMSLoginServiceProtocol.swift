@@ -26,7 +26,7 @@ protocol AIMSLoginServiceProtocol {
     // Login related methods
     func availableAuthType(for serviceDocument: String, handler:@escaping AvailableAuthTypeCallback<AvailableAuthType>)
     func login(onViewController: UIViewController, delegate: AlfrescoAuthDelegate)
-    func refreshSession(delegate: AlfrescoAuthDelegate)
+    func refreshSession(keychainIdentifier: String, delegate: AlfrescoAuthDelegate)
     func logout()
     
     // Parameter related methods

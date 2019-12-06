@@ -115,7 +115,7 @@ class SplashScreenViewController: UIViewController {
         if segue.identifier == kSegueIDLoginAuthorized {
             let cvc = segue.destination as! AFAContainerViewController
             cvc.transitioningDelegate = self
-            cvc.viewModel = AFAContainerViewModel.init(persistenceStackModelName: SplashScreenViewController.model.persistenceStackModelName())
+            cvc.viewModel = ContainerViewModel.init(with: SplashScreenViewController.model.persistenceStackModelName())
         } else if segue.identifier == kSegueIDSplashScreenContainerSegueID {
             let destinationVC = segue.destination as! UINavigationController
             if let loginVC = destinationVC.viewControllers.first as? AIMSLoginViewController {
