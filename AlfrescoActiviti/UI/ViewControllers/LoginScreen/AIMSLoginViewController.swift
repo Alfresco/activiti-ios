@@ -283,6 +283,7 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
                 guard let sSelf = self else { return }
                 
                 sSelf.controllerState = .isIdle
+                sSelf.alfrescoURLTextFieldController?.setErrorText(nil, errorAccessibilityValue: "")
                 
                 let viewController = sSelf.storyboard?.instantiateViewController(withIdentifier: authenticationControllerIdentifier)
                 if let viewController = viewController {
