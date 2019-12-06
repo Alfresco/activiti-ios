@@ -24,10 +24,7 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     var dataSource: [[AIMSAdvancedSettingsAction]]?
     var parameters: AIMSAuthenticationParameters?
     
-    // Keyboard handling
-    var positionEndTextFieldOpenedInSuperview: CGFloat = 0.0
-    var positionEndTextFieldOpenedInView: CGFloat = 0.0
-    var heightTextFieldOpened: CGFloat = 0.0
+    var keyboardHandling = KeyboardHandling()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -41,9 +38,6 @@ class AIMSAdvancedSettingsViewController: UIViewController {
         
         self.dataSource = model.datasource()
         parameters = model.getParameters()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil) 
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,36 +58,6 @@ class AIMSAdvancedSettingsViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    //MARK: - Keyboard Notification
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
-            let window = UIApplication.shared.keyWindow {
-            let superviewHeight = window.frame.size.height
-            let viewHeight = view.frame.size.height
-            let keyboardHeight =  keyboardFrame.cgRectValue.height
-            let marginInSuperView = superviewHeight - positionEndTextFieldOpenedInSuperview
-            let marginInView = viewHeight - positionEndTextFieldOpenedInView
-
-            if self.view.frame.origin.y == 0 &&
-                UIDevice.current.userInterfaceIdiom == .pad &&
-                marginInSuperView < keyboardHeight {
-                self.view.frame.origin.y -= (keyboardHeight - marginInSuperView)
-            }
-            
-            if self.view.frame.origin.y == 0 &&
-                UIDevice.current.userInterfaceIdiom == .phone &&
-                marginInView < keyboardHeight {
-                self.view.frame.origin.y -= (keyboardHeight - marginInView)
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
     
     //MARK: - Helpers
     
@@ -125,13 +89,13 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
     func willBeginEditing(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes) {
         let cellRect = tableView.rectForRow(at: tableView.indexPath(for: cell)!)
         let cellRectInTableView = self.tableView.convert(cellRect, to: tableView.superview)
-        heightTextFieldOpened = cell.frame.size.height + view.safeAreaInsets.bottom
-        positionEndTextFieldOpenedInView = cellRectInTableView.origin.y + heightTextFieldOpened
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            let frameInSuperview =  self.view.convert(cellRectInTableView, to: UIApplication.shared.keyWindow)
-            positionEndTextFieldOpenedInSuperview = frameInSuperview.origin.y + heightTextFieldOpened
-        }
+        let frameInSuperview =  self.view.convert(cellRectInTableView, to: UIApplication.shared.keyWindow)
+        let heightTextFieldOpened = cell.frame.size.height + view.safeAreaInsets.bottom
+
+        keyboardHandling.add(positionObjectInSuperview: frameInSuperview.origin.y + heightTextFieldOpened,
+                             positionObjectInView: cellRectInTableView.origin.y + heightTextFieldOpened,
+                             heightObject: heightTextFieldOpened,
+                             in: self.view)
     }
     
     func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAuthenticationParameters) {

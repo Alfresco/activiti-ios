@@ -46,6 +46,7 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     // Constraints
     @IBOutlet weak var separatorSpace1HeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var separatorSpace2HeightConstraint: NSLayoutConstraint!
+    var rateConstraintsOnce: Bool = true
 
     // Loading view
     var overlayView: AIMSActivityView?
@@ -64,7 +65,8 @@ class AIMSSSOViewController: AFABaseThemedViewController {
         }
     }
     
-    var rateConstraintsOnce: Bool = true
+    // Keyboard handling
+    var keyboardHandling = KeyboardHandling()
     
     //MARK: - View Life Cycle
     
@@ -197,6 +199,18 @@ extension AIMSSSOViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         enableSignInButton = (textField.text != "")
         shouldEnableSignInButton()
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        let textFieldRect = textField.frame
+        let frameInSuperview =  self.view.convert(textFieldRect, to: UIApplication.shared.keyWindow)
+        let heightTextFieldOpened = textFieldRect.size.height + view.safeAreaInsets.bottom
+        
+        keyboardHandling.add(positionObjectInSuperview: frameInSuperview.origin.y + heightTextFieldOpened,
+                             positionObjectInView: textFieldRect.origin.y + heightTextFieldOpened,
+                             heightObject: 0,
+                             in: self.view)
+        return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

@@ -47,6 +47,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     //Constraints section
     @IBOutlet weak var separatorSpace1HeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var separatorSpace2HeightConstraint: NSLayoutConstraint!
+    var rateConstraintsOnce: Bool = true
 
     // Loading view
     var overlayView: AIMSActivityView?
@@ -66,11 +67,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     }
     
     // Keyboard handling
-    var positionEndTextFieldOpenedInSuperview: CGFloat = 0.0
-    var positionEndTextFieldOpenedInView: CGFloat = 0.0
-    var heightTextFieldOpened: CGFloat = 0.0
-    
-    var rateConstraintsOnce: Bool = true
+    var keyboardHandling = KeyboardHandling()
     
     //MARK: - View Life Cycle
     
@@ -144,11 +141,6 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
                                               typographyScheme: colorSchemeManager.defaultTypographyScheme)
         overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
-        
-        // Keyboard notification
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     
     override func didRestoredNetworkConnectivity() {
@@ -240,37 +232,6 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         signInButton.semanticContentAttribute = .forceRightToLeft
     }
     
-    //MARK: - Keyboard Notification
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
-            let window = UIApplication.shared.keyWindow {
-            let superviewHeight = window.frame.size.height
-            let viewHeight = view.frame.size.height
-            let keyboardHeight =  keyboardFrame.cgRectValue.height
-            let marginInSuperView = superviewHeight - positionEndTextFieldOpenedInSuperview
-            let marginInView = viewHeight - positionEndTextFieldOpenedInView
-
-            if self.view.frame.origin.y == 0 &&
-                UIDevice.current.userInterfaceIdiom == .pad &&
-                marginInSuperView < keyboardHeight {
-                self.view.frame.origin.y -= (keyboardHeight - marginInSuperView)
-            }
-            
-            if self.view.frame.origin.y == 0 &&
-                UIDevice.current.userInterfaceIdiom == .phone &&
-                marginInView < keyboardHeight {
-                self.view.frame.origin.y -= (keyboardHeight - marginInView)
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
-    
     //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -308,13 +269,13 @@ extension BaseAuthLoginViewController: UITextFieldDelegate {
         textField.rightView?.tintColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
         
         let textFieldRect = textField.frame
-        heightTextFieldOpened = textFieldRect.size.height + view.safeAreaInsets.bottom
-        positionEndTextFieldOpenedInView = textFieldRect.origin.y + heightTextFieldOpened
+        let frameInSuperview =  self.view.convert(textFieldRect, to: UIApplication.shared.keyWindow)
+        let heightTextFieldOpened = textFieldRect.size.height + view.safeAreaInsets.bottom
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            let frameInSuperview =  self.view.convert(textFieldRect, to: UIApplication.shared.keyWindow)
-            positionEndTextFieldOpenedInSuperview = frameInSuperview.origin.y + heightTextFieldOpened
-        }
+        keyboardHandling.add(positionObjectInSuperview: frameInSuperview.origin.y + heightTextFieldOpened,
+                             positionObjectInView: textFieldRect.origin.y + heightTextFieldOpened,
+                             heightObject: 0,
+                             in: self.view)
 
         return true
     }
