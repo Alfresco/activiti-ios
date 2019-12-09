@@ -83,12 +83,7 @@ class CloudLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
 }
 
 class PremiseLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
-    var infoText: String {
-        get {
-            let aimsParameters = AIMSAuthenticationParameters.parameters()
-            return String(format: NSLocalizedString(kLocalizationLoginScreenOnPremiseSigningInToHintFormat, comment: "Info"), aimsParameters.hostname)
-        }
-    }
+    var infoText = NSLocalizedString(kLocalizationLoginScreenOnPremiseSigningInToHintFormat, comment: "Info")
     let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
     var serverConfiguration: ASDKModelServerConfiguration?
     

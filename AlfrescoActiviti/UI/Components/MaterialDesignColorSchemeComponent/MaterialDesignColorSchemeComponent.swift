@@ -65,15 +65,7 @@ class MaterialDesignColorSchemeComponent: NSObject {
         
         return scheme
     }()
-    
-    public let advancedSettingsTextFieldColorScheme: MDCSemanticColorScheme = {
-        let scheme = MDCSemanticColorScheme(defaults: .material201804)
-        scheme.primaryColor = #colorLiteral(red: 0.2474783659, green: 0.6575964093, blue: 0.2639612854, alpha: 1)
-        scheme.primaryColorVariant = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        scheme.errorColor = #colorLiteral(red: 1, green: 0.2470588235, blue: 0.2666666667, alpha: 1)
-        
-        return scheme
-    }()
+
     public let textfieldDefaultColorScheme: MDCSemanticColorScheme = {
         let scheme = MDCSemanticColorScheme(defaults: .material201804)
         scheme.primaryColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
@@ -130,6 +122,20 @@ class MaterialDesignColorSchemeComponent: NSObject {
         return scheme
     }()
     
+    public let labelsTypographyScheme: MDCTypographyScheme = {
+        let scheme = MDCTypographyScheme()
+        
+        let lightFontName = "Muli-Light"
+        let boldFontName = "Muli-Bold"
+        let regularFontName = "Muli"
+        
+        scheme.headline1 = UIFont(name: lightFontName, size: 24)!
+        scheme.subtitle1 = UIFont(name: regularFontName, size: 12)!
+        scheme.subtitle2 = UIFont(name: regularFontName, size: 14)!
+        
+        return scheme
+    }()
+    
     public let textFieldTypographyScheme: MDCTypographyScheme = {
         let scheme = MDCTypographyScheme()
         
@@ -145,7 +151,7 @@ class MaterialDesignColorSchemeComponent: NSObject {
        let scheme = MDCTypographyScheme()
         
         let boldFontName = "Muli-Bold"
-        scheme.button = UIFont(name: boldFontName, size: 14)!
+        scheme.button = UIFont(name: boldFontName, size: 16)!
         scheme.headline1 = UIFont(name: boldFontName, size: 17)!
         
         return scheme

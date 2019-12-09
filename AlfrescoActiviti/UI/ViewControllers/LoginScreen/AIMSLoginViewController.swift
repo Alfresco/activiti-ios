@@ -50,7 +50,9 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     
     // Constraints
     var rateConstraintsOnce: Bool = true
-    @IBOutlet var rateDefaultConstraints: [NSLayoutConstraint]!
+    @IBOutlet weak var constraintSeparator1: NSLayoutConstraint!
+    @IBOutlet weak var constraintSeparator2: NSLayoutConstraint!
+    @IBOutlet weak var constraintSeparator3: NSLayoutConstraint!
     
     // Gesture recognizer
     var tapGestureRecognizer: UITapGestureRecognizer?
@@ -88,7 +90,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         
         // Title section
         processServicesAppLabel.text = NSLocalizedString(kLocalizationLoginProcessServicesAppText, comment: "App name")
-        processServicesAppLabel.font = colorSchemeManager.defaultTypographyScheme.headline5
+        processServicesAppLabel.font = colorSchemeManager.labelsTypographyScheme.headline1
         
         // Alfresco URL section
         alfrescoURLTextField.font = colorSchemeManager.textFieldTypographyScheme.headline1
@@ -135,10 +137,20 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.navigationBar.backItem?.title = ""
         
         controllerState = .isIdle
         updateConnectButtonState()
-        rateConstraints()
+        
+        if rateConstraintsOnce {
+            rateConstraintsOnce = false
+            let rate: CGFloat = 0.4
+            constraintSeparator1.scale(in: view, rate: rate)
+            constraintSeparator2.scale(in: view)
+            if self.view.bounds.size.height <= 568 && UIDevice.current.userInterfaceIdiom == .phone {
+                constraintSeparator3.constant = 10
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -190,17 +202,6 @@ class AIMSLoginViewController: AFABaseThemedViewController {
      
     fileprivate func updateConnectButtonState() {
         connectToButton.isEnabled = enableConnectButton
-    }
-    
-    func rateConstraints() {
-        guard rateConstraintsOnce else {
-            return
-        }
-        rateConstraintsOnce = false
-        self.view.setNeedsLayout()
-        for constraint in rateDefaultConstraints {
-            constraint.scale(in: view)
-        }
     }
 
     // MARK: - Navigation
@@ -295,5 +296,19 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
                 }
             }
         }
+    }
+}
+
+extension MDCTextField {
+
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 12))
+    }
+    open override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 12))
+    }
+
+    open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 12))
     }
 }

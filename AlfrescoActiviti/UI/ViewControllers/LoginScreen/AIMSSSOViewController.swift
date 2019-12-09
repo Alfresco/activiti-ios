@@ -44,7 +44,8 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     @IBOutlet weak var copyrightLabel: UILabel!
     
     // Constraints
-    @IBOutlet var rateDefaultConstraints: [NSLayoutConstraint]!
+    @IBOutlet weak var constraintSeparator1: NSLayoutConstraint!
+    @IBOutlet weak var constraintSeparator2: NSLayoutConstraint!
     var rateConstraintsOnce: Bool = true
 
     // Loading view
@@ -84,10 +85,19 @@ class AIMSSSOViewController: AFABaseThemedViewController {
         
         self.model.delegate = self
         
-        processServiceAppLabel.text = model.processServicessAppText
+        processServiceAppLabel.text = NSLocalizedString(kLocalizationLoginProcessServicesAppText, comment: "App name")
+        processServiceAppLabel.font = colorSchemeManager.labelsTypographyScheme.headline1
+        
         subtitle1Label.text = model.subtitle1Text
+        subtitle1Label.textColor = colorSchemeManager.grayColorScheme.primaryColor
+        subtitle1Label.font = colorSchemeManager.labelsTypographyScheme.subtitle1
+        
         serverURLLabel.text = model.serverURLText
+        serverURLLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
+        serverURLLabel.font = colorSchemeManager.labelsTypographyScheme.subtitle2
+        
         subtitle2Label.text = model.subtitle2Text
+        subtitle2Label.font = colorSchemeManager.labelsTypographyScheme.subtitle2
         
         // Repository textfield
         repositoryTextField.font = colorSchemeManager.textFieldTypographyScheme.headline1
@@ -113,7 +123,16 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        rateConstraints()
+        
+        self.navigationController?.navigationBar.backItem?.title = ""
+        
+        if rateConstraintsOnce {
+            rateConstraintsOnce = false
+            let rate: CGFloat = 0.4
+            let heightNavigationBar = self.navigationController?.navigationBar.bounds.size.height ?? 0
+            constraintSeparator1.scale(in: view, heightNavigationBar: heightNavigationBar , rate: rate)
+            constraintSeparator2.scale(in: view)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -177,22 +196,6 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     }
     
     //MARK: - Helpers
-    
-    func rateConstraints() {
-        guard rateConstraintsOnce else {
-            return
-        }
-        rateConstraintsOnce = false
-        self.view.setNeedsLayout()
-        let heightNavigationBar = self.navigationController?.navigationBar.bounds.size.height ?? 0
-        for constraint in rateDefaultConstraints {
-            if constraint.identifier == kConstraintIDFirstOnTop {
-                constraint.scale(in: view, heightNavigationBar: heightNavigationBar)
-            } else {
-                constraint.scale(in: view)
-            }
-        }
-    }
     
     func shouldEnableSignInButton() {
         guard let colorSchemeManager = self.colorSchemeManager else {

@@ -39,6 +39,10 @@ class AIMSAdvancedSettingsViewController: UIViewController {
                                                                  style: .done,
                                                                  target: self,
                                                                  action: #selector(saveButtonPressed))
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.6876367331, green: 0.6845007539, blue: 0.6877160072, alpha: 1)], for: .disabled)
+        
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        
         self.title = model.screenTitleText
         self.dataSource = model.datasource()
         
@@ -101,6 +105,7 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
                              positionObjectInView: cellRectInTableView.origin.y + heightTextFieldOpened,
                              heightObject: heightTextFieldOpened,
                              in: self.view)
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     func result(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes, response: AIMSAuthenticationParameters) {
@@ -109,6 +114,7 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
             response.port = (response.https) ? String(kDefaultLoginSecuredPort) : String(kDefaultLoginUnsecuredPort)
             tableView.reloadRows(at: [model.getIndexPathForPortField()], with: .none)
         }
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     func buttonPressed(cell: UITableViewCell, type: AIMSAdvancedSettingsActionTypes) {

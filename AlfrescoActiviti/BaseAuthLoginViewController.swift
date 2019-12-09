@@ -27,6 +27,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     // App name section
     @IBOutlet weak var processServicesAppLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var hostNameLabel: UILabel!
     
     // Copyrigh section
     @IBOutlet weak var copyrightLabel: UILabel!
@@ -45,7 +46,9 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     var showPasswordButton = UIButton()
     
     // Constraints
-    @IBOutlet var rateDefaultConstraints: [NSLayoutConstraint]!
+    
+    @IBOutlet weak var constraintSeparator1: NSLayoutConstraint!
+    @IBOutlet weak var constraintSeparator2: NSLayoutConstraint!
     var rateConstraintsOnce: Bool = true
 
     // Loading view
@@ -76,20 +79,27 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         super.viewDidLoad()
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.backItem?.title = ""
         
         guard let colorSchemeManager = self.colorSchemeManager else {
             AFALog.logError("Color scheme manager could not be initiated")
             return
         }
         
-        processServicesAppLabel.text = model.loginStrategy?.processServicessAppText
+        processServicesAppLabel.text = NSLocalizedString(kLocalizationLoginProcessServicesAppText, comment: "App name")
+        processServicesAppLabel.font = colorSchemeManager.labelsTypographyScheme.headline1
+        
         infoLabel.text = model.loginStrategy?.infoText
+        infoLabel.font = colorSchemeManager.labelsTypographyScheme.subtitle2
+        hostNameLabel.text = ""
+        
         
         if (model.loginStrategy as? PremiseLoginStrategy) != nil {
             infoLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
-            infoLabel.font = colorSchemeManager.defaultTypographyScheme.headline3
-        }
+            infoLabel.font = colorSchemeManager.labelsTypographyScheme.subtitle1
+            hostNameLabel.text = AIMSAuthenticationParameters.parameters().hostname
+            hostNameLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
+            hostNameLabel.font = colorSchemeManager.labelsTypographyScheme.subtitle2
+        } 
         
         // Username textfield
         usernameTextfield.rightViewMode = .unlessEditing
@@ -141,7 +151,16 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        rateConstraints()
+        
+        self.navigationController?.navigationBar.backItem?.title = ""
+        
+        if rateConstraintsOnce {
+            rateConstraintsOnce = false
+            let rate: CGFloat = 0.4
+            let heightNavigationBar = self.navigationController?.navigationBar.bounds.size.height ?? 0
+            constraintSeparator1.scale(in: view, heightNavigationBar: heightNavigationBar , rate: rate)
+            constraintSeparator2.scale(in: view)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -216,23 +235,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     }
     
     //MARK: - Helpers
-    
-    func rateConstraints() {
-        guard rateConstraintsOnce else {
-            return
-        }
-        rateConstraintsOnce = false
-        self.view.setNeedsLayout()
-        let heightNavigationBar = self.navigationController?.navigationBar.bounds.size.height ?? 0
-        for constraint in rateDefaultConstraints {
-            if constraint.identifier == kConstraintIDFirstOnTop {
-                constraint.scale(in: view, heightNavigationBar: heightNavigationBar)
-            } else {
-                constraint.scale(in: view)
-            }
-        }
-    }
-    
+
     func shouldEnableSignInButton() {
         guard let colorSchemeManager = self.colorSchemeManager else {
             AFALog.logError("Color scheme manager could not be initiated")

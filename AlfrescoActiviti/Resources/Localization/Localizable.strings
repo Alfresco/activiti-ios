@@ -45,7 +45,7 @@
 "loginScreenIndentityServiceURLHintTitleText"            = "How to connect to Alfresco";
 "loginScreenIdentityServiceURLHintText"                  = "<p><font size=\"6\">How to connect to Alfresco</font></p><p><font size=\"5\">Alfresco Process Services URL</font></p><p>You can enter the URL of your Alfresco Process Services instance. This will require you to enter your username &amp; password to authenticate.</p><p><font size=\"5\">Sign in with SSO</font></p><p>You can enter the URL of your Alfresco Identity Management Service in order to authenticate with your organisations identity provider.</p><p>*You will have to provide the URL of your Alfresco Process Services instance afterwards</p><p>Talk to your Alfresco administrator if you require help.</p>";
 "loginScreenSSOHelpHintText"                             = "<p><font size=\"6\">How to connect to Alfresco</font></p><p>Alfresco Process Services URL:</p><p>This is the URL of your Alfresco Process Services instance.</p><p>Talk to your Alfresco administrator if you require help.</p>";
-"loginScreenOnPremiseSigningInToHintFormat"              = "Signing in to \n %@";
+"loginScreenOnPremiseSigningInToHintFormat"              = "Signing in to";
 
 // Advanced Settings screen
 "advancedSettingsScreenTitle"                            = "Advanced Settings";

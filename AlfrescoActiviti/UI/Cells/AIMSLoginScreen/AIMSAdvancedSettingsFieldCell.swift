@@ -55,7 +55,7 @@ class AIMSAdvancedSettingsFieldCell: UITableViewCell, AIMSAdvancedSettingsCellPr
 
         if let textFieldController = self.textFieldController {
             textFieldController.placeholderText = model.title
-            MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.advancedSettingsTextFieldColorScheme, to: textFieldController )
+            MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.textfieldDefaultColorScheme, to: textFieldController )
         }
         
         switch model.type {

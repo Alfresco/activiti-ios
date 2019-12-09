@@ -32,7 +32,7 @@ class AIMSAdvancedSettingsSectionCell: UITableViewCell, AIMSAdvancedSettingsCell
             return
         }
         label.text = ""
-        label.font = colorSchemeManager.boldTypographyScheme.headline1
+        label.font = colorSchemeManager.textFieldTypographyScheme.headline1
     }
     
     func configureCell() {
