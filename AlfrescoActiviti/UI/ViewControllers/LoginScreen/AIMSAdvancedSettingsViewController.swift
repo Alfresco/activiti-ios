@@ -130,6 +130,7 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
         } else if type == .resetDefault {
             parameters = AIMSAuthenticationParameters.resetToDefault()
             tableView.reloadData()
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
 
