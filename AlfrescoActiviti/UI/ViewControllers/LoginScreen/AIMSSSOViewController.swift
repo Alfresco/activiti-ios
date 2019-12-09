@@ -104,6 +104,7 @@ class AIMSSSOViewController: AFABaseThemedViewController {
         repositoryTextFieldController = MDCTextInputControllerUnderline(textInput: repositoryTextField)
         repositoryTextFieldController?.placeholderText = model.repositoryPlaceholderText
         repositoryTextFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
+        repositoryTextFieldController?.inlinePlaceholderColor = colorSchemeManager.textfieldDefaultColorScheme.onSurfaceColor
         if let repositoryTextFieldController = self.repositoryTextFieldController {
             MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.textfieldDefaultColorScheme, to: repositoryTextFieldController)
         }

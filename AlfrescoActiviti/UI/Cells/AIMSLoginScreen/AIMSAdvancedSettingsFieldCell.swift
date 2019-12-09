@@ -40,6 +40,7 @@ class AIMSAdvancedSettingsFieldCell: UITableViewCell, AIMSAdvancedSettingsCellPr
         textField.delegate = self
         textFieldController = MDCTextInputControllerUnderline(textInput: textField)
         textFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
+        textFieldController?.inlinePlaceholderColor = colorSchemeManager.textfieldDefaultColorScheme.onSurfaceColor
         textField.font = colorSchemeManager.textFieldTypographyScheme.headline1
     }
     

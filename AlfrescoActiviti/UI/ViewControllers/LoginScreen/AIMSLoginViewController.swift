@@ -96,6 +96,8 @@ class AIMSLoginViewController: AFABaseThemedViewController {
         alfrescoURLTextField.font = colorSchemeManager.textFieldTypographyScheme.headline1
         alfrescoURLTextFieldController = MDCTextInputControllerUnderline(textInput: alfrescoURLTextField)
         alfrescoURLTextFieldController?.placeholderText = loginViewModel.alfrescoURLPlaceholderText
+        alfrescoURLTextFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
+        alfrescoURLTextFieldController?.inlinePlaceholderColor = colorSchemeManager.textfieldDefaultColorScheme.onSurfaceColor
         if let alfrescoURLTextFieldController = self.alfrescoURLTextFieldController {
             MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.textfieldDefaultColorScheme, to: alfrescoURLTextFieldController)
         }

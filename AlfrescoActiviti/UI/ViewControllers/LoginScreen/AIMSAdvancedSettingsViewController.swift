@@ -39,7 +39,7 @@ class AIMSAdvancedSettingsViewController: UIViewController {
                                                                  style: .done,
                                                                  target: self,
                                                                  action: #selector(saveButtonPressed))
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.6876367331, green: 0.6845007539, blue: 0.6877160072, alpha: 1)], for: .disabled)
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.7565980554, green: 0.7567081451, blue: 0.7565739751, alpha: 1)], for: .disabled)
         
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         

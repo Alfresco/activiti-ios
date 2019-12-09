@@ -109,6 +109,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         usernameTextFieldController = MDCTextInputControllerUnderline(textInput: usernameTextfield)
         usernameTextFieldController?.placeholderText = model.loginStrategy?.usernamaPlaceholderText
         usernameTextFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
+        usernameTextFieldController?.inlinePlaceholderColor = colorSchemeManager.textfieldDefaultColorScheme.onSurfaceColor
         if let usernameTextFieldController = self.usernameTextFieldController {
             MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.textfieldDefaultColorScheme, to: usernameTextFieldController)
         }
@@ -132,6 +133,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
         passwordTextFieldController = MDCTextInputControllerUnderline(textInput: passwordTextfield)
         passwordTextFieldController?.placeholderText = model.loginStrategy?.passwordPlaceholderText
         passwordTextFieldController?.inlinePlaceholderFont = colorSchemeManager.textFieldTypographyScheme.subtitle1
+        passwordTextFieldController?.inlinePlaceholderColor = colorSchemeManager.textfieldDefaultColorScheme.onSurfaceColor
         if let passwordTextFieldController = self.passwordTextFieldController {
             MDCTextFieldColorThemer.applySemanticColorScheme(colorSchemeManager.textfieldDefaultColorScheme, to: passwordTextFieldController)
         }
