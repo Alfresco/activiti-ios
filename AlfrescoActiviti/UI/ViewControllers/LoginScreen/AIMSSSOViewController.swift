@@ -21,9 +21,10 @@ import MaterialComponents.MDCButton
 import MaterialComponents.MDCTextField
 import AlfrescoCore
 
-class AIMSSSOViewController: AFABaseThemedViewController {
+class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
     
     let model: AIMSSSOViewModel = AIMSSSOViewModel()
+    weak var delegate: SplashScreenDelegate?
     
     // App name section
     @IBOutlet weak var processServiceAppLabel: UILabel!
@@ -125,6 +126,7 @@ class AIMSSSOViewController: AFABaseThemedViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.backItem?.title = ""
         
         if rateConstraintsOnce {
@@ -264,7 +266,12 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + kOverlayAlphaChangeTime) { [weak self] in
                 guard let sSelf = self else { return }
-                sSelf.showWarningMessage(message)
+            
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    sSelf.delegate?.showWarning(message: message)
+                } else {
+                    sSelf.showWarningMessage(message)
+                }
             }
         }
     }
@@ -282,17 +289,22 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
     func logInFailed(with error: APIError) {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
-            
+
             sSelf.navigationController?.setNavigationBarHidden(false, animated: true)
             sSelf.controllerState = .isIdle
             
             AFALog.logError(error.localizedDescription)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + kOverlayAlphaChangeTime) { [weak self] in
-                guard let sSelf = self else { return }
-                
-                sSelf.repositoryTextFieldController?.setErrorText("", errorAccessibilityValue: "")
-                sSelf.showErrorMessage(error.localizedDescription)
+            if error.responseCode != -3 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + kOverlayAlphaChangeTime) { [weak self] in
+                    guard let sSelf = self else { return }
+                    
+                    sSelf.repositoryTextFieldController?.setErrorText("", errorAccessibilityValue: "")
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        sSelf.delegate?.showError(message: error.localizedDescription)
+                    } else {
+                        sSelf.showErrorMessage(error.localizedDescription)
+                    }
+                }
             }
         }
     }

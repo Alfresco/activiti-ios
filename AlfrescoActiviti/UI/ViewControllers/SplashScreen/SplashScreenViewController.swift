@@ -19,7 +19,12 @@
 import UIKit
 
 protocol SplashScreenDelegate: class {
-    func showError(message: String);
+    func showError(message: String)
+    func showWarning(message: String)
+}
+
+protocol SplashScreenProtocol: class {
+    var delegate: SplashScreenDelegate? {get set}
 }
 
 class SplashScreenViewController: UIViewController {
@@ -181,6 +186,10 @@ extension SplashScreenViewController: UIViewControllerTransitioningDelegate {
 
 // MARK: SplashScreenDelegate
 extension SplashScreenViewController: SplashScreenDelegate {
+    func showWarning(message: String) {
+        self.bannerView?.show(withText: message, title: NSLocalizedString(kLocalizationBannerViewErrorText, comment: "Error title"), style: .warning)
+    }
+    
     func showError(message: String) {
         self.bannerView?.show(withText: message, title: NSLocalizedString(kLocalizationBannerViewErrorText, comment: "Error title"), style: .error)
     }

@@ -52,6 +52,9 @@ class AIMSAdvancedSettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.backItem?.title = ""
+        
         if (self.view.traitCollection.horizontalSizeClass == .compact) {
             tableView.tableFooterView = footerView()
         }

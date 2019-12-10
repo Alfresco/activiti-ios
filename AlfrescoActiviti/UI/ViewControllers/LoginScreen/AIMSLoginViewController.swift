@@ -26,7 +26,7 @@ enum ControllerState {
     case isIdle
 }
 
-class AIMSLoginViewController: AFABaseThemedViewController {
+class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol {
     
     let loginViewModel: AIMSLoginViewModel = AIMSLoginViewModel()
     weak var delegate: SplashScreenDelegate?
@@ -216,6 +216,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if kSegueIDBaseAuthLoginSegueID == segue.identifier {
             if let destinationVC = segue.destination as? BaseAuthLoginViewController {
+                destinationVC.delegate = self.delegate
                 loginViewModel.prepareViewModel(for: destinationVC, authenticationType: .basicAuth, isCloud: true)
             }
         }
@@ -294,6 +295,9 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
                 
                 let viewController = sSelf.storyboard?.instantiateViewController(withIdentifier: authenticationControllerIdentifier)
                 if let viewController = viewController {
+                    if viewController is SplashScreenProtocol {
+                        (viewController as! SplashScreenProtocol).delegate = sSelf.delegate
+                    }
                     sSelf.loginViewModel.prepareViewModel(for: viewController, authenticationType: authType)
                     sSelf.navigationController?.pushViewController(viewController, animated: true)
                 }

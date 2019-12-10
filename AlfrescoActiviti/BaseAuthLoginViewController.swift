@@ -20,9 +20,10 @@ import UIKit
 import MaterialComponents.MDCButton
 import MaterialComponents.MDCTextField
 
-class BaseAuthLoginViewController: AFABaseThemedViewController {
+class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProtocol {
 
     let model: BaseAuthLoginViewModel = BaseAuthLoginViewModel()
+    weak var delegate: SplashScreenDelegate?
     
     // App name section
     @IBOutlet weak var processServicesAppLabel: UILabel!
@@ -154,6 +155,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.backItem?.title = ""
         
         if rateConstraintsOnce {
@@ -203,12 +205,19 @@ class BaseAuthLoginViewController: AFABaseThemedViewController {
                     AFALog.logError(error.localizedDescription)
                     sSelf.usernameTextFieldController?.setErrorText("", errorAccessibilityValue: "")
                     sSelf.passwordTextFieldController?.setErrorText("", errorAccessibilityValue: "")
-                    if (error as NSError).domain == AFALoginViewModelWarningDomain {
-                        sSelf.showWarningMessage(error.localizedDescription)
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        if (error as NSError).domain == AFALoginViewModelWarningDomain {
+                            sSelf.delegate?.showWarning(message: error.localizedDescription)
+                        } else {
+                            sSelf.delegate?.showError(message: error.localizedDescription)
+                        }
                     } else {
-                        sSelf.showErrorMessage(error.localizedDescription)
+                        if (error as NSError).domain == AFALoginViewModelWarningDomain {
+                            sSelf.showWarningMessage(error.localizedDescription)
+                        } else {
+                            sSelf.showErrorMessage(error.localizedDescription)
+                        }
                     }
-                    
                     break
                 case .success(_):
                     sSelf.performSegue(withIdentifier: kSegueIDLoginAuthorized, sender: nil)
