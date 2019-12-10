@@ -210,6 +210,7 @@ class AIMSLoginViewController: AFABaseThemedViewController {
     
     @IBAction func unwindToAIMSLoginViewController(_ sender: UIStoryboardSegue) {
         alfrescoURLTextField.text = nil
+        alfrescoURLTextFieldController?.setErrorText(nil, errorAccessibilityValue: "")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
