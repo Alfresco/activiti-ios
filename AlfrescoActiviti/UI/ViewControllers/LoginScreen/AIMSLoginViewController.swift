@@ -211,6 +211,8 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
     @IBAction func unwindToAIMSLoginViewController(_ sender: UIStoryboardSegue) {
         alfrescoURLTextField.text = nil
         alfrescoURLTextFieldController?.setErrorText(nil, errorAccessibilityValue: "")
+        enableConnectButton = false
+        updateConnectButtonState()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

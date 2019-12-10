@@ -73,7 +73,11 @@ class ContainerViewModel: NSObject {
     }
 }
 
-extension ContainerViewModel: AlfrescoAuthDelegate {    
+extension ContainerViewModel: AlfrescoAuthDelegate {
+    func didLogOut(result: Result<Int, APIError>) {
+        
+    }
+    
     func didReceive(result: Result<AlfrescoCredential, APIError>, session: AlfrescoAuthSession?) {
         switch result {
         case .success(let credential):

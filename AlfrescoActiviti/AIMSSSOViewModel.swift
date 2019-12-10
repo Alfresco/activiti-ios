@@ -74,6 +74,10 @@ class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
 
 //MARK: - AlfrescoAuth Delegate
 extension AIMSSSOViewModel: AlfrescoAuthDelegate {
+    func didLogOut(result: Result<Int, APIError>) {
+        
+    }
+    
     var serverConfiguration: ASDKModelServerConfiguration {
         get {
             let serverConfiguration = ASDKModelServerConfiguration()
