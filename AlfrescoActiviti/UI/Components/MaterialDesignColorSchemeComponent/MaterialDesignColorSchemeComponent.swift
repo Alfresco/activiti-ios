@@ -69,7 +69,7 @@ class MaterialDesignColorSchemeComponent: NSObject {
     public let textfieldDefaultColorScheme: MDCSemanticColorScheme = {
         let scheme = MDCSemanticColorScheme(defaults: .material201804)
         scheme.primaryColor = #colorLiteral(red: 0.07236295193, green: 0.6188754439, blue: 0.2596520483, alpha: 1)
-        scheme.onSurfaceColor = #colorLiteral(red: 0.7709081769, green: 0.7710202336, blue: 0.7708836794, alpha: 1)
+        scheme.onSurfaceColor = #colorLiteral(red: 0.6862745098, green: 0.6862745098, blue: 0.6862745098, alpha: 1)
         
         return scheme
     }()
