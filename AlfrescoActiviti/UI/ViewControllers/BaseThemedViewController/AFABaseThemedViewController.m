@@ -167,4 +167,8 @@
     return (self.networkReachabilityStatus == ASDKNetworkReachabilityStatusReachableViaWWANOrWifi) ? YES : NO;
 }
 
+- (void)dismissMessage:(BOOL)animated {
+    [self.bannerAlertView hide: animated];
+}
+
 @end

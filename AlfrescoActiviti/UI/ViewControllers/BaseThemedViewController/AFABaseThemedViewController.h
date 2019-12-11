@@ -32,5 +32,6 @@
 - (void)didRestoredNetworkConnectivity;
 - (void)didLoseNetworkConnectivity;
 - (BOOL)isNetworkReachable;
+- (void)dismissMessage:(BOOL)animated;
 
 @end

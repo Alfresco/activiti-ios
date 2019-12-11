@@ -168,6 +168,12 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
         self.controllerState = .isLoading
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.delegate?.dismiss(animated: true)
+        } else {
+            self.dismissMessage(true)
+        }
+        
         if let apsURL = repositoryTextField.text {
             model.authParameters?.processURL = apsURL
             model.login(onViewController: self)

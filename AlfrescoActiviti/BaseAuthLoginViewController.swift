@@ -200,8 +200,10 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
             model.signIn(username: username, password: password) { [weak self] (result) in
                 guard let sSelf = self else { return }
                 sSelf.controllerState = .isIdle
+                
                 switch result {
                 case .failure(let error):
+                    
                     AFALog.logError(error.localizedDescription)
                     sSelf.usernameTextFieldController?.setErrorText("", errorAccessibilityValue: "")
                     sSelf.passwordTextFieldController?.setErrorText("", errorAccessibilityValue: "")
@@ -220,6 +222,13 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
                     }
                     break
                 case .success(_):
+                    
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        sSelf.delegate?.dismiss(animated: true)
+                    } else {
+                        sSelf.dismissMessage(true)
+                    }
+                    
                     sSelf.performSegue(withIdentifier: kSegueIDLoginAuthorized, sender: nil)
                     break
                 }

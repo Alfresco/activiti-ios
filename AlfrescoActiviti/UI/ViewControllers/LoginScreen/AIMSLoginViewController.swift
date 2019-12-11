@@ -170,8 +170,6 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
         overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
     }
     
-   
-    
     // MARK: - Actions
     
     @IBAction func connectButtonTapped(_ sender: Any) {
@@ -220,6 +218,12 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
             if let destinationVC = segue.destination as? BaseAuthLoginViewController {
                 destinationVC.delegate = self.delegate
                 loginViewModel.prepareViewModel(for: destinationVC, authenticationType: .basicAuth, isCloud: true)
+                
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    self.delegate?.dismiss(animated: true)
+                } else {
+                    self.dismissMessage(true)
+                }
             }
         }
     }
@@ -286,6 +290,12 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
         case .aimsAuth:
             AFALog.logVerbose("Available authentication type is: aims")
             identifier = kStoryboardIDAIMSSSOViewController
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.delegate?.dismiss(animated: true)
+        } else {
+            self.dismissMessage(true)
         }
         
         if let authenticationControllerIdentifier = identifier {
