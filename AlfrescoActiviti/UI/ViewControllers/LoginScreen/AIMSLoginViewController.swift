@@ -176,7 +176,9 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
         self.view.endEditing(true)
         if let alfrescoURL = alfrescoURLTextField.text {
             controllerState = .isLoading
-            loginViewModel.availableAuthType(for: alfrescoURL)
+            let url = loginViewModel.buildURL(alfrescoURL)
+            alfrescoURLTextField.text = url
+            loginViewModel.availableAuthType(for: url)
         }
     }
     

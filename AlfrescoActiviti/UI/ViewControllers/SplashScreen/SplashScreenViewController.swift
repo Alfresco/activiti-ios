@@ -138,7 +138,7 @@ class SplashScreenViewController: UIViewController {
     }
     
     //MARK: - Helpers
-    
+
     func showContainerView() {
         self.logoImageView.isHidden = true
         containerView.alpha = 0.0
