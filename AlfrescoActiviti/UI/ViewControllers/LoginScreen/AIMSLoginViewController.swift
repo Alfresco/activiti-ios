@@ -292,15 +292,15 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
             identifier = kStoryboardIDAIMSSSOViewController
         }
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            self.delegate?.dismiss(animated: true)
-        } else {
-            self.dismissMessage(true)
-        }
-        
         if let authenticationControllerIdentifier = identifier {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 guard let sSelf = self else { return }
+                
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    sSelf.delegate?.dismiss(animated: true)
+                } else {
+                    sSelf.dismissMessage(true)
+                }
                 
                 sSelf.controllerState = .isIdle
                 sSelf.alfrescoURLTextFieldController?.setErrorText(nil, errorAccessibilityValue: "")
