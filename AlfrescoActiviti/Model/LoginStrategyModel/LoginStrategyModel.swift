@@ -95,6 +95,7 @@ class PremiseLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
             serverConfiguration.hostAddressString = aimsParameters.hostname
             serverConfiguration.isCommunicationOverSecureLayer = aimsParameters.https
             serverConfiguration.serviceDocument = aimsParameters.serviceDocument
+            serverConfiguration.port = aimsParameters.port
             serverConfiguration.username = username
             serverConfiguration.password = password
             self.serverConfiguration = serverConfiguration
