@@ -887,6 +887,7 @@
 		E371B6D02368312D000790DE /* AIMSAdvancedSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6CF2368312D000790DE /* AIMSAdvancedSettingsViewController.swift */; };
 		E371B6D223683302000790DE /* AIMSAdvancedSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */; };
 		E3DEBE1E238564E10056118A /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DEBE1D238564E10056118A /* SplashScreenViewController.swift */; };
+		E3E42A5A23A78AC50079FA03 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A5923A78AC50079FA03 /* String+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1982,6 +1983,7 @@
 		E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsViewModel.swift; path = ViewModel/AIMSViewModel/AIMSAdvancedSettingsViewModel.swift; sourceTree = "<group>"; };
 		E371B6D423685154000790DE /* AIMSAuthenticationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAuthenticationParameters.swift; path = Model/AdvancedSettingsParameters/AIMSAuthenticationParameters.swift; sourceTree = "<group>"; };
 		E3DEBE1D238564E10056118A /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashScreenViewController.swift; path = AlfrescoActiviti/UI/ViewControllers/SplashScreen/SplashScreenViewController.swift; sourceTree = SOURCE_ROOT; };
+		E3E42A5923A78AC50079FA03 /* String+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -6631,6 +6633,7 @@
 			children = (
 				B94FE4882367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift */,
 				E361FF1D2386CDE1001377DC /* NSLayoutConstraint+Rate.swift */,
+				E3E42A5923A78AC50079FA03 /* String+Helpers.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -7458,6 +7461,7 @@
 				8D7C1A4E1C808D290092EA81 /* AFADescriptionTableViewCell.m in Sources */,
 				137C58AE1BF9C6BC00DF41B3 /* UIImage+ImageEffects.m in Sources */,
 				135EF5651B9090E800ECD1B2 /* NSDate+AFAStringTransformation.m in Sources */,
+				E3E42A5A23A78AC50079FA03 /* String+Helpers.swift in Sources */,
 				B96B855A238EC3570018E39A /* AIMSAuthenticationParameters.swift in Sources */,
 				8D7C1A791C80912B0092EA81 /* AFANoContentView.m in Sources */,
 				13E6E2831B7E078A001F5737 /* AFASignInTableViewCell.m in Sources */,
