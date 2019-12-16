@@ -84,24 +84,26 @@ class AIMSAdvancedSettingsFieldCell: UITableViewCell, AIMSAdvancedSettingsCellPr
 extension AIMSAdvancedSettingsFieldCell: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        switch model.type {
-        case .port:
-            parameters.port = textField.text ?? ""
-            break
-        case .serviceDocuments:
-            parameters.serviceDocument = textField.text ?? ""
-            break
-        case .realm:
-            parameters.realm = textField.text ?? ""
-            break
-        case .clientID:
-            parameters.clientID = textField.text ?? ""
-            break
-        case .redirectURL:
-            parameters.redirectURI = textField.text ?? ""
-            break
-        default:
-            break
+        if let text = textField.text {
+            switch model.type {
+            case .port:
+                parameters.port = text
+                break
+            case .serviceDocuments:
+                parameters.serviceDocument = text
+                break
+            case .realm:
+                parameters.realm = text
+                break
+            case .clientID:
+                parameters.clientID = text
+                break
+            case .redirectURL:
+                parameters.redirectURI = text
+                break
+            default:
+                break
+            }
         }
         delegate.result(cell: self, type: model.type, response: parameters)
     }

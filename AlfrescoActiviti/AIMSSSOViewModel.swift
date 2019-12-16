@@ -85,7 +85,7 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
             if let authParameters = self.authParameters {
                 serverConfiguration.hostAddressString = authParameters.hostname
                 serverConfiguration.isCommunicationOverSecureLayer = authParameters.https
-                serverConfiguration.serviceDocument = authParameters.serviceDocument
+                serverConfiguration.serviceDocument = authParameters.serviceDocument.encoding()
                 serverConfiguration.port = authParameters.port
                 serverConfiguration.acessToken = alfrescoCredential?.accessToken
             }

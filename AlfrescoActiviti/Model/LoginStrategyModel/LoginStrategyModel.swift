@@ -94,7 +94,7 @@ class PremiseLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
             let serverConfiguration = ASDKModelServerConfiguration()
             serverConfiguration.hostAddressString = aimsParameters.hostname
             serverConfiguration.isCommunicationOverSecureLayer = aimsParameters.https
-            serverConfiguration.serviceDocument = aimsParameters.serviceDocument
+            serverConfiguration.serviceDocument = aimsParameters.serviceDocument.encoding()
             serverConfiguration.port = aimsParameters.port
             serverConfiguration.username = username
             serverConfiguration.password = password

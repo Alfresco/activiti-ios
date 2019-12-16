@@ -90,7 +90,7 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
         let authConfig = AuthConfiguration(baseUrl: authenticationParameters.fullFormatURL,
         clientID: authenticationParameters.clientID,
         realm: authenticationParameters.realm,
-        redirectURI: authenticationParameters.redirectURI)
+        redirectURI: authenticationParameters.redirectURI.encoding())
         
         return authConfig
     }
