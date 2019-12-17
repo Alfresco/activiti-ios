@@ -391,13 +391,6 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
 
 - (void)requestUserLogout {
     [self.viewModel requestLogout];
-    
-    __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        __strong typeof(self) strongSelf = weakSelf;
-        
-        [strongSelf redirectToLoginViewController];
-    });
 }
 
 - (void)changeContainerBackgroundColor:(UIColor *)containerBackgroundColor

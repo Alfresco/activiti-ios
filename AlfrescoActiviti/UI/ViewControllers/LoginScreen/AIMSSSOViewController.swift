@@ -200,7 +200,7 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
         if segue.identifier == kSegueIDLoginAuthorized {
             let cvc = segue.destination as! AFAContainerViewController
             cvc.transitioningDelegate = self
-            cvc.viewModel = ContainerViewModel.init(with: model.persistenceStackModelName())
+            cvc.viewModel = ContainerViewModel.init(with: model.persistenceStackModelName(), logoutViewController: cvc)
         }
     }
     
@@ -283,7 +283,7 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
     }
     
     func logInSuccessful() {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + kDefaultAnimationTime) { [weak self] in
             guard let sSelf = self else { return }
             
             sSelf.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -300,8 +300,8 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
             sSelf.controllerState = .isIdle
             
             AFALog.logError(error.localizedDescription)
-            if error.responseCode != -3 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + kOverlayAlphaChangeTime) { [weak self] in
+            if error.responseCode != kAFALoginSSOViewModelCancelErrorCode {
+                DispatchQueue.main.asyncAfter(deadline: .now() + kDefaultAnimationTime) { [weak self] in
                     guard let sSelf = self else { return }
                     
                     sSelf.repositoryTextFieldController?.setErrorText("", errorAccessibilityValue: "")

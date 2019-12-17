@@ -82,4 +82,5 @@ NSString * const AFALoginViewModelErrorDomain                   = @"AFALoginView
 NSString * const AFALoginViewModelWarningDomain                 = @"AFALoginViewModelWarningDomain";
 NSInteger const kAFALoginViewModelInvalidCredentialErrorCode    = 1;
 NSString * const AFAAIMSLoginErrorDomain                        = @"AFAAIMSLoginErrorDomain";
+NSInteger const kAFALoginSSOViewModelCancelErrorCode            = -3;
 

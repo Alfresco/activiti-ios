@@ -281,7 +281,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
         if segue.identifier == kSegueIDLoginAuthorized {
             let cvc = segue.destination as! AFAContainerViewController
             cvc.transitioningDelegate = self
-            cvc.viewModel = ContainerViewModel.init(with: model.persistenceStackModelName())
+            cvc.viewModel = ContainerViewModel.init(with: model.persistenceStackModelName(), logoutViewController: cvc)
         }
     }
 }

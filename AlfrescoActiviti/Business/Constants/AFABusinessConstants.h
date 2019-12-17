@@ -71,3 +71,4 @@ extern NSString * const AFALoginViewModelErrorDomain;
 extern NSString * const AFALoginViewModelWarningDomain;
 extern NSInteger const kAFALoginViewModelInvalidCredentialErrorCode;
 extern NSString * const AFAAIMSLoginErrorDomain;
+extern NSInteger const kAFALoginSSOViewModelCancelErrorCode;

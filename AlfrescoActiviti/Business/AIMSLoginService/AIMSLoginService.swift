@@ -20,9 +20,8 @@ import AlfrescoAuth
 
 class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     private (set) var authenticationParameters: AIMSAuthenticationParameters
-    private (set) var session: AlfrescoAuthSession?
-    private (set) var credential: AlfrescoCredential?
     private (set) var alfrescoAuth: AlfrescoAuth?
+    var session: AlfrescoAuthSession?
     
     init(with authenticationParameters: AIMSAuthenticationParameters) {
         self.authenticationParameters = authenticationParameters
@@ -68,7 +67,9 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
         }
     }
     
-    func logout() {
+    func logout(onViewController viewController: UIViewController, delegate: AlfrescoAuthDelegate, forCredential credential: AlfrescoCredential) {
+        session = nil
+        alfrescoAuth?.logout(onViewController: viewController, delegate: delegate, forCredential: credential)
     }
     
     func updateAuthParameters(with parameters: AIMSAuthenticationParameters) {
@@ -76,11 +77,11 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     }
     
     @objc func resumeExternalUserAgentFlow(with url: URL) -> Bool {
-        if let authSession = session {
-            return authSession.resumeExternalUserAgentFlow(with: url)
+        if session == nil {
+            session = AlfrescoAuthSession()
         }
-        
-        return false
+        guard let authSession = session else { return false}
+        return authSession.resumeExternalUserAgentFlow(with: url)
     }
     
     

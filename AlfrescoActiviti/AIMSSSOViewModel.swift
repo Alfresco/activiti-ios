@@ -74,9 +74,7 @@ class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
 
 //MARK: - AlfrescoAuth Delegate
 extension AIMSSSOViewModel: AlfrescoAuthDelegate {
-    func didLogOut(result: Result<Int, APIError>) {
-        
-    }
+    func didLogOut(result: Result<Int, APIError>) {}
     
     var serverConfiguration: ASDKModelServerConfiguration {
         get {
@@ -97,7 +95,6 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
     func didReceive(result: Result<AlfrescoCredential, APIError>, session: AlfrescoAuthSession?) {
         switch result {
         case .success(let alfrescoCredential):
-
             // Persist the login type identifier
             let sud = UserDefaults.standard
             sud.set(kAIMSAuthenticationCredentialIdentifier, forKey: kAuthentificationTypeCredentialIdentifier)

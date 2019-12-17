@@ -22,26 +22,42 @@ import AlfrescoAuth
 class ContainerViewModel: NSObject {
     @objc weak var delegate: AFAContainerViewModelDelegate?
     @objc var isLogoutRequestInProgress: Bool
+    @objc var logoutViewController: UIViewController
     private (set) var persistenceStackModelName: String?
     
-    @objc init(with persistenceStackModelName: String) {
+    @objc init(with persistenceStackModelName: String, logoutViewController: UIViewController) {
         isLogoutRequestInProgress = false
         self.persistenceStackModelName = persistenceStackModelName
+        self.logoutViewController = logoutViewController
     }
     
     @objc func requestLogout() {
-        let sud = UserDefaults.standard
-        sud.removeObject(forKey: kAuthentificationTypeCredentialIdentifier)
-        
-        AFAKeychainWrapper.deleteItemFromKeychain(withIdentifier: persistenceStackModelName)
-        if let persistenceStackModelName = self.persistenceStackModelName {
-            AFAKeychainWrapper.deleteItemFromKeychain(withIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter))
-        }
-        
-        let cookieJar = HTTPCookieStorage.shared
-        
-        for cookie in cookieJar.cookies! {
-            cookieJar.deleteCookie(cookie)
+        performLogout(withPKCERequest: true)
+    }
+    
+    func performLogout(withPKCERequest: Bool) {
+        if withPKCERequest {
+            // 1. Retrieve credentials from Keychain
+            var alfrescoCredential: AlfrescoCredential?
+            let decoder = JSONDecoder()
+            guard let credentialData = AFAKeychainWrapper.dataFor(matchingIdentifier: persistenceStackModelName) else { return }
+            
+            do {
+                alfrescoCredential = try decoder.decode(AlfrescoCredential.self, from: credentialData)
+                
+            } catch {
+                AFALog.logError("Unable to retrieve credential from Keychain")
+            }
+            
+            // 2. If it's an AIMS session, perform a logout call to terminate the session
+            if let aimsLoginService = AFAServiceRepository.shared()?.serviceObject(forPurpose: .aimsLogin) as? AIMSLoginService,
+                let credential = alfrescoCredential {
+                AFALog.logVerbose("Logging out from AIMS session")
+                
+                aimsLoginService.logout(onViewController: logoutViewController, delegate: self, forCredential: credential)
+            }
+        } else {
+            removeLocalCredentials()
         }
     }
     
@@ -71,13 +87,30 @@ class ContainerViewModel: NSObject {
             loginService.refreshSession(keychainIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter), delegate: self)
         }
     }
+    
+    fileprivate func authenticationIdentifier() -> String? {
+        let sud = UserDefaults.standard
+        let authIdentifier = sud.string(forKey: kAuthentificationTypeCredentialIdentifier)
+        
+        return authIdentifier
+    }
+    
+    fileprivate func removeLocalCredentials() {
+        // 2. Remove credentials from Keychain
+        AFAKeychainWrapper.deleteItemFromKeychain(withIdentifier: persistenceStackModelName)
+        if let persistenceStackModelName = self.persistenceStackModelName {
+            AFAKeychainWrapper.deleteItemFromKeychain(withIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter))
+        }
+        
+        // 3. Clear the cookies
+        let cookieJar = HTTPCookieStorage.shared
+        for cookie in cookieJar.cookies! {
+            cookieJar.deleteCookie(cookie)
+        }
+    }
 }
 
 extension ContainerViewModel: AlfrescoAuthDelegate {
-    func didLogOut(result: Result<Int, APIError>) {
-        
-    }
-    
     func didReceive(result: Result<AlfrescoCredential, APIError>, session: AlfrescoAuthSession?) {
         switch result {
         case .success(let credential):
@@ -88,7 +121,32 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
         case .failure:
             // Refresh token ex pired, log out the user
             AFALog.logWarning("Refresh token expired, logging out user.")
-            requestLogout()
+            performLogout(withPKCERequest: false)
+            delegate?.redirectToLoginViewController()
+        }
+    }
+    
+    func didLogOut(result: Result<Int, APIError>) {
+        var hasLogoutBeenCancelled = false
+        
+        switch result {
+        case .success(_):
+            AFALog.logVerbose("AIMS session terminated successfully.")
+        case .failure(let error):
+            if error.responseCode == kAFALoginSSOViewModelCancelErrorCode {
+                hasLogoutBeenCancelled = true
+            } else {
+                let errorMessage = String(format: "AIMS session failed to be terminated succesfully. Reason:%@", error.localizedDescription)
+                AFALog.logError(errorMessage)
+            }
+        }
+        
+        if !hasLogoutBeenCancelled {
+            removeLocalCredentials()
+            
+            let sud = UserDefaults.standard
+            sud.removeObject(forKey: kAuthentificationTypeCredentialIdentifier)
+            
             delegate?.redirectToLoginViewController()
         }
     }
