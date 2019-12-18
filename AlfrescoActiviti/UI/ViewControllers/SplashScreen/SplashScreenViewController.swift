@@ -181,7 +181,7 @@ extension SplashScreenViewController: UIViewControllerTransitioningDelegate {
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AFAModalDismissAnimator()
+        return AFAModalReplaceAnimator()
     }
 }
 

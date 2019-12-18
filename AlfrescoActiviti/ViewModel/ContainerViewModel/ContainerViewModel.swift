@@ -32,7 +32,16 @@ class ContainerViewModel: NSObject {
     }
     
     @objc func requestLogout() {
-        performLogout(withPKCERequest: true)
+        // Retrieve the last login type identifier
+        let sud = UserDefaults.standard
+        let lastLoginType = sud.string(forKey: kAuthentificationTypeCredentialIdentifier)
+        
+        switch lastLoginType {
+        case kAIMSAuthenticationCredentialIdentifier:
+            performLogout(withPKCERequest: true)
+        default:
+            performLogout(withPKCERequest: false)
+        }
     }
     
     func performLogout(withPKCERequest: Bool) {
@@ -58,6 +67,7 @@ class ContainerViewModel: NSObject {
             }
         } else {
             removeLocalCredentials()
+            delegate?.redirectToLoginViewController()
         }
     }
     
@@ -72,12 +82,9 @@ class ContainerViewModel: NSObject {
             let authIdentifier = sud.string(forKey: kAuthentificationTypeCredentialIdentifier)
             
             if authIdentifier == kAIMSAuthenticationCredentialIdentifier {
-                let aimsAuthParams = AIMSAuthenticationParameters.parameters()
-                let loginService = AIMSLoginService.init(with: aimsAuthParams)
+                guard let authenticationService = AFAServiceRepository.shared()?.serviceObject(forPurpose: .aimsLogin) as? AIMSLoginService else { return }
                 
-                AFAServiceRepository.shared()?.registerServiceObject(loginService, forPurpose: .aimsLogin)
-                
-                refreshAIMSSession(with: loginService)
+                refreshAIMSSession(with: authenticationService)
             }
         }
     }

@@ -182,6 +182,10 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
         overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     override func didRestoredNetworkConnectivity() {
         // Don't display network connectivity alerts on this screen
     }
@@ -295,7 +299,7 @@ extension BaseAuthLoginViewController: UIViewControllerTransitioningDelegate {
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AFAModalDismissAnimator()
+        return AFAModalReplaceAnimator()
     }
 }
 

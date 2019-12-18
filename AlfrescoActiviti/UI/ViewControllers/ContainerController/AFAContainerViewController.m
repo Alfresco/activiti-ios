@@ -122,11 +122,6 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
     self.viewModel.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
@@ -278,10 +273,13 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
 #pragma mark AFAContainerViewModelDelegate
 
 - (void)redirectToLoginViewController {
-    [self dismissViewControllerAnimated:YES
-                                   completion:nil];
-    [self performSegueWithIdentifier:kSegueIDLoginAuthorizedUnwind
-                                    sender:nil];
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kLoginScreenBackgroundImageFadeInTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [strongSelf performSegueWithIdentifier:kSegueIDLoginAuthorizedUnwind
+                                        sender:nil];
+    });
 }
 
 

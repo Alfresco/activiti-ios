@@ -34,6 +34,10 @@ class AIMSSplashscreenViewModel: AIMSLoginViewModelProtocol {
         serverConfiguration.serviceDocument = authParameters.serviceDocument.encoding()
         serverConfiguration.port = authParameters.port
         
+        // Register login service
+        let loginService = AIMSLoginService.init(with: authParameters)
+        AFAServiceRepository.shared()?.registerServiceObject(loginService, forPurpose: .aimsLogin)
+        
         switch lastLoginType {
         case kAIMSAuthenticationCredentialIdentifier:
             // Check for AIMS sessions

@@ -20,7 +20,11 @@ import AlfrescoAuth
 
 class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     private (set) var authenticationParameters: AIMSAuthenticationParameters
-    private (set) var alfrescoAuth: AlfrescoAuth?
+    private (set) lazy var alfrescoAuth: AlfrescoAuth = {
+        let authConfig = authConfiguration()
+        return AlfrescoAuth.init(configuration: authConfig)
+    }()
+    
     var session: AlfrescoAuthSession?
     
     init(with authenticationParameters: AIMSAuthenticationParameters) {
@@ -29,19 +33,22 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     
     //MARK: - AIMSLoginServiceProtocol
     func login(onViewController: UIViewController, delegate: AlfrescoAuthDelegate) {
-        alfrescoAuth = authServiceForCurrentConfiguration()
-        alfrescoAuth?.pkceAuth(onViewController: onViewController, delegate: delegate)
+        let authConfig = authConfiguration()
+        alfrescoAuth.update(configuration: authConfig)
+        alfrescoAuth.pkceAuth(onViewController: onViewController, delegate: delegate)
     }
     
     func availableAuthType(for url: String, handler: @escaping AvailableAuthTypeCallback<AvailableAuthType>) {
-        alfrescoAuth = authServiceForCurrentConfiguration()
-        alfrescoAuth?.availableAuthType(for: url, handler: handler)
+        let authConfig = authConfiguration()
+        alfrescoAuth.update(configuration: authConfig)
+        alfrescoAuth.availableAuthType(for: url, handler: handler)
     }
     
     func refreshSession(keychainIdentifier: String, delegate: AlfrescoAuthDelegate) {
-        alfrescoAuth = authServiceForCurrentConfiguration()
+        let authConfig = authConfiguration()
+        alfrescoAuth.update(configuration: authConfig)
         if let session = self.session {
-            alfrescoAuth?.pkceRefresh(session: session, delegate: delegate)
+            alfrescoAuth.pkceRefresh(session: session, delegate: delegate)
         } else {
             // Restore last valid session from Keychain
             let errorDomain = Bundle.main.bundleName ?? AFAAIMSLoginErrorDomain
@@ -56,7 +63,7 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
             do {
                 if let session = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? AlfrescoAuthSession {
                     self.session = session
-                    alfrescoAuth?.pkceRefresh(session: session, delegate: delegate)
+                    alfrescoAuth.pkceRefresh(session: session, delegate: delegate)
                 } else {
                     delegate.didReceive(result: .failure(APIError(domain: errorDomain, message: errorMessage)), session: nil)
                 }
@@ -69,7 +76,9 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
     
     func logout(onViewController viewController: UIViewController, delegate: AlfrescoAuthDelegate, forCredential credential: AlfrescoCredential) {
         session = nil
-        alfrescoAuth?.logout(onViewController: viewController, delegate: delegate, forCredential: credential)
+        let authConfig = authConfiguration()
+        alfrescoAuth.update(configuration: authConfig)
+        alfrescoAuth.logout(onViewController: viewController, delegate: delegate, forCredential: credential)
     }
     
     func updateAuthParameters(with parameters: AIMSAuthenticationParameters) {
@@ -94,10 +103,5 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
         redirectURI: authenticationParameters.redirectURI.encoding())
         
         return authConfig
-    }
-    
-    private func authServiceForCurrentConfiguration() -> AlfrescoAuth {
-        let authConfig = authConfiguration()
-        return AlfrescoAuth.init(configuration: authConfig)
     }
 }
