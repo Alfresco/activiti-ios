@@ -18,11 +18,12 @@
 
 import UIKit
 
-class AIMSAdvancedSettingsViewController: UIViewController {
+class AIMSAdvancedSettingsViewController: AFABaseThemedViewController, SplashScreenProtocol {
     
     var model = AIMSAdvancedSettingsViewModel()
     var dataSource: [[AIMSAdvancedSettingsAction]]?
     var parameters: AIMSAuthenticationParameters?
+    weak var delegate: SplashScreenDelegate?
     
     var keyboardHandling = KeyboardHandling()
     
@@ -86,7 +87,7 @@ class AIMSAdvancedSettingsViewController: UIViewController {
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         copyrightLabel.adjustsFontSizeToFitWidth = true;
         
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 15))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 25))
         footerView.backgroundColor = .clear
         footerView.addSubview(copyrightLabel)
         
@@ -140,7 +141,12 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
     @objc func saveButtonPressed() {
         self.view.endEditing(true)
         model.saveParameters(parameters!)
-        self.navigationController?.popViewController(animated: true)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.delegate?.showConfirmation(message: model.confirmationSaveText)
+        } else {
+            self.showConfirmationMessage(model.confirmationSaveText)
+        }
     }
 }
 

@@ -72,6 +72,7 @@ extern NSString *kLocalizationAdvancedSettingsScreenHelpText;
 extern NSString *kLocalizationAdvancedSettingsScreenHelpHintText;
 extern NSString *kLocalizationAdvancedSettingsScreenCloseText;
 extern NSString *kLocalizationAdvancedSettingsScreenResetButtonText;
+extern NSString *kLocalizationAdvancedSettingsScreenSaveConfirmationText;
 
 // Banner view component
 

@@ -26,13 +26,13 @@ enum AuthenticationType {
 }
 
 class AIMSAuthenticationParameters: Codable {
-    var https: Bool = true
-    var port: String = "443"
+    var https: Bool = false
+    var port: String = "80"
     var serviceDocument: String = "activiti-app"
     var realm: String = "alfresco"
     var clientID: String = "iosapsapp"
     var redirectURI: String = "iosapsapp://aims/auth"
-    var hostname: String = ""
+    var hostname: String = "alfresco-identity-service.mobile.dev.alfresco.me"
     var processURL: String = ""
     var fullFormatURL: String {
         get {

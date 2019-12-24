@@ -40,7 +40,6 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
     
     // Buttons section
     @IBOutlet weak var connectToButton: MDCButton!
-    var enableConnectButton: Bool = false
     @IBOutlet weak var cloudSignInButton: MDCButton!
     @IBOutlet weak var advancedSettingsButton: MDCButton!
     @IBOutlet weak var needHelpButton: MDCButton!
@@ -56,6 +55,9 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
     
     // Gesture recognizer
     var tapGestureRecognizer: UITapGestureRecognizer?
+    
+    // Keyboard Focus
+    var shouldOpenKeyboard: Bool = true
     
     // Loading view
     var overlayView: AIMSActivityView?
@@ -133,6 +135,8 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
         if let gestureRecognizer = tapGestureRecognizer {
             self.view .addGestureRecognizer(gestureRecognizer)
         }
+    
+        shouldEnableConnectButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,7 +146,6 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
         self.navigationController?.navigationBar.backItem?.title = ""
         
         controllerState = .isIdle
-        updateConnectButtonState()
         
         if rateConstraintsOnce {
             rateConstraintsOnce = false
@@ -150,7 +153,7 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
             constraintSeparator1.scale(in: view, rate: rate)
             constraintSeparator2.scale(in: view)
             if self.view.bounds.size.height <= 568 && UIDevice.current.userInterfaceIdiom == .phone {
-                constraintSeparator3.constant = 10
+                constraintSeparator3.constant = 5
             }
         }
     }
@@ -168,6 +171,16 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
         overlayView?.applySemanticColorScheme(colorScheme: colorSchemeManager.activityViewColorScheme,
                                               typographyScheme: colorSchemeManager.defaultTypographyScheme)
         overlayView?.label.text = NSLocalizedString(kLocalizationOfflineConnectivityRetryText, comment: "Connecting")
+    
+        
+        if shouldOpenKeyboard {
+            shouldOpenKeyboard = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + kSplashScreenLogoAnimationTime + kSplashScreenAlphaAnimationTime,
+                execute: { [weak self] in
+                guard let sSelf = self else { return }
+                sSelf.alfrescoURLTextField.becomeFirstResponder()
+            })
+        }
     }
     
     // MARK: - Actions
@@ -200,17 +213,20 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
     
     // MARK: - Helpers
      
-    fileprivate func updateConnectButtonState() {
-        connectToButton.isEnabled = enableConnectButton
+    func shouldEnableConnectButton() {
+        connectToButton.isEnabled = (alfrescoURLTextField.text != "")
     }
 
     // MARK: - Navigation
     
     @IBAction func unwindToAIMSLoginViewController(_ sender: UIStoryboardSegue) {
-        alfrescoURLTextField.text = nil
+        let sud = UserDefaults.standard
+        let lastLoginType = sud.string(forKey: kAuthentificationTypeCredentialIdentifier)
+        if lastLoginType == kCloudAuthetificationCredentialIdentifier {
+            alfrescoURLTextField.text = ""
+        }
         alfrescoURLTextFieldController?.setErrorText(nil, errorAccessibilityValue: "")
-        enableConnectButton = false
-        updateConnectButtonState()
+        shouldEnableConnectButton()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -225,6 +241,10 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
                     self.dismissMessage(true)
                 }
             }
+        } else if kSegueIDLoginAIMSAdvancedSettings == segue.identifier {
+            if let destinationVC = segue.destination as? AIMSAdvancedSettingsViewController {
+                destinationVC.delegate = self.delegate
+            }
         }
     }
 }
@@ -235,8 +255,7 @@ extension AIMSLoginViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if alfrescoURLTextField == textField {
-            enableConnectButton = (textField.text != "")
-            updateConnectButtonState()
+            shouldEnableConnectButton()
         }
     }
     
@@ -254,10 +273,15 @@ extension AIMSLoginViewController: UITextFieldDelegate {
                     shouldEnable = (updatedText != "")
                 }
             }
-            enableConnectButton = shouldEnable
-            updateConnectButtonState()
+            shouldEnableConnectButton()
         }
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if alfrescoURLTextField == textField {
+            shouldEnableConnectButton()
+        }
     }
 }
 
@@ -321,13 +345,13 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
 extension MDCTextField {
 
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 12))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 15))
     }
     open override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 12))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 15))
     }
 
     open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 12))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 15))
     }
 }

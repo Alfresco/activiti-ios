@@ -22,6 +22,7 @@ protocol SplashScreenDelegate: class {
     func showError(message: String)
     func showWarning(message: String)
     func dismiss(animated: Bool)
+    func showConfirmation(message: String)
 }
 
 protocol SplashScreenProtocol: class {
@@ -96,8 +97,8 @@ class SplashScreenViewController: UIViewController {
         
         if !performedRestoreOperation {
             self.logoWidthConstraint.constant = self.logoWidthConstraint.constant + 30
-            UIView.animate(withDuration: kSplashScreenAnimationTime) {}
-            UIView.animate(withDuration: kSplashScreenAnimationTime, animations: {
+            UIView.animate(withDuration: kSplashScreenLogoAnimationTime) {}
+            UIView.animate(withDuration: kSplashScreenLogoAnimationTime, animations: {
                 self.view.layoutIfNeeded()
             }) { (completed) in
                 if(SplashScreenViewController.isAuthSessionRestored) {
@@ -147,7 +148,7 @@ class SplashScreenViewController: UIViewController {
         self.view.bringSubviewToFront(self.shadowView)
         self.view.bringSubviewToFront(self.whiteView)
         self.view.bringSubviewToFront(self.containerView)
-        UIView.animate(withDuration: 1.5, animations: {
+        UIView.animate(withDuration: kSplashScreenAlphaAnimationTime, animations: {
             self.containerView.alpha = 1.0
             self.shadowView.alpha = 1.0
             self.whiteView.alpha = 1.0
@@ -157,6 +158,7 @@ class SplashScreenViewController: UIViewController {
             self.whiteView.layer.cornerRadius = 5.0
             self.whiteView.layer.masksToBounds = true
             self.shadowView.backgroundColor = .clear
+            
         }) { (_) in
             
         }
@@ -187,12 +189,17 @@ extension SplashScreenViewController: UIViewControllerTransitioningDelegate {
 
 // MARK: SplashScreenDelegate
 extension SplashScreenViewController: SplashScreenDelegate {
+    
+    func showConfirmation(message: String) {
+        self.bannerView?.show(withText: message, title: NSLocalizedString(kLocalizationBannerViewConfirmationText, comment: "Confirmation title"), style: .success)
+    }
+    
     func dismiss(animated: Bool) {
         self.bannerView?.hide(true)
     }
     
     func showWarning(message: String) {
-        self.bannerView?.show(withText: message, title: NSLocalizedString(kLocalizationBannerViewErrorText, comment: "Error title"), style: .warning)
+        self.bannerView?.show(withText: message, title: NSLocalizedString(kLocalizationBannerViewWarningText, comment: "Error title"), style: .warning)
     }
     
     func showError(message: String) {

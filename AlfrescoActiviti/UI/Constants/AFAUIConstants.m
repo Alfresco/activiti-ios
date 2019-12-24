@@ -28,7 +28,9 @@ NSTimeInterval kLoginScreenBackgroundImageFadeInTime            = 1.2f;
 NSTimeInterval kModalReplaceAnimationTime                       = .55f;
 NSTimeInterval kPushPopAnimationTime                            = .40f;
 NSTimeInterval kOverlayAlphaChangeTime                          = .25f;
-NSTimeInterval kSplashScreenAnimationTime                       = 2.0;
+NSTimeInterval kSplashScreenLogoAnimationTime                   = 2.0;
+NSTimeInterval kSplashScreenAlphaAnimationTime                  = 1.5;
+NSTimeInterval kLoginScreenKeyboardAnimationTime                = 1.0;
 
 
 #pragma mark -

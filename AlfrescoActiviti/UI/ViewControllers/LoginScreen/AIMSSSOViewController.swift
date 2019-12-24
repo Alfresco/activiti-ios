@@ -39,7 +39,6 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
     // Buttons section
     @IBOutlet weak var signInButton: MDCButton!
     @IBOutlet weak var helpButton: MDCButton!
-    var enableSignInButton: Bool = false
     
     // Copyright section
     @IBOutlet weak var copyrightLabel: UILabel!
@@ -120,6 +119,7 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
+        repositoryTextField.text = AIMSAuthenticationParameters.parameters().hostname
         shouldEnableSignInButton()
     }
     
@@ -212,8 +212,8 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
             return
         }
         signInButton.setTitle(model.signInSSOButtonText, for: .normal)
-        signInButton.isEnabled = enableSignInButton
-        if enableSignInButton {
+        signInButton.isEnabled = (repositoryTextField.text != "")
+        if signInButton.isEnabled {
             signInButton.applyContainedTheme(withScheme: colorSchemeManager.flatButtonWithBackgroundScheme)
         } else {
             signInButton.applyContainedTheme(withScheme: colorSchemeManager.grayFlatButtonWithoutBackgroundScheme)
@@ -230,7 +230,6 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
 extension AIMSSSOViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        enableSignInButton = (textField.text != "")
         shouldEnableSignInButton()
     }
     
@@ -247,7 +246,6 @@ extension AIMSSSOViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        enableSignInButton = (textField.text != "")
         shouldEnableSignInButton()
         return true
     }

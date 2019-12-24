@@ -76,6 +76,7 @@ NSString *kLocalizationAdvancedSettingsScreenHelpText                           
 NSString *kLocalizationAdvancedSettingsScreenHelpHintText                           = @"advancedSettingsScreenHelpHintText";
 NSString *kLocalizationAdvancedSettingsScreenCloseText                              = @"advancedSettingsScreenCloseText";
 NSString *kLocalizationAdvancedSettingsScreenResetButtonText                        = @"advancedSettingsScreenResetButtonText";
+NSString *kLocalizationAdvancedSettingsScreenSaveConfirmationText                   = @"advancedSettingsScreenSaveConfirmationText";
 
 #pragma mark -
 #pragma mark Banner view component

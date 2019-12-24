@@ -36,6 +36,8 @@ class AIMSAdvancedSettingsViewModel {
     let helpText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpText, comment: "Help")
     let helpHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpHintText, comment: "Hint Help")
     let closeText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCloseText, comment: "Close")
+    let confirmationSaveText = NSLocalizedString(kLocalizationAdvancedSettingsScreenSaveConfirmationText, comment: "Saved")
+    
     var copyrightText: String {
         get {
             let calendar = Calendar.current

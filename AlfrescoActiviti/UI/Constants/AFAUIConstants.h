@@ -27,7 +27,9 @@ extern NSTimeInterval kLoginScreenServerButtonsFadeInTime;
 extern NSTimeInterval kModalReplaceAnimationTime;
 extern NSTimeInterval kPushPopAnimationTime;
 extern NSTimeInterval kOverlayAlphaChangeTime;
-extern NSTimeInterval kSplashScreenAnimationTime;
+extern NSTimeInterval kSplashScreenLogoAnimationTime;
+extern NSTimeInterval kSplashScreenAlphaAnimationTime;
+extern NSTimeInterval kLoginScreenKeyboardAnimationTime;
 
 // Storyboard components IDs
 
