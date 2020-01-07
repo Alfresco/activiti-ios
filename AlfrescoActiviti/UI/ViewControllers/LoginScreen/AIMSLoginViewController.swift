@@ -93,6 +93,7 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
         // Title section
         processServicesAppLabel.text = NSLocalizedString(kLocalizationLoginProcessServicesAppText, comment: "App name")
         processServicesAppLabel.font = colorSchemeManager.labelsTypographyScheme.headline1
+        processServicesAppLabel.add(spacing: -1.0)
         
         // Alfresco URL section
         alfrescoURLTextField.font = colorSchemeManager.textFieldTypographyScheme.headline1
@@ -339,19 +340,5 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
                 }
             }
         }
-    }
-}
-
-extension MDCTextField {
-
-    override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 15))
-    }
-    open override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 15))
-    }
-
-    open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 15))
     }
 }

@@ -87,6 +87,7 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
         
         processServiceAppLabel.text = NSLocalizedString(kLocalizationLoginProcessServicesAppText, comment: "App name")
         processServiceAppLabel.font = colorSchemeManager.labelsTypographyScheme.headline1
+        processServiceAppLabel.add(spacing: -1.0)
         
         subtitle1Label.text = model.subtitle1Text
         subtitle1Label.textColor = colorSchemeManager.grayColorScheme.primaryColor

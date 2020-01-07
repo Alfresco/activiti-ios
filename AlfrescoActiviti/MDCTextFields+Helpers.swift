@@ -17,12 +17,18 @@
 ******************************************************************************/
 
 import Foundation
+import MaterialComponents.MaterialButtons
 
-extension String {
-    func encoding() -> String {
-        if let escapedString = addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) {
-            return escapedString
-        }
-        return self
+extension MDCTextField {
+
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 15))
+    }
+    open override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 15))
+    }
+
+    open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 15))
     }
 }

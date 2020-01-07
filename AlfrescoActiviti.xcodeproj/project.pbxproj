@@ -886,6 +886,8 @@
 		E361FF1E2386CDE1001377DC /* NSLayoutConstraint+Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E361FF1D2386CDE1001377DC /* NSLayoutConstraint+Rate.swift */; };
 		E371B6D02368312D000790DE /* AIMSAdvancedSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6CF2368312D000790DE /* AIMSAdvancedSettingsViewController.swift */; };
 		E371B6D223683302000790DE /* AIMSAdvancedSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */; };
+		E3822E9423C3629600D625BB /* UILabel+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3822E9323C3629600D625BB /* UILabel+Helpers.swift */; };
+		E3822E9623C362D400D625BB /* MDCTextFields+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3822E9523C362D400D625BB /* MDCTextFields+Helpers.swift */; };
 		E3DEBE1E238564E10056118A /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DEBE1D238564E10056118A /* SplashScreenViewController.swift */; };
 		E3E42A5A23A78AC50079FA03 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E42A5923A78AC50079FA03 /* String+Helpers.swift */; };
 /* End PBXBuildFile section */
@@ -1982,6 +1984,8 @@
 		E371B6CF2368312D000790DE /* AIMSAdvancedSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsViewController.swift; path = UI/ViewControllers/LoginScreen/AIMSAdvancedSettingsViewController.swift; sourceTree = "<group>"; };
 		E371B6D123683302000790DE /* AIMSAdvancedSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAdvancedSettingsViewModel.swift; path = ViewModel/AIMSViewModel/AIMSAdvancedSettingsViewModel.swift; sourceTree = "<group>"; };
 		E371B6D423685154000790DE /* AIMSAuthenticationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSAuthenticationParameters.swift; path = Model/AdvancedSettingsParameters/AIMSAuthenticationParameters.swift; sourceTree = "<group>"; };
+		E3822E9323C3629600D625BB /* UILabel+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Helpers.swift"; sourceTree = "<group>"; };
+		E3822E9523C362D400D625BB /* MDCTextFields+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDCTextFields+Helpers.swift"; sourceTree = "<group>"; };
 		E3DEBE1D238564E10056118A /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashScreenViewController.swift; path = AlfrescoActiviti/UI/ViewControllers/SplashScreen/SplashScreenViewController.swift; sourceTree = SOURCE_ROOT; };
 		E3E42A5923A78AC50079FA03 /* String+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -6634,6 +6638,8 @@
 				B94FE4882367204E008BCA64 /* UIViewController+MaterialDesignColorScheme.swift */,
 				E361FF1D2386CDE1001377DC /* NSLayoutConstraint+Rate.swift */,
 				E3E42A5923A78AC50079FA03 /* String+Helpers.swift */,
+				E3822E9323C3629600D625BB /* UILabel+Helpers.swift */,
+				E3822E9523C362D400D625BB /* MDCTextFields+Helpers.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -7455,6 +7461,7 @@
 				B94FE483236704E0008BCA64 /* AIMSLoginViewModel.swift in Sources */,
 				13323B611E9E255000D45ABB /* AFAContentPickerProcessInstanceAuditLogDownloadBehavior.m in Sources */,
 				13A106A01E94DC4B00506871 /* AFAProcessListViewModel.m in Sources */,
+				E3822E9623C362D400D625BB /* MDCTextFields+Helpers.swift in Sources */,
 				13FFF4101C43A6E600550747 /* AFAApplicationListViewController.m in Sources */,
 				75CFBC711B81E7860018DADE /* AFARememberCredentialsTableViewCell.m in Sources */,
 				138D3D7F1C3FBAAE00266A7C /* AFALoginCredentialsViewController.m in Sources */,
@@ -7466,6 +7473,7 @@
 				8D7C1A791C80912B0092EA81 /* AFANoContentView.m in Sources */,
 				13E6E2831B7E078A001F5737 /* AFASignInTableViewCell.m in Sources */,
 				7597AEE91B821E9500F8B5DE /* AFAActivityView.m in Sources */,
+				E3822E9423C3629600D625BB /* UILabel+Helpers.swift in Sources */,
 				8D7C1A4A1C808D160092EA81 /* AFADueTableViewCell.m in Sources */,
 				139DF5BE1C5A63740062D01D /* AFAProfileServices.m in Sources */,
 				133539FB1F30A8010058B85E /* AFAPushFadeAnimator.m in Sources */,

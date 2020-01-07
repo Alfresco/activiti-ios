@@ -18,11 +18,10 @@
 
 import Foundation
 
-extension String {
-    func encoding() -> String {
-        if let escapedString = addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) {
-            return escapedString
-        }
-        return self
+extension UILabel {
+    func add(spacing: CGFloat) {
+        let attributedString = NSMutableAttributedString(string: self.text ?? " ")
+        attributedString.addAttribute(NSAttributedString.Key.kern, value: spacing, range: NSRange(location: 0, length: attributedString.length))
+        self.attributedText = attributedString
     }
 }

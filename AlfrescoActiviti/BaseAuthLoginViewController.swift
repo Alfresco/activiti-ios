@@ -88,6 +88,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
         
         processServicesAppLabel.text = NSLocalizedString(kLocalizationLoginProcessServicesAppText, comment: "App name")
         processServicesAppLabel.font = colorSchemeManager.labelsTypographyScheme.headline1
+        processServicesAppLabel.add(spacing: -1.0)
         
         infoLabel.text = model.loginStrategy?.infoText
         infoLabel.font = colorSchemeManager.labelsTypographyScheme.subtitle2

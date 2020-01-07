@@ -68,7 +68,7 @@
 "advancedSettingsScreenResetButtonText"                  = "RESET to default";
 "advancedSettingsScreenHelpText"                         = "Help";
 "advancedSettingsScreenCloseText"                        = "CLOSE";
-"advancedSettingsScreenHelpHintText"                     = "Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco\n\nYour system administrator will have setup a client id for this application. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
+"advancedSettingsScreenHelpHintText"                     = "<p>Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don&rsquo;t change this unless you know it is different. Default value: alfresco</p><p>Your system administrator will have setup a client id for this application. The default value has been set for you so don't change this unless you know it is different. Default value: alfresco</p>";
 "advancedSettingsScreenSaveConfirmationText"            = "Settings saved successfully";
 
 // Banner view component
