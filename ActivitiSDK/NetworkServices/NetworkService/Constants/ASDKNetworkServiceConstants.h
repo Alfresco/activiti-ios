@@ -85,3 +85,6 @@ extern NSString * const kADSKAPIUnauthorizedRequestNotification;
 extern NSString * const ASDKNetworkServiceErrorDomain;
 extern NSInteger const  ASDKNetworkServiceErrorInvalidResponseFormat;
 
+// AIMS session
+extern NSTimeInterval kASDKSessionExpirationTimeIntervalCheck;
+extern NSString * const kASDKAIMSJwtTokenPayload;

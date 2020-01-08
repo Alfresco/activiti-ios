@@ -36,11 +36,13 @@ class BaseAuthLoginViewModel: AIMSLoginViewModelProtocol {
                     sSelf.loginStrategy?.syncToUserDefaultsServerConfiguration()
                     
                     if let serverConfiguration = sSelf.loginStrategy?.serverConfiguration {
+                        guard let baseAuthCredential = serverConfiguration.credential as? ASDKModelCredentialBaseAuth else { return }
+
                         if (AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName) != nil) {
-                            AFAKeychainWrapper.updateKeychainValue(serverConfiguration.password,
+                            AFAKeychainWrapper.updateKeychainValue(baseAuthCredential.password,
                                                                    forIdentifier: persistenceStackModelName)
                         } else {
-                            AFAKeychainWrapper.createKeychainValue(serverConfiguration.password,
+                            AFAKeychainWrapper.createKeychainValue(baseAuthCredential.password,
                                                                    forIdentifier: persistenceStackModelName)
                         }
                     }

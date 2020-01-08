@@ -64,6 +64,8 @@
 
 // Model imports
 #import "ASDKModelServerConfiguration.h"
+#import "ASDKModelCredentialAIMS.h"
+#import "ASDKModelCredentialBaseAuth.h"
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -122,7 +124,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                                         overSecureLayer:self.serverConfiguration.isCommunicationOverSecureLayer];
     
     // Set up the request manager
-    AFJSONRequestSerializer *authenticationProvider = [self authenticationProviderForServerConfiguration:serverConfiguration];
+    AFJSONRequestSerializer *authenticationProvider = [self authenticationProviderForCredential:serverConfiguration.credential];
     self.requestOperationManager = [[ASDKRequestOperationManager alloc] initWithBaseURL:servicePathFactory.baseURL
                                                                  authenticationProvider:authenticationProvider];
     
@@ -185,38 +187,21 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     [self setupPersistenceStack];
 }
 
-- (void)updateServerConfigurationCredentialsForUsername:(NSString *)username
-                                               password:(NSString *)password {
-    _serverConfiguration.username = username;
-    _serverConfiguration.password = password;
-    
-    ASDKBasicAuthenticationProvider *authenticationProvider =
-    [[ASDKBasicAuthenticationProvider alloc] initWithUserName:username
-                                                     password:password];
-    [self.requestOperationManager replaceAuthenticationProvider:authenticationProvider];
-}
-
-- (void)updateServerConfigurationForAccessToken:(NSString *)accessToken {
-    _serverConfiguration.acessToken = accessToken;
-    
-    ASDKPKCEAuthenticationProvider *authenticationProvider =
-    [[ASDKPKCEAuthenticationProvider alloc] initWithAccessToken:accessToken];
-    [self.requestOperationManager replaceAuthenticationProvider:authenticationProvider];
+- (void)updateServerConfigurationForCredential:(id<ASDKModelCredentialBaseProtocol>)credential {
+    [self.requestOperationManager replaceAuthenticationProvider:[self authenticationProviderForCredential:credential]];
 }
 
 
 #pragma mark -
 #pragma mark Private interface
 
-- (AFJSONRequestSerializer *)authenticationProviderForServerConfiguration:(ASDKModelServerConfiguration *)serverConfiguration {
-    // Based on the server configuration object assess whether it's a basic auth or token login
-    AFJSONRequestSerializer *authenticationProvider = nil;
+- (AFJSONRequestSerializer *)authenticationProviderForCredential:(id<ASDKModelCredentialBaseProtocol>)credential {
+    AFJSONRequestSerializer *authenticationProvider;
     
-    if (serverConfiguration.acessToken.length) {
-        authenticationProvider = [[ASDKPKCEAuthenticationProvider alloc] initWithAccessToken:serverConfiguration.acessToken];
+    if ([credential isKindOfClass:ASDKModelCredentialAIMS.class]) {
+        authenticationProvider = [[ASDKPKCEAuthenticationProvider alloc] initWithCredential:credential];
     } else {
-        authenticationProvider = [[ASDKBasicAuthenticationProvider alloc] initWithUserName:serverConfiguration.username
-                                                                                  password:serverConfiguration.password];
+        authenticationProvider = [[ASDKBasicAuthenticationProvider alloc] initWithCredential:credential];
     }
     
     return authenticationProvider;

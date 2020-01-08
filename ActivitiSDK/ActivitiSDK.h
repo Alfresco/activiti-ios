@@ -83,6 +83,9 @@
 #import <ActivitiSDK/ASDKIntegrationSiteContentDataSource.h>
 #import <ActivitiSDK/ASDKIntegrationFolderContentDataSource.h>
 
+#import <ActivitiSDK/ASDKModelCredentialBaseAuth.h>
+#import <ActivitiSDK/ASDKModelCredentialAIMS.h>
+
 // Network services and protocols
 #import <ActivitiSDK/ASDKHTTPCodes.h>
 #import <ActivitiSDK/ASDKRequestOperationManager.h>
@@ -159,6 +162,7 @@
 // Service categories
 #import <ActivitiSDK/NSURLSessionTask+ASDKAdditions.h>
 #import <ActivitiSDK/NSString+ASDKEmailValidation.h>
+#import <ActivitiSDK/NSString+PersistenceStackNormalization.h>
 
 // Form render engine
 #import <ActivitiSDK/ASDKFormRenderEngine.h>

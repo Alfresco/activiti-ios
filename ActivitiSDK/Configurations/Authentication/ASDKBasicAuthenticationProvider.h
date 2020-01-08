@@ -19,9 +19,10 @@
 #import <Foundation/Foundation.h>
 @import AFNetworking;
 
+@class ASDKModelCredentialBaseAuth;
+
 @interface ASDKBasicAuthenticationProvider : AFJSONRequestSerializer
 
-- (instancetype)initWithUserName:(NSString *)username
-                        password:(NSString *)password;
+- (instancetype)initWithCredential:(ASDKModelCredentialBaseAuth *)credential;
 
 @end

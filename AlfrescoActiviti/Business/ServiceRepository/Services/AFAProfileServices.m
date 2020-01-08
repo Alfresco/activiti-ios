@@ -221,9 +221,11 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
         // If the user updated the email address (username) then replace the authentication provider in the
         // SDK with the new username and also update the keychain values if the user checked the remember
         // credentials option
-        if (![profile.email isEqualToString:[self currentServerConfiguration].username]) {
-            [self handleCredentialUpdateRequestForUsername:profile.email
-                                                  password:[self currentServerConfiguration].password];
+        if ([[self currentServerConfiguration].credential isKindOfClass:ASDKModelCredentialBaseAuth.class]) {
+            if (![profile.email isEqualToString:((ASDKModelCredentialBaseAuth *)[self currentServerConfiguration].credential).username]) {
+                [self handleCredentialUpdateRequestForUsername:profile.email
+                                                      password:((ASDKModelCredentialBaseAuth *)[self currentServerConfiguration].credential).password];
+            }
         }
     }
     
@@ -248,8 +250,10 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
         // the new password and also update the keychain values if the user checked the remember
         // credentials option
         if (newPassword.length) {
-            [self handleCredentialUpdateRequestForUsername:[self currentServerConfiguration].username
-                                                  password:newPassword];
+            if ([[self currentServerConfiguration].credential isKindOfClass:ASDKModelCredentialBaseAuth.class]) {
+                [self handleCredentialUpdateRequestForUsername:((ASDKModelCredentialBaseAuth *)[self currentServerConfiguration].credential).username
+                                                      password:newPassword];
+            }
         }
     }
     
@@ -296,8 +300,10 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
 - (void)handleCredentialUpdateRequestForUsername:(NSString *)userName
                                         password:(NSString *)password {
     ASDKBootstrap *sdkBootstrap = [ASDKBootstrap sharedInstance];
-    [sdkBootstrap updateServerConfigurationCredentialsForUsername:userName
-                                                         password:password];
+    ASDKModelCredentialBaseAuth *baseAuthCredential = [[ASDKModelCredentialBaseAuth alloc] initWithUsername:userName
+                                                                                                   password:password];
+    [sdkBootstrap updateServerConfigurationForCredential:baseAuthCredential];
+
     NSString *persistenceStackModelName = [ASDKPersistenceStack persistenceStackModelNameForServerConfiguration:sdkBootstrap.serverConfiguration];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

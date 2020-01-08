@@ -16,25 +16,30 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import "ASDKBasicAuthenticationProvider.h"
 #import "ASDKModelCredentialBaseAuth.h"
 
-#if ! __has_feature(objc_arc)
-#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
-#endif
+@implementation ASDKModelCredentialBaseAuth
 
-@implementation ASDKBasicAuthenticationProvider
-
-- (instancetype)initWithCredential:(ASDKModelCredentialBaseAuth *)credential {
-    NSParameterAssert(credential);
-    
+- (instancetype)initWithUsername:(NSString *)username
+                        password:(NSString *)password {
     self = [super init];
     if (self) {
-        [self setAuthorizationHeaderFieldWithUsername:credential.username
-                                             password:credential.password];
+        _username = username;
+        _password = password;
     }
     
     return self;
 }
+
+- (NSString *)authorizationHeaderValue {
+    NSData *basicAuthCredentials = [[NSString stringWithFormat:@"%@:%@", self.username, self.password] dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64AuthCredentials = [basicAuthCredentials base64EncodedStringWithOptions:(NSDataBase64EncodingOptions)0];
+    return [NSString stringWithFormat:@"Basic %@", base64AuthCredentials];
+}
+
+- (BOOL)areCredentialValid {
+    return YES;
+}
+
 
 @end

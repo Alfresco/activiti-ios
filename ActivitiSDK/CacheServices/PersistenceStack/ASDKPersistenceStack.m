@@ -20,10 +20,17 @@
 
 // Constants
 #import "ASDKPersistenceStackConstants.h"
+#import "ASDKNetworkServiceConstants.h"
 #import "ASDKLogConfiguration.h"
+
+// Categories
+#import "NSString+PersistenceStackNormalization.h"
 
 // Models
 #import "ASDKModelServerConfiguration.h"
+#import "ASDKModelCredentialBaseAuth.h"
+#import "ASDKModelCredentialAIMS.h"
+
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -69,27 +76,24 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
 + (NSString *)persistenceStackModelNameForServerConfiguration:(ASDKModelServerConfiguration *)serverConfiguration {
     if (serverConfiguration.hostAddressString.length &&
         serverConfiguration.serviceDocument.length) {
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_]+"
-                                                                               options:kNilOptions
-                                                                                 error:nil];
         
-        
-        NSString *normalizedHostName = [regex stringByReplacingMatchesInString:serverConfiguration.hostAddressString
-                                                                       options:kNilOptions
-                                                                         range:NSMakeRange(0, serverConfiguration.hostAddressString.length)
-                                                                  withTemplate:@""];
+        NSString *normalizedHostName = [serverConfiguration.hostAddressString normalizedPersistenceStackName];
         NSString *normalizedUserName;
-        if (serverConfiguration.username.length) {
-            normalizedHostName = [regex stringByReplacingMatchesInString:serverConfiguration.username
-                 options:kNilOptions
-                   range:NSMakeRange(0, serverConfiguration.username.length)
-            withTemplate:@""];
+        // If credential type is for basic auth use the username otherwise decode the JWT token for that information
+        if ([serverConfiguration.credential isKindOfClass: ASDKModelCredentialBaseAuth.class]) {
+            ASDKModelCredentialBaseAuth *baseAuthCredentials = (ASDKModelCredentialBaseAuth *)serverConfiguration.credential;
+            
+            if (baseAuthCredentials.username.length) {
+                normalizedUserName = [baseAuthCredentials.username normalizedPersistenceStackName];
+            }
+        } else {
+            ASDKModelCredentialAIMS *aimsCredentials = (ASDKModelCredentialAIMS *)serverConfiguration.credential;
+            NSDictionary *payloadDict = aimsCredentials.decodedJWTPayloadToken[kASDKAIMSJwtTokenPayload];
+            NSString *username = payloadDict[kASDKAPIEmailParameter];
+            
+            normalizedUserName = [username normalizedPersistenceStackName];
         }
-        
-        NSString *normalizedServiceDocument = [regex stringByReplacingMatchesInString:serverConfiguration.serviceDocument
-                                                                              options:kNilOptions
-                                                                                range:NSMakeRange(0, serverConfiguration.serviceDocument.length)
-                                                                         withTemplate:@""];
+        NSString *normalizedServiceDocument = [serverConfiguration.serviceDocument normalizedPersistenceStackName];
         
         if (normalizedUserName) {
             return [NSString stringWithFormat:@"%@@%@@%@", normalizedHostName, normalizedServiceDocument, normalizedUserName];

@@ -36,11 +36,12 @@
 
 - (ASDKModelServerConfiguration *)serverConfiguration {
     _serverConfiguration.hostAddressString = _hostname;
-    _serverConfiguration.username = _username;
-    _serverConfiguration.password = _password;
     _serverConfiguration.port = _port;
     _serverConfiguration.serviceDocument = _serviceDocument;
     _serverConfiguration.isCommunicationOverSecureLayer = _isCommunicationOverSecureLayer;
+    
+    ASDKModelCredentialBaseAuth *baseAuthCredential = [[ASDKModelCredentialBaseAuth alloc] initWithUsername:_username password:_password];
+    _serverConfiguration.credential = baseAuthCredential;
     
     return _serverConfiguration;
 }

@@ -85,7 +85,10 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
                 serverConfiguration.isCommunicationOverSecureLayer = authParameters.https
                 serverConfiguration.serviceDocument = authParameters.serviceDocument.encoding()
                 serverConfiguration.port = authParameters.port
-                serverConfiguration.acessToken = alfrescoCredential?.accessToken
+                
+                if let aimsCredential = alfrescoCredential?.toASDKModelCredentialType() {
+                    serverConfiguration.credential = aimsCredential
+                }
             }
         
             return serverConfiguration
@@ -98,6 +101,10 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
             // Persist the login type identifier
             let sud = UserDefaults.standard
             sud.set(kAIMSAuthenticationCredentialIdentifier, forKey: kAuthentificationTypeCredentialIdentifier)
+            
+            if let payload = alfrescoCredential.toASDKModelCredentialType().decodedJWTPayloadToken()[kASDKAIMSJwtTokenPayload] as? [String : Any] {
+                sud.set(payload[kASDKAPIEmailParameter], forKey: kAIMSUsernameCredentialIdentifier)
+            }
             sud.synchronize()
             
             // Save Alfresco credentials and server connection parameters

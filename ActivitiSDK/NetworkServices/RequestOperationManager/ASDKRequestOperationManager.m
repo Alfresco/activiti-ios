@@ -19,6 +19,7 @@
 #import "ASDKRequestOperationManager.h"
 #import "ASDKLogConfiguration.h"
 #import "ASDKNetworkServiceConstants.h"
+#import "ASDKHTTPCodes.h"
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -92,6 +93,40 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
         self.authenticationProvider = authenticationProvider;
         self.requestSerializer = authenticationProvider;
     }
+}
+
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
+                               uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
+                             downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
+                            completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
+    // Create a completion block that handles unauthorized requests and wraps the original request
+    void (^authFailBlock)(NSURLResponse *response, id responseObject, NSError *error) = ^(NSURLResponse *response, id responseObject, NSError *error)
+    {
+        NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+        if([httpResponse statusCode] == ASDKHTTPCode401Unauthorised){
+            
+            //since there was an error, call you refresh method and then redo the original task
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                
+                // Refresh and store token
+                
+                // Execute original request
+                NSURLSessionDataTask *originalTask = [super dataTaskWithRequest:request
+                                                                 uploadProgress:uploadProgressBlock
+                                                               downloadProgress:downloadProgressBlock
+                                                              completionHandler:completionHandler];
+                [originalTask resume];
+            });
+        }else{
+            completionHandler(response, responseObject, error);
+        }
+    };
+    
+    NSURLSessionDataTask *task = [super dataTaskWithRequest:request
+                                             uploadProgress:uploadProgressBlock
+                                           downloadProgress:downloadProgressBlock
+                                          completionHandler:authFailBlock];
+    return task;
 }
 
 @end

@@ -19,11 +19,13 @@
 #import <Foundation/Foundation.h>
 @import AFNetworking;
 
+@class ASDKModelCredentialAIMS;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ASDKPKCEAuthenticationProvider : AFJSONRequestSerializer
 
-- (instancetype)initWithAccessToken:(NSString *)accessToken;
+- (instancetype)initWithCredential:(ASDKModelCredentialAIMS *)credential;
 
 @end
 

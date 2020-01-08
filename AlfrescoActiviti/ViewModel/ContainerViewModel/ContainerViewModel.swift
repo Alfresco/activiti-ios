@@ -123,8 +123,7 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
         case .success(let credential):
             // Update the access token for future requests
             let sdkBootstrap = ASDKBootstrap.sharedInstance()
-            sdkBootstrap?.updateServerConfiguration(forAccessToken: credential.accessToken)
-            
+            sdkBootstrap?.updateServerConfiguration(forCredential: credential.toASDKModelCredentialType())
         case .failure:
             // Refresh token ex pired, log out the user
             AFALog.logWarning("Refresh token expired, logging out user.")

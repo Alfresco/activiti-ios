@@ -17,6 +17,7 @@
  ******************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "ASDKModelCredentialBaseProtocol.h"
 
 @class ASDKServiceLocator, ASDKModelServerConfiguration, AFHTTPRequestSerializer;
 
@@ -30,9 +31,7 @@
 
 // Services interface
 - (void)setupServicesWithServerConfiguration:(ASDKModelServerConfiguration *)serverConfiguration;
-- (void)updateServerConfigurationForAccessToken:(NSString *)accessToken;
-- (void)updateServerConfigurationCredentialsForUsername:(NSString *)username
-                                               password:(NSString *)password;
+- (void)updateServerConfigurationForCredential:(id<ASDKModelCredentialBaseProtocol>)credential;
 
 // Read-only properties
 @property (strong, nonatomic, readonly) ASDKServiceLocator              *serviceLocator;
