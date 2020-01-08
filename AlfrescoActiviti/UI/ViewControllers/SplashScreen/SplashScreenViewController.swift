@@ -78,7 +78,7 @@ class SplashScreenViewController: UIViewController {
         copyrightLabel.text = copyrightText
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
-        copyrightLabel.alpha = 0.0
+        copyrightLabel.alpha = 1.0
         
         self.view.layoutIfNeeded()
         applyShadow(to: shadowView)

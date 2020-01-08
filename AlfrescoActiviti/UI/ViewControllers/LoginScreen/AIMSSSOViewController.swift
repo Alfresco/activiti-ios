@@ -120,7 +120,7 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
         copyrightLabel.font = colorSchemeManager.defaultTypographyScheme.subtitle1
         copyrightLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
         
-        repositoryTextField.text = AIMSAuthenticationParameters.parameters().hostname
+        repositoryTextField.text = AIMSAuthenticationParameters.parameters().processURL
         shouldEnableSignInButton()
     }
     

@@ -32,7 +32,7 @@ class AIMSAuthenticationParameters: Codable {
     var realm: String = "alfresco"
     var clientID: String = "iosapsapp"
     var redirectURI: String = "iosapsapp://aims/auth"
-    var hostname: String = "alfresco-identity-service.mobile.dev.alfresco.me"
+    var hostname: String = ""
     var processURL: String = ""
     var fullFormatURL: String {
         get {

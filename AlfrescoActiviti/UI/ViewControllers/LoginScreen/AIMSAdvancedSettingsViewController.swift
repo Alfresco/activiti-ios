@@ -141,6 +141,7 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
     @objc func saveButtonPressed() {
         self.view.endEditing(true)
         model.saveParameters(parameters!)
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             self.delegate?.showConfirmation(message: model.confirmationSaveText)

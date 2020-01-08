@@ -60,6 +60,9 @@ class AIMSLoginViewModel {
             
             switch result {
             case .success(let authType):
+                if AIMSAuthenticationParameters.parameters().hostname != authParameters.hostname {
+                    authParameters.processURL = ""
+                }
                 authParameters.save()
                 sSelf.delegate?.authenticationServiceAvailable(for: authType)
             case .failure(let error):
