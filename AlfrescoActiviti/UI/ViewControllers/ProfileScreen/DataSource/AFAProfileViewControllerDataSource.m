@@ -248,7 +248,7 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return REPORT_TOOL ? AFAProfileControllerSectionTypeEnumCount : AFAProfileControllerSectionTypeEnumCount-1 ;
+    return AFAProfileControllerSectionTypeEnumCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -267,7 +267,8 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
             break;
             
         case AFAProfileControllerSectionTypeChangePassord: {
-            rowCount = 1;
+            // function disable for now => [IOS-1475]
+            rowCount = 0;
         }
             break;
             
