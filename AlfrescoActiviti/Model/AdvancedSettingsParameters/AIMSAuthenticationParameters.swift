@@ -52,7 +52,11 @@ class AIMSAuthenticationParameters: Codable {
     }
     
     static func resetToDefault() -> AIMSAuthenticationParameters {
-        return AIMSAuthenticationParameters()
+        let parameters = AIMSAuthenticationParameters.parameters()
+        let defaultParameters = AIMSAuthenticationParameters()
+        defaultParameters.hostname = parameters.hostname
+        defaultParameters.processURL = parameters.processURL
+        return defaultParameters
     }
     
     static func parameters() -> AIMSAuthenticationParameters {

@@ -136,7 +136,8 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
         if let gestureRecognizer = tapGestureRecognizer {
             self.view .addGestureRecognizer(gestureRecognizer)
         }
-    
+        
+        alfrescoURLTextField.text = AIMSAuthenticationParameters.parameters().hostname
         shouldEnableConnectButton()
     }
     
