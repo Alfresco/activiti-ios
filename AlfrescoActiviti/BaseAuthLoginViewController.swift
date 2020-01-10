@@ -61,11 +61,13 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
                 if let loadingView = overlayView {
                     self.view.isUserInteractionEnabled = false
                     self.navigationController?.navigationBar.isUserInteractionEnabled = false
-                    self.navigationController?.view.addSubview(loadingView)
+                    self.navigationController?.setNavigationBarHidden(true, animated: false)
+                    self.view.addSubview(loadingView)
                 }
             case .isIdle, .none:
                 self.view.isUserInteractionEnabled = true
                 self.navigationController?.navigationBar.isUserInteractionEnabled = true
+                self.navigationController?.setNavigationBarHidden(false, animated: false)
                 overlayView?.removeFromSuperview()
             }
         }
@@ -204,6 +206,7 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
             controllerState = .isLoading
             model.signIn(username: username, password: password) { [weak self] (result) in
                 guard let sSelf = self else { return }
+
                 sSelf.controllerState = .isIdle
                 
                 switch result {

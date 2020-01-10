@@ -57,11 +57,13 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
                 if let loadingView = overlayView {
                     self.view.isUserInteractionEnabled = false
                     self.navigationController?.navigationBar.isUserInteractionEnabled = false
-                    self.navigationController?.view.addSubview(loadingView)
+                    self.navigationController?.setNavigationBarHidden(true, animated: false)
+                    self.view.addSubview(loadingView)
                 }
             case .isIdle, .none:
                 self.view.isUserInteractionEnabled = true
                 self.navigationController?.navigationBar.isUserInteractionEnabled = true
+                self.navigationController?.setNavigationBarHidden(false, animated: false)
                 overlayView?.removeFromSuperview()
             }
         }
@@ -167,7 +169,6 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
     @IBAction func signInButtonPressed(_ sender: MDCButton) {
         self.view.endEditing(true)
         self.controllerState = .isLoading
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             self.delegate?.dismiss(animated: true)
@@ -263,8 +264,7 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
     func logInWarning(with message: String) {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
-            
-            sSelf.navigationController?.setNavigationBarHidden(false, animated: true)
+        
             sSelf.controllerState = .isIdle
             
             AFALog.logWarning(message)
@@ -284,8 +284,7 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
     func logInSuccessful() {
         DispatchQueue.main.asyncAfter(deadline: .now() + kDefaultAnimationTime) { [weak self] in
             guard let sSelf = self else { return }
-            
-            sSelf.navigationController?.setNavigationBarHidden(false, animated: false)
+
             sSelf.controllerState = .isIdle
             sSelf.performSegue(withIdentifier: kSegueIDLoginAuthorized, sender: nil)
         }
@@ -295,7 +294,6 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
 
-            sSelf.navigationController?.setNavigationBarHidden(false, animated: true)
             sSelf.controllerState = .isIdle
             
             AFALog.logError(error.localizedDescription)

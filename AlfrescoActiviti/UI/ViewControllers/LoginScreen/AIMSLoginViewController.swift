@@ -68,11 +68,13 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
                 if let loadingView = overlayView {
                     self.view.isUserInteractionEnabled = false
                     self.navigationController?.navigationBar.isUserInteractionEnabled = false
-                    self.navigationController?.view.addSubview(loadingView)
+                    self.navigationController?.setNavigationBarHidden(true, animated: false)
+                    self.view.addSubview(loadingView)
                 }
             case .isIdle, .none:
                 self.view.isUserInteractionEnabled = true
                 self.navigationController?.navigationBar.isUserInteractionEnabled = true
+                self.navigationController?.setNavigationBarHidden(true, animated: false)
                 overlayView?.removeFromSuperview()
             }
         }
@@ -229,6 +231,7 @@ class AIMSLoginViewController: AFABaseThemedViewController, SplashScreenProtocol
         }
         alfrescoURLTextFieldController?.setErrorText(nil, errorAccessibilityValue: "")
         shouldEnableConnectButton()
+        controllerState = .isIdle
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
