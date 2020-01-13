@@ -17,9 +17,18 @@
  ******************************************************************************/
 
 #import "ASDKRequestOperationManager.h"
+
+// Constants
 #import "ASDKLogConfiguration.h"
 #import "ASDKNetworkServiceConstants.h"
 #import "ASDKHTTPCodes.h"
+
+// Models
+#import "ASDKPKCEAuthenticationProvider.h"
+#import "ASDKBasicAuthenticationProvider.h"
+#import "ASDKModelCredentialAIMS.h"
+#import "ASDKModelCredentialBaseAuth.h"
+
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -29,18 +38,24 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
 
 @interface ASDKRequestOperationManager ()
 
-@property (strong, nonatomic) AFHTTPRequestSerializer *authenticationProvider;
+@property (strong, nonatomic) AFHTTPRequestSerializer               *authenticationProvider;
+@property (strong, nonatomic) id<ASDKModelCredentialBaseProtocol>   credential;
 
 @end
 
 @implementation ASDKRequestOperationManager
 
+
+#pragma mark -
+#pragma mark Public interface
+
 - (instancetype)initWithBaseURL:(NSURL *)url
-         authenticationProvider:(AFHTTPRequestSerializer *)authenticationProvider {
+                     credential:(id<ASDKModelCredentialBaseProtocol>)credential {
     NSParameterAssert(url);
     
     self = [super initWithBaseURL:url];
     if (self) {
+        
         ASDKLogVerbose(@"Request manager initialized with baseURL:%@", url.absoluteString);
         
         // Allow invalid certificates for test environments
@@ -52,6 +67,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
         securityPolicy.validatesDomainName = NO;
         self.securityPolicy = securityPolicy;
 #endif
+        self.credential = credential;
+        AFHTTPRequestSerializer *authenticationProvider = [self authenticationProviderForCredential:credential];
         self.authenticationProvider = authenticationProvider;
         self.requestSerializer = authenticationProvider;
         
@@ -88,36 +105,53 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
     return _authenticationProvider;
 }
 
-- (void)replaceAuthenticationProvider:(AFHTTPRequestSerializer *)authenticationProvider {
+- (void)updateCredential:(id<ASDKModelCredentialBaseProtocol>)credential {
+    AFHTTPRequestSerializer *authenticationProvider = [self authenticationProviderForCredential:credential];
+    
     if (self.authenticationProvider != authenticationProvider) {
         self.authenticationProvider = authenticationProvider;
         self.requestSerializer = authenticationProvider;
     }
 }
 
+
+#pragma mark -
+#pragma mark Private interface
+
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
                                uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
                              downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
                             completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
+    __weak typeof(self) weakSelf = self;
     // Create a completion block that handles unauthorized requests and wraps the original request
     void (^authFailBlock)(NSURLResponse *response, id responseObject, NSError *error) = ^(NSURLResponse *response, id responseObject, NSError *error)
     {
+        __strong typeof(self) strongSelf = weakSelf;
+        
         NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-        if([httpResponse statusCode] == ASDKHTTPCode401Unauthorised){
-            
-            //since there was an error, call you refresh method and then redo the original task
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                
-                // Refresh and store token
-                
-                // Execute original request
-                NSURLSessionDataTask *originalTask = [super dataTaskWithRequest:request
-                                                                 uploadProgress:uploadProgressBlock
-                                                               downloadProgress:downloadProgressBlock
-                                                              completionHandler:completionHandler];
-                [originalTask resume];
-            });
-        }else{
+        if ([httpResponse statusCode] == ASDKHTTPCode401Unauthorised || ![strongSelf.credential areCredentialValid]) {
+            // Since there was an error, call the refresh method and then redo the original task
+            // Refresh and store token
+            if (strongSelf.sessionDelegate) {
+                [strongSelf.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
+                    if (!error) {
+                        // Execute original request
+                        NSURLSessionDataTask *originalTask = [super dataTaskWithRequest:request
+                                                                         uploadProgress:uploadProgressBlock
+                                                                       downloadProgress:downloadProgressBlock
+                                                                      completionHandler:completionHandler];
+                        [originalTask resume];
+                    } else {
+                        ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
+                        [weakSelf postNotificationForUnauthorizedAccessWithError:error];
+                    }
+                }];
+            } else {
+                // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
+                // status to the caller
+                [strongSelf postNotificationForUnauthorizedAccessWithError:error];
+            }
+        } else {
             completionHandler(response, responseObject, error);
         }
     };
@@ -127,6 +161,25 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                                            downloadProgress:downloadProgressBlock
                                           completionHandler:authFailBlock];
     return task;
+}
+
+- (AFJSONRequestSerializer *)authenticationProviderForCredential:(id<ASDKModelCredentialBaseProtocol>)credential {
+    AFJSONRequestSerializer *authenticationProvider;
+    
+    if ([credential isKindOfClass:ASDKModelCredentialAIMS.class]) {
+        authenticationProvider = [[ASDKPKCEAuthenticationProvider alloc] initWithCredential:credential];
+    } else {
+        authenticationProvider = [[ASDKBasicAuthenticationProvider alloc] initWithCredential:credential];
+    }
+    
+    return authenticationProvider;
+}
+
+- (void)postNotificationForUnauthorizedAccessWithError:(NSError *)error {
+    NSDictionary *userInfo = [error userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kADSKAPIUnauthorizedRequestNotification
+                                                        object:nil
+                                                      userInfo:userInfo];
 }
 
 @end

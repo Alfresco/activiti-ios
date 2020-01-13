@@ -17,15 +17,18 @@
  ******************************************************************************/
 
 #import <AFNetworking/AFNetworking.h>
+#import "ASDKNetworkSessionProtocol.h"
+#import "ASDKModelCredentialBaseProtocol.h"
 
 @class AFHTTPRequestSerializer;
 
 @interface ASDKRequestOperationManager : AFHTTPSessionManager
 
-- (instancetype)initWithBaseURL:(NSURL *)url
-         authenticationProvider:(AFHTTPRequestSerializer *)authenticationProvider;
+@property (weak, nonatomic) id<ASDKNetworkSessionProtocol> sessionDelegate;
 
+- (instancetype)initWithBaseURL:(NSURL *)url
+                     credential:(id<ASDKModelCredentialBaseProtocol>)credential;
 - (AFHTTPRequestSerializer *)authenticationProvider;
-- (void)replaceAuthenticationProvider:(AFHTTPRequestSerializer *)authenticationProvider;
+- (void)updateCredential:(id<ASDKModelCredentialBaseProtocol>)credential;
 
 @end

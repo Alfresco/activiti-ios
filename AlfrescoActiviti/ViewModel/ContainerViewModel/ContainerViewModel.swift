@@ -23,12 +23,25 @@ class ContainerViewModel: NSObject {
     @objc weak var delegate: AFAContainerViewModelDelegate?
     @objc var isLogoutRequestInProgress: Bool
     @objc var logoutViewController: UIViewController
+    
     private (set) var persistenceStackModelName: String?
     
+    // Refresh session related properties
+    private var refreshTokenDispatchGroup = DispatchGroup()
+    private var refreshTokenBlocks: [DispatchWorkItem] = []
+    private var credentialError: APIError?
+    private var credential: AlfrescoCredential?
+    
+    //MARK: - Public interface
     @objc init(with persistenceStackModelName: String, logoutViewController: UIViewController) {
         isLogoutRequestInProgress = false
         self.persistenceStackModelName = persistenceStackModelName
         self.logoutViewController = logoutViewController
+        
+        super.init()
+        
+        let sdkBootstrap = ASDKBootstrap.sharedInstance()
+        sdkBootstrap?.sessionDelegate = self
     }
     
     @objc func requestLogout() {
@@ -44,7 +57,7 @@ class ContainerViewModel: NSObject {
         }
     }
     
-    func performLogout(withPKCERequest: Bool) {
+    @objc func performLogout(withPKCERequest: Bool) {
         if withPKCERequest {
             // 1. Retrieve credentials from Keychain
             var alfrescoCredential: AlfrescoCredential?
@@ -71,30 +84,13 @@ class ContainerViewModel: NSObject {
         }
     }
     
-    @objc func handleUnAuthorizedRequest() {
-        if let aimsLoginService = AFAServiceRepository.shared()?.serviceObject(forPurpose: .aimsLogin) as? AIMSLoginService {
-            AFALog.logVerbose("Preparing to refreshing AIMS session")
-            
-            refreshAIMSSession(with: aimsLoginService)
-        } else {
-            // Login service not available, default to last successfull login identifier
-            let sud = UserDefaults.standard
-            let authIdentifier = sud.string(forKey: kAuthentificationTypeCredentialIdentifier)
-            
-            if authIdentifier == kAIMSAuthenticationCredentialIdentifier {
-                guard let authenticationService = AFAServiceRepository.shared()?.serviceObject(forPurpose: .aimsLogin) as? AIMSLoginService else { return }
-                
-                refreshAIMSSession(with: authenticationService)
-            }
-        }
-    }
-    
     fileprivate func refreshAIMSSession(with loginService:AIMSLoginService) {
         if let persistenceStackModelName = self.persistenceStackModelName {
             loginService.refreshSession(keychainIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter), delegate: self)
         }
     }
     
+    // MARK: - Private interface
     fileprivate func authenticationIdentifier() -> String? {
         let sud = UserDefaults.standard
         let authIdentifier = sud.string(forKey: kAuthentificationTypeCredentialIdentifier)
@@ -122,14 +118,15 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
         switch result {
         case .success(let credential):
             // Update the access token for future requests
+            self.credential = credential
             let sdkBootstrap = ASDKBootstrap.sharedInstance()
-            sdkBootstrap?.updateServerConfiguration(forCredential: credential.toASDKModelCredentialType())
-        case .failure:
-            // Refresh token ex pired, log out the user
-            AFALog.logWarning("Refresh token expired, logging out user.")
-            performLogout(withPKCERequest: false)
-            delegate?.redirectToLoginViewController()
+            sdkBootstrap?.updateServerConfiguration(withCredential: credential.toASDKModelCredentialType())
+        case .failure(let error):
+            credentialError = error
+            credential = nil
         }
+        
+        refreshTokenDispatchGroup.leave()
     }
     
     func didLogOut(result: Result<Int, APIError>) {
@@ -154,6 +151,41 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
             sud.removeObject(forKey: kAuthentificationTypeCredentialIdentifier)
             
             delegate?.redirectToLoginViewController()
+        }
+    }
+}
+
+// MARK: - ASDKNetworkSession Delegate
+extension ContainerViewModel: ASDKNetworkSessionProtocol {
+    func refreshNetworkSession(completionBlock: @escaping ASDKNetworkSessionRefreshCompletionBlock) {
+        if let aimsLoginService = AFAServiceRepository.shared()?.serviceObject(forPurpose: .aimsLogin) as? AIMSLoginService {
+            for block in refreshTokenBlocks {
+                block.cancel()
+                refreshTokenDispatchGroup.leave()
+            }
+            
+            AFALog.logVerbose("Preparing to refresh AIMS session")
+            
+            // Wait for a token refresh operation to finish then return the result via the completion block
+            refreshTokenDispatchGroup.enter()
+            
+            let refreshBlock = DispatchWorkItem { [weak self] in
+                guard let sSelf = self else { return }
+                sSelf.refreshAIMSSession(with: aimsLoginService)
+            }
+            refreshTokenBlocks.append(refreshBlock)
+            
+            DispatchQueue.global().async(execute: refreshBlock)
+            
+            refreshTokenDispatchGroup.notify(queue: .global()) {[weak self] in
+                guard let sSelf = self else { return }
+                
+                sSelf.refreshTokenBlocks.removeAll()
+                
+                if (sSelf.credential != nil || sSelf.credentialError != nil) {
+                    completionBlock(sSelf.credentialError)
+                }
+            }
         }
     }
 }

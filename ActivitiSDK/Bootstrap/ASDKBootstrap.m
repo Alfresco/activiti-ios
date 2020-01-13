@@ -124,9 +124,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                                         overSecureLayer:self.serverConfiguration.isCommunicationOverSecureLayer];
     
     // Set up the request manager
-    AFJSONRequestSerializer *authenticationProvider = [self authenticationProviderForCredential:serverConfiguration.credential];
     self.requestOperationManager = [[ASDKRequestOperationManager alloc] initWithBaseURL:servicePathFactory.baseURL
-                                                                 authenticationProvider:authenticationProvider];
+                                                                             credential:serverConfiguration.credential];
     
     // Set up parser services
     ASDKParserOperationManager *parserOperationManager = [self parserOperationManager];
@@ -187,25 +186,20 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     [self setupPersistenceStack];
 }
 
-- (void)updateServerConfigurationForCredential:(id<ASDKModelCredentialBaseProtocol>)credential {
-    [self.requestOperationManager replaceAuthenticationProvider:[self authenticationProviderForCredential:credential]];
+- (void)updateServerConfigurationWithCredential:(id<ASDKModelCredentialBaseProtocol>)credential; {
+    [self.requestOperationManager updateCredential:credential];
+}
+
+- (void)setSessionDelegate:(id<ASDKNetworkSessionProtocol>)sessionDelegate {
+    if (sessionDelegate != _sessionDelegate) {
+        _sessionDelegate = sessionDelegate;
+        _requestOperationManager.sessionDelegate = _sessionDelegate;
+    }
 }
 
 
 #pragma mark -
 #pragma mark Private interface
-
-- (AFJSONRequestSerializer *)authenticationProviderForCredential:(id<ASDKModelCredentialBaseProtocol>)credential {
-    AFJSONRequestSerializer *authenticationProvider;
-    
-    if ([credential isKindOfClass:ASDKModelCredentialAIMS.class]) {
-        authenticationProvider = [[ASDKPKCEAuthenticationProvider alloc] initWithCredential:credential];
-    } else {
-        authenticationProvider = [[ASDKBasicAuthenticationProvider alloc] initWithCredential:credential];
-    }
-    
-    return authenticationProvider;
-}
 
 - (ASDKParserOperationManager *)parserOperationManager {
     ASDKParserOperationManager *parserOperationManager = [ASDKParserOperationManager new];

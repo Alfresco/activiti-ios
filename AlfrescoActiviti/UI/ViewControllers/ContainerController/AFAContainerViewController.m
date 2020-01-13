@@ -374,7 +374,8 @@ static CGFloat const kBackgroundThemeColorChangeAnimationDuration = .072f;
                              style:UIAlertActionStyleDefault
                            handler:^(UIAlertAction *action) {
         __strong typeof(self) strongSelf = weakSelf;
-        [strongSelf.viewModel handleUnAuthorizedRequest];
+        [strongSelf.viewModel performLogoutWithPKCERequest:NO];
+        [strongSelf redirectToLoginViewController];
     }];
     
     [alertController addAction:okButtonAction];

@@ -302,7 +302,7 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
     ASDKBootstrap *sdkBootstrap = [ASDKBootstrap sharedInstance];
     ASDKModelCredentialBaseAuth *baseAuthCredential = [[ASDKModelCredentialBaseAuth alloc] initWithUsername:userName
                                                                                                    password:password];
-    [sdkBootstrap updateServerConfigurationForCredential:baseAuthCredential];
+    [sdkBootstrap updateServerConfigurationWithCredential:baseAuthCredential];
 
     NSString *persistenceStackModelName = [ASDKPersistenceStack persistenceStackModelNameForServerConfiguration:sdkBootstrap.serverConfiguration];
     

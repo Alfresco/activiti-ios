@@ -100,15 +100,11 @@
 #import <ActivitiSDK/ASDKQuerryNetworkServiceProtocol.h>
 #import <ActivitiSDK/ASDKIntegrationNetworkServiceProtocol.h>
 #import <ActivitiSDK/ASDKServicePathFactory.h>
+#import <ActivitiSDK/ASDKNetworkSessionProtocol.h>
 
 // JSON adapters
 #import <ActivitiSDK/ASDKMantleJSONAdapterExcludeZeroNil.h>
 #import <ActivitiSDK/ASDKMantleJSONAdapterCustomPolicy.h>
-
-// Response serializers
-#import <ActivitiSDK/ASDKHTTPResponseSerializer.h>
-#import <ActivitiSDK/ASDKJSONResponseSerializer.h>
-#import <ActivitiSDK/ASDKImageResponseSerializer.h>
 
 // Other service protocols
 #import <ActivitiSDK/ASDKDiskServiceProtocol.h>

@@ -16,8 +16,18 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <AFNetworking/AFNetworking.h>
+#import <Foundation/Foundation.h>
 
-@interface ASDKHTTPResponseSerializer : AFHTTPResponseSerializer
+@class ASDKModelCredentialAIMS;
+
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^ASDKNetworkSessionRefreshCompletionBlock) (NSError * _Nullable error);
+
+@protocol ASDKNetworkSessionProtocol
+
+- (void)refreshNetworkSessionWithCompletionBlock:(ASDKNetworkSessionRefreshCompletionBlock)completionBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END
