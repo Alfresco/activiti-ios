@@ -81,7 +81,7 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
             let serverConfiguration = ASDKModelServerConfiguration()
             
             if let authParameters = self.authParameters {
-                serverConfiguration.hostAddressString = authParameters.hostname
+                serverConfiguration.hostAddressString = authParameters.processURL
                 serverConfiguration.isCommunicationOverSecureLayer = authParameters.https
                 serverConfiguration.serviceDocument = authParameters.serviceDocument.encoding()
                 serverConfiguration.port = authParameters.port
