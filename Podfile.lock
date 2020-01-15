@@ -14,10 +14,10 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AlfrescoAuth (0.6.2):
+  - AlfrescoAuth (0.6.3):
     - AlfrescoCore
     - AppAuth
-  - AlfrescoCore (0.2.4)
+  - AlfrescoCore (0.2.5)
   - AppAuth (1.3.0):
     - AppAuth/Core (= 1.3.0)
     - AppAuth/ExternalUserAgent (= 1.3.0)
@@ -708,7 +708,7 @@ DEPENDENCIES:
   - OCMock (~> 3.4)
 
 SPEC REPOS:
-  https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk.git:
+  https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk:
     - AlfrescoAuth
     - AlfrescoCore
   https://github.com/CocoaPods/Specs.git:
@@ -730,8 +730,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AlfrescoAuth: 14bb56397f9f797b9ee3a5dee4ae886baa496fec
-  AlfrescoCore: d0ceba616f182ed19f77d85ea324c6292fb0fc5d
+  AlfrescoAuth: fbe268cec3782136b5f53376222170f9d306d6f6
+  AlfrescoCore: e07100ee2a3c93706c9bb4cc3d67f926d5bc30a5
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   Buglife: bc8e4931ebe37b2901c6dbcb0ca6dd76f62a98c3
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
