@@ -17,7 +17,7 @@ PODS:
   - AlfrescoAuth (0.6.3):
     - AlfrescoCore
     - AppAuth
-  - AlfrescoCore (0.2.5)
+  - AlfrescoCore (0.2.6)
   - AppAuth (1.3.0):
     - AppAuth/Core (= 1.3.0)
     - AppAuth/ExternalUserAgent (= 1.3.0)
@@ -731,7 +731,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   AlfrescoAuth: fbe268cec3782136b5f53376222170f9d306d6f6
-  AlfrescoCore: e07100ee2a3c93706c9bb4cc3d67f926d5bc30a5
+  AlfrescoCore: 89c7269b121fb3cff33aa5257dd2f7dd71ab7e83
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   Buglife: bc8e4931ebe37b2901c6dbcb0ca6dd76f62a98c3
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
