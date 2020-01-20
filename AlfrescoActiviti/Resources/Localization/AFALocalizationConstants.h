@@ -79,6 +79,10 @@ extern NSString *kLocalizationAdvancedSettingsScreenSaveConfirmationText;
 extern NSString *kLocalizationBannerViewErrorText;
 extern NSString *kLocalizationBannerViewWarningText;
 extern NSString *kLocalizationBannerViewConfirmationText;
+extern NSString *kLocalizationGenericErrorText;
+extern NSString *kLocalizationErrorCheckConnectURL;
+extern NSString *kLocalizationErrorNoAuthAlfrescoURL;
+extern NSString *kLocalizationErrorCredentialProvided;
 
 //Cloud Login screen
 extern NSString *kLocalizationCloudLoginInfoText;

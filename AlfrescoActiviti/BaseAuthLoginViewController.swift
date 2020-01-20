@@ -215,17 +215,18 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
                     AFALog.logError(error.localizedDescription)
                     sSelf.usernameTextFieldController?.setErrorText("", errorAccessibilityValue: "")
                     sSelf.passwordTextFieldController?.setErrorText("", errorAccessibilityValue: "")
+                    let errorMessage = (error as NSError).mapToMessage()
                     if UIDevice.current.userInterfaceIdiom == .pad {
                         if (error as NSError).domain == AFALoginViewModelWarningDomain {
                             sSelf.delegate?.showWarning(message: error.localizedDescription)
                         } else {
-                            sSelf.delegate?.showError(message: error.localizedDescription)
+                            sSelf.delegate?.showError(message: errorMessage)
                         }
                     } else {
                         if (error as NSError).domain == AFALoginViewModelWarningDomain {
                             sSelf.showWarningMessage(error.localizedDescription)
                         } else {
-                            sSelf.showErrorMessage(error.localizedDescription)
+                            sSelf.showErrorMessage(errorMessage)
                         }
                     }
                     break

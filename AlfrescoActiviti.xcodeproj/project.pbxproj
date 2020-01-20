@@ -876,6 +876,7 @@
 		B9BF25B6236309D60017B71D /* ASDKPKCEAuthenticationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BF25B5236309D60017B71D /* ASDKPKCEAuthenticationProvider.m */; };
 		B9BF25B823631A520017B71D /* AIMSLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BF25B723631A520017B71D /* AIMSLoginViewController.swift */; };
 		B9BF25BB236338590017B71D /* Muli-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9BF25BA236338590017B71D /* Muli-Light.ttf */; };
+		E307B32323D5AFB3005933E9 /* NSError+Mapers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E307B32223D5AFB3005933E9 /* NSError+Mapers.swift */; };
 		E335FA762372BE35005EE76B /* BaseAuthLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E335FA752372BE35005EE76B /* BaseAuthLoginViewController.swift */; };
 		E335FA782372C48A005EE76B /* BaseAuthLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E335FA772372C48A005EE76B /* BaseAuthLoginViewModel.swift */; };
 		E335FA7B23741113005EE76B /* AIMSSSOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E335FA7A23741113005EE76B /* AIMSSSOViewController.swift */; };
@@ -1973,6 +1974,7 @@
 		B9BF25B723631A520017B71D /* AIMSLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSLoginViewController.swift; path = UI/ViewControllers/LoginScreen/AIMSLoginViewController.swift; sourceTree = "<group>"; };
 		B9BF25BA236338590017B71D /* Muli-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Muli-Light.ttf"; path = "AlfrescoActiviti/Resources/Fonts/Muli-Light.ttf"; sourceTree = SOURCE_ROOT; };
 		E30248B522AAA083006C5A3B /* AlfrescoActiviti.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AlfrescoActiviti.xcconfig; sourceTree = "<group>"; };
+		E307B32223D5AFB3005933E9 /* NSError+Mapers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError+Mapers.swift"; sourceTree = "<group>"; };
 		E335FA752372BE35005EE76B /* BaseAuthLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAuthLoginViewController.swift; sourceTree = "<group>"; };
 		E335FA772372C48A005EE76B /* BaseAuthLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAuthLoginViewModel.swift; sourceTree = "<group>"; };
 		E335FA7A23741113005EE76B /* AIMSSSOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSSSOViewController.swift; path = UI/ViewControllers/LoginScreen/AIMSSSOViewController.swift; sourceTree = "<group>"; };
@@ -6640,6 +6642,7 @@
 				E3E42A5923A78AC50079FA03 /* String+Helpers.swift */,
 				E3822E9323C3629600D625BB /* UILabel+Helpers.swift */,
 				E3822E9523C362D400D625BB /* MDCTextFields+Helpers.swift */,
+				E307B32223D5AFB3005933E9 /* NSError+Mapers.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -7412,6 +7415,7 @@
 				8D7C1A461C808D010092EA81 /* AFAAssigneeTableViewCell.m in Sources */,
 				132BB7671D48AEB200757493 /* AFAStartFormTableViewCell.m in Sources */,
 				13F562C71CA2A3D300F0C7B5 /* AFAClaimTableViewCell.m in Sources */,
+				E307B32323D5AFB3005933E9 /* NSError+Mapers.swift in Sources */,
 				13AEE2BC1C96B79500E9EB44 /* AFATableControllerProcessInstanceContentModel.m in Sources */,
 				B94FE48623671BA6008BCA64 /* MaterialDesignColorSchemeComponent.swift in Sources */,
 				131DCF4E1DAFB18E00E08798 /* AFAModalTaskDetailsUpdateTaskAction.m in Sources */,

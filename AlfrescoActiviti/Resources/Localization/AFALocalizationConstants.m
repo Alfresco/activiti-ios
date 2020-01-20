@@ -84,6 +84,10 @@ NSString *kLocalizationAdvancedSettingsScreenSaveConfirmationText               
 NSString *kLocalizationBannerViewErrorText              = @"bannerViewErrorText";
 NSString *kLocalizationBannerViewWarningText            = @"bannerViewWarningText";
 NSString *kLocalizationBannerViewConfirmationText       = @"bannerViewConfirmationText";
+NSString *kLocalizationGenericErrorText                 = @"genericErrorText";
+NSString *kLocalizationErrorCheckConnectURL             = @"errorCheckConnectURL";
+NSString *kLocalizationErrorNoAuthAlfrescoURL           = @"errorNoAuthAlfrescoURL";
+NSString *kLocalizationErrorCredentialProvided          = @"errorWrongCredentialProvided";
 
 #pragma mark -
 #pragma mark Cloud Login screen

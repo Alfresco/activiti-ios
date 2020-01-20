@@ -75,6 +75,10 @@
 "bannerViewErrorText"                                    = "Error";
 "bannerViewWarningText"                                  = "Warning";
 "bannerViewConfirmationText"                             = "Confirmation";
+"genericErrorText"                                       = "Something went wrong. Contact your administrator for help. Error code: %d";
+"errorCheckConnectURL"                                   = "Check your Connect to URL.";
+"errorNoAuthAlfrescoURL"                                 = "No authentication service can be found at the provided Alfresco URL.";
+"errorWrongCredentialProvided"                           = "Wrong username or password provided.";
 
 // Cloud Login screen
 "cloudLoginInfoText"                                     = "Helpful introduction and information text about Process Services Cloud.";

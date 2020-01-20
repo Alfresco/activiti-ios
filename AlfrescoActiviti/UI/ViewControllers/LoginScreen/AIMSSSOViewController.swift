@@ -302,10 +302,11 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
                     guard let sSelf = self else { return }
                     
                     sSelf.repositoryTextFieldController?.setErrorText("", errorAccessibilityValue: "")
+                    let errorMessage = (error as NSError).mapToMessage()
                     if UIDevice.current.userInterfaceIdiom == .pad {
-                        sSelf.delegate?.showError(message: error.localizedDescription)
+                        sSelf.delegate?.showError(message: errorMessage)
                     } else {
-                        sSelf.showErrorMessage(error.localizedDescription)
+                        sSelf.showErrorMessage(errorMessage)
                     }
                 }
             }
