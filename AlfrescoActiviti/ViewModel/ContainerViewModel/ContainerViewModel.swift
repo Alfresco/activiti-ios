@@ -31,6 +31,7 @@ class ContainerViewModel: NSObject {
     private var refreshTokenBlocks: [DispatchWorkItem] = []
     private var credentialError: APIError?
     private var credential: AlfrescoCredential?
+    private let loginService = AFAServiceRepository.shared()?.serviceObject(forPurpose: .aimsLogin) as? AIMSLoginService
     
     //MARK: - Public interface
     @objc init(with persistenceStackModelName: String, logoutViewController: UIViewController) {
@@ -72,11 +73,9 @@ class ContainerViewModel: NSObject {
             }
             
             // 2. If it's an AIMS session, perform a logout call to terminate the session
-            if let aimsLoginService = AFAServiceRepository.shared()?.serviceObject(forPurpose: .aimsLogin) as? AIMSLoginService,
-                let credential = alfrescoCredential {
+            if let credential = alfrescoCredential {
                 AFALog.logVerbose("Logging out from AIMS session")
-                
-                aimsLoginService.logout(onViewController: logoutViewController, delegate: self, forCredential: credential)
+                loginService?.logout(onViewController: logoutViewController, delegate: self, forCredential: credential)
             }
         } else {
             removeLocalCredentials()
@@ -84,9 +83,9 @@ class ContainerViewModel: NSObject {
         }
     }
     
-    fileprivate func refreshAIMSSession(with loginService:AIMSLoginService) {
+    fileprivate func refreshAIMSSession() {
         if let persistenceStackModelName = self.persistenceStackModelName {
-            loginService.refreshSession(keychainIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter), delegate: self)
+            loginService?.refreshSession(keychainIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter), delegate: self)
         }
     }
     
@@ -121,6 +120,10 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
             self.credential = credential
             let sdkBootstrap = ASDKBootstrap.sharedInstance()
             sdkBootstrap?.updateServerConfiguration(withCredential: credential.toASDKModelCredentialType())
+            
+            if let persistenceStackModelName = self.persistenceStackModelName {
+                loginService?.saveToKeychain(for: persistenceStackModelName, session: session, credential: credential)
+            }
         case .failure(let error):
             credentialError = error
             credential = nil
@@ -158,33 +161,31 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
 // MARK: - ASDKNetworkSession Delegate
 extension ContainerViewModel: ASDKNetworkSessionProtocol {
     func refreshNetworkSession(completionBlock: @escaping ASDKNetworkSessionRefreshCompletionBlock) {
-        if let aimsLoginService = AFAServiceRepository.shared()?.serviceObject(forPurpose: .aimsLogin) as? AIMSLoginService {
-            for block in refreshTokenBlocks {
-                block.cancel()
-                refreshTokenDispatchGroup.leave()
-            }
+        for block in refreshTokenBlocks {
+            block.cancel()
+            refreshTokenDispatchGroup.leave()
+        }
+        
+        AFALog.logVerbose("Preparing to refresh AIMS session")
+        
+        // Wait for a token refresh operation to finish then return the result via the completion block
+        refreshTokenDispatchGroup.enter()
+        
+        let refreshBlock = DispatchWorkItem { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.refreshAIMSSession()
+        }
+        refreshTokenBlocks.append(refreshBlock)
+        
+        DispatchQueue.global().async(execute: refreshBlock)
+        
+        refreshTokenDispatchGroup.notify(queue: .global()) {[weak self] in
+            guard let sSelf = self else { return }
             
-            AFALog.logVerbose("Preparing to refresh AIMS session")
+            sSelf.refreshTokenBlocks.removeAll()
             
-            // Wait for a token refresh operation to finish then return the result via the completion block
-            refreshTokenDispatchGroup.enter()
-            
-            let refreshBlock = DispatchWorkItem { [weak self] in
-                guard let sSelf = self else { return }
-                sSelf.refreshAIMSSession(with: aimsLoginService)
-            }
-            refreshTokenBlocks.append(refreshBlock)
-            
-            DispatchQueue.global().async(execute: refreshBlock)
-            
-            refreshTokenDispatchGroup.notify(queue: .global()) {[weak self] in
-                guard let sSelf = self else { return }
-                
-                sSelf.refreshTokenBlocks.removeAll()
-                
-                if (sSelf.credential != nil || sSelf.credentialError != nil) {
-                    completionBlock(sSelf.credentialError)
-                }
+            if (sSelf.credential != nil || sSelf.credentialError != nil) {
+                completionBlock(sSelf.credentialError)
             }
         }
     }

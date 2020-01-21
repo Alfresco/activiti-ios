@@ -112,25 +112,7 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
             authParameters?.save()
             
             let persistenceStackModelName = self.persistenceStackModelName()
-            
-            let encoder = JSONEncoder()
-            var credentialData: Data?
-            var sessionData: Data?
-           
-            do {
-                credentialData = try encoder.encode(alfrescoCredential)
-                
-                if let authSession = session {
-                    sessionData = try NSKeyedArchiver.archivedData(withRootObject: authSession, requiringSecureCoding: true)
-                }
-            } catch {
-                AFALog.logError("Unable to persist credentials to Keychain.")
-            }
-            
-            if let cData = credentialData, let sData = sessionData {
-                AFAKeychainWrapper.createKeychainData(cData, forIdentifier: persistenceStackModelName)
-                AFAKeychainWrapper.createKeychainData(sData, forIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter))
-            }
+            authenticationService?.saveToKeychain(for: persistenceStackModelName, session: session, credential: alfrescoCredential)
             
             // Initialize ActivitiSDK
             let sdkBootstrap = ASDKBootstrap.sharedInstance()

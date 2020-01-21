@@ -106,6 +106,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
 }
 
 - (void)updateCredential:(id<ASDKModelCredentialBaseProtocol>)credential {
+    self.credential = credential;
+    
     AFHTTPRequestSerializer *authenticationProvider = [self authenticationProviderForCredential:credential];
     
     if (self.authenticationProvider != authenticationProvider) {
@@ -129,37 +131,84 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
         __strong typeof(self) strongSelf = weakSelf;
         
         NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+        
         if ([httpResponse statusCode] == ASDKHTTPCode401Unauthorised || ![strongSelf.credential areCredentialValid]) {
-            // Since there was an error, call the refresh method and then redo the original task
-            // Refresh and store token
-            if (strongSelf.sessionDelegate) {
-                [strongSelf.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
-                    if (!error) {
-                        // Execute original request
-                        NSURLSessionDataTask *originalTask = [super dataTaskWithRequest:request
-                                                                         uploadProgress:uploadProgressBlock
-                                                                       downloadProgress:downloadProgressBlock
-                                                                      completionHandler:completionHandler];
-                        [originalTask resume];
-                    } else {
-                        ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
-                        [weakSelf postNotificationForUnauthorizedAccessWithError:error];
-                    }
-                }];
+            if (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN) {
+                // Since there was an error, call the refresh method and then redo the original task
+                // Refresh and store new fresh token as calling super into AFNetworking perfrorm the
+                // request using the new token
+                if (strongSelf.sessionDelegate) {
+                    [strongSelf.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
+                        if (!error) {
+                            NSMutableURLRequest *mutableOriginalRequest = [request mutableCopy];
+                            
+                            // Execute original request and re-attach the newly acquired access token
+                            [mutableOriginalRequest setValue:[weakSelf.authenticationProvider valueForHTTPHeaderField:@"Authorization"]
+                                          forHTTPHeaderField:@"Authorization"];
+                            NSURLSessionDataTask *originalTask = [super dataTaskWithRequest:mutableOriginalRequest
+                                                                             uploadProgress:uploadProgressBlock
+                                                                           downloadProgress:downloadProgressBlock
+                                                                          completionHandler:completionHandler];
+                            [originalTask resume];
+                        } else {
+                            ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
+                            [weakSelf postNotificationForUnauthorizedAccessWithError:error];
+                        }
+                    }];
+                } else {
+                    // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
+                    // status to the caller
+                    [self postNotificationForUnauthorizedAccessWithError:error];
+                }
             } else {
-                // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
-                // status to the caller
-                [strongSelf postNotificationForUnauthorizedAccessWithError:error];
+                completionHandler(response, responseObject, error);
             }
         } else {
             completionHandler(response, responseObject, error);
         }
     };
     
-    NSURLSessionDataTask *task = [super dataTaskWithRequest:request
-                                             uploadProgress:uploadProgressBlock
-                                           downloadProgress:downloadProgressBlock
-                                          completionHandler:authFailBlock];
+    NSURLSessionDataTask *task = nil;
+    // Check if credentials are about to expire and refresh the session if it's the case
+    if (![self.credential areCredentialValid] && (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN)) {
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        
+        if (self.sessionDelegate) {
+            __weak typeof(self) weakSelf = self;
+            [self.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
+                __strong typeof(self) strongSelf = weakSelf;
+                
+                if (!error) {
+                    dispatch_semaphore_signal(semaphore);
+                } else {
+                    ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
+                    [strongSelf postNotificationForUnauthorizedAccessWithError:error];
+                }
+            }];
+        } else {
+            // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
+            // status to the caller
+            [self postNotificationForUnauthorizedAccessWithError:nil];
+        }
+        
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        
+        NSMutableURLRequest *mutableOriginalRequest = [request mutableCopy];
+        
+        // Execute original request and re-attach the newly acquired access token
+        [mutableOriginalRequest setValue:[weakSelf.authenticationProvider valueForHTTPHeaderField:@"Authorization"]
+                      forHTTPHeaderField:@"Authorization"];
+        task = [super dataTaskWithRequest:mutableOriginalRequest
+                           uploadProgress:uploadProgressBlock
+                         downloadProgress:downloadProgressBlock
+                        completionHandler:completionHandler];
+    } else { // Execute original request but capture the failure due to credential errors
+        task = [super dataTaskWithRequest:request
+                           uploadProgress:uploadProgressBlock
+                         downloadProgress:downloadProgressBlock
+                        completionHandler:authFailBlock];
+    }
+    
     return task;
 }
 

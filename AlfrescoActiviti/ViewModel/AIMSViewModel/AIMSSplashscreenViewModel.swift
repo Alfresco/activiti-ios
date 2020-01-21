@@ -29,7 +29,7 @@ class AIMSSplashscreenViewModel: AIMSLoginViewModelProtocol {
         
         // Recreate server configuration object
         let authParameters = AIMSAuthenticationParameters.parameters()
-        serverConfiguration.hostAddressString = authParameters.hostname
+        serverConfiguration.hostAddressString = authParameters.processURL
         serverConfiguration.isCommunicationOverSecureLayer = authParameters.https
         serverConfiguration.serviceDocument = authParameters.serviceDocument.encoding()
         serverConfiguration.port = authParameters.port
