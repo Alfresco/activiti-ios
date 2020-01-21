@@ -17,15 +17,14 @@
  ******************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "ASDKModelCredentialBaseProtocol.h"
 
 @interface ASDKModelServerConfiguration : NSObject
 
 @property (strong, nonatomic, nonnull) NSString   *hostAddressString;
 @property (assign, nonatomic) BOOL                isCommunicationOverSecureLayer;
-@property (strong, nonatomic, nullable) NSString  *username;
-@property (strong, nonatomic, nullable) NSString  *password;
-@property (strong, nonatomic, nullable) NSString  *acessToken;
 @property (strong, nonatomic, nullable) NSString  *port;
 @property (strong, nonatomic, nonnull) NSString   *serviceDocument;
+@property (strong, nonatomic, nonnull) id<ASDKModelCredentialBaseProtocol> credential;
 
 @end

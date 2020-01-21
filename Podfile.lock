@@ -23,6 +23,7 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.3.0)
   - AppAuth/Core (1.3.0)
   - AppAuth/ExternalUserAgent (1.3.0)
+  - Base64 (1.1.2)
   - Buglife (2.10.1)
   - CocoaLumberjack (3.6.0):
     - CocoaLumberjack/Core (= 3.6.0)
@@ -31,6 +32,8 @@ PODS:
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
   - JGProgressHUD (2.1)
+  - JWT (2.2.0):
+    - Base64 (~> 1.1.2)
   - Mantle (2.1.0):
     - Mantle/extobjc (= 2.1.0)
   - Mantle/extobjc (2.1.0)
@@ -703,22 +706,25 @@ DEPENDENCIES:
   - Crashlytics (~> 3.14)
   - Fabric (~> 1.0)
   - JGProgressHUD (~> 2.1)
+  - JWT
   - Mantle (~> 2.1)
   - MaterialComponents (~> 92.5)
   - OCMock (~> 3.4)
 
 SPEC REPOS:
-  https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk.git:
+  https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk:
     - AlfrescoAuth
     - AlfrescoCore
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - AppAuth
+    - Base64
     - Buglife
     - CocoaLumberjack
     - Crashlytics
     - Fabric
     - JGProgressHUD
+    - JWT
     - Mantle
     - MaterialComponents
     - MDFInternationalization
@@ -733,11 +739,13 @@ SPEC CHECKSUMS:
   AlfrescoAuth: 25ba9f246c6440a9ee27da8348d8901d91d3fc8d
   AlfrescoCore: d28a8593e87b52952f70a5378b4047770f404af5
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
+  Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   Buglife: bc8e4931ebe37b2901c6dbcb0ca6dd76f62a98c3
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
+  JWT: cf73c0ab0dac762df3de8a3f1164352089d97780
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
   MaterialComponents: 268edb7e34f1277b79d20f701b6ae30c7cd0179a
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
@@ -747,6 +755,6 @@ SPEC CHECKSUMS:
   MotionTransitioning: 23d25edc2f4606efb922403cbac6d81af37aa33a
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
 
-PODFILE CHECKSUM: 2de4943f22fda7ba09e51296400d22cd7454dc24
+PODFILE CHECKSUM: e0de044887d4997c59e1db240701b38c86258143
 
 COCOAPODS: 1.8.4

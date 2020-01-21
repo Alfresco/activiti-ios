@@ -93,6 +93,26 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
         return authSession.resumeExternalUserAgentFlow(with: url)
     }
     
+    func saveToKeychain(for persistenceStackModelName: String, session: AlfrescoAuthSession?, credential: AlfrescoCredential) {
+        let encoder = JSONEncoder()
+         var credentialData: Data?
+         var sessionData: Data?
+        
+         do {
+             credentialData = try encoder.encode(credential)
+             
+             if let authSession = session {
+                 sessionData = try NSKeyedArchiver.archivedData(withRootObject: authSession, requiringSecureCoding: true)
+             }
+         } catch {
+             AFALog.logError("Unable to persist credentials to Keychain.")
+         }
+         
+         if let cData = credentialData, let sData = sessionData {
+             AFAKeychainWrapper.createKeychainData(cData, forIdentifier: persistenceStackModelName)
+             AFAKeychainWrapper.createKeychainData(sData, forIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter))
+         }
+    }
     
     // MARK: - Private
     

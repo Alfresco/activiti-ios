@@ -27,6 +27,7 @@
 
 // Model
 #import "ASDKModelServerConfiguration.h"
+#import "ASDKModelCredentialBaseAuth.h"
 
 // Managers
 #import "ASDKCSRFTokenStorage.h"
@@ -81,24 +82,28 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     ASDKBootstrap *sdkBootstrap = [ASDKBootstrap sharedInstance];
     ASDKProfileNetworkServices *profileNetworkServices = [sdkBootstrap.serviceLocator serviceConformingToProtocol:@protocol(ASDKProfileNetworkServiceProtocol)];
     
-    [profileNetworkServices authenticateUser:sdkBootstrap.serverConfiguration.username
-                                withPassword:sdkBootstrap.serverConfiguration.password
-                         withCompletionBlock:^(BOOL didAutheticate, NSError *error) {
-                             if (didAutheticate) {
-                                 ASDKLogVerbose(@"Authentication cookie retrieved successfully.\nDisplaying integration login form with request:%@", self.loginURLString);
-                                 NSMutableURLRequest *loginRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.loginURLString]];
-                                 
-                                 // Attach the CSRF token to the login page request
-                                 [loginRequest setValue:[profileNetworkServices.tokenStorage csrfTokenString]
-                                     forHTTPHeaderField:kASDKAPICSRFHeaderFieldParameter];
-                                 
-                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                     [self.webViewContainer loadRequest:loginRequest];
-                                 });
-                             } else {
-                                 ASDKLogVerbose(@"An error occured while retrieving the authentication cookie.");
-                             }
-    }];
+    if ([sdkBootstrap.serverConfiguration.credential isKindOfClass: ASDKModelCredentialBaseAuth.class]) {
+        ASDKModelCredentialBaseAuth *baseAuthCredential = (ASDKModelCredentialBaseAuth *)sdkBootstrap.serverConfiguration.credential;
+        
+        [profileNetworkServices authenticateUser:baseAuthCredential.username
+                                    withPassword:baseAuthCredential.password
+                             withCompletionBlock:^(BOOL didAutheticate, NSError *error) {
+                                 if (didAutheticate) {
+                                     ASDKLogVerbose(@"Authentication cookie retrieved successfully.\nDisplaying integration login form with request:%@", self.loginURLString);
+                                     NSMutableURLRequest *loginRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.loginURLString]];
+                                     
+                                     // Attach the CSRF token to the login page request
+                                     [loginRequest setValue:[profileNetworkServices.tokenStorage csrfTokenString]
+                                         forHTTPHeaderField:kASDKAPICSRFHeaderFieldParameter];
+                                     
+                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                         [self.webViewContainer loadRequest:loginRequest];
+                                     });
+                                 } else {
+                                     ASDKLogVerbose(@"An error occured while retrieving the authentication cookie.");
+                                 }
+        }];
+    }
 }
 
 

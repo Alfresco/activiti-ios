@@ -16,25 +16,23 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import "ASDKBasicAuthenticationProvider.h"
-#import "ASDKModelCredentialBaseAuth.h"
+#import "NSString+PersistenceStackNormalization.h"
 
-#if ! __has_feature(objc_arc)
-#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
-#endif
+#import <Foundation/Foundation.h>
 
-@implementation ASDKBasicAuthenticationProvider
 
-- (instancetype)initWithCredential:(ASDKModelCredentialBaseAuth *)credential {
-    NSParameterAssert(credential);
+@implementation NSString (PersistenceStackNormalization)
+
+- (NSString *)normalizedPersistenceStackName {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_]+"
+                                                                           options:kNilOptions
+                                                                             error:nil];
+    NSString *normalizedValue = [regex stringByReplacingMatchesInString:self
+                                                                options:kNilOptions
+                                                                  range:NSMakeRange(0, self.length)
+                                                           withTemplate:@""];
     
-    self = [super init];
-    if (self) {
-        [self setAuthorizationHeaderFieldWithUsername:credential.username
-                                             password:credential.password];
-    }
-    
-    return self;
+    return normalizedValue;
 }
 
 @end

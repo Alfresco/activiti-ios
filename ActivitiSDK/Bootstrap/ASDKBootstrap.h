@@ -17,10 +17,15 @@
  ******************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "ASDKModelCredentialBaseProtocol.h"
+#import "ASDKNetworkSessionProtocol.h"
 
 @class ASDKServiceLocator, ASDKModelServerConfiguration, AFHTTPRequestSerializer;
 
 @interface ASDKBootstrap : NSObject
+
+// Auth session delegate
+@property (weak, nonatomic) id<ASDKNetworkSessionProtocol> sessionDelegate;
 
 // Singleton interface
 + (instancetype)sharedInstance;
@@ -30,9 +35,7 @@
 
 // Services interface
 - (void)setupServicesWithServerConfiguration:(ASDKModelServerConfiguration *)serverConfiguration;
-- (void)updateServerConfigurationForAccessToken:(NSString *)accessToken;
-- (void)updateServerConfigurationCredentialsForUsername:(NSString *)username
-                                               password:(NSString *)password;
+- (void)updateServerConfigurationWithCredential:(id<ASDKModelCredentialBaseProtocol>)credential;
 
 // Read-only properties
 @property (strong, nonatomic, readonly) ASDKServiceLocator              *serviceLocator;

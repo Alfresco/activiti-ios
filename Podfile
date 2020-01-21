@@ -10,6 +10,7 @@ def shared_pods
 	pod 'Mantle', '~> 2.1'
 	pod 'JGProgressHUD', '~> 2.1'
 	pod 'AFNetworking', '~> 3.2'
+    pod 'JWT'
 end
 
 abstract_target 'Shared' do

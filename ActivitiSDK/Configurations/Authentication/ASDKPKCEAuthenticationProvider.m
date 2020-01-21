@@ -17,15 +17,17 @@
  ******************************************************************************/
 
 #import "ASDKPKCEAuthenticationProvider.h"
+#import "ASDKModelCredentialAIMS.h"
+
 
 @implementation ASDKPKCEAuthenticationProvider
 
-- (instancetype)initWithAccessToken:(NSString *)accessToken {
-    NSParameterAssert(accessToken);
+- (instancetype)initWithCredential:(ASDKModelCredentialAIMS *)credential {
+    NSParameterAssert(credential);
     
     self = [super init];
     if (self) {
-        NSString *accessTokenHTTPHeaderField = [NSString stringWithFormat:@"Bearer %@", accessToken];
+        NSString *accessTokenHTTPHeaderField = [NSString stringWithFormat:@"Bearer %@", credential.accessToken];
         [self setValue:accessTokenHTTPHeaderField forHTTPHeaderField:@"Authorization"];
     }
     

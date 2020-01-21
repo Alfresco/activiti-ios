@@ -34,7 +34,13 @@
 
 - (void)testThatItConfiguresProviderWithBasicAuthentication {
     // given
-    ASDKPKCEAuthenticationProvider *pkceAuthentication = [[ASDKPKCEAuthenticationProvider alloc] initWithAccessToken:@"123456789"];
+    ASDKModelCredentialAIMS *credential = [[ASDKModelCredentialAIMS alloc] initWithTokenType:@""
+                                                                                 accessToken:@"123456789"
+                                                                        accessTokenExpiresIn:0
+                                                                                refreshToken:@""
+                                                                       refreshTokenExpiresIn:0
+                                                                                sessionState:@""];
+    ASDKPKCEAuthenticationProvider *pkceAuthentication = [[ASDKPKCEAuthenticationProvider alloc] initWithCredential:credential];
     
     // then
     XCTAssertTrue([[pkceAuthentication valueForHTTPHeaderField:@"Authorization"] isEqualToString:@"Bearer 123456789"]);

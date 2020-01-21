@@ -31,7 +31,7 @@
 "loginScreenInvalidCredentialsText"                      = "Invalid or insufficient credentials.";
 "loginScreenUnreachableHostText"                         = "The host your are trying to connect to is unreachable.";
 "loginScreenRequestTimedOutText"                         = "The login request timed out.";
-"loginScreenUnauthorizedRequestErrorText"                = "Invalid credentials, you will be redirected to the login screen";
+"loginScreenUnauthorizedRequestErrorText"                = "You are no longer authenticated, please log in again.";
 "loginScreenCloudLoginButtonText"                        = "Alfresco Process Services Online";
 "loginScreenPremiseLoginButtonText"                      = "Process Services On Premise";
 "loginScreenProcessServicesAppText"                      = "Process Services";

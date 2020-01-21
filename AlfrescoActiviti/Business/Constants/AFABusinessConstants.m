@@ -44,6 +44,7 @@ NSString *kPremiseAuthentificationCredentialIdentifier  = @"kPremiseAuthentifica
 NSString *kAIMSAuthenticationCredentialIdentifier       = @"kAIMSAuthenticationCredentialIdentifier";
 NSString *kCloudUsernameCredentialIdentifier            = @"kCloudUsernameCredentialIdentifier";
 NSString *kPremiseUsernameCredentialIdentifier          = @"kPremiseUsernameCredentialIdentifier";
+NSString *kAIMSUsernameCredentialIdentifier             = @"kAIMSUsernameCredentialIdentifier";
 NSString *kUsernameCredentialIdentifier                 = @"kUsernameCredentialIdentifier";
 NSString *kPasswordCredentialIdentifier                 = @"kPasswordCredentialIdentifier";
 NSString *kCloudHostNameCredentialIdentifier            = @"kCloudHostNameCredentialIdentifier";

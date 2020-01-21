@@ -29,7 +29,7 @@ class AIMSSplashscreenViewModel: AIMSLoginViewModelProtocol {
         
         // Recreate server configuration object
         let authParameters = AIMSAuthenticationParameters.parameters()
-        serverConfiguration.hostAddressString = authParameters.hostname
+        serverConfiguration.hostAddressString = authParameters.processURL
         serverConfiguration.isCommunicationOverSecureLayer = authParameters.https
         serverConfiguration.serviceDocument = authParameters.serviceDocument.encoding()
         serverConfiguration.port = authParameters.port
@@ -41,38 +41,56 @@ class AIMSSplashscreenViewModel: AIMSLoginViewModelProtocol {
         switch lastLoginType {
         case kAIMSAuthenticationCredentialIdentifier:
             // Check for AIMS sessions
-            guard let retrievedData = AFAKeychainWrapper.dataFor(matchingIdentifier: persistenceStackModelName()) else { return false }
-            let decoder = JSONDecoder()
-            do {
-                let alfrescoCredential = try decoder.decode(AlfrescoCredential.self, from: retrievedData)
-                serverConfiguration.acessToken = alfrescoCredential.accessToken
-            } catch {
-                AFALog.logError("Cannot decode credential information from the keychain")
-                return false
+            let aimsUsername = sud.string(forKey: kAIMSUsernameCredentialIdentifier)
+            if let username = aimsUsername {
+                let normalizedHostName = NSString(string: serverConfiguration.hostAddressString).normalizedPersistenceStackName()
+                let normalizedServiceDocument = NSString(string: serverConfiguration.serviceDocument).normalizedPersistenceStackName()
+                let normalizedUsername = NSString(string: username).normalizedPersistenceStackName()
+                let normalizedPersistenceStackName = String(format: "%@@%@@%@", normalizedHostName, normalizedServiceDocument, normalizedUsername)
+                
+                guard let retrievedData = AFAKeychainWrapper.dataFor(matchingIdentifier: normalizedPersistenceStackName) else { return false }
+                let decoder = JSONDecoder()
+                do {
+                    let alfrescoCredential = try decoder.decode(AlfrescoCredential.self, from: retrievedData)
+                    serverConfiguration.credential = alfrescoCredential.toASDKModelCredentialType()
+                } catch {
+                    AFALog.logError("Cannot decode credential information from the keychain")
+                    return false
+                }
             }
         case kPremiseAuthentificationCredentialIdentifier:
             if let premiseHostAdress = sud.string(forKey: kPremiseHostNameCredentialIdentifier) {
                 serverConfiguration.hostAddressString = premiseHostAdress
             }
-            if let premiseUsername = sud.string(forKey: kPremiseUsernameCredentialIdentifier) {
-                serverConfiguration.username = premiseUsername
-            }
             serverConfiguration.isCommunicationOverSecureLayer = sud.bool(forKey: kPremiseSecureLayerCredentialIdentifier)
-            serverConfiguration.password = AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName())
+            
+            var premiseUsername, premisePassword: String?
+            premiseUsername = sud.string(forKey: kPremiseUsernameCredentialIdentifier)
+            premisePassword = AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName())
+            
+            if let username = premiseUsername, let password = premisePassword {
+                let baseAuthCredential = ASDKModelCredentialBaseAuth.init(username: username, password: password)
+                serverConfiguration.credential = baseAuthCredential
+            } else {
+                return false
+            }
         case kCloudAuthetificationCredentialIdentifier:
             if let cloudHostAddress = sud.string(forKey: kCloudHostNameCredentialIdentifier) {
                 serverConfiguration.hostAddressString = cloudHostAddress
             }
-            if let cloudUsername = sud.string(forKey: kCloudUsernameCredentialIdentifier) {
-                serverConfiguration.username = cloudUsername
+            
+            var cloudUsername, cloudPassword : String?
+            cloudUsername = sud.string(forKey: kCloudUsernameCredentialIdentifier)
+            cloudPassword = AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName())
+            
+            if let username = cloudUsername, let password = cloudPassword {
+                let baseAuthCredential = ASDKModelCredentialBaseAuth.init(username: username, password: password)
+                serverConfiguration.credential = baseAuthCredential
+            } else {
+                return false
             }
-            serverConfiguration.password = AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName())
         default:
             AFALog.logWarning("Restoring last session information failed or user has not logged in yet.")
-            return false
-        }
-        
-        if serverConfiguration.acessToken == nil && serverConfiguration.password == nil {
             return false
         }
         

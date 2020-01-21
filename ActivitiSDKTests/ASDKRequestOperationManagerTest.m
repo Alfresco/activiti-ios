@@ -39,9 +39,10 @@
                                                                                                 port:port
                                                                                      overSecureLayer:overSecureLayer];
     
-    id authenticationProvider = OCMClassMock([ASDKBasicAuthenticationProvider class]);
+    id credential = OCMClassMock([ASDKModelCredentialBaseAuth class]);
+    
     self.requestOperationManager = [[ASDKRequestOperationManager alloc] initWithBaseURL:servicePathFactory.baseURL
-                                                                 authenticationProvider:authenticationProvider];
+                                                                             credential:credential];
 }
 
 - (void)tearDown {
@@ -61,13 +62,16 @@
 
 - (void)testThatItReplacesAuthenticationProvider {
     // given
-    id newAuthenticationProvider = OCMClassMock([AFJSONRequestSerializer class]);
+    ASDKModelCredentialBaseAuth *credential = [[ASDKModelCredentialBaseAuth alloc] initWithUsername:@"test"
+                                                                 password:@"test"];
     
     // when
-    [self.requestOperationManager replaceAuthenticationProvider:newAuthenticationProvider];
+    [self.requestOperationManager updateCredential:credential];
     
     // then
-    XCTAssertEqual(self.requestOperationManager.requestSerializer, newAuthenticationProvider);
+    NSDictionary *httpRequestHeaders = self.requestOperationManager.requestSerializer.HTTPRequestHeaders;
+
+    XCTAssertEqualObjects(httpRequestHeaders[@"Authorization"], @"Basic dGVzdDp0ZXN0");
 }
 
 @end
