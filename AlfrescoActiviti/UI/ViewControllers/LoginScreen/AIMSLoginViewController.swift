@@ -300,7 +300,7 @@ extension AIMSLoginViewController: AIMSLoginViewModelDelegate {
             sSelf.controllerState = .isIdle
             
             sSelf.alfrescoURLTextFieldController?.setErrorText("", errorAccessibilityValue: "")
-            let errorMessage = (error as NSError).mapToMessage()
+            let errorMessage = error.mapToMessage()
             if UIDevice.current.userInterfaceIdiom == .pad {
                 sSelf.delegate?.showError(message: errorMessage)
             } else {
