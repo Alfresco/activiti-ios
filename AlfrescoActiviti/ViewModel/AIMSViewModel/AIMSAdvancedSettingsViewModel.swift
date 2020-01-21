@@ -24,7 +24,7 @@ class AIMSAdvancedSettingsViewModel {
     let transportProtocolText = NSLocalizedString(kLocalizationAdvancedSettingsScreenTransportProtocolText, comment: "Transport Protocol")
     let httpsText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHttpsText, comment: "HTTPS")
     let portPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenPortPlaceholderText, comment: "Port")
-    let processServicessAppText = NSLocalizedString(kLocalizationLoginScreenProcessServicesAppText, comment: "App name")
+    let processServicessAppText = NSLocalizedString(kLocalizationAdvancedSettingsScreenAlfrescoProcessServiceSettingsText, comment: "App name")
     let serviceDocumentPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText, comment: "Service Document")
     let authenticationText = NSLocalizedString(kLocalizationAdvancedSettingsScreenAuthenticationText, comment: "Authentication")
     let realmPlaceholderText = NSLocalizedString(kLocalizationAdvancedSettingsScreenRealmPlaceholderText, comment: "Realm")

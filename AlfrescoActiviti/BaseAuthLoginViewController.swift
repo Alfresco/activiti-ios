@@ -103,7 +103,10 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
             hostNameLabel.text = AIMSAuthenticationParameters.parameters().hostname
             hostNameLabel.textColor = colorSchemeManager.grayColorScheme.primaryColor
             hostNameLabel.font = colorSchemeManager.labelsTypographyScheme.subtitle2
-        } 
+            helpButton.isHidden = true
+        } else  if (model.loginStrategy as? CloudLoginStrategy) != nil  {
+            infoLabel.isHidden = true
+        }
         
         // Username textfield
         usernameTextfield.rightViewMode = .unlessEditing
