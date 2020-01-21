@@ -159,6 +159,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                     // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
                     // status to the caller
                     [self postNotificationForUnauthorizedAccessWithError:error];
+                    completionHandler(response, responseObject, error);
                 }
             } else {
                 completionHandler(response, responseObject, error);
