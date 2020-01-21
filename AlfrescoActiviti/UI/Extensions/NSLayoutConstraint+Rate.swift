@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (C) 2005-2018 Alfresco Software Limited.
  *
- * This file is part of the Alfresco Activiti Mobile SDK.
+ * This file is part of the Alfresco Activiti iOS App.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,17 @@
  *  limitations under the License.
  ******************************************************************************/
 
-#import <AFNetworking/AFNetworking.h>
+import Foundation
+import UIKit
 
-@interface ASDKJSONResponseSerializer : AFJSONResponseSerializer
-
-@end
+extension NSLayoutConstraint {
+    func scale(in view: UIView, heightNavigationBar: CGFloat = 0, rate: CGFloat = 0.2) {
+        let spaceMax: CGFloat = self.constant
+        let spaceMin: CGFloat = self.constant * rate
+        let heightMax: CGFloat = 896.0
+        let heightMin: CGFloat = 568.0
+        let height = view.bounds.size.height
+        let rate: CGFloat = (heightMax - heightMin) / (spaceMax - spaceMin)
+        self.constant = (height - heightMin) / rate + spaceMin - heightNavigationBar
+    }
+}

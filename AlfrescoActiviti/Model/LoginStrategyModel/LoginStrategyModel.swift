@@ -62,9 +62,11 @@ class CloudLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
         serverConfiguration.hostAddressString = kASDKAPICloudHostnamePath
         serverConfiguration.isCommunicationOverSecureLayer = true
         serverConfiguration.serviceDocument = kASDKAPIApplicationPath
-        serverConfiguration.username = username
-        serverConfiguration.password = password
+        
+        let baseAuthCredential = ASDKModelCredentialBaseAuth.init(username: username, password: password)
+        serverConfiguration.credential = baseAuthCredential
         self.serverConfiguration = serverConfiguration
+        
         return .success(serverConfiguration)
     }
     
@@ -75,7 +77,9 @@ class CloudLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
         if let serverConfiguration = self.serverConfiguration {
             sud.set(serverConfiguration.hostAddressString, forKey: kCloudHostNameCredentialIdentifier)
             sud.set(serverConfiguration.isCommunicationOverSecureLayer, forKey: kCloudSecureLayerCredentialIdentifier)
-            sud.set(serverConfiguration.username, forKey: kCloudUsernameCredentialIdentifier)
+            
+            guard let baseAuthCredential = serverConfiguration.credential as? ASDKModelCredentialBaseAuth else { return }
+            sud.set(baseAuthCredential.username, forKey: kCloudUsernameCredentialIdentifier)
         }
         
         sud.synchronize()
@@ -96,8 +100,10 @@ class PremiseLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
             serverConfiguration.isCommunicationOverSecureLayer = aimsParameters.https
             serverConfiguration.serviceDocument = aimsParameters.serviceDocument.encoding()
             serverConfiguration.port = aimsParameters.port
-            serverConfiguration.username = username
-            serverConfiguration.password = password
+            
+            let baseAuthCredential = ASDKModelCredentialBaseAuth.init(username: username, password: password)
+            serverConfiguration.credential = baseAuthCredential
+            
             self.serverConfiguration = serverConfiguration
             return .success(serverConfiguration)
         case .failure(let error):
@@ -112,7 +118,9 @@ class PremiseLoginStrategy:BaseLoginStrategy, BaseAuthLoginStrategyProtocol {
         if let serverConfiguration = self.serverConfiguration {
             sud.set(serverConfiguration.hostAddressString, forKey: kPremiseHostNameCredentialIdentifier)
             sud.set(serverConfiguration.isCommunicationOverSecureLayer, forKey: kPremiseSecureLayerCredentialIdentifier)
-            sud.set(serverConfiguration.username, forKey: kPremiseUsernameCredentialIdentifier)
+            
+            guard let baseAuthCredential = serverConfiguration.credential as? ASDKModelCredentialBaseAuth else { return }
+            sud.set(baseAuthCredential.username, forKey: kPremiseUsernameCredentialIdentifier)
         }
         
         sud.synchronize()

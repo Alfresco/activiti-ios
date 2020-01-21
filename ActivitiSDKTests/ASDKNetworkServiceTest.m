@@ -32,9 +32,10 @@
     id servicePathFactory = OCMClassMock([ASDKServicePathFactory class]);
     id parserOperationManager = OCMClassMock([ASDKParserOperationManager class]);
     id diskServices = OCMClassMock([ASDKDiskServices class]);
-    id authenticationProvider = OCMClassMock([ASDKBasicAuthenticationProvider class]);
+    id credential = OCMClassMock([ASDKModelCredentialBaseAuth class]);
+    
     ASDKRequestOperationManager *requestOperationManager = [[ASDKRequestOperationManager alloc] initWithBaseURL:[self baseURL]
-                                                                                         authenticationProvider:authenticationProvider];
+                                                                                         credential:credential];
     self.genericNetworkService = [[ASDKNetworkService alloc] initWithRequestManager:requestOperationManager
                                                                       parserManager:parserOperationManager
                                                                  servicePathFactory:servicePathFactory

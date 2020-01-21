@@ -24,5 +24,5 @@ extern NSInteger const  kASDKPersistenceStackInitializationErrorCode;
 extern NSInteger const  kASDKPersistenceStackSaveViewContextErrorCode;
 extern NSInteger const  kASDKPersistenceStackCleanCacheStalledDataErrorCode;
 
-//
+// Default parameters
 extern NSString * const kASDKPersistenceStackNameDefault;

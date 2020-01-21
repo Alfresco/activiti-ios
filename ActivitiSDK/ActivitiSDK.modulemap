@@ -160,7 +160,7 @@ framework module ActivitiSDK {
         private header "ASDKModelFormPreProcessorResponse.h"
         private header "ASDKProcessDefinitionMapCacheMapper.h"
         private header "ASDKModelBase.h"
-
+        private header "ASDKModelCredentialBaseProtocol.h"
     }
 }
 

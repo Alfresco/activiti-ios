@@ -44,6 +44,7 @@ extern NSString *kPremiseAuthentificationCredentialIdentifier;
 extern NSString *kAIMSAuthenticationCredentialIdentifier;
 extern NSString *kCloudUsernameCredentialIdentifier;
 extern NSString *kPremiseUsernameCredentialIdentifier;
+extern NSString *kAIMSUsernameCredentialIdentifier;
 extern NSString *kCloudHostNameCredentialIdentifier;
 extern NSString *kPremiseHostNameCredentialIdentifier;
 extern NSString *kCloudSecureLayerCredentialIdentifier;
