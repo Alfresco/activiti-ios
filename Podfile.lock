@@ -696,7 +696,7 @@ PODS:
     - MotionInterchange (~> 1.6)
   - MotionInterchange (1.6.0)
   - MotionTransitioning (5.0.0)
-  - OCMock (3.4.3)
+  - OCMock (3.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.2)
@@ -709,10 +709,10 @@ DEPENDENCIES:
   - JWT
   - Mantle (~> 2.1)
   - MaterialComponents (~> 92.5)
-  - OCMock (~> 3.4)
+  - OCMock (~> 3.5)
 
 SPEC REPOS:
-  https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk:
+  https://github.com/Alfresco/alfresco-private-podspecs-ios-sdk.git:
     - AlfrescoAuth
     - AlfrescoCore
   https://github.com/CocoaPods/Specs.git:
@@ -753,8 +753,8 @@ SPEC CHECKSUMS:
   MotionAnimator: ee16aa30567c5bae0fb2750c132915829cfaaf8a
   MotionInterchange: ead0e3ae1f3a5fb539e289debbc7ae036160a10d
   MotionTransitioning: 23d25edc2f4606efb922403cbac6d81af37aa33a
-  OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
+  OCMock: 4ab4577fc941af31f4a0398f6e7e230cf21fc72a
 
-PODFILE CHECKSUM: e0de044887d4997c59e1db240701b38c86258143
+PODFILE CHECKSUM: 7304512351392061131eec716642a93fb9f0416d
 
 COCOAPODS: 1.8.4

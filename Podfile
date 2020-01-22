@@ -26,7 +26,7 @@ abstract_target 'Shared' do
 
 	target 'ActivitiSDK' do
         target 'ActivitiSDKTests' do
-            pod 'OCMock', '~> 3.4'
+            pod 'OCMock', '~> 3.5'
         end
 	end
 end
