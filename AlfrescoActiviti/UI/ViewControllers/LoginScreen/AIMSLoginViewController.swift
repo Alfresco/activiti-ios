@@ -270,16 +270,9 @@ extension AIMSLoginViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        var shouldEnable = false
-        if alfrescoURLTextField == textField {
-            if let text = textField.text {
-                if  let textRange = Range(range, in: text) {
-                    let updatedText = text.replacingCharacters(in: textRange, with: string)
-                    shouldEnable = (updatedText != "")
-                }
-            }
-            shouldEnableConnectButton()
-        }
+        
+        shouldEnableConnectButton()
+        
         return true
     }
     

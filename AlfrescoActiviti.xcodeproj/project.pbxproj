@@ -7216,7 +7216,7 @@
 		137194451B6922DE00D4E1F0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Emanuel Lupu-Marinei";
 				TargetAttributes = {
 					1371944C1B6922DE00D4E1F0 = {
@@ -8071,6 +8071,7 @@
 				PRODUCT_NAME = "Alfresco Activiti";
 				PROVISIONING_PROFILE = "213b908d-3e87-4ef3-b7fb-fe10925db92e";
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
