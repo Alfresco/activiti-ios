@@ -66,6 +66,10 @@ class AIMSSplashscreenViewModel: AIMSLoginViewModelProtocol {
             
             var premiseUsername, premisePassword: String?
             premiseUsername = sud.string(forKey: kPremiseUsernameCredentialIdentifier)
+            
+            let baseAuthCredential = ASDKModelCredentialBaseAuth(username: premiseUsername ?? "", password: "")
+            serverConfiguration.credential = baseAuthCredential
+            
             premisePassword = AFAKeychainWrapper.keychainStringFrom(matchingIdentifier: persistenceStackModelName())
             
             if let username = premiseUsername, let password = premisePassword {
