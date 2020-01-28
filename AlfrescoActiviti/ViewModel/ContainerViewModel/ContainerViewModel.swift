@@ -28,7 +28,6 @@ class ContainerViewModel: NSObject {
     
     // Refresh session related properties
     private var refreshTokenDispatchGroup = DispatchGroup()
-    private var refreshTokenBlocks: [DispatchWorkItem] = []
     private var credentialError: APIError?
     private var credential: AlfrescoCredential?
     private let loginService = AFAServiceRepository.shared()?.serviceObject(forPurpose: .aimsLogin) as? AIMSLoginService
@@ -161,32 +160,15 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
 // MARK: - ASDKNetworkSession Delegate
 extension ContainerViewModel: ASDKNetworkSessionProtocol {
     func refreshNetworkSession(completionBlock: @escaping ASDKNetworkSessionRefreshCompletionBlock) {
-        for block in refreshTokenBlocks {
-            block.cancel()
-            refreshTokenDispatchGroup.leave()
-        }
-        
         AFALog.logVerbose("Preparing to refresh AIMS session")
         
         // Wait for a token refresh operation to finish then return the result via the completion block
         refreshTokenDispatchGroup.enter()
-        
-        let refreshBlock = DispatchWorkItem { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.refreshAIMSSession()
-        }
-        refreshTokenBlocks.append(refreshBlock)
-        
-        DispatchQueue.global().async(execute: refreshBlock)
+        refreshAIMSSession()
         
         refreshTokenDispatchGroup.notify(queue: .global()) {[weak self] in
             guard let sSelf = self else { return }
-            
-            sSelf.refreshTokenBlocks.removeAll()
-            
-            if (sSelf.credential != nil || sSelf.credentialError != nil) {
-                completionBlock(sSelf.credentialError)
-            }
+            completionBlock(sSelf.credentialError)
         }
     }
 }
