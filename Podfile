@@ -22,6 +22,7 @@ abstract_target 'Shared' do
         pod 'Buglife', '~> 2.10'
         pod 'AlfrescoAuth'
         pod 'MaterialComponents' , '~> 92.5'
+        pod 'Firebase/Analytics'
 	end
 
 	target 'ActivitiSDK' do

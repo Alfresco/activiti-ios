@@ -36,6 +36,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <Buglife/Buglife.h>
+@import Firebase;
 
 
 static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRACE;
@@ -51,6 +52,10 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // Firebase Analytics integration
+    [FIRApp configure];
+    
     // Cocoa Lumberjack integration
     [[DDOSLogger sharedInstance] setLogFormatter:[AFALogFormatter new]];
     [[DDTTYLogger sharedInstance] setLogFormatter:[AFALogFormatter new]];
