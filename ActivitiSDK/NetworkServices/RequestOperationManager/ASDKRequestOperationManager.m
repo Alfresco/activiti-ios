@@ -40,6 +40,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
 
 @property (strong, nonatomic) AFHTTPRequestSerializer               *authenticationProvider;
 @property (strong, nonatomic) id<ASDKModelCredentialBaseProtocol>   credential;
+@property (assign, atomic) BOOL                                     isSessionRefreshInProgress;
 
 @end
 
@@ -129,87 +130,97 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
     void (^authFailBlock)(NSURLResponse *response, id responseObject, NSError *error) = ^(NSURLResponse *response, id responseObject, NSError *error)
     {
         __strong typeof(self) strongSelf = weakSelf;
-        
+        dispatch_semaphore_t failBlockSemaphore = dispatch_semaphore_create(kNilOptions);
         NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-        
+
         if ([httpResponse statusCode] == ASDKHTTPCode401Unauthorised || ![strongSelf.credential areCredentialValid]) {
-            if (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN) {
+            if (strongSelf.reachabilityManager.isReachableViaWiFi || strongSelf.reachabilityManager.isReachableViaWWAN) {
                 // Since there was an error, call the refresh method and then redo the original task
                 // Refresh and store new fresh token as calling super into AFNetworking perfrorm the
                 // request using the new token
                 if (strongSelf.sessionDelegate) {
-                    [strongSelf.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
-                        if (!error) {
-                            NSMutableURLRequest *mutableOriginalRequest = [request mutableCopy];
+                    if (!strongSelf.isSessionRefreshInProgress) {
+                        strongSelf.isSessionRefreshInProgress = YES;
+                        [strongSelf.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
+                            weakSelf.isSessionRefreshInProgress = NO;
                             
-                            // Execute original request and re-attach the newly acquired access token
-                            [mutableOriginalRequest setValue:[weakSelf.authenticationProvider valueForHTTPHeaderField:@"Authorization"]
-                                          forHTTPHeaderField:@"Authorization"];
-                            NSURLSessionDataTask *originalTask = [super dataTaskWithRequest:mutableOriginalRequest
-                                                                             uploadProgress:uploadProgressBlock
-                                                                           downloadProgress:downloadProgressBlock
-                                                                          completionHandler:completionHandler];
-                            [originalTask resume];
-                        } else {
-                            ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
-                            [weakSelf postNotificationForUnauthorizedAccessWithError:error];
-                        }
-                    }];
+                            dispatch_semaphore_signal(failBlockSemaphore);
+                            
+                            if (!error) {
+                                [weakSelf executeRequest:request
+                                          uploadProgress:uploadProgressBlock
+                                        downloadProgress:downloadProgressBlock
+                                       completionHandler:completionHandler];
+                            } else {
+                                ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
+                                [weakSelf postNotificationForUnauthorizedAccessWithError:error];
+                            }
+                        }];
+                    } else {
+                        dispatch_semaphore_wait(failBlockSemaphore, DISPATCH_TIME_FOREVER);
+                        
+                        [strongSelf executeRequest:request
+                                    uploadProgress:uploadProgressBlock
+                                  downloadProgress:downloadProgressBlock
+                                 completionHandler:completionHandler];
+                    }
                 } else {
                     // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
                     // status to the caller
-                    [self postNotificationForUnauthorizedAccessWithError:error];
+                    [strongSelf postNotificationForUnauthorizedAccessWithError:error];
                     completionHandler(response, responseObject, error);
                 }
-            } else {
+            } else { // If network reachability is limited, report the error as is
                 completionHandler(response, responseObject, error);
             }
-        } else {
+        } else { // If an error, other than authentication ones is encountered report it as is
             completionHandler(response, responseObject, error);
         }
     };
     
     NSURLSessionDataTask *task = nil;
-    // Check if credentials are about to expire and refresh the session if it's the case
-    if (![self.credential areCredentialValid] && (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN)) {
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    if (![self.credential areCredentialValid] &&
+        (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN)) {
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(kNilOptions);
         
-        if (self.sessionDelegate) {
-            __weak typeof(self) weakSelf = self;
-            [self.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
-                __strong typeof(self) strongSelf = weakSelf;
-                
-                if (!error) {
-                    dispatch_semaphore_signal(semaphore);
-                } else {
-                    ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
-                    [strongSelf postNotificationForUnauthorizedAccessWithError:error];
-                }
-            }];
-        } else {
-            // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
-            // status to the caller
-            [self postNotificationForUnauthorizedAccessWithError:nil];
+        if (!self.isSessionRefreshInProgress) {
+            self.isSessionRefreshInProgress = YES;
+            
+            if (self.sessionDelegate) {
+                __weak typeof(self) weakSelf = self;
+                [self.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
+                    __strong typeof(self) strongSelf = weakSelf;
+                    
+                    strongSelf.isSessionRefreshInProgress = NO;
+                    
+                    if (!error) {
+                        dispatch_semaphore_signal(semaphore);
+                    } else {
+                        ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
+                        [strongSelf postNotificationForUnauthorizedAccessWithError:error];
+                    }
+                }];
+            } else {
+                // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
+                // status to the caller
+                [self postNotificationForUnauthorizedAccessWithError:nil];
+            }
         }
         
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         
-        NSMutableURLRequest *mutableOriginalRequest = [request mutableCopy];
-        
-        // Execute original request and re-attach the newly acquired access token
-        [mutableOriginalRequest setValue:[weakSelf.authenticationProvider valueForHTTPHeaderField:@"Authorization"]
-                      forHTTPHeaderField:@"Authorization"];
-        task = [super dataTaskWithRequest:mutableOriginalRequest
-                           uploadProgress:uploadProgressBlock
-                         downloadProgress:downloadProgressBlock
-                        completionHandler:completionHandler];
-    } else { // Execute original request but capture the failure due to credential errors
+        [self executeRequest:request
+              uploadProgress:uploadProgressBlock
+            downloadProgress:downloadProgressBlock
+           completionHandler:completionHandler];
+    } else {
+        // Execute original request but capture the failure due to credential errors
         task = [super dataTaskWithRequest:request
                            uploadProgress:uploadProgressBlock
                          downloadProgress:downloadProgressBlock
                         completionHandler:authFailBlock];
     }
-    
+     
     return task;
 }
 
@@ -230,6 +241,22 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
     [[NSNotificationCenter defaultCenter] postNotificationName:kADSKAPIUnauthorizedRequestNotification
                                                         object:nil
                                                       userInfo:userInfo];
+}
+
+- (void)executeRequest:(NSURLRequest *)request
+        uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
+      downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
+     completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
+    NSMutableURLRequest *mutableOriginalRequest = [request mutableCopy];
+    
+    // Execute original request and re-attach the newly acquired access token
+    [mutableOriginalRequest setValue:[self.authenticationProvider valueForHTTPHeaderField:@"Authorization"]
+                  forHTTPHeaderField:@"Authorization"];
+    NSURLSessionDataTask *originalTask = [super dataTaskWithRequest:mutableOriginalRequest
+                                                     uploadProgress:uploadProgressBlock
+                                                   downloadProgress:downloadProgressBlock
+                                                  completionHandler:completionHandler];
+    [originalTask resume];
 }
 
 @end
