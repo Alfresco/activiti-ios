@@ -66,6 +66,7 @@ class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
                 delegate?.logInWarning(with: error.localizedDescription)
             case .success(_):
                 authenticationService = AIMSLoginService(with: authParameters)
+                AFAServiceRepository.shared()?.registerServiceObject(authenticationService, forPurpose: .aimsLogin)
                 authenticationService?.login(onViewController: viewController, delegate: self)
             }
         }
@@ -109,6 +110,7 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
             
             // Save Alfresco credentials and server connection parameters
             self.alfrescoCredential = alfrescoCredential
+            authenticationService?.session = session
             authParameters?.save()
             
             let persistenceStackModelName = self.persistenceStackModelName()

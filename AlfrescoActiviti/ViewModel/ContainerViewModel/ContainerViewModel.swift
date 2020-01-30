@@ -97,6 +97,8 @@ class ContainerViewModel: NSObject {
     }
     
     fileprivate func removeLocalCredentials() {
+        AFAServiceRepository.shared()?.removeService(forPurpose: .aimsLogin)
+        
         // 2. Remove credentials from Keychain
         AFAKeychainWrapper.deleteItemFromKeychain(withIdentifier: persistenceStackModelName)
         if let persistenceStackModelName = self.persistenceStackModelName {
@@ -117,6 +119,7 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
         case .success(let credential):
             // Update the access token for future requests
             self.credential = credential
+            loginService?.session = session
             let sdkBootstrap = ASDKBootstrap.sharedInstance()
             sdkBootstrap?.updateServerConfiguration(withCredential: credential.toASDKModelCredentialType())
             
