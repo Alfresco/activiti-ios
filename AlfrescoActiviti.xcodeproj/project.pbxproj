@@ -878,6 +878,7 @@
 		B9FD29EE23BF628600403968 /* ASDKModelCredentialAIMS.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FD29EC23BF628600403968 /* ASDKModelCredentialAIMS.m */; };
 		B9FD29F423C3589D00403968 /* ASDKModelCredentialBaseProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B9FD29F323C3589D00403968 /* ASDKModelCredentialBaseProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B9FD29F623C4C58F00403968 /* AlfrescoCredential+ActivitiSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD29F523C4C58F00403968 /* AlfrescoCredential+ActivitiSDK.swift */; };
+		E306347623E04FB500DD8248 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E306347523E04FB400DD8248 /* GoogleService-Info.plist */; };
 		E307B32323D5AFB3005933E9 /* NSError+Mapers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E307B32223D5AFB3005933E9 /* NSError+Mapers.swift */; };
 		E335FA762372BE35005EE76B /* BaseAuthLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E335FA752372BE35005EE76B /* BaseAuthLoginViewController.swift */; };
 		E335FA782372C48A005EE76B /* BaseAuthLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E335FA772372C48A005EE76B /* BaseAuthLoginViewModel.swift */; };
@@ -1978,6 +1979,7 @@
 		B9FD29F323C3589D00403968 /* ASDKModelCredentialBaseProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKModelCredentialBaseProtocol.h; path = Model/ASDKModelCredentialBaseProtocol/ASDKModelCredentialBaseProtocol.h; sourceTree = "<group>"; };
 		B9FD29F523C4C58F00403968 /* AlfrescoCredential+ActivitiSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AlfrescoCredential+ActivitiSDK.swift"; path = "ViewModel/AIMSViewModel/Extensions/AlfrescoCredential+ActivitiSDK.swift"; sourceTree = "<group>"; };
 		E30248B522AAA083006C5A3B /* AlfrescoActiviti.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AlfrescoActiviti.xcconfig; sourceTree = "<group>"; };
+		E306347523E04FB400DD8248 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "AlfrescoActiviti/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E307B32223D5AFB3005933E9 /* NSError+Mapers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSError+Mapers.swift"; path = "UI/Extensions/NSError+Mapers.swift"; sourceTree = "<group>"; };
 		E335FA752372BE35005EE76B /* BaseAuthLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseAuthLoginViewController.swift; path = UI/ViewControllers/LoginScreen/BaseAuthLoginViewController.swift; sourceTree = "<group>"; };
 		E335FA772372C48A005EE76B /* BaseAuthLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseAuthLoginViewModel.swift; path = ViewModel/AIMSViewModel/BaseAuthLoginViewModel.swift; sourceTree = "<group>"; };
@@ -3501,6 +3503,7 @@
 		137194441B6922DE00D4E1F0 = {
 			isa = PBXGroup;
 			children = (
+				E306347523E04FB400DD8248 /* GoogleService-Info.plist */,
 				1371944F1B6922DE00D4E1F0 /* AlfrescoActiviti */,
 				1371947F1B6924DE00D4E1F0 /* ActivitiSDK */,
 				1371944E1B6922DE00D4E1F0 /* Products */,
@@ -7273,6 +7276,7 @@
 				1371945F1B6922DE00D4E1F0 /* Main.storyboard in Resources */,
 				13BDA73F1B7B632100A2CE40 /* Localizable.strings in Resources */,
 				B9BF25BB236338590017B71D /* Muli-Light.ttf in Resources */,
+				E306347623E04FB500DD8248 /* GoogleService-Info.plist in Resources */,
 				13A578541CEC677C0014B6FD /* glyphicons-regular.otf in Resources */,
 				137194641B6922DE00D4E1F0 /* LaunchScreen.xib in Resources */,
 				137194611B6922DE00D4E1F0 /* Images.xcassets in Resources */,
