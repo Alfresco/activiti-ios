@@ -125,12 +125,13 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                                uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
                              downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
                             completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(kNilOptions);
+    
     __weak typeof(self) weakSelf = self;
     // Create a completion block that handles unauthorized requests and wraps the original request
     void (^authFailBlock)(NSURLResponse *response, id responseObject, NSError *error) = ^(NSURLResponse *response, id responseObject, NSError *error)
     {
         __strong typeof(self) strongSelf = weakSelf;
-        dispatch_semaphore_t failBlockSemaphore = dispatch_semaphore_create(kNilOptions);
         NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
 
         if ([httpResponse statusCode] == ASDKHTTPCode401Unauthorised || ![strongSelf.credential areCredentialValid]) {
@@ -144,8 +145,6 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                         [strongSelf.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
                             weakSelf.isSessionRefreshInProgress = NO;
                             
-                            dispatch_semaphore_signal(failBlockSemaphore);
-                            
                             if (!error) {
                                 [weakSelf executeRequest:request
                                           uploadProgress:uploadProgressBlock
@@ -157,7 +156,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                             }
                         }];
                     } else {
-                        dispatch_semaphore_wait(failBlockSemaphore, DISPATCH_TIME_FOREVER);
+                        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
                         
                         [strongSelf executeRequest:request
                                     uploadProgress:uploadProgressBlock
@@ -181,8 +180,6 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
     NSURLSessionDataTask *task = nil;
     if (![self.credential areCredentialValid] &&
         (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN)) {
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(kNilOptions);
-        
         if (!self.isSessionRefreshInProgress) {
             self.isSessionRefreshInProgress = YES;
             
