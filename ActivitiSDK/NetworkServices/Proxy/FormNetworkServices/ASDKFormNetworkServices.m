@@ -75,27 +75,27 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleSuccessfulFormModelsResponseForTask:task
-                                                                         responseObject:responseObject
-                                                                    withCompletionBlock:completionBlock];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to start form for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        [strongSelf handleSuccessfulFormModelsResponseForTask:task
+                                               responseObject:responseObject
+                                          withCompletionBlock:completionBlock];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to start form for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -114,27 +114,27 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleSuccessfulFormModelsResponseForTask:task
-                                                                         responseObject:responseObject
-                                                                    withCompletionBlock:completionBlock];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to start form for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        [strongSelf handleSuccessfulFormModelsResponseForTask:task
+                                               responseObject:responseObject
+                                          withCompletionBlock:completionBlock];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to start form for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -149,51 +149,51 @@ withFormFieldValueRequestRepresentation:(ASDKFormFieldValueRequestRepresentation
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[NSString stringWithFormat:[self.servicePathFactory taskFormServicePathFormat], taskID]
-                            parameters:[formFieldValuesRepresentation jsonDictionary]
-                              progress:nil
-                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   // Check status code
-                                   NSInteger statusCode = [task statusCode];
-                                   if (ASDKHTTPCode200OK == statusCode) {
-                                       NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                       ASDKLogVerbose(@"Form completed with success for request: %@",
-                                                      [task stateDescriptionForResponse:responseDictionary]);
-                                       
-                                       dispatch_async(strongSelf.resultsQueue, ^{
-                                           completionBlock(YES, nil);
-                                       });
-                                   } else {
-                                       ASDKLogVerbose(@"Failed to complete form for request: %@",
-                                                      [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                       
-                                       dispatch_async(strongSelf.resultsQueue, ^{
-                                           completionBlock(NO, nil);
-                                       });
-                                   }
-                                   
-                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   ASDKLogError(@"Failed to complete form for request: %@",
-                                                [task stateDescriptionForError:error]);
-                                   
-                                   dispatch_async(strongSelf.resultsQueue, ^{
-                                       completionBlock(NO, error);
-                                   });
-                               }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[NSString stringWithFormat:[strongSelf.servicePathFactory taskFormServicePathFormat], taskID]
+                                      parameters:[formFieldValuesRepresentation jsonDictionary]
+                                        progress:nil
+                                         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            // Check status code
+            NSInteger statusCode = [task statusCode];
+            if (ASDKHTTPCode200OK == statusCode) {
+                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+                ASDKLogVerbose(@"Form completed with success for request: %@",
+                               [task stateDescriptionForResponse:responseDictionary]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(YES, nil);
+                });
+            } else {
+                ASDKLogVerbose(@"Failed to complete form for request: %@",
+                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(NO, nil);
+                });
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to complete form for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)completeFormForProcessDefinition:(ASDKModelProcessDefinition *)processDefinition
@@ -211,56 +211,56 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
                           forKey:kASDKAPIGenericNameParameter];
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[self.servicePathFactory startFormCompletionPath]
-                            parameters:requestParameters
-                              progress:nil
-                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                   ASDKLogVerbose(@"Form completed successfully for request: %@",
-                                                  [task stateDescriptionForResponse:responseDictionary]);
-                                   
-                                   // Parse response data
-                                   NSString *parserContentType = CREATE_STRING(ASDKProcessParserContentTypeProcessInstanceDetails);
-                                   
-                                   [strongSelf.parserOperationManager
-                                    parseContentDictionary:responseDictionary
-                                    ofType:parserContentType
-                                    withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                        if (error) {
-                                            ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                            dispatch_async(weakSelf.resultsQueue, ^{
-                                                completionBlock(nil, error);
-                                            });
-                                        } else {
-                                            ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                            dispatch_async(weakSelf.resultsQueue, ^{
-                                                completionBlock(parsedObject, nil);
-                                            });
-                                        }
-                                    }];
-                                   
-                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   ASDKLogError(@"Failed to complete form for request: %@",
-                                                [task stateDescriptionForError:error]);
-                                   
-                                   dispatch_async(strongSelf.resultsQueue, ^{
-                                       completionBlock(nil, error);
-                                   });
-                               }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[strongSelf.servicePathFactory startFormCompletionPath]
+                                      parameters:requestParameters
+                                        progress:nil
+                                         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+            ASDKLogVerbose(@"Form completed successfully for request: %@",
+                           [task stateDescriptionForResponse:responseDictionary]);
+            
+            // Parse response data
+            NSString *parserContentType = CREATE_STRING(ASDKProcessParserContentTypeProcessInstanceDetails);
+            
+            [weakSelf.parserOperationManager
+             parseContentDictionary:responseDictionary
+             ofType:parserContentType
+             withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+                if (error) {
+                    ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(nil, error);
+                    });
+                } else {
+                    ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(parsedObject, nil);
+                    });
+                }
+            }];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to complete form for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)saveFormForTaskID:(NSString *)taskID
@@ -272,51 +272,51 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[NSString stringWithFormat:[self.servicePathFactory saveFormServicePathFormat], taskID]
-                            parameters:[formFieldValuesRepresentation jsonDictionary]
-                              progress:nil
-                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   // Check status code
-                                   NSInteger statusCode = [task statusCode];
-                                   if (ASDKHTTPCode200OK == statusCode) {
-                                       NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                       ASDKLogVerbose(@"Form was successfully saved with request: %@",
-                                                      [task stateDescriptionForResponse:responseDictionary]);
-                                       
-                                       dispatch_async(strongSelf.resultsQueue, ^{
-                                           completionBlock(YES, nil);
-                                       });
-                                   } else {
-                                       ASDKLogVerbose(@"Failed to save form for request: %@",
-                                                      [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                       
-                                       dispatch_async(strongSelf.resultsQueue, ^{
-                                           completionBlock(NO, nil);
-                                       });
-                                   }
-                                   
-                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   ASDKLogError(@"Failed to save form for request: %@",
-                                                [task stateDescriptionForError:error]);
-                                   
-                                   dispatch_async(strongSelf.resultsQueue, ^{
-                                       completionBlock(NO, error);
-                                   });
-                               }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[NSString stringWithFormat:[strongSelf.servicePathFactory saveFormServicePathFormat], taskID]
+                                      parameters:[formFieldValuesRepresentation jsonDictionary]
+                                        progress:nil
+                                         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            // Check status code
+            NSInteger statusCode = [task statusCode];
+            if (ASDKHTTPCode200OK == statusCode) {
+                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+                ASDKLogVerbose(@"Form was successfully saved with request: %@",
+                               [task stateDescriptionForResponse:responseDictionary]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(YES, nil);
+                });
+            } else {
+                ASDKLogVerbose(@"Failed to save form for request: %@",
+                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(NO, nil);
+                });
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to save form for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)fetchFormForTaskWithID:(NSString *)taskID
@@ -332,28 +332,28 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleSuccessfulFormModelsResponseForTask:dataTask
-                                                                              responseObject:responseObject
-                                                                         withCompletionBlock:completionBlock];
-                                  
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch form for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        [strongSelf handleSuccessfulFormModelsResponseForTask:dataTask
+                                               responseObject:responseObject
+                                          withCompletionBlock:completionBlock];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch form for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -371,46 +371,46 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeFormVariables);
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil);
-                                           });
-                                       }
-                                   }];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch rest field values for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeFormVariables);
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:parserContentType
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil);
+                });
+            }
+        }];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch rest field values for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
 }
 
 - (void)uploadContentWithModel:(ASDKModelFileContent *)file
@@ -424,93 +424,91 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[self.servicePathFactory contentFieldUploadServicePath]
-                            parameters:nil
-             constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                 NSError *error = nil;
-                 
-                 [formData appendPartWithFileData:contentData
-                                             name:kASDKAPIContentUploadMultipartParameter
-                                         fileName:file.fileName
-                                         mimeType:file.mimeType];
-                 
-                 if (error) {
-                     ASDKLogError(@"An error occured while appending multipart form data from file %@.", file.modelFileURL);
-                 }
-             } progress:^(NSProgress * _Nonnull uploadProgress) {
-                 __strong typeof(self) strongSelf = weakSelf;
-                 
-                 // If a progress block is provided report transfer progress information
-                 if (progressBlock) {
-                     NSUInteger percentProgress = (NSUInteger) (uploadProgress.completedUnitCount * 100 / uploadProgress.totalUnitCount);
-                     
-                     dispatch_async(strongSelf.resultsQueue, ^{
-                         progressBlock(percentProgress, nil);
-                     });
-                 }
-             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                 __strong typeof(self) strongSelf = weakSelf;
-                 
-                 // Remove operation reference
-                 [strongSelf.networkOperations removeObject:dataTask];
-                 
-                 NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                 ASDKLogVerbose(@"Form field content succesfully uploaded for request: %@",
-                                [task stateDescriptionForResponse:responseDictionary]);
-                 
-                 // Parse response data
-                 NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeContent);
-                 
-                 [strongSelf.parserOperationManager
-                  parseContentDictionary:responseDictionary
-                  ofType:parserContentType
-                  withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                      if (error) {
-                          ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                          dispatch_async(weakSelf.resultsQueue, ^{
-                              completionBlock(nil, error);
-                          });
-                      } else {
-                          ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                              // Generate the file path
-                              if (![self.diskServices doesFileAlreadyExistsForContent:parsedObject]) {
-                                  NSString *downloadPathForContent = [self.diskServices downloadPathForContent:parsedObject];
-                                  NSError *error = nil;
-                                  
-                                  // Save it into file system
-                                  BOOL isWritten = [contentData writeToFile:downloadPathForContent
-                                                                    options:kNilOptions
-                                                                      error:&error];
-                                  if (isWritten) {
-                                      ASDKLogVerbose(@"Local storage is written");
-                                  } else {
-                                      ASDKLogError(@"Error while storing local storage %@", error);
-                                  }
-                              }
-                          });
-                          dispatch_async(weakSelf.resultsQueue, ^{
-                              completionBlock(parsedObject, nil);
-                          });
-                      }
-                  }];
-             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                 __strong typeof(self) strongSelf = weakSelf;
-                 
-                 // Remove operation reference
-                 [strongSelf.networkOperations removeObject:dataTask];
-                 
-                 ASDKLogError(@"Failed to upload form field content for request: %@",
-                              [task stateDescriptionForError:error]);
-                 
-                 dispatch_async(strongSelf.resultsQueue, ^{
-                     completionBlock(nil, error);
-                 });
-             }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[strongSelf.servicePathFactory contentFieldUploadServicePath]
+                                      parameters:nil
+                       constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            NSError *error = nil;
+            
+            [formData appendPartWithFileData:contentData
+                                        name:kASDKAPIContentUploadMultipartParameter
+                                    fileName:file.fileName
+                                    mimeType:file.mimeType];
+            
+            if (error) {
+                ASDKLogError(@"An error occured while appending multipart form data from file %@.", file.modelFileURL);
+            }
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            // If a progress block is provided report transfer progress information
+            if (progressBlock) {
+                NSUInteger percentProgress = (NSUInteger) (uploadProgress.completedUnitCount * 100 / uploadProgress.totalUnitCount);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    progressBlock(percentProgress, nil);
+                });
+            }
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+            ASDKLogVerbose(@"Form field content succesfully uploaded for request: %@",
+                           [task stateDescriptionForResponse:responseDictionary]);
+            
+            // Parse response data
+            NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeContent);
+            
+            [weakSelf.parserOperationManager
+             parseContentDictionary:responseDictionary
+             ofType:parserContentType
+             withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+                if (error) {
+                    ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(nil, error);
+                    });
+                } else {
+                    ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                        // Generate the file path
+                        if (![weakSelf.diskServices doesFileAlreadyExistsForContent:parsedObject]) {
+                            NSString *downloadPathForContent = [weakSelf.diskServices downloadPathForContent:parsedObject];
+                            NSError *error = nil;
+                            
+                            // Save it into file system
+                            BOOL isWritten = [contentData writeToFile:downloadPathForContent
+                                                              options:kNilOptions
+                                                                error:&error];
+                            if (isWritten) {
+                                ASDKLogVerbose(@"Local storage is written");
+                            } else {
+                                ASDKLogError(@"Error while storing local storage %@", error);
+                            }
+                        }
+                    });
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(parsedObject, nil);
+                    });
+                }
+            }];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to upload form field content for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)downloadContentWithModel:(ASDKModelContent *)content
@@ -552,67 +550,67 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
     }
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDownloadTask *downloadTask =
-    [self.requestOperationManager downloadTaskWithRequest:downloadRequest
-                                                 progress:nil
-                                              destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-                                                  return [NSURL fileURLWithPath:downloadPathForContent];
-                                              } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-                                                  __strong typeof(self) strongSelf = weakSelf;
-                                                  
-                                                  // Remove operation reference
-                                                  [strongSelf.networkOperations removeObject:downloadTask];
-                                                  
-                                                  if (!error) {
-                                                      // Check status code
-                                                      NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                                                      if (ASDKHTTPCode200OK == statusCode) {
-                                                          ASDKLogVerbose(@"The form field content was successfully downloaded with request: %@",
-                                                                         [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                                          
-                                                          dispatch_async(strongSelf.resultsQueue, ^{
-                                                              NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
-                                                              completionBlock(content.modelID, downloadURL, NO, nil);
-                                                          });
-                                                      } else {
-                                                          ASDKLogVerbose(@"The form field content failed to download with request: %@",
-                                                                         [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                                          
-                                                          dispatch_async(strongSelf.resultsQueue, ^{
-                                                              completionBlock(content.modelID, nil, NO, nil);
-                                                          });
-                                                      }
-                                                  } else {
-                                                      ASDKLogError(@"Failed to download content for task with request: %@ - %@.\nBody:%@.\nReason:%@",
-                                                                   downloadRequest.HTTPMethod,
-                                                                   downloadRequest.URL.absoluteString,
-                                                                   [[NSString alloc] initWithData:downloadRequest.HTTPBody encoding:NSUTF8StringEncoding],
-                                                                   error.localizedDescription);
-                                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                                          completionBlock(nil, nil, NO, error);
-                                                      });
-                                                  }
-                                              }];
-    
-    // If a progress block is provided report transfer progress information
-    if (progressBlock) {
-        [self.requestOperationManager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session,
-                                                                         NSURLSessionDownloadTask * _Nonnull downloadTask,
-                                                                         int64_t bytesWritten,
-                                                                         int64_t totalBytesWritten,
-                                                                         int64_t totalBytesExpectedToWrite) {
-            __strong typeof(self) strongSelf = weakSelf;
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDownloadTask *downloadTask =
+        [strongSelf.requestOperationManager downloadTaskWithRequest:downloadRequest
+                                                           progress:nil
+                                                        destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+            return [NSURL fileURLWithPath:downloadPathForContent];
+        } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:downloadTask];
             
-            dispatch_async(strongSelf.resultsQueue, ^{
-                progressBlock([weakSelf.diskServices sizeStringForByteCount:totalBytesWritten] , nil);
-            });
+            if (!error) {
+                // Check status code
+                NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
+                if (ASDKHTTPCode200OK == statusCode) {
+                    ASDKLogVerbose(@"The form field content was successfully downloaded with request: %@",
+                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                    
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
+                        completionBlock(content.modelID, downloadURL, NO, nil);
+                    });
+                } else {
+                    ASDKLogVerbose(@"The form field content failed to download with request: %@",
+                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                    
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(content.modelID, nil, NO, nil);
+                    });
+                }
+            } else {
+                ASDKLogError(@"Failed to download content for task with request: %@ - %@.\nBody:%@.\nReason:%@",
+                             downloadRequest.HTTPMethod,
+                             downloadRequest.URL.absoluteString,
+                             [[NSString alloc] initWithData:downloadRequest.HTTPBody encoding:NSUTF8StringEncoding],
+                             error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, nil, NO, error);
+                });
+            }
         }];
-    }
-    
-    [downloadTask resume];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:downloadTask];
+        
+        // If a progress block is provided report transfer progress information
+        if (progressBlock) {
+            [strongSelf.requestOperationManager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session,
+                                                                                   NSURLSessionDownloadTask * _Nonnull downloadTask,
+                                                                                   int64_t bytesWritten,
+                                                                                   int64_t totalBytesWritten,
+                                                                                   int64_t totalBytesExpectedToWrite) {
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    progressBlock([weakSelf.diskServices sizeStringForByteCount:totalBytesWritten] , nil);
+                });
+            }];
+        }
+        
+        [downloadTask resume];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:downloadTask];
+    });
 }
 
 
@@ -631,50 +629,50 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  
-                                  ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil);
-                                           });
-                                       }
-                                   }];
-                                  
-                                  
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch rest field values for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        
+        ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues);
+        
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:parserContentType
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil);
+                });
+            }
+        }];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch rest field values for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -697,48 +695,48 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  
-                                  ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues)
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil);
-                                           });
-                                       }
-                                   }];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch rest field values for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        
+        ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues);
+        
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues)
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil);
+                });
+            }
+        }];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch rest field values for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -759,48 +757,48 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  
-                                  ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil);
-                                           });
-                                       }
-                                   }];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch rest field values for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        
+        ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues);
+        
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:parserContentType
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil);
+                });
+            }
+        }];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch rest field values for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -822,48 +820,48 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  
-                                  ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil);
-                                           });
-                                       }
-                                   }];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch rest field values for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        
+        ASDKLogVerbose(@"Fetch rest field values with success for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKTaskFormParserContentTypeRestFieldValues);
+        
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:parserContentType
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil);
+                });
+            }
+        }];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch rest field values for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -891,18 +889,18 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
     [self.parserOperationManager parseContentDictionary:responseDictionary
                                                  ofType:parserContentType
                                     withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                        if (error) {
-                                            ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                            dispatch_async(self.resultsQueue, ^{
-                                                completionBlock(nil, error);
-                                            });
-                                        } else {
-                                            ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                            dispatch_async(self.resultsQueue, ^{
-                                                completionBlock(parsedObject, nil);
-                                            });
-                                        }
-                                    }];
+        if (error) {
+            ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+            dispatch_async(self.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        } else {
+            ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+            dispatch_async(self.resultsQueue, ^{
+                completionBlock(parsedObject, nil);
+            });
+        }
+    }];
 }
 
 @end

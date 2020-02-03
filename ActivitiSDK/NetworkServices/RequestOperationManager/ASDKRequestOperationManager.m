@@ -178,6 +178,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
     };
     
     NSURLSessionDataTask *task = nil;
+    __block NSError *refreshTokenError = nil;
+    
     if (![self.credential areCredentialValid] &&
         (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN)) {
         if (!self.isSessionRefreshInProgress) {
@@ -189,13 +191,14 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                     __strong typeof(self) strongSelf = weakSelf;
                     
                     strongSelf.isSessionRefreshInProgress = NO;
+                    refreshTokenError = error;
                     
-                    if (!error) {
-                        dispatch_semaphore_signal(semaphore);
-                    } else {
+                    if (error) {
                         ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
                         [strongSelf postNotificationForUnauthorizedAccessWithError:error];
                     }
+                    
+                    dispatch_semaphore_signal(semaphore);
                 }];
             } else {
                 // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
@@ -206,10 +209,12 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
         
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         
-        [self executeRequest:request
-              uploadProgress:uploadProgressBlock
-            downloadProgress:downloadProgressBlock
-           completionHandler:completionHandler];
+        if (!refreshTokenError) {
+            task = [self request:request
+               uploadProgress:uploadProgressBlock
+             downloadProgress:downloadProgressBlock
+            completionHandler:completionHandler];
+        }
     } else {
         // Execute original request but capture the failure due to credential errors
         task = [super dataTaskWithRequest:request
@@ -240,10 +245,10 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                                                       userInfo:userInfo];
 }
 
-- (void)executeRequest:(NSURLRequest *)request
-        uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
-      downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
-     completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
+- (NSURLSessionDataTask *)request:(NSURLRequest *)request
+                   uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
+                 downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
+                completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
     NSMutableURLRequest *mutableOriginalRequest = [request mutableCopy];
     
     // Execute original request and re-attach the newly acquired access token
@@ -253,6 +258,17 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                                                      uploadProgress:uploadProgressBlock
                                                    downloadProgress:downloadProgressBlock
                                                   completionHandler:completionHandler];
+    return originalTask;
+}
+
+- (void)executeRequest:(NSURLRequest *)request
+        uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
+      downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
+     completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
+    NSURLSessionDataTask *originalTask = [self request:request
+                                        uploadProgress:uploadProgressBlock
+                                      downloadProgress:downloadProgressBlock
+                                     completionHandler:completionHandler];
     [originalTask resume];
 }
 

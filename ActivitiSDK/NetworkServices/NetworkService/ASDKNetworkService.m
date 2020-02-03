@@ -48,6 +48,9 @@
     
     if (self) {
         self.requestOperationManager = requestOperationManager;
+        if (resultsQueue) {
+            [self.requestOperationManager setCompletionQueue:resultsQueue];
+        }
         self.parserOperationManager = parserManager;
         self.servicePathFactory = servicePathFactory;
         self.diskServices = diskServices;
@@ -71,6 +74,13 @@
 
 #pragma mark - 
 #pragma mark Public interface
+
+- (void)setResultsQueue:(dispatch_queue_t)resultsQueue {
+    if (resultsQueue != _resultsQueue) {
+        _resultsQueue = resultsQueue;
+        [_parserOperationManager setCompletionQueue:resultsQueue];
+    }
+}
 
 - (AFHTTPRequestSerializer *)requestSerializerOfType:(ASDKNetworkServiceRequestSerializerType)serializerType {
     return self.requestSerializersDict[@(serializerType)];

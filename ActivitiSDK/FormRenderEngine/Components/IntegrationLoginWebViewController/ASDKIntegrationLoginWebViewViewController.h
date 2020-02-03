@@ -20,7 +20,8 @@
 
 typedef void (^ASDKIntegrationLoginWebViewViewControllerCompletionBlock) (BOOL isAuthorized);
 
-@interface ASDKIntegrationLoginWebViewViewController : UIViewController
+__deprecated
+@interface ASDKIntegrationLoginWebViewViewController : UIViewController 
 
 - (instancetype)initWithAuthorizationURL:(NSString *)authorizationURLString
                          completionBlock:(ASDKIntegrationLoginWebViewViewControllerCompletionBlock)completionBlock;
