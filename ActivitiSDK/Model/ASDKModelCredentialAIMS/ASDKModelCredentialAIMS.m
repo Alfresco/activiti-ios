@@ -51,15 +51,11 @@
 
 - (BOOL)areCredentialValid {
     NSDate *tokenExpireDate = [NSDate dateWithTimeIntervalSince1970:_accessTokenExpiresIn];
-    
     //Substract sessionExpirationTimeIntervalCheck time
-    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-    NSDate *currentDateThreshold = [calendar dateByAddingUnit:NSCalendarUnitSecond
-                                                        value:-kASDKSessionExpirationTimeIntervalCheck
-                                                       toDate:NSDate.date
-                                                      options:kNilOptions];
+    NSDate *currentDateThreshold = [tokenExpireDate dateByAddingTimeInterval:-kASDKSessionExpirationTimeIntervalCheck];
     
-    if ([currentDateThreshold compare:tokenExpireDate] == NSOrderedDescending) {
+    if ([NSDate.date compare:currentDateThreshold] == NSOrderedDescending ||
+        [NSDate.date compare:tokenExpireDate] == NSOrderedDescending) {
         return NO;
     }
     
