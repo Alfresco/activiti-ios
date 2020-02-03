@@ -269,52 +269,52 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager GET:[self.servicePathFactory profilePicturePath]
-                           parameters:nil
-                             progress:nil
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    dispatch_async(self.resultsQueue, ^{
         __strong typeof(self) strongSelf = weakSelf;
         
-        // Remove operation reference
-        [strongSelf.networkOperations removeObject:dataTask];
-        
-        UIImage *profileImage = nil;
-        if ([responseObject isKindOfClass:[UIImage class]]) {
-            ASDKLogVerbose(@"Profile picture fetched successfully for request: %@.",
-                           [task stateDescriptionForResponse:nil]);
-            profileImage = (UIImage *)responseObject;
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager GET:[strongSelf.servicePathFactory profilePicturePath]
+                               parameters:nil
+                                 progress:nil
+                                  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
             
-            dispatch_async(strongSelf.resultsQueue, ^{
-                completionBlock(profileImage, nil);
-            });
-        } else {
-            NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Invalid image format received", @""),
-                                       NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Image cannot be parsed from response because a different format than expected was received:%@", NSStringFromClass([responseObject class])]};
-            NSError *imageFormatError = [NSError errorWithDomain:ASDKNetworkServiceErrorDomain
-                                                            code:ASDKNetworkServiceErrorInvalidResponseFormat
-                                                        userInfo:userInfo];
+            UIImage *profileImage = nil;
+            if ([responseObject isKindOfClass:[UIImage class]]) {
+                ASDKLogVerbose(@"Profile picture fetched successfully for request: %@.",
+                               [task stateDescriptionForResponse:nil]);
+                profileImage = (UIImage *)responseObject;
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(profileImage, nil);
+                });
+            } else {
+                NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Invalid image format received", @""),
+                                           NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Image cannot be parsed from response because a different format than expected was received:%@", NSStringFromClass([responseObject class])]};
+                NSError *imageFormatError = [NSError errorWithDomain:ASDKNetworkServiceErrorDomain
+                                                                code:ASDKNetworkServiceErrorInvalidResponseFormat
+                                                            userInfo:userInfo];
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, imageFormatError);
+                });
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
             
-            dispatch_async(strongSelf.resultsQueue, ^{
-                completionBlock(nil, imageFormatError);
+            ASDKLogError(@"Failed to fetch profile picture for request:%@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error);
             });
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        __strong typeof(self) strongSelf = weakSelf;
+        }];
         
-        // Remove operation reference
-        [strongSelf.networkOperations removeObject:dataTask];
-        
-        ASDKLogError(@"Failed to fetch profile picture for request:%@",
-                     [task stateDescriptionForError:error]);
-        
-        dispatch_async(strongSelf.resultsQueue, ^{
-            completionBlock(nil, error);
-        });
-    }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)updateProfileWithNewPassword:(NSString *)updatedPassword
@@ -331,49 +331,49 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     profilePasswordRequestRepresentation.oldPassword = oldPassword;
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[self.servicePathFactory profilePasswordPath]
-                            parameters:[profilePasswordRequestRepresentation jsonDictionary]
-                              progress:nil
-                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    dispatch_async(self.resultsQueue, ^{
         __strong typeof(self) strongSelf = weakSelf;
         
-        // Remove operation reference
-        [strongSelf.networkOperations removeObject:dataTask];
-        
-        // Check status code
-        NSInteger statusCode = [task statusCode];
-        if (ASDKHTTPCode200OK == statusCode) {
-            ASDKLogVerbose(@"Profile password was updated successfully for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+        __block NSURLSessionDataTask *dataTask =
+        [self.requestOperationManager POST:[strongSelf.servicePathFactory profilePasswordPath]
+                                parameters:[profilePasswordRequestRepresentation jsonDictionary]
+                                  progress:nil
+                                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
             
-            dispatch_async(strongSelf.resultsQueue, ^{
-                completionBlock(YES, nil);
-            });
-        } else {
-            ASDKLogError(@"Profile password failed to update successfully for request: %@",
-                         [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            // Check status code
+            NSInteger statusCode = [task statusCode];
+            if (ASDKHTTPCode200OK == statusCode) {
+                ASDKLogVerbose(@"Profile password was updated successfully for request: %@",
+                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(YES, nil);
+                });
+            } else {
+                ASDKLogError(@"Profile password failed to update successfully for request: %@",
+                             [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(NO, nil);
+                });
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
             
-            dispatch_async(strongSelf.resultsQueue, ^{
-                completionBlock(NO, nil);
+            ASDKLogError(@"Failed to update profile password for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, error);
             });
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        __strong typeof(self) strongSelf = weakSelf;
+        }];
         
-        // Remove operation reference
-        [strongSelf.networkOperations removeObject:dataTask];
-        
-        ASDKLogError(@"Failed to update profile password for request: %@",
-                     [task stateDescriptionForError:error]);
-        
-        dispatch_async(strongSelf.resultsQueue, ^{
-            completionBlock(NO, error);
-        });
-    }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)uploadProfileImageWithModel:(ASDKModelFileContent *)file
