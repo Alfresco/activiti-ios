@@ -41,6 +41,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
 @property (strong, nonatomic) AFHTTPRequestSerializer               *authenticationProvider;
 @property (strong, nonatomic) id<ASDKModelCredentialBaseProtocol>   credential;
 @property (assign, atomic) BOOL                                     isSessionRefreshInProgress;
+@property (assign, atomic) NSUInteger                               waitingRequestCount;
+@property (strong, nonatomic) dispatch_semaphore_t                  refreshSessionSemaphore;
 
 @end
 
@@ -97,6 +99,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
         }];
         
         [self.reachabilityManager startMonitoring];
+        
+        _refreshSessionSemaphore = dispatch_semaphore_create(kNilOptions);
     }
     
     return self;
@@ -125,8 +129,6 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                                uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
                              downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
                             completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(kNilOptions);
-    
     __weak typeof(self) weakSelf = self;
     // Create a completion block that handles unauthorized requests and wraps the original request
     void (^authFailBlock)(NSURLResponse *response, id responseObject, NSError *error) = ^(NSURLResponse *response, id responseObject, NSError *error)
@@ -156,7 +158,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                             }
                         }];
                     } else {
-                        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+                        strongSelf.waitingRequestCount++;
+                        dispatch_semaphore_wait(weakSelf.refreshSessionSemaphore, DISPATCH_TIME_FOREVER);
                         
                         [strongSelf executeRequest:request
                                     uploadProgress:uploadProgressBlock
@@ -198,7 +201,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                         [strongSelf postNotificationForUnauthorizedAccessWithError:error];
                     }
                     
-                    dispatch_semaphore_signal(semaphore);
+                    [strongSelf semaphoreSignalForAllWaitingRequests];
                 }];
             } else {
                 // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
@@ -206,8 +209,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                 [self postNotificationForUnauthorizedAccessWithError:nil];
             }
         }
-        
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        self.waitingRequestCount++;
+        dispatch_semaphore_wait(self.refreshSessionSemaphore, DISPATCH_TIME_FOREVER);
         
         if (!refreshTokenError) {
             task = [self request:request
@@ -270,6 +273,12 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                                       downloadProgress:downloadProgressBlock
                                      completionHandler:completionHandler];
     [originalTask resume];
+}
+
+- (void)semaphoreSignalForAllWaitingRequests {
+    for (int idx = 0; idx < self.waitingRequestCount; idx++) {
+        dispatch_semaphore_signal(self.refreshSessionSemaphore);
+    }
 }
 
 @end
