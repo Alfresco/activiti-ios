@@ -42,12 +42,23 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
 @property (copy, nonatomic) void (^uploadProgressBlock)(NSProgress * _Nonnull);
 @property (copy, nonatomic) void (^downloadProgressBlock)(NSProgress * _Nonnull);
 @property (copy, nonatomic) void (^completionHandler)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable);
-
+@property (strong, nonatomic) NSString *urlString;
+@property (strong, nonatomic) id parameters;
+@property (copy, nonatomic) void (^bodyBlock)(id <AFMultipartFormData> formData);
+@property (copy, nonatomic) void (^successBlock)(NSURLSessionDataTask *task, id responseObject);
+@property (copy, nonatomic) void (^failureBlock)(NSURLSessionDataTask *task, NSError *error);
+ 
 - (instancetype)initWithRequest:(NSURLRequest *)request
                  uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
                downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
               completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler;
 
+- (instancetype)initWithURLString:(NSString *)urlString
+                       parameters:(id)parameters
+        constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                         progress:(nullable void (^)(NSProgress * _Nonnull))uploadProgress
+                          success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                          failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 @end
 
 @implementation ASDKRequestOperationManagerRequest
@@ -63,6 +74,25 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
         _downloadProgressBlock = downloadProgressBlock;
         _completionHandler = completionHandler;
     }
+    
+    return self;
+}
+
+- (instancetype)initWithURLString:(NSString *)urlString
+                       parameters:(id)parameters
+        constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block
+                         progress:(void (^)(NSProgress * _Nonnull))uploadProgress
+                          success:(void (^)(NSURLSessionDataTask *, id))success
+                          failure:(void (^)(NSURLSessionDataTask *, NSError *))failure {
+    self = [super init];
+    if (self) {
+        _urlString = urlString;
+        _parameters = parameters;
+        _bodyBlock = block;
+        _successBlock = success;
+        _failureBlock = failure;
+    }
+    
     return self;
 }
 
@@ -194,7 +224,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
             [self postNotificationForUnauthorizedAccessWithError:nil];
         }
     } else {
-        // Execute original request but capture the failure due to credential errors
+        // Execute original request
         task = [super dataTaskWithRequest:request
                            uploadProgress:uploadProgressBlock
                          downloadProgress:downloadProgressBlock
@@ -204,67 +234,60 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
     return task;
 }
 
-// Logic to be added for IOS-1502
-//- (NSURLSessionDataTask *)POST:(NSString *)URLString
-//                    parameters:(id)parameters
-//     constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
-//                      progress:(nullable void (^)(NSProgress * _Nonnull))uploadProgress
-//                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-//                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
-//{
-//    dispatch_semaphore_t semaphore = dispatch_semaphore_create(kNilOptions);
-//
-//    NSURLSessionDataTask *task = nil;
-//    __block NSError *refreshTokenError = nil;
-//
-//    if (![self.credential areCredentialValid] &&
-//        (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN)) {
-//        if (!self.isSessionRefreshInProgress) {
-//            self.isSessionRefreshInProgress = YES;
-//
-//            if (self.sessionDelegate) {
-//                __weak typeof(self) weakSelf = self;
-//                [self.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
-//                    __strong typeof(self) strongSelf = weakSelf;
-//
-//                    strongSelf.isSessionRefreshInProgress = NO;
-//                    refreshTokenError = error;
-//
-//                    if (error) {
-//                        ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
-//                        [strongSelf postNotificationForUnauthorizedAccessWithError:error];
-//                    }
-//
-//                    dispatch_semaphore_signal(semaphore);
-//                }];
-//            } else {
-//                // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
-//                // status to the caller
-//                [self postNotificationForUnauthorizedAccessWithError:nil];
-//            }
-//        }
-//
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-//
-//        if (!refreshTokenError) {
-//            task = [super POST:URLString
-//                    parameters:parameters
-//     constructingBodyWithBlock:block
-//                      progress:uploadProgress
-//                       success:success
-//                       failure:failure];
-//        }
-//    } else {
-//        task = [super POST:URLString
-//                parameters:parameters
-// constructingBodyWithBlock:block
-//                  progress:uploadProgress
-//                   success:success
-//                   failure:failure];
-//    }
-//
-//    return task;
-//}
+- (NSURLSessionDataTask *)POST:(NSString *)URLString
+                    parameters:(id)parameters
+     constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                      progress:(nullable void (^)(NSProgress * _Nonnull))uploadProgress
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+{
+    NSURLSessionDataTask *task = nil;
+
+    if (![self.credential areCredentialValid] &&
+        (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN)) {
+        if (self.sessionDelegate) {
+            ASDKRequestOperationManagerRequest *queuedRequest =
+            [[ASDKRequestOperationManagerRequest alloc] initWithURLString:URLString
+                                                               parameters:parameters
+                                                constructingBodyWithBlock:block
+                                                                 progress:uploadProgress
+                                                                  success:success
+                                                                  failure:failure];
+            [self.queuedRequests addObject:queuedRequest];
+            
+            if (!self.isSessionRefreshInProgress) {
+                self.isSessionRefreshInProgress = YES;
+                
+                __weak typeof(self) weakSelf = self;
+                [self.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
+                    __strong typeof(self) strongSelf = weakSelf;
+
+                    strongSelf.isSessionRefreshInProgress = NO;
+
+                    if (error) {
+                        ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
+                        [strongSelf postNotificationForUnauthorizedAccessWithError:error];
+                    } else {
+                        [strongSelf executeQueuedRequests];
+                    }
+                }];
+            } else {
+                // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
+                // status to the caller
+                [self postNotificationForUnauthorizedAccessWithError:nil];
+            }
+        }
+    } else { // Execute original request
+        task = [super POST:URLString
+                parameters:parameters
+ constructingBodyWithBlock:block
+                  progress:uploadProgress
+                   success:success
+                   failure:failure];
+    }
+
+    return task;
+}
 
 - (AFJSONRequestSerializer *)authenticationProviderForCredential:(id<ASDKModelCredentialBaseProtocol>)credential {
     AFJSONRequestSerializer *authenticationProvider;
@@ -285,10 +308,10 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                                                       userInfo:userInfo];
 }
 
-- (NSURLSessionDataTask *)request:(NSURLRequest *)request
-                   uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
-                 downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
-                completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
+- (void)executeRequest:(NSURLRequest *)request
+        uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
+      downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
+     completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
     NSMutableURLRequest *mutableOriginalRequest = [request mutableCopy];
     
     // Execute original request and re-attach the newly acquired access token
@@ -298,17 +321,6 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                                                      uploadProgress:uploadProgressBlock
                                                    downloadProgress:downloadProgressBlock
                                                   completionHandler:completionHandler];
-    return originalTask;
-}
-
-- (void)executeRequest:(NSURLRequest *)request
-        uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
-      downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
-     completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
-    NSURLSessionDataTask *originalTask = [self request:request
-                                        uploadProgress:uploadProgressBlock
-                                      downloadProgress:downloadProgressBlock
-                                     completionHandler:completionHandler];
     [originalTask resume];
 }
 
@@ -316,10 +328,19 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
     for (int idx = 0; idx < self.queuedRequests.count; idx++) {
         ASDKRequestOperationManagerRequest *queuedRequest = (ASDKRequestOperationManagerRequest *)self.queuedRequests[idx];
         
-        [self executeRequest:queuedRequest.request
-              uploadProgress:queuedRequest.uploadProgressBlock
-            downloadProgress:queuedRequest.downloadProgressBlock
-           completionHandler:queuedRequest.completionHandler];
+        if (queuedRequest.request) {
+            [self executeRequest:queuedRequest.request
+               uploadProgress:queuedRequest.uploadProgressBlock
+             downloadProgress:queuedRequest.downloadProgressBlock
+            completionHandler:queuedRequest.completionHandler];
+        } else {
+            [self POST:queuedRequest.urlString
+            parameters:queuedRequest.parameters
+constructingBodyWithBlock:queuedRequest.bodyBlock
+              progress:queuedRequest.uploadProgressBlock
+               success:queuedRequest.successBlock
+               failure:queuedRequest.failureBlock];
+        }
     }
     
     [self.queuedRequests removeAllObjects];
