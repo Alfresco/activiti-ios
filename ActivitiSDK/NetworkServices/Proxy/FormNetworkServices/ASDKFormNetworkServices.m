@@ -160,25 +160,13 @@ withFormFieldValueRequestRepresentation:(ASDKFormFieldValueRequestRepresentation
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
             
-            // Check status code
-            NSInteger statusCode = [task statusCode];
-            if (ASDKHTTPCode200OK == statusCode) {
-                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                ASDKLogVerbose(@"Form completed with success for request: %@",
-                               [task stateDescriptionForResponse:responseDictionary]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(YES, nil);
-                });
-            } else {
-                ASDKLogVerbose(@"Failed to complete form for request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(NO, nil);
-                });
-            }
+            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+            ASDKLogVerbose(@"Form completed with success for request: %@",
+                           [task stateDescriptionForResponse:responseDictionary]);
             
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
@@ -283,25 +271,13 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
             
-            // Check status code
-            NSInteger statusCode = [task statusCode];
-            if (ASDKHTTPCode200OK == statusCode) {
-                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                ASDKLogVerbose(@"Form was successfully saved with request: %@",
-                               [task stateDescriptionForResponse:responseDictionary]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(YES, nil);
-                });
-            } else {
-                ASDKLogVerbose(@"Failed to save form for request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(NO, nil);
-                });
-            }
+            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+            ASDKLogVerbose(@"Form was successfully saved with request: %@",
+                           [task stateDescriptionForResponse:responseDictionary]);
             
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
@@ -563,24 +539,14 @@ withFormFieldValuesRequestRepresentation:(ASDKFormFieldValueRequestRepresentatio
             [weakSelf.networkOperations removeObject:downloadTask];
             
             if (!error) {
-                // Check status code
                 NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                if (ASDKHTTPCode200OK == statusCode) {
-                    ASDKLogVerbose(@"The form field content was successfully downloaded with request: %@",
-                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                    
-                    dispatch_async(weakSelf.resultsQueue, ^{
-                        NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
-                        completionBlock(content.modelID, downloadURL, NO, nil);
-                    });
-                } else {
-                    ASDKLogVerbose(@"The form field content failed to download with request: %@",
-                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                    
-                    dispatch_async(weakSelf.resultsQueue, ^{
-                        completionBlock(content.modelID, nil, NO, nil);
-                    });
-                }
+                ASDKLogVerbose(@"The form field content was successfully downloaded with request: %@",
+                               [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
+                    completionBlock(content.modelID, downloadURL, NO, nil);
+                });
             } else {
                 ASDKLogError(@"Failed to download content for task with request: %@ - %@.\nBody:%@.\nReason:%@",
                              downloadRequest.HTTPMethod,

@@ -97,23 +97,13 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
         // Remove operation reference
         [strongSelf.networkOperations removeObject:dataTask];
         
-        // Check status code
         NSInteger statusCode = [task statusCode];
-        if (ASDKHTTPCode200OK == statusCode) {
-            ASDKLogVerbose(@"User authenticated successfully for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            
-            dispatch_async(strongSelf.resultsQueue, ^{
-                completionBlock(YES, nil);
-            });
-        } else {
-            ASDKLogError(@"Failed to authenticate user for request: %@",
-                         [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            
-            dispatch_async(strongSelf.resultsQueue, ^{
-                completionBlock(NO, nil);
-            });
-        }
+        ASDKLogVerbose(@"User authenticated successfully for request: %@",
+                       [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(YES, nil);
+        });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         __strong typeof(self) strongSelf = weakSelf;
         
@@ -342,23 +332,13 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
             
-            // Check status code
             NSInteger statusCode = [task statusCode];
-            if (ASDKHTTPCode200OK == statusCode) {
-                ASDKLogVerbose(@"Profile password was updated successfully for request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(YES, nil);
-                });
-            } else {
-                ASDKLogError(@"Profile password failed to update successfully for request: %@",
-                             [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(NO, nil);
-                });
-            }
+            ASDKLogVerbose(@"Profile password was updated successfully for request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];

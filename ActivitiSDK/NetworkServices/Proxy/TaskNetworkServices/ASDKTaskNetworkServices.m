@@ -397,23 +397,13 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
             
-            // Check status code
             NSInteger statusCode = [task statusCode];
-            if (ASDKHTTPCode200OK == statusCode) {
-                ASDKLogVerbose(@"The task details were updated successfully for request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(YES, nil);
-                });
-            } else {
-                ASDKLogError(@"The task details failed to update successfully for request: %@",
-                             [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(NO, nil);
-                });
-            }
+            ASDKLogVerbose(@"The task details were updated successfully for request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
@@ -449,23 +439,13 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
             
-            // Check status code
             NSInteger statusCode = [task statusCode];
-            if (ASDKHTTPCode200OK == statusCode) {
-                ASDKLogVerbose(@"The task was marked as completed successfully for request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(YES, nil);
-                });
-            } else {
-                ASDKLogVerbose(@"The task failed to be marked as completed for request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(NO, nil);
-                });
-            }
+            ASDKLogVerbose(@"The task was marked as completed successfully for request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
@@ -665,23 +645,13 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
             
-            // Check status code
             NSInteger statusCode = [task statusCode];
-            if (ASDKHTTPCode200OK == statusCode) {
-                ASDKLogVerbose(@"The task content was successfully deleted with request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(YES, nil);
-                });
-            } else {
-                ASDKLogError(@"The task content failed to have been deleted with request: %@",
-                             [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(NO, nil);
-                });
-            }
+            ASDKLogVerbose(@"The task content was successfully deleted with request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
@@ -751,24 +721,14 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             [weakSelf.networkOperations removeObject:downloadTask];
             
             if (!error) {
-                // Check status code
                 NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                if (ASDKHTTPCode200OK == statusCode) {
-                    ASDKLogVerbose(@"The task content was successfully downloaded with request: %@",
-                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                    
-                    dispatch_async(weakSelf.resultsQueue, ^{
-                        NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
-                        completionBlock(downloadURL, NO, nil);
-                    });
-                } else {
-                    ASDKLogVerbose(@"The task content failed to download with request: %@",
-                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                    
-                    dispatch_async(weakSelf.resultsQueue, ^{
-                        completionBlock(nil, NO, nil);
-                    });
-                }
+                ASDKLogVerbose(@"The task content was successfully downloaded with request: %@",
+                               [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
+                    completionBlock(downloadURL, NO, nil);
+                });
             } else {
                 ASDKLogError(@"Failed to download content for task with request: %@ - %@.\nBody:%@.\nReason:%@",
                              downloadRequest.HTTPMethod,
@@ -854,24 +814,14 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             [weakSelf.networkOperations removeObject:downloadTask];
             
             if (!error) {
-                // Check status code
                 NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                if (ASDKHTTPCode200OK == statusCode) {
-                    ASDKLogVerbose(@"The task content thumbnail was successfully downloaded with request: %@",
-                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                    
-                    dispatch_async(weakSelf.resultsQueue, ^{
-                        NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForThumbnail];
-                        completionBlock(downloadURL, NO, nil);
-                    });
-                } else {
-                    ASDKLogVerbose(@"The task content thumbnail failed to download with request: %@",
-                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                    
-                    dispatch_async(weakSelf.resultsQueue, ^{
-                        completionBlock(nil, NO, nil);
-                    });
-                }
+                ASDKLogVerbose(@"The task content thumbnail was successfully downloaded with request: %@",
+                               [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForThumbnail];
+                    completionBlock(downloadURL, NO, nil);
+                });
             } else {
                 ASDKLogError(@"Failed to download content thumbnail for task with request: %@ - %@.\nBody:%@.\nReason:%@",
                              downloadRequest.HTTPMethod,
@@ -1105,23 +1055,13 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
             
-            // Check status code
             NSInteger statusCode = [task statusCode];
-            if (ASDKHTTPCode200OK == statusCode) {
-                ASDKLogVerbose(@"The task has been successfully claimed with request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(YES, nil);
-                });
-            } else {
-                ASDKLogVerbose(@"The task cannot be claimed with request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(NO, nil);
-                });
-            }
+            ASDKLogVerbose(@"The task has been successfully claimed with request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
@@ -1157,23 +1097,13 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
             
-            // Check status code
             NSInteger statusCode = [task statusCode];
-            if (ASDKHTTPCode200OK == statusCode) {
-                ASDKLogVerbose(@"The task has been successfully unclaimed with request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(NO, nil);
-                });
-            } else {
-                ASDKLogVerbose(@"The task cannot be unclaimed with request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(YES, nil);
-                });
-            }
+            ASDKLogVerbose(@"The task has been successfully unclaimed with request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, nil);
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
@@ -1304,24 +1234,14 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             [weakSelf.networkOperations removeObject:downloadTask];
             
             if (!error) {
-                // Check status code
                 NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                if (ASDKHTTPCode200OK == statusCode) {
-                    ASDKLogVerbose(@"The audit log content was successfully downloaded with request: %@",
-                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                    
-                    dispatch_async(weakSelf.resultsQueue, ^{
-                        NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
-                        completionBlock(downloadURL, NO, nil);
-                    });
-                } else {
-                    ASDKLogVerbose(@"The audit log content failed to download with request: %@",
-                                   [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                    
-                    dispatch_async(weakSelf.resultsQueue, ^{
-                        completionBlock(nil, NO, nil);
-                    });
-                }
+                ASDKLogVerbose(@"The audit log content was successfully downloaded with request: %@",
+                               [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
+                    completionBlock(downloadURL, NO, nil);
+                });
             } else {
                 ASDKLogError(@"Failed to download audit log content with request: %@ - %@.\nBody:%@.\nReason:%@",
                              downloadRequest.HTTPMethod,
@@ -1444,23 +1364,13 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
             
-            // Check status code
             NSInteger statusCode = [task statusCode];
-            if (ASDKHTTPCode200OK == statusCode) {
-                ASDKLogVerbose(@"The checklist order was updated successfully for request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(YES, nil);
-                });
-            } else {
-                ASDKLogVerbose(@"The checklist order failed to update for request: %@",
-                               [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                
-                dispatch_async(weakSelf.resultsQueue, ^{
-                    completionBlock(NO, nil);
-                });
-            }
+            ASDKLogVerbose(@"The checklist order was updated successfully for request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // Remove operation reference
             [weakSelf.networkOperations removeObject:dataTask];
@@ -1549,36 +1459,19 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
 - (void)handleSuccessfulTaskUserInvolvementResponseForTask:(NSURLSessionTask *)task
                                          isRemoveOperation:(BOOL)isRemoveOperation
                                            completionBlock:(ASDKTaskUserInvolvementCompletionBlock)completionBlock {
-    // Check status code
     NSInteger statusCode = [task statusCode];
-    if (ASDKHTTPCode200OK == statusCode) {
-        if (isRemoveOperation) {
-            ASDKLogVerbose(@"The user's involvement was successfully removed for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            dispatch_async(self.resultsQueue, ^{
-                completionBlock(NO, nil);
-            });
-        } else {
-            ASDKLogVerbose(@"The user was successfully involved for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            dispatch_async(self.resultsQueue, ^{
-                completionBlock(YES, nil);
-            });
-        }
+    if (isRemoveOperation) {
+        ASDKLogVerbose(@"The user's involvement was successfully removed for request: %@",
+                       [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+        dispatch_async(self.resultsQueue, ^{
+            completionBlock(NO, nil);
+        });
     } else {
-        if (isRemoveOperation) {
-            ASDKLogVerbose(@"The user's involvement removal failed for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            dispatch_async(self.resultsQueue, ^{
-                completionBlock(YES, nil);
-            });
-        } else {
-            ASDKLogVerbose(@"The user involvement failed for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            dispatch_async(self.resultsQueue, ^{
-                completionBlock(NO, nil);
-            });
-        }
+        ASDKLogVerbose(@"The user was successfully involved for request: %@",
+                       [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+        dispatch_async(self.resultsQueue, ^{
+            completionBlock(YES, nil);
+        });
     }
 }
 
