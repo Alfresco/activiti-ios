@@ -36,13 +36,44 @@
 
 static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_TRACE;
 
+@interface ASDKRequestOperationManagerRequest: NSObject
+
+@property (strong, nonatomic) NSURLRequest *request;
+@property (copy, nonatomic) void (^uploadProgressBlock)(NSProgress * _Nonnull);
+@property (copy, nonatomic) void (^downloadProgressBlock)(NSProgress * _Nonnull);
+@property (copy, nonatomic) void (^completionHandler)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable);
+
+- (instancetype)initWithRequest:(NSURLRequest *)request
+                 uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
+               downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
+              completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler;
+
+@end
+
+@implementation ASDKRequestOperationManagerRequest
+
+- (instancetype)initWithRequest:(NSURLRequest *)request
+                 uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
+               downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
+              completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
+    self = [super init];
+    if (self) {
+        _request = request;
+        _uploadProgressBlock = uploadProgressBlock;
+        _downloadProgressBlock = downloadProgressBlock;
+        _completionHandler = completionHandler;
+    }
+    return self;
+}
+
+@end
+
 @interface ASDKRequestOperationManager ()
 
 @property (strong, nonatomic) AFHTTPRequestSerializer               *authenticationProvider;
 @property (strong, nonatomic) id<ASDKModelCredentialBaseProtocol>   credential;
-@property (assign, atomic) BOOL                                     isSessionRefreshInProgress;
-@property (assign, atomic) NSUInteger                               waitingRequestCount;
-@property (strong, nonatomic) dispatch_semaphore_t                  refreshSessionSemaphore;
+@property (strong, atomic)    NSMutableArray                        *queuedRequests;
+@property (assign, atomic)    BOOL                                  isSessionRefreshInProgress;
 
 @end
 
@@ -99,8 +130,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
         }];
         
         [self.reachabilityManager startMonitoring];
-        
-        _refreshSessionSemaphore = dispatch_semaphore_create(kNilOptions);
+        self.queuedRequests = [NSMutableArray array];
     }
     
     return self;
@@ -129,105 +159,112 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                                uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
                              downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
                             completionHandler:(void (^)(NSURLResponse * _Nonnull, id _Nullable, NSError * _Nullable))completionHandler {
-    __weak typeof(self) weakSelf = self;
-    // Create a completion block that handles unauthorized requests and wraps the original request
-    void (^authFailBlock)(NSURLResponse *response, id responseObject, NSError *error) = ^(NSURLResponse *response, id responseObject, NSError *error)
-    {
-        __strong typeof(self) strongSelf = weakSelf;
-        NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-
-        if ([httpResponse statusCode] == ASDKHTTPCode401Unauthorised || ![strongSelf.credential areCredentialValid]) {
-            if (strongSelf.reachabilityManager.isReachableViaWiFi || strongSelf.reachabilityManager.isReachableViaWWAN) {
-                // Since there was an error, call the refresh method and then redo the original task
-                // Refresh and store new fresh token as calling super into AFNetworking perfrorm the
-                // request using the new token
-                if (strongSelf.sessionDelegate) {
-                    if (!strongSelf.isSessionRefreshInProgress) {
-                        strongSelf.isSessionRefreshInProgress = YES;
-                        [strongSelf.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
-                            weakSelf.isSessionRefreshInProgress = NO;
-                            
-                            if (!error) {
-                                [weakSelf executeRequest:request
-                                          uploadProgress:uploadProgressBlock
-                                        downloadProgress:downloadProgressBlock
-                                       completionHandler:completionHandler];
-                            } else {
-                                ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
-                                [weakSelf postNotificationForUnauthorizedAccessWithError:error];
-                            }
-                        }];
-                    } else {
-                        strongSelf.waitingRequestCount++;
-                        dispatch_semaphore_wait(weakSelf.refreshSessionSemaphore, DISPATCH_TIME_FOREVER);
-                        
-                        [strongSelf executeRequest:request
-                                    uploadProgress:uploadProgressBlock
-                                  downloadProgress:downloadProgressBlock
-                                 completionHandler:completionHandler];
-                    }
-                } else {
-                    // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
-                    // status to the caller
-                    [strongSelf postNotificationForUnauthorizedAccessWithError:error];
-                    completionHandler(response, responseObject, error);
-                }
-            } else { // If network reachability is limited, report the error as is
-                completionHandler(response, responseObject, error);
-            }
-        } else { // If an error, other than authentication ones is encountered report it as is
-            completionHandler(response, responseObject, error);
-        }
-    };
-    
     NSURLSessionDataTask *task = nil;
-    __block NSError *refreshTokenError = nil;
     
     if (![self.credential areCredentialValid] &&
         (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN)) {
-        if (!self.isSessionRefreshInProgress) {
-            self.isSessionRefreshInProgress = YES;
+        if (self.sessionDelegate) {
+            ASDKRequestOperationManagerRequest *queuedRequest =
+            [[ASDKRequestOperationManagerRequest alloc] initWithRequest:request
+                                                         uploadProgress:uploadProgressBlock
+                                                       downloadProgress:downloadProgressBlock
+                                                      completionHandler:completionHandler];
+            [self.queuedRequests addObject:queuedRequest];
             
-            if (self.sessionDelegate) {
+            if (!self.isSessionRefreshInProgress) {
+                self.isSessionRefreshInProgress = YES;
+                
                 __weak typeof(self) weakSelf = self;
                 [self.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
                     __strong typeof(self) strongSelf = weakSelf;
                     
                     strongSelf.isSessionRefreshInProgress = NO;
-                    refreshTokenError = error;
                     
                     if (error) {
                         ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
                         [strongSelf postNotificationForUnauthorizedAccessWithError:error];
+                    } else {
+                        [strongSelf executeQueuedRequests];
                     }
-                    
-                    [strongSelf semaphoreSignalForAllWaitingRequests];
                 }];
-            } else {
-                // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
-                // status to the caller
-                [self postNotificationForUnauthorizedAccessWithError:nil];
             }
-        }
-        self.waitingRequestCount++;
-        dispatch_semaphore_wait(self.refreshSessionSemaphore, DISPATCH_TIME_FOREVER);
-        
-        if (!refreshTokenError) {
-            task = [self request:request
-               uploadProgress:uploadProgressBlock
-             downloadProgress:downloadProgressBlock
-            completionHandler:completionHandler];
+        } else {
+            // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
+            // status to the caller
+            [self postNotificationForUnauthorizedAccessWithError:nil];
         }
     } else {
         // Execute original request but capture the failure due to credential errors
         task = [super dataTaskWithRequest:request
                            uploadProgress:uploadProgressBlock
                          downloadProgress:downloadProgressBlock
-                        completionHandler:authFailBlock];
+                        completionHandler:completionHandler];
     }
-     
+    
     return task;
 }
+
+// Logic to be added for IOS-1502
+//- (NSURLSessionDataTask *)POST:(NSString *)URLString
+//                    parameters:(id)parameters
+//     constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+//                      progress:(nullable void (^)(NSProgress * _Nonnull))uploadProgress
+//                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+//                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+//{
+//    dispatch_semaphore_t semaphore = dispatch_semaphore_create(kNilOptions);
+//
+//    NSURLSessionDataTask *task = nil;
+//    __block NSError *refreshTokenError = nil;
+//
+//    if (![self.credential areCredentialValid] &&
+//        (self.reachabilityManager.isReachableViaWiFi || self.reachabilityManager.isReachableViaWWAN)) {
+//        if (!self.isSessionRefreshInProgress) {
+//            self.isSessionRefreshInProgress = YES;
+//
+//            if (self.sessionDelegate) {
+//                __weak typeof(self) weakSelf = self;
+//                [self.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
+//                    __strong typeof(self) strongSelf = weakSelf;
+//
+//                    strongSelf.isSessionRefreshInProgress = NO;
+//                    refreshTokenError = error;
+//
+//                    if (error) {
+//                        ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
+//                        [strongSelf postNotificationForUnauthorizedAccessWithError:error];
+//                    }
+//
+//                    dispatch_semaphore_signal(semaphore);
+//                }];
+//            } else {
+//                // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
+//                // status to the caller
+//                [self postNotificationForUnauthorizedAccessWithError:nil];
+//            }
+//        }
+//
+//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+//
+//        if (!refreshTokenError) {
+//            task = [super POST:URLString
+//                    parameters:parameters
+//     constructingBodyWithBlock:block
+//                      progress:uploadProgress
+//                       success:success
+//                       failure:failure];
+//        }
+//    } else {
+//        task = [super POST:URLString
+//                parameters:parameters
+// constructingBodyWithBlock:block
+//                  progress:uploadProgress
+//                   success:success
+//                   failure:failure];
+//    }
+//
+//    return task;
+//}
 
 - (AFJSONRequestSerializer *)authenticationProviderForCredential:(id<ASDKModelCredentialBaseProtocol>)credential {
     AFJSONRequestSerializer *authenticationProvider;
@@ -275,10 +312,17 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
     [originalTask resume];
 }
 
-- (void)semaphoreSignalForAllWaitingRequests {
-    for (int idx = 0; idx < self.waitingRequestCount; idx++) {
-        dispatch_semaphore_signal(self.refreshSessionSemaphore);
+- (void)executeQueuedRequests {
+    for (int idx = 0; idx < self.queuedRequests.count; idx++) {
+        ASDKRequestOperationManagerRequest *queuedRequest = (ASDKRequestOperationManagerRequest *)self.queuedRequests[idx];
+        
+        [self executeRequest:queuedRequest.request
+              uploadProgress:queuedRequest.uploadProgressBlock
+            downloadProgress:queuedRequest.downloadProgressBlock
+           completionHandler:queuedRequest.completionHandler];
     }
+    
+    [self.queuedRequests removeAllObjects];
 }
 
 @end

@@ -84,7 +84,11 @@ class ContainerViewModel: NSObject {
     
     fileprivate func refreshAIMSSession() {
         if let persistenceStackModelName = self.persistenceStackModelName {
-            loginService?.refreshSession(keychainIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter), delegate: self)
+            DispatchQueue.global().async { [weak self] in
+                guard let sSelf = self else { return }
+                
+                sSelf.loginService?.refreshSession(keychainIdentifier: String(format: "%@-%@", persistenceStackModelName, kPersistenceStackSessionParameter), delegate: sSelf)
+            }
         }
     }
     
