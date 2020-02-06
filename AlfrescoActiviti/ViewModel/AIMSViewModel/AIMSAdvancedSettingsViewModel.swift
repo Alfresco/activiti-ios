@@ -64,8 +64,7 @@ class AIMSAdvancedSettingsViewModel {
         
         let authSection = [AIMSAdvancedSettingsAction(type: .sectionTitle, title: authenticationText),
                            AIMSAdvancedSettingsAction(type: .realm, title: realmPlaceholderText),
-                           AIMSAdvancedSettingsAction(type: .clientID, title: cliendIDPlaceholderText),
-                           AIMSAdvancedSettingsAction(type: .redirectURL, title: redirectURLPlaceholderText)]
+                           AIMSAdvancedSettingsAction(type: .clientID, title: cliendIDPlaceholderText)]
         
         let buttonsSection = [AIMSAdvancedSettingsAction(type: .resetDefault, title: resetButtonText),
                               AIMSAdvancedSettingsAction(type: .help, title: helpButtonText, info: helpHintText)]
