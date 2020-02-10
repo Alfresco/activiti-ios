@@ -191,7 +191,7 @@ extension SplashScreenViewController: UIViewControllerTransitioningDelegate {
 extension SplashScreenViewController: SplashScreenDelegate {
     
     func showConfirmation(message: String) {
-        self.bannerView?.show(withText: message, title: NSLocalizedString(kLocalizationBannerViewConfirmationText, comment: "Confirmation title"), style: .success)
+        self.bannerView?.show(withText: message, title: NSLocalizedString(kLocalizationBannerViewSuccessText, comment: "Success title"), style: .success)
     }
     
     func dismiss(animated: Bool) {

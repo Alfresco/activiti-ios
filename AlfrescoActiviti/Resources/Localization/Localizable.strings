@@ -69,12 +69,13 @@
 "advancedSettingsScreenHelpText"                         = "Help";
 "advancedSettingsScreenCloseText"                        = "CLOSE";
 "advancedSettingsScreenHelpHintText"                     = "<p><font size=\"6\">Authenticating with Alfresco</font></p><p>If you are not using the default SSO settings, your values can be set here.</p><p>If you need help please contact your Alfresco administrator.</p>";
-"advancedSettingsScreenSaveConfirmationText"            = "Settings saved successfully";
+"advancedSettingsScreenSaveConfirmationText"            = "Changes to the configuration have been saved";
 
 // Banner view component
 "bannerViewErrorText"                                    = "Error";
 "bannerViewWarningText"                                  = "Warning";
 "bannerViewConfirmationText"                             = "Confirmation";
+"bannerViewSuccessText"                                  = "Success!";
 "genericErrorText"                                       = "Something went wrong. Contact your administrator for help. Error code: %d";
 "errorCheckConnectURL"                                   = "Check your Connect to URL.";
 "errorNoAuthAlfrescoURL"                                 = "No authentication service can be found at the provided Alfresco URL.";

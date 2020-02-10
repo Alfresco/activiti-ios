@@ -146,7 +146,7 @@ extension AIMSAdvancedSettingsViewController: AIMSAdvancedSettingsCellDelegate {
         if UIDevice.current.userInterfaceIdiom == .pad {
             self.delegate?.showConfirmation(message: model.confirmationSaveText)
         } else {
-            self.showConfirmationMessage(model.confirmationSaveText)
+            self.showConfirmation(withTitle: model.successSaveText, andMessage: model.confirmationSaveText)
         }
     }
 }
