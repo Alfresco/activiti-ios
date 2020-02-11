@@ -25,9 +25,9 @@ PODS:
   - AppAuth/ExternalUserAgent (1.3.0)
   - Base64 (1.1.2)
   - Buglife (2.10.1)
-  - CocoaLumberjack (3.6.0):
-    - CocoaLumberjack/Core (= 3.6.0)
-  - CocoaLumberjack/Core (3.6.0)
+  - CocoaLumberjack (3.6.1):
+    - CocoaLumberjack/Core (= 3.6.1)
+  - CocoaLumberjack/Core (3.6.1)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
@@ -99,9 +99,9 @@ PODS:
   - JGProgressHUD (2.1)
   - JWT (2.2.0):
     - Base64 (~> 1.1.2)
-  - Mantle (2.1.0):
-    - Mantle/extobjc (= 2.1.0)
-  - Mantle/extobjc (2.1.0)
+  - Mantle (2.1.1):
+    - Mantle/extobjc (= 2.1.1)
+  - Mantle/extobjc (2.1.1)
   - MaterialComponents (92.5.0):
     - MaterialComponents/ActionSheet (= 92.5.0)
     - "MaterialComponents/ActionSheet+Theming (= 92.5.0)"
@@ -826,7 +826,7 @@ SPEC CHECKSUMS:
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   Buglife: bc8e4931ebe37b2901c6dbcb0ca6dd76f62a98c3
-  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
+  CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 497158b816d0a86fc31babbd05546fcd7e6083ff
@@ -842,7 +842,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
   JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   JWT: cf73c0ab0dac762df3de8a3f1164352089d97780
-  Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
+  Mantle: 35238ae6f2e2b2d474fa7b67fee82a59fea71915
   MaterialComponents: 268edb7e34f1277b79d20f701b6ae30c7cd0179a
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
