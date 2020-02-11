@@ -469,12 +469,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
         
         BOOL didContentUploadSucceeded = modelContent.isModelContentAvailable && !contentResponse.error;
         if (didContentUploadSucceeded) {
-            self.progressHUD.textLabel.text = ASDKLocalizedStringFromTable(kLocalizationFormContentPickerComponentSuccessText, ASDKLocalizationTable,  @"Success text");
-            self.progressHUD.detailTextLabel.text = nil;
-            self.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 __strong typeof(self) strongSelf = weakSelf;
+                
+                strongSelf.progressHUD.textLabel.text = ASDKLocalizedStringFromTable(kLocalizationFormContentPickerComponentSuccessText, ASDKLocalizationTable,  @"Success text");
+                strongSelf.progressHUD.detailTextLabel.text = nil;
+                strongSelf.progressHUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
                 
                 [strongSelf.progressHUD dismiss];
                 

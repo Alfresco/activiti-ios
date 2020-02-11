@@ -31,9 +31,70 @@
 "loginScreenInvalidCredentialsText"                      = "Invalid or insufficient credentials.";
 "loginScreenUnreachableHostText"                         = "The host your are trying to connect to is unreachable.";
 "loginScreenRequestTimedOutText"                         = "The login request timed out.";
-"loginScreenUnauthorizedRequestErrorText"                = "Invalid credentials, you will be redirected to the login screen";
+"loginScreenUnauthorizedRequestErrorText"                = "You are no longer authenticated, please log in again.";
 "loginScreenCloudLoginButtonText"                        = "Alfresco Process Services Online";
 "loginScreenPremiseLoginButtonText"                      = "Process Services On Premise";
+"loginScreenProcessServicesAppText"                      = "Process Services";
+"loginScreenAlfrescoURLPlaceholderText"                  = "Connect to";
+"loginScreenProcessURLPlaceholderText"                   = "Process URL";
+"loginScreenUseHTTPsText"                                = "USE HTTPS";
+"loginScreenConnectButtonText"                           = "CONNECT";
+"loginScreenCloudSignInButtonText"                       = "CLOUD SIGN IN";
+"loginScreenAdvancedSettingsButtonText"                  = "ADVANCED SETTINGS";
+"loginScreenCopyrightFormat"                             = "© 2017 - %d Alfresco Software, Inc. All rights reserved.";
+"loginScreenIndentityServiceURLHintTitleText"            = "How to connect to Alfresco";
+"loginScreenIdentityServiceURLHintText"                  = "<p><font size=\"6\">How to connect to Alfresco</font></p><p><font size=\"5\">Alfresco Process Services URL</font></p><p>You can enter the URL of your Alfresco Process Services instance. This will require you to enter your username &amp; password to authenticate.</p><p><font size=\"5\">Sign in with SSO</font></p><p>You can enter the URL of your Alfresco Identity Management Service in order to authenticate with your organisations identity provider.</p><p>*You will have to provide the URL of your Alfresco Process Services instance afterwards</p><p>Talk to your Alfresco administrator if you require help.</p>";
+"loginScreenSSOHelpHintText"                             = "<p><font size=\"6\">Process Repository Location</font></p><p>Alfresco Process Services URL:</p><p>This is the URL of your Alfresco Process Services instance.</p><p>Talk to your Alfresco administrator if you require help.</p>";
+"loginScreenOnPremiseSigningInToHintFormat"              = "Connected to:";
+
+// Advanced Settings screen
+"advancedSettingsScreenTitle"                            = "Advanced Settings";
+"advancedSettingsScreenTransportProtocolText"            = "Transport Protocol";
+"advancedSettingsScreenHttpsPlaceholderText"             = "HTTPS";
+"advancedSettingsScreenPortPlaceholderText"              = "Port";
+"advancedSettingsScreenPortHintText"                     = "You can connect using a custom port number here";
+"advancedSettingProcessServiceSettingsText"              = "Alfresco Process Services Settings";
+"advancedSettingsScreenServiceDocumentPlaceholderText"   = "Service Documents";
+"advancedSettingsScreenServiceDocumentHintText"          = " ";
+"advancedSettingsScreenAuthenticationText"               = "Authentication";
+"advancedSettingsScreenRealmPlaceholderText"             = "Realm";
+"advancedSettingsScreenRealmHintText"                    = "Your system administrator will have setup a realm for your Alfresco configuration. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
+"advancedSettingsScreeClientIDPlaceholderText"           = "Client ID";
+"advancedSettingsScreenClientIDHintText"                 = "Your system administrator will have setup a client id for this application. The default value has been set for you so don’t change this unless you know it is different.\n\nDefault value: alfresco";
+"advancedSettingsScreenRedirectURLPlaceHolderText"       = "Redirect URL";
+"advancedSettingsScreenRedirectURLHintText"              = " ";
+"advancedSettingsScreenSaveButtonText"                   = "SAVE";
+"advancedSettingsScreenHelpButtonText"                   = "NEED HELP";
+"advancedSettingsScreenResetButtonText"                  = "RESET to default";
+"advancedSettingsScreenHelpText"                         = "Help";
+"advancedSettingsScreenCloseText"                        = "CLOSE";
+"advancedSettingsScreenHelpHintText"                     = "<p><font size=\"6\">Authenticating with Alfresco</font></p><p>If you are not using the default SSO settings, your values can be set here.</p><p>If you need help please contact your Alfresco administrator.</p>";
+"advancedSettingsScreenSaveConfirmationText"            = "Changes to the configuration have been saved";
+
+// Banner view component
+"bannerViewErrorText"                                    = "Error";
+"bannerViewWarningText"                                  = "Warning";
+"bannerViewConfirmationText"                             = "Confirmation";
+"bannerViewSuccessText"                                  = "Success!";
+"genericErrorText"                                       = "Something went wrong. Contact your administrator for help. Error code: %d";
+"errorCheckConnectURL"                                   = "Check your Connect to URL.";
+"errorNoAuthAlfrescoURL"                                 = "No authentication service can be found at the provided Alfresco URL.";
+"errorWrongCredentialProvided"                           = "Wrong username or password provided.";
+
+// Cloud Login screen
+"cloudLoginInfoText"                                     = "Helpful introduction and information text about Process Services Cloud.";
+"cloudLoginUsernamePlaceholderText"                      = "Username or Email";
+"cloudLoginPasswordPlaceholderText"                      = "Password";
+"cloudLoginSignInButtonText"                             = "SIGN IN";
+"cloudLoginWarningText"                                  = "Service Document shouldn't be empty, go to Advanced Settings.";
+
+// SSO Login screen
+"ssoLoginSubtitle1Text"                                  = "Signing in to:";
+"ssoLoginSubtitle2Text"                                  = "Please provide the URL of your Process Services environment.";
+"ssoLoginRepositoryPlaceholderText"                      = "Process Services URL";
+"ssoLoginSignInSSOButtonText"                            = "SIGN IN WITH SSO";
+"ssoLoginScreenSigningInText"                            = "Signing In";
+"ssoLoginWarningLoginRedirectURL"                        = "RedirectURL shouldn't be empty, go to Advanced Settings.";
 
 // Applications screen
 "appScreenTitleText"                                     = "Applications";

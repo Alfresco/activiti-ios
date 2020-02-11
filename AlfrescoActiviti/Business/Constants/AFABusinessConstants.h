@@ -22,6 +22,8 @@
 // Login related
 extern NSUInteger kDefaultLoginUnsecuredPort;
 extern NSUInteger kDefaultLoginSecuredPort;
+extern NSString  *kAdvancedSettingsParameters;
+extern NSString  *kPersistenceStackSessionParameter;
 
 // Task related
 extern NSInteger  kDayDifferenceForHighPriorityTasks;
@@ -39,8 +41,10 @@ extern NSUInteger kTaskPreloadCellThreshold;
 // Credential related
 extern NSString *kCloudAuthetificationCredentialIdentifier;
 extern NSString *kPremiseAuthentificationCredentialIdentifier;
+extern NSString *kAIMSAuthenticationCredentialIdentifier;
 extern NSString *kCloudUsernameCredentialIdentifier;
 extern NSString *kPremiseUsernameCredentialIdentifier;
+extern NSString *kAIMSUsernameCredentialIdentifier;
 extern NSString *kCloudHostNameCredentialIdentifier;
 extern NSString *kPremiseHostNameCredentialIdentifier;
 extern NSString *kCloudSecureLayerCredentialIdentifier;
@@ -65,4 +69,7 @@ extern NSString *kCellFactoryCellParameterActionType;
 
 // Error domains
 extern NSString * const AFALoginViewModelErrorDomain;
+extern NSString * const AFALoginViewModelWarningDomain;
 extern NSInteger const kAFALoginViewModelInvalidCredentialErrorCode;
+extern NSString * const AFAAIMSLoginErrorDomain;
+extern NSInteger const kAFALoginSSOViewModelCancelErrorCode;

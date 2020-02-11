@@ -45,7 +45,7 @@ typedef void  (^ASDKProfileImageContentUploadCompletionBlock)(ASDKModelContent *
  */
 - (void)authenticateUser:(NSString *)username
             withPassword:(NSString *)password
-     withCompletionBlock:(ASDKProfileAutheticationCompletionBlock)completionBlock;
+     withCompletionBlock:(ASDKProfileAutheticationCompletionBlock)completionBlock __deprecated;
 
 
 /**

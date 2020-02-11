@@ -20,10 +20,17 @@
 
 // Constants
 #import "ASDKPersistenceStackConstants.h"
+#import "ASDKNetworkServiceConstants.h"
 #import "ASDKLogConfiguration.h"
+
+// Categories
+#import "NSString+PersistenceStackNormalization.h"
 
 // Models
 #import "ASDKModelServerConfiguration.h"
+#import "ASDKModelCredentialBaseAuth.h"
+#import "ASDKModelCredentialAIMS.h"
+
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -68,30 +75,34 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
 
 + (NSString *)persistenceStackModelNameForServerConfiguration:(ASDKModelServerConfiguration *)serverConfiguration {
     if (serverConfiguration.hostAddressString.length &&
-        serverConfiguration.username.length &&
         serverConfiguration.serviceDocument.length) {
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_]+"
-                                                                               options:kNilOptions
-                                                                                 error:nil];
         
+        NSString *normalizedHostName = [serverConfiguration.hostAddressString normalizedPersistenceStackName];
+        NSString *normalizedUserName;
+        // If credential type is for basic auth use the username otherwise decode the JWT token for that information
+        if ([serverConfiguration.credential isKindOfClass: ASDKModelCredentialBaseAuth.class]) {
+            ASDKModelCredentialBaseAuth *baseAuthCredentials = (ASDKModelCredentialBaseAuth *)serverConfiguration.credential;
+            
+            if (baseAuthCredentials.username.length) {
+                normalizedUserName = [baseAuthCredentials.username normalizedPersistenceStackName];
+            }
+        } else {
+            ASDKModelCredentialAIMS *aimsCredentials = (ASDKModelCredentialAIMS *)serverConfiguration.credential;
+            NSDictionary *payloadDict = aimsCredentials.decodedJWTPayloadToken[kASDKAIMSJwtTokenPayload];
+            NSString *username = payloadDict[kASDKAPIEmailParameter];
+            
+            normalizedUserName = [username normalizedPersistenceStackName];
+        }
+        NSString *normalizedServiceDocument = [serverConfiguration.serviceDocument normalizedPersistenceStackName];
         
-        NSString *normalizedHostName = [regex stringByReplacingMatchesInString:serverConfiguration.hostAddressString
-                                                                       options:kNilOptions
-                                                                         range:NSMakeRange(0, serverConfiguration.hostAddressString.length)
-                                                                  withTemplate:@""];
-        NSString *normalizedUserName = [regex stringByReplacingMatchesInString:serverConfiguration.username
-                                                                       options:kNilOptions
-                                                                         range:NSMakeRange(0, serverConfiguration.username.length)
-                                                                  withTemplate:@""];
-        NSString *normalizedServiceDocument = [regex stringByReplacingMatchesInString:serverConfiguration.serviceDocument
-                                                                              options:kNilOptions
-                                                                                range:NSMakeRange(0, serverConfiguration.serviceDocument.length)
-                                                                         withTemplate:@""];
-        
-        return [NSString stringWithFormat:@"%@@%@@%@", normalizedHostName, normalizedServiceDocument, normalizedUserName];
+        if (normalizedUserName) {
+            return [NSString stringWithFormat:@"%@@%@@%@", normalizedHostName, normalizedServiceDocument, normalizedUserName];
+        } else {
+            return [NSString stringWithFormat:@"%@@%@", normalizedHostName, normalizedServiceDocument];
+        }
     }
     
-    return nil;
+    return kASDKPersistenceStackNameDefault;
 }
 
 

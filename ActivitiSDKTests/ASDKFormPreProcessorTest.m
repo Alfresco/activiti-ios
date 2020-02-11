@@ -17,8 +17,7 @@
  ******************************************************************************/
 
 #import "ASDKNetworkProxyBaseTest.h"
-#import "ASDKModelFormPreProcessorResponse.h"
-#import "ASDKFormDataAccessor.h"
+@import ActivitiSDK.Private;
 
 typedef void (^ASDKFormDescriptionCompletionBlock) (ASDKModelFormDescription *formDescription, NSError *error);
 typedef NS_ENUM(NSInteger, ASDKFormPreProcessorTestType) {

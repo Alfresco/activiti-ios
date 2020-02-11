@@ -52,14 +52,13 @@
                                  switch (reachability) {
                                      case ASDKNetworkReachabilityStatusNotReachable: {
                                          if (strongSelf.isControllerViewVisible) {
-                                             [self didLoseNetworkConnectivity];
+                                             [strongSelf didLoseNetworkConnectivity];
                                          }
                                      }
                                          break;
                                          
                                      case ASDKNetworkReachabilityStatusReachableViaWWANOrWifi: {
                                          if (strongSelf.isControllerViewVisible) {
-                                             [strongSelf showWarningMessage:NSLocalizedString(kLocalizationOfflineConnectivityRetryText, @"Reconnect text")];
                                              [strongSelf didRestoredNetworkConnectivity];
                                          }
                                      }
@@ -92,6 +91,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.isControllerViewVisible = NO;
+    [self.bannerAlertView hide:NO];
 }
 
 
@@ -138,18 +138,27 @@
 #pragma mark Public interface
 
 - (void)showWarningMessage:(NSString *)warningMessage {
-    [self.bannerAlertView showAndHideWithText:warningMessage
-                                        style:AFABannerAlertStyleWarning];
+    [self.bannerAlertView showWithText:warningMessage
+                                 title:NSLocalizedString(kLocalizationBannerViewWarningText, @"Warning title")
+                                 style:AFABannerAlertStyleWarning];
 }
 
 - (void)showErrorMessage:(NSString *)errorMessage {
-    [self.bannerAlertView showAndHideWithText:errorMessage
-                                        style:AFABannerAlertStyleError];
+    [self.bannerAlertView showWithText:errorMessage
+                                 title:NSLocalizedString(kLocalizationBannerViewErrorText, @"Error title")
+                                 style:AFABannerAlertStyleError];
 }
 
 - (void)showConfirmationMessage:(NSString *)confirmationMessage {
-    [self.bannerAlertView showAndHideWithText:confirmationMessage
-                                        style:AFABannerAlertStyleSuccess];
+    [self.bannerAlertView showWithText:confirmationMessage
+                                 title:NSLocalizedString(kLocalizationBannerViewConfirmationText, @"Confirmation title")
+                                 style:AFABannerAlertStyleSuccess];
+}
+
+- (void)showConfirmationWithTitle:(NSString*)title andMessage:(NSString *)confirmationMessage {
+    [self.bannerAlertView showWithText:confirmationMessage
+                                 title:title
+                                 style:AFABannerAlertStyleSuccess];
 }
 
 - (void)didRestoredNetworkConnectivity {
@@ -162,6 +171,10 @@
 
 - (BOOL)isNetworkReachable {
     return (self.networkReachabilityStatus == ASDKNetworkReachabilityStatusReachableViaWWANOrWifi) ? YES : NO;
+}
+
+- (void)dismissMessage:(BOOL)animated {
+    [self.bannerAlertView hide: animated];
 }
 
 @end

@@ -18,9 +18,7 @@
 
 #import "ASDKNetworkService.h"
 #import "ASDKNetworkServiceConstants.h"
-#import "ASDKJSONResponseSerializer.h"
-#import "ASDKHTTPResponseSerializer.h"
-#import "ASDKImageResponseSerializer.h"
+
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -50,15 +48,18 @@
     
     if (self) {
         self.requestOperationManager = requestOperationManager;
+        if (resultsQueue) {
+            [self.requestOperationManager setCompletionQueue:resultsQueue];
+        }
         self.parserOperationManager = parserManager;
         self.servicePathFactory = servicePathFactory;
         self.diskServices = diskServices;
         self.resultsQueue = resultsQueue;
         
         AFCompoundResponseSerializer *compoundResponseSerializer =[AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:
-                                                                   @[[ASDKJSONResponseSerializer serializer],
-                                                                     [ASDKImageResponseSerializer serializer],
-                                                                     [ASDKHTTPResponseSerializer serializer]]];
+                                                                   @[[AFJSONResponseSerializer serializer],
+                                                                     [AFImageResponseSerializer serializer],
+                                                                     [AFHTTPResponseSerializer serializer]]];
         self.requestOperationManager.responseSerializer = compoundResponseSerializer;
         
         AFJSONRequestSerializer *jsonRequestSerializer = [AFJSONRequestSerializer serializer];
@@ -73,6 +74,13 @@
 
 #pragma mark - 
 #pragma mark Public interface
+
+- (void)setResultsQueue:(dispatch_queue_t)resultsQueue {
+    if (resultsQueue != _resultsQueue) {
+        _resultsQueue = resultsQueue;
+        [_parserOperationManager setCompletionQueue:resultsQueue];
+    }
+}
 
 - (AFHTTPRequestSerializer *)requestSerializerOfType:(ASDKNetworkServiceRequestSerializerType)serializerType {
     return self.requestSerializersDict[@(serializerType)];

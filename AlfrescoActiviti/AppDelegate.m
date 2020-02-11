@@ -30,25 +30,35 @@
 #import "AFAThumbnailManager.h"
 #import "AFAKeychainWrapper.h"
 #import "AFALogFormatter.h"
+#import "AlfrescoActiviti-Swift.h"
 
 // Frameworks
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <Buglife/Buglife.h>
+@import Firebase;
 
 
 static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRACE;
 
 @interface AppDelegate () <CrashlyticsDelegate, BuglifeDelegate>
 
-@property (strong, nonatomic) DDFileLogger *fileLogger;
+@property (strong, nonatomic) DDFileLogger      *fileLogger;
+@property (strong, nonatomic) AIMSLoginService  *loginService;
 
 @end
+
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // Firebase Analytics integration
+#ifndef DEBUG
+    [FIRApp configure];
+#endif
+    
     // Cocoa Lumberjack integration
     [[DDOSLogger sharedInstance] setLogFormatter:[AFALogFormatter new]];
     [[DDTTYLogger sharedInstance] setLogFormatter:[AFALogFormatter new]];
@@ -72,6 +82,11 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
     [[Buglife sharedBuglife] startWithEmail:@"you@yourdomain.com"];
     [Buglife sharedBuglife].invocationOptions = LIFEInvocationOptionsShake;
     [Buglife sharedBuglife].delegate = self;
+    
+    // Register color scheme manager
+    MaterialDesignColorSchemeComponent *colorSchemeManager = [MaterialDesignColorSchemeComponent new];
+    [[AFAServiceRepository sharedRepository] registerServiceObject:colorSchemeManager
+                                                        forPurpose:AFAServiceObjectTypeMaterialDesignColorSchemeComponent];
     
     application.delegate.window.backgroundColor = [UIColor windowBackgroundColor];
     
@@ -122,6 +137,11 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    AIMSLoginService *loginService = [[AFAServiceRepository sharedRepository] serviceObjectForPurpose:AFAServiceObjectTypeAIMSLogin];
+    return [loginService resumeExternalUserAgentFlowWith:url];
 }
 
 @end

@@ -83,7 +83,11 @@
 #import <ActivitiSDK/ASDKIntegrationSiteContentDataSource.h>
 #import <ActivitiSDK/ASDKIntegrationFolderContentDataSource.h>
 
+#import <ActivitiSDK/ASDKModelCredentialBaseAuth.h>
+#import <ActivitiSDK/ASDKModelCredentialAIMS.h>
+
 // Network services and protocols
+#import <ActivitiSDK/ASDKHTTPCodes.h>
 #import <ActivitiSDK/ASDKRequestOperationManager.h>
 #import <ActivitiSDK/ASDKAppNetworkServiceProtocol.h>
 #import <ActivitiSDK/ASDKProfileNetworkServiceProtocol.h>
@@ -96,15 +100,11 @@
 #import <ActivitiSDK/ASDKQuerryNetworkServiceProtocol.h>
 #import <ActivitiSDK/ASDKIntegrationNetworkServiceProtocol.h>
 #import <ActivitiSDK/ASDKServicePathFactory.h>
+#import <ActivitiSDK/ASDKNetworkSessionProtocol.h>
 
 // JSON adapters
 #import <ActivitiSDK/ASDKMantleJSONAdapterExcludeZeroNil.h>
 #import <ActivitiSDK/ASDKMantleJSONAdapterCustomPolicy.h>
-
-// Response serializers
-#import <ActivitiSDK/ASDKHTTPResponseSerializer.h>
-#import <ActivitiSDK/ASDKJSONResponseSerializer.h>
-#import <ActivitiSDK/ASDKImageResponseSerializer.h>
 
 // Other service protocols
 #import <ActivitiSDK/ASDKDiskServiceProtocol.h>
@@ -158,6 +158,7 @@
 // Service categories
 #import <ActivitiSDK/NSURLSessionTask+ASDKAdditions.h>
 #import <ActivitiSDK/NSString+ASDKEmailValidation.h>
+#import <ActivitiSDK/NSString+PersistenceStackNormalization.h>
 
 // Form render engine
 #import <ActivitiSDK/ASDKFormRenderEngine.h>
@@ -195,7 +196,8 @@
 #import <ActivitiSDK/ASDKFormRenderEngineConstants.h>
 
 // Authentication providers
-#import <ActivitiSDK/ASDKBasicAuthentificationProvider.h>
+#import <ActivitiSDK/ASDKBasicAuthenticationProvider.h>
+#import <ActivitiSDK/ASDKPKCEAuthenticationProvider.h>
 
 //! Project version number for ActivitiSDK.
 FOUNDATION_EXPORT double ActivitiSDKVersionNumber;

@@ -78,48 +78,48 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                            parameters:[filter jsonDictionary]
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  ASDKLogVerbose(@"Filter list fetched successfully for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKFilterParserContentTypeFilterList);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error, nil);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil, paging);
-                                           });
-                                       }
-                                   }];
-                                  
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch filter list for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error, nil);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        ASDKLogVerbose(@"Filter list fetched successfully for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKFilterParserContentTypeFilterList);
+        
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:parserContentType
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error, nil);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil, paging);
+                });
+            }
+        }];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch filter list for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error, nil);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -142,48 +142,48 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                            parameters:[filter jsonDictionary]
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  ASDKLogVerbose(@"Filter list fetched successfully for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKFilterParserContentTypeFilterList);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error, nil);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil, paging);
-                                           });
-                                       }
-                                   }];
-                                  
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch filter list for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error, nil);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        ASDKLogVerbose(@"Filter list fetched successfully for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKFilterParserContentTypeFilterList);
+        
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:parserContentType
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error, nil);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil, paging);
+                });
+            }
+        }];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch filter list for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error, nil);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -197,32 +197,32 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[self.servicePathFactory taskFilterListServicePath]
-                            parameters:[filter jsonDictionary]
-                              progress:nil
-                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [strongSelf handleSuccessfulFilterCreationResponseForTask:task
-                                                                                   responseObject:responseObject
-                                                                                  completionBlock:completionBlock];
-                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [strongSelf handleFailedFilterCreationResponseForTask:task
-                                                                                        error:error
-                                                                          withCompletionBlock:completionBlock];
-                               }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[strongSelf.servicePathFactory taskFilterListServicePath]
+                                      parameters:[filter jsonDictionary]
+                                        progress:nil
+                                         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleSuccessfulFilterCreationResponseForTask:task
+                                                     responseObject:responseObject
+                                                    completionBlock:completionBlock];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleFailedFilterCreationResponseForTask:task
+                                                          error:error
+                                            withCompletionBlock:completionBlock];
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)createProcessInstanceTaskFilterWithRepresentation:(ASDKFilterCreationRequestRepresentation *)filter
@@ -233,32 +233,32 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[self.servicePathFactory processInstanceFilterListServicePath]
-                            parameters:[filter jsonDictionary]
-                              progress:nil
-                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [strongSelf handleSuccessfulFilterCreationResponseForTask:task
-                                                                                   responseObject:responseObject
-                                                                                  completionBlock:completionBlock];
-                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [strongSelf handleFailedFilterCreationResponseForTask:task
-                                                                                        error:error
-                                                                          withCompletionBlock:completionBlock];
-                               }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[strongSelf.servicePathFactory processInstanceFilterListServicePath]
+                                      parameters:[filter jsonDictionary]
+                                        progress:nil
+                                         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleSuccessfulFilterCreationResponseForTask:task
+                                                     responseObject:responseObject
+                                                    completionBlock:completionBlock];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleFailedFilterCreationResponseForTask:task
+                                                          error:error
+                                            withCompletionBlock:completionBlock];
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)cancelAllNetworkOperations {
@@ -285,18 +285,18 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
      parseContentDictionary:responseDictionary
      ofType:parserContentType
      withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-         if (error) {
-             ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-             dispatch_async(weakSelf.resultsQueue, ^{
-                 completionBlock(nil, error);
-             });
-         } else {
-             ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-             dispatch_async(weakSelf.resultsQueue, ^{
-                 completionBlock(parsedObject, nil);
-             });
-         }
-     }];
+        if (error) {
+            ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        } else {
+            ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(parsedObject, nil);
+            });
+        }
+    }];
 }
 
 - (void)handleFailedFilterCreationResponseForTask:(NSURLSessionDataTask *)task

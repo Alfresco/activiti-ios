@@ -38,7 +38,76 @@ NSString *kLocalizationLoginTimedOutText                         = @"loginScreen
 NSString *kLocalizationLoginUnauthorizedRequestErrorText         = @"loginScreenUnauthorizedRequestErrorText";
 NSString *kLocalizationLoginCloudLoginButtonText                 = @"loginScreenCloudLoginButtonText";
 NSString *kLocalizationLoginPremiseLoginButtonText               = @"loginScreenPremiseLoginButtonText";
+NSString *kLocalizationLoginProcessServicesAppText               = @"loginScreenProcessServicesAppText";
+NSString *kLocalizationLoginScreenProcessServicesAppText         = @"loginScreenProcessServicesAppText";
+NSString *kLocalizationLoginScreenAlfrescoURLPlaceholderText     = @"loginScreenAlfrescoURLPlaceholderText";
+NSString *kLocalizationLoginScreenProcessURLPlaceholderText      = @"loginScreenProcessURLPlaceholderText";
+NSString *kLocalizationLoginScreenUseHTTPsText                   = @"loginScreenUseHTTPsText";
+NSString *kLocalizationLoginScreenConnectButtonText              = @"loginScreenConnectButtonText";
+NSString *kLocalizationLoginScreenCloudSignInButtonText          = @"loginScreenCloudSignInButtonText";
+NSString *kLocalizationLoginScreenAdvancedSettingsButtonText     = @"loginScreenAdvancedSettingsButtonText";
+NSString *kLocalizationLoginScreenCopyrightFormat                = @"loginScreenCopyrightFormat";
+NSString *kLocalizationLoginScreenIndentityServiceURLHintTitleText = @"loginScreenIndentityServiceURLHintTitleText";
+NSString *kLocalizationLoginScreenIdentityServiceURLHintText     = @"loginScreenIdentityServiceURLHintText";
+NSString *kLocalizationLoginScreenSSOHelpHintText                = @"loginScreenSSOHelpHintText";
+NSString *kLocalizationLoginScreenOnPremiseSigningInToHintFormat = @"loginScreenOnPremiseSigningInToHintFormat";
 
+#pragma mark -
+#pragma mark Advanced Settings screen
+
+NSString *kLocalizationAdvancedSettingsScreenTittle                                 = @"advancedSettingsScreenTitle";
+NSString *kLocalizationAdvancedSettingsScreenTransportProtocolText                  = @"advancedSettingsScreenTransportProtocolText";
+NSString *kLocalizationAdvancedSettingsScreenHttpsText                              = @"advancedSettingsScreenHttpsPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenPortPlaceholderText                    = @"advancedSettingsScreenPortPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenPortHintText                           = @"advancedSettingsScreenPortHintText";
+NSString *kLocalizationAdvancedSettingsScreenAlfrescoProcessServiceSettingsText     = @"advancedSettingProcessServiceSettingsText";
+NSString *kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText         = @"advancedSettingsScreenServiceDocumentPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenServiceDocumentHintText                = @"advancedSettingsScreenServiceDocumentHintText";
+NSString *kLocalizationAdvancedSettingsScreenAuthenticationText                     = @"advancedSettingsScreenAuthenticationText";
+NSString *kLocalizationAdvancedSettingsScreenRealmPlaceholderText                   = @"advancedSettingsScreenRealmPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenRealmHintText                          = @"advancedSettingsScreenRealmHintText";
+NSString *kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText                = @"advancedSettingsScreeClientIDPlaceholderText";
+NSString *kLocalizationAdvancedSettingsScreenClientIDHintText                       = @"advancedSettingsScreenClientIDHintText";
+NSString *kLocalizationAdvancedSettingsScreenRedirectURLPlaceholderText             = @"advancedSettingsScreenRedirectURLPlaceHolderText";
+NSString *kLocalizationAdvancedSettingsScreenRedirectURLHintText                    = @"advancedSettingsScreenRedirectURLHintText";
+NSString *kLocalizationAdvancedSettingsScreenSaveButtonText                         = @"advancedSettingsScreenSaveButtonText";
+NSString *kLocalizationAdvancedSettingsScreenHelpButtonText                         = @"advancedSettingsScreenHelpButtonText";
+NSString *kLocalizationAdvancedSettingsScreenHelpText                               = @"advancedSettingsScreenHelpText";
+NSString *kLocalizationAdvancedSettingsScreenHelpHintText                           = @"advancedSettingsScreenHelpHintText";
+NSString *kLocalizationAdvancedSettingsScreenCloseText                              = @"advancedSettingsScreenCloseText";
+NSString *kLocalizationAdvancedSettingsScreenResetButtonText                        = @"advancedSettingsScreenResetButtonText";
+NSString *kLocalizationAdvancedSettingsScreenSaveConfirmationText                   = @"advancedSettingsScreenSaveConfirmationText";
+
+#pragma mark -
+#pragma mark Banner view component
+
+NSString *kLocalizationBannerViewErrorText              = @"bannerViewErrorText";
+NSString *kLocalizationBannerViewWarningText            = @"bannerViewWarningText";
+NSString *kLocalizationBannerViewConfirmationText       = @"bannerViewConfirmationText";
+NSString *kLocalizationBannerViewSuccessText            = @"bannerViewSuccessText";
+NSString *kLocalizationGenericErrorText                 = @"genericErrorText";
+NSString *kLocalizationErrorCheckConnectURL             = @"errorCheckConnectURL";
+NSString *kLocalizationErrorNoAuthAlfrescoURL           = @"errorNoAuthAlfrescoURL";
+NSString *kLocalizationErrorCredentialProvided          = @"errorWrongCredentialProvided";
+
+#pragma mark -
+#pragma mark Cloud Login screen
+
+NSString *kLocalizationCloudLoginInfoText                = @"cloudLoginInfoText";
+NSString *kLocalizationCloudLoginUsernamePlaceholderText = @"cloudLoginUsernamePlaceholderText";
+NSString *kLocalizationCloudLoginPasswordPlaceholderText = @"cloudLoginPasswordPlaceholderText";
+NSString *kLocalizationCloudLoginSignInButtonText        = @"cloudLoginSignInButtonText";
+NSString *kLocalizationCloudLoginWarningText             = @"cloudLoginWarningText";
+
+#pragma mark -
+#pragma mark SSO Login screen
+
+NSString *kLocalizationSSOLoginSubtitle1Text                    = @"ssoLoginSubtitle1Text";
+NSString *kLocalizationSSOLoginSubtitle2Text                    = @"ssoLoginSubtitle2Text";
+NSString *kLocalizationSSOLoginRepositoryPlaceholderText        = @"ssoLoginRepositoryPlaceholderText";
+NSString *kLocalizationSSOLoginSignInSSOButtonText              = @"ssoLoginSignInSSOButtonText";
+NSString *kLocalizationSSOLoginScreenSigningInText              = @"ssoLoginScreenSigningInText";
+NSString *kLocalizationSSOLoginWarningLoginRedirectURL          = @"ssoLoginWarningLoginRedirectURL";
 
 #pragma mark -
 #pragma mark Application screen

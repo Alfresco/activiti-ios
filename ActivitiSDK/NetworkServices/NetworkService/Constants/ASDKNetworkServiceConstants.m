@@ -111,5 +111,11 @@ NSString * const kADSKAPIUnauthorizedRequestNotification        = @"com.alfresco
 #pragma mark -
 #pragma mark Error domain
 
-NSString * const ASDKNetworkServiceErrorDomain = @"ASDKNetworkServiceErrorDomain";
-const NSInteger ASDKNetworkServiceErrorInvalidResponseFormat = 1;
+NSString * const ASDKNetworkServiceErrorDomain                  = @"ASDKNetworkServiceErrorDomain";
+const NSInteger ASDKNetworkServiceErrorInvalidResponseFormat    = 1;
+
+#pragma mark -
+#pragma mark AIMS session
+
+NSTimeInterval kASDKSessionExpirationTimeIntervalCheck          = 20;
+NSString * const kASDKAIMSJwtTokenPayload                       = @"payload";

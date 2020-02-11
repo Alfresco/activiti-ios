@@ -18,7 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class AFALoginViewModel;
+@class ContainerViewModel;
+
 @protocol AFAContainerViewControllerDelegate <NSObject>
 
 - (BOOL)isDrawerMenuOpen;
@@ -34,6 +35,6 @@
 
 @interface AFAContainerViewController : UIViewController
 
-@property (strong, nonatomic) AFALoginViewModel *loginViewModel;
+@property ContainerViewModel *viewModel;
 
 @end

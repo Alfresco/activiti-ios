@@ -28,6 +28,9 @@ NSTimeInterval kLoginScreenBackgroundImageFadeInTime            = 1.2f;
 NSTimeInterval kModalReplaceAnimationTime                       = .55f;
 NSTimeInterval kPushPopAnimationTime                            = .40f;
 NSTimeInterval kOverlayAlphaChangeTime                          = .25f;
+NSTimeInterval kSplashScreenLogoAnimationTime                   = 2.0;
+NSTimeInterval kSplashScreenAlphaAnimationTime                  = 1.5;
+NSTimeInterval kLoginScreenKeyboardAnimationTime                = 1.0;
 
 
 #pragma mark -
@@ -42,6 +45,14 @@ NSString *kStoryboardIDListViewController                       = @"ListViewCont
 NSString *kStoryboardIDApplicationListViewController            = @"ApplicationListViewControllerID";
 NSString *kStoryboardIDProfileViewController                    = @"ProfileViewControllerID";
 NSString *kStoryboardIDSettingsViewController                   = @"SettingsViewControllerID";
+NSString *kStoryboardIDAIMSSSOViewController                    = @"AIMSSSOViewControllerID";
+NSString *kStoryboardIDBaseAuthLoginViewController              = @"BaseAuthViewControllerID";
+NSString *kStoryboardIDAIMSHelpViewController                   = @"AIMSHelpViewControllerID";
+
+#pragma mark -
+#pragma mark Constraints IDs
+
+NSString *kConstraintIDFirstOnTop                               = @"FirstConstrainOnTop";
 
 
 #pragma mark -
@@ -93,6 +104,11 @@ NSString *kCellIDAuditLog                                       = @"AuditLogCell
 NSString *kCellIDStartForm                                      = @"StartFormCellID";
 NSString *kCellIDTaskChecklist                                  = @"TaskChecklistCellID";
 NSString *kCellIDLoginSection                                   = @"LoginSectionCellID";
+NSString *kCellIDAdvancedSettingsHttps                          = @"AdvancedSettingsHttpsCellID";
+NSString *kCellIDAdvancedSettingsField                          = @"AdvancedSettingsTextfieldCellID";
+NSString *kCellIDAdvancedSettingsButton                         = @"AdvancedSettingsButtonCellID";
+NSString *kCellIDAdvancedSettingsCopyright                      = @"AdvancedSettingsCopyrightCellID";
+NSString *kCellIDAdvancedSettingsSection                        = @"AdvancedSettingsSectionCellID";
 
 
 #pragma mark -
@@ -133,6 +149,10 @@ NSString *kSegueIDProcessInstanceDetailsAddCommentsUnwind       = @"ProcessInsta
 NSString *kSegueIDProcessInstanceViewCompletedStartForm         = @"ProcessInstanceViewCompletedStartFormSegueID";
 NSString *kSegueIDProcessInstanceViewCompletedStartFormUnwind   = @"ProcessInstanceViewCompletedStartFormUnwindSegueID";
 NSString *kSegueIDProfileContentPickerComponentEmbedding        = @"ProfileContentPickerComponentEmbeddingSegueID";
+NSString *kSegueIDLoginAIMSAdvancedSettings                     = @"LoginAIMSAdvancedSettingsSegueID";
+NSString *kSegueIDSplashScreen                                  = @"ShowAppFromSplashScreenSegueID";
+NSString *kSegueIDBaseAuthLoginSegueID                          = @"BaseAuthLoginSegueID";
+NSString *kSegueIDSplashScreenContainerSegueID                  = @"SplashScreenContainerSegueID";
 
 
 #pragma mark -

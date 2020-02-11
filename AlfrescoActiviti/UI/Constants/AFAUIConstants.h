@@ -27,6 +27,9 @@ extern NSTimeInterval kLoginScreenServerButtonsFadeInTime;
 extern NSTimeInterval kModalReplaceAnimationTime;
 extern NSTimeInterval kPushPopAnimationTime;
 extern NSTimeInterval kOverlayAlphaChangeTime;
+extern NSTimeInterval kSplashScreenLogoAnimationTime;
+extern NSTimeInterval kSplashScreenAlphaAnimationTime;
+extern NSTimeInterval kLoginScreenKeyboardAnimationTime;
 
 // Storyboard components IDs
 
@@ -39,6 +42,9 @@ extern NSString *kStoryboardIDListViewController;
 extern NSString *kStoryboardIDApplicationListViewController;
 extern NSString *kStoryboardIDProfileViewController;
 extern NSString *kStoryboardIDSettingsViewController;
+extern NSString *kStoryboardIDAIMSSSOViewController;
+extern NSString *kStoryboardIDBaseAuthLoginViewController;
+extern NSString *kStoryboardIDAIMSHelpViewController;
 
 // Cell IDs
 
@@ -88,6 +94,15 @@ extern NSString *kCellIDStartForm;
 extern NSString *kCellIDTaskChecklist;
 extern NSString *kCellIDSettingsUsage;
 extern NSString *kCellIDLoginSection;
+extern NSString *kCellIDAdvancedSettingsHttps;
+extern NSString *kCellIDAdvancedSettingsField;
+extern NSString *kCellIDAdvancedSettingsButton;
+extern NSString *kCellIDAdvancedSettingsCopyright;
+extern NSString *kCellIDAdvancedSettingsSection;
+
+// Constraints IDs
+
+extern NSString *kConstraintIDFirstOnTop;
 
 // Segue IDs
 
@@ -126,6 +141,10 @@ extern NSString *kSegueIDProcessInstanceDetailsAddCommentsUnwind;
 extern NSString *kSegueIDProcessInstanceViewCompletedStartForm;
 extern NSString *kSegueIDProcessInstanceViewCompletedStartFormUnwind;
 extern NSString *kSegueIDProfileContentPickerComponentEmbedding;
+extern NSString *kSegueIDLoginAIMSAdvancedSettings;
+extern NSString *kSegueIDSplashScreen;
+extern NSString *kSegueIDBaseAuthLoginSegueID;
+extern NSString *kSegueIDSplashScreenContainerSegueID;
 
 // Thumbnail manager
 extern NSString *kProfileImageThumbnailIdentifier;

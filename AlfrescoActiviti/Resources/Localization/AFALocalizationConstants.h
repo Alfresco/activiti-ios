@@ -35,6 +35,70 @@ extern NSString *kLocalizationLoginTimedOutText;
 extern NSString *kLocalizationLoginUnauthorizedRequestErrorText;
 extern NSString *kLocalizationLoginCloudLoginButtonText;
 extern NSString *kLocalizationLoginPremiseLoginButtonText;
+extern NSString *kLocalizationLoginProcessServicesAppText;
+extern NSString *kLocalizationLoginScreenProcessServicesAppText;
+extern NSString *kLocalizationLoginScreenAlfrescoURLPlaceholderText;
+extern NSString *kLocalizationLoginScreenProcessURLPlaceholderText;
+extern NSString *kLocalizationLoginScreenUseHTTPsText;
+extern NSString *kLocalizationLoginScreenConnectButtonText;
+extern NSString *kLocalizationLoginScreenCloudSignInButtonText;
+extern NSString *kLocalizationLoginScreenAdvancedSettingsButtonText;
+extern NSString *kLocalizationLoginScreenCopyrightFormat;
+extern NSString *kLocalizationLoginScreenIndentityServiceURLHintTitleText;
+extern NSString *kLocalizationLoginScreenIdentityServiceURLHintText;
+extern NSString *kLocalizationLoginScreenCopyrightFormat;
+extern NSString *kLocalizationLoginScreenSSOHelpHintText;
+extern NSString *kLocalizationLoginScreenOnPremiseSigningInToHintFormat;
+
+// Advanced Settings screen
+extern NSString *kLocalizationAdvancedSettingsScreenTittle;
+extern NSString *kLocalizationAdvancedSettingsScreenTransportProtocolText;
+extern NSString *kLocalizationAdvancedSettingsScreenHttpsText;
+extern NSString *kLocalizationAdvancedSettingsScreenPortPlaceholderText;
+extern NSString *kLocalizationAdvancedSettingsScreenPortHintText;
+extern NSString *kLocalizationAdvancedSettingsScreenAlfrescoProcessServiceSettingsText;
+extern NSString *kLocalizationAdvancedSettingsScreenServiceDocumentPlaceholderText;
+extern NSString *kLocalizationAdvancedSettingsScreenServiceDocumentHintText;
+extern NSString *kLocalizationAdvancedSettingsScreenAuthenticationText;
+extern NSString *kLocalizationAdvancedSettingsScreenRealmPlaceholderText;
+extern NSString *kLocalizationAdvancedSettingsScreenRealmHintText;
+extern NSString *kLocalizationAdvancedSettingsScreenCliendIDPlaceholderText;
+extern NSString *kLocalizationAdvancedSettingsScreenClientIDHintText;
+extern NSString *kLocalizationAdvancedSettingsScreenRedirectURLPlaceholderText;
+extern NSString *kLocalizationAdvancedSettingsScreenRedirectURLHintText;
+extern NSString *kLocalizationAdvancedSettingsScreenSaveButtonText;
+extern NSString *kLocalizationAdvancedSettingsScreenHelpButtonText;
+extern NSString *kLocalizationAdvancedSettingsScreenHelpText;
+extern NSString *kLocalizationAdvancedSettingsScreenHelpHintText;
+extern NSString *kLocalizationAdvancedSettingsScreenCloseText;
+extern NSString *kLocalizationAdvancedSettingsScreenResetButtonText;
+extern NSString *kLocalizationAdvancedSettingsScreenSaveConfirmationText;
+
+// Banner view component
+
+extern NSString *kLocalizationBannerViewErrorText;
+extern NSString *kLocalizationBannerViewWarningText;
+extern NSString *kLocalizationBannerViewConfirmationText;
+extern NSString *kLocalizationBannerViewSuccessText;
+extern NSString *kLocalizationGenericErrorText;
+extern NSString *kLocalizationErrorCheckConnectURL;
+extern NSString *kLocalizationErrorNoAuthAlfrescoURL;
+extern NSString *kLocalizationErrorCredentialProvided;
+
+//Cloud Login screen
+extern NSString *kLocalizationCloudLoginInfoText;
+extern NSString *kLocalizationCloudLoginUsernamePlaceholderText;
+extern NSString *kLocalizationCloudLoginPasswordPlaceholderText;
+extern NSString *kLocalizationCloudLoginSignInButtonText;
+extern NSString *kLocalizationCloudLoginWarningText;
+
+//SSO Login screen
+extern NSString *kLocalizationSSOLoginSubtitle1Text;
+extern NSString *kLocalizationSSOLoginSubtitle2Text;
+extern NSString *kLocalizationSSOLoginRepositoryPlaceholderText;
+extern NSString *kLocalizationSSOLoginSignInSSOButtonText;
+extern NSString *kLocalizationSSOLoginScreenSigningInText;
+extern NSString *kLocalizationSSOLoginWarningLoginRedirectURL;
 
 // Applications screen
 extern NSString *kLocalizationAppScreenTitleText;

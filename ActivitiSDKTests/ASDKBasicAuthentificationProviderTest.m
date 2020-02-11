@@ -34,8 +34,9 @@
 
 - (void)testThatItConfiguresProviderWithBasicAuthentication {
     // given
-    ASDKBasicAuthentificationProvider *basicAuthentication = [[ASDKBasicAuthentificationProvider alloc] initWithUserName:@"test"
-                                                                                                                password:@"test"];
+    ASDKModelCredentialBaseAuth *credential = [[ASDKModelCredentialBaseAuth alloc] initWithUsername:@"test"
+                                                                                           password:@"test"];
+    ASDKBasicAuthenticationProvider *basicAuthentication = [[ASDKBasicAuthenticationProvider alloc] initWithCredential:credential];
     // then
     XCTAssertTrue([[basicAuthentication valueForHTTPHeaderField:@"Authorization"] isEqualToString:@"Basic dGVzdDp0ZXN0"]);
 }

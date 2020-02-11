@@ -63,54 +63,54 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager GET:[self.servicePathFactory userListServicePath]
-                           parameters:[userRequest jsonDictionary]
-                             progress:nil
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  ASDKLogVerbose(@"Users fetched successfully for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKUserParserContentTypeUserList);
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error, paging);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil, paging);
-                                           });
-                                       }
-                                   }];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch users list for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error, nil);
-                                  });
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager GET:[strongSelf.servicePathFactory userListServicePath]
+                                     parameters:[userRequest jsonDictionary]
+                                       progress:nil
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+            ASDKLogVerbose(@"Users fetched successfully for request: %@",
+                           [task stateDescriptionForResponse:responseDictionary]);
+            
+            // Parse response data
+            NSString *parserContentType = CREATE_STRING(ASDKUserParserContentTypeUserList);
+            [weakSelf.parserOperationManager
+             parseContentDictionary:responseDictionary
+             ofType:parserContentType
+             withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+                if (error) {
+                    ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(nil, error, paging);
+                    });
+                } else {
+                    ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(parsedObject, nil, paging);
+                    });
+                }
+            }];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to fetch users list for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error, nil);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)fetchPictureForUserID:(NSString *)userID
@@ -121,38 +121,38 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager GET:[NSString stringWithFormat:[self.servicePathFactory userProfileImageServicePathFormat], userID]
-                           parameters:nil
-                             progress:nil
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  UIImage *profileImage = (UIImage *)responseObject;
-                                  ASDKLogVerbose(@"Profile picture fetched successfully for request: %@", [task stateDescriptionForResponse:nil]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(profileImage, nil);
-                                  });
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch profile picture for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager GET:[NSString stringWithFormat:[strongSelf.servicePathFactory userProfileImageServicePathFormat], userID]
+                                     parameters:nil
+                                       progress:nil
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            UIImage *profileImage = (UIImage *)responseObject;
+            ASDKLogVerbose(@"Profile picture fetched successfully for request: %@", [task stateDescriptionForResponse:nil]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(profileImage, nil);
+            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to fetch profile picture for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)cancelAllNetworkOperations {

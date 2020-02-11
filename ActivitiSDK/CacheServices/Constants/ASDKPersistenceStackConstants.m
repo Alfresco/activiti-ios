@@ -26,3 +26,9 @@ NSString * const ASDKPersistenceStackErrorDomain                        = @"ASDK
 NSInteger const  kASDKPersistenceStackInitializationErrorCode           = 1;
 NSInteger const  kASDKPersistenceStackSaveViewContextErrorCode          = 2;
 NSInteger const  kASDKPersistenceStackCleanCacheStalledDataErrorCode    = 3;
+
+
+#pragma mark -
+#pragma mark Default parameters
+
+NSString * const kASDKPersistenceStackNameDefault                       = @"PersistenceStackNameDefault";

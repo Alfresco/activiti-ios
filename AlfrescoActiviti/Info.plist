@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2</string>
+	<string>1.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>78</string>
+	<string>166</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -49,6 +49,9 @@
 	<string>This allows Alfresco Activiti to let you pick images from your photo library and attach them to tasks.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Muli-Bold.ttf</string>
+		<string>Muli-Light.ttf</string>
+		<string>Muli-Regular.ttf</string>
 		<string>glyphicons-filetypes.otf</string>
 		<string>glyphicons-regular.otf</string>
 	</array>
@@ -74,6 +77,15 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>iosapsapp</string>
+			</array>
+		</dict>
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>

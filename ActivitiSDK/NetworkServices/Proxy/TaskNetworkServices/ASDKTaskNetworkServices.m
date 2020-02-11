@@ -80,24 +80,24 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                             parameters:[filter jsonDictionary]
                               progress:nil
                                success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [strongSelf handleSuccessfulTaskListResponseForTask:task
-                                                                        responseObject:responseObject
-                                                                       completionBlock:completionBlock];
-                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [strongSelf handleFailedTaskListResponseForTask:task
-                                                                             error:error
-                                                                   completionBlock:completionBlock];
-                               }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        [strongSelf handleSuccessfulTaskListResponseForTask:task
+                                             responseObject:responseObject
+                                            completionBlock:completionBlock];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        [strongSelf handleFailedTaskListResponseForTask:task
+                                                  error:error
+                                        completionBlock:completionBlock];
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -116,25 +116,25 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                             parameters:[filter jsonDictionary]
                               progress:nil
                                success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [strongSelf handleSuccessfulTaskListResponseForTask:task
-                                                                        responseObject:responseObject
-                                                                       completionBlock:completionBlock];
-                                   
-                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [strongSelf handleFailedTaskListResponseForTask:task
-                                                                             error:error
-                                                                   completionBlock:completionBlock];
-                               }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        [strongSelf handleSuccessfulTaskListResponseForTask:task
+                                             responseObject:responseObject
+                                            completionBlock:completionBlock];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        [strongSelf handleFailedTaskListResponseForTask:task
+                                                  error:error
+                                        completionBlock:completionBlock];
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -153,47 +153,47 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  ASDKLogVerbose(@"Task details fetched successfully for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeTaskDetails);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil);
-                                           });
-                                       }
-                                   }];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch task details for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        ASDKLogVerbose(@"Task details fetched successfully for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeTaskDetails);
+        
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:parserContentType
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil);
+                });
+            }
+        }];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch task details for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -212,47 +212,47 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  ASDKLogVerbose(@"Task content fetched successfully for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeContent);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil);
-                                           });
-                                       }
-                                   }];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch task content for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        ASDKLogVerbose(@"Task content fetched successfully for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeContent);
+        
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:parserContentType
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil);
+                });
+            }
+        }];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch task content for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -271,47 +271,47 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  ASDKLogVerbose(@"Task comments fetched successfully for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeComments);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error, nil);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil, paging);
-                                           });
-                                       }
-                                   }];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to fetch task comments for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error, nil);
-                                  });
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        ASDKLogVerbose(@"Task comments fetched successfully for request: %@",
+                       [task stateDescriptionForResponse:responseDictionary]);
+        
+        // Parse response data
+        NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeComments);
+        
+        [strongSelf.parserOperationManager
+         parseContentDictionary:responseDictionary
+         ofType:parserContentType
+         withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+            if (error) {
+                ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, error, nil);
+                });
+            } else {
+                ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(parsedObject, nil, paging);
+                });
+            }
+        }];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        ASDKLogError(@"Failed to fetch task comments for request: %@",
+                     [task stateDescriptionForError:error]);
+        
+        dispatch_async(strongSelf.resultsQueue, ^{
+            completionBlock(nil, error, nil);
+        });
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -327,55 +327,55 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[NSString stringWithFormat:[self.servicePathFactory taskCommentServicePathFormat], taskID]
-                            parameters:@{kASDKAPIMessageParameter : comment}
-                              progress:nil
-                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                   ASDKLogVerbose(@"Comment created successfully for request: %@",
-                                                  [task stateDescriptionForResponse:responseDictionary]);
-                                   
-                                   // Parse response data
-                                   NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeComment);
-                                   
-                                   [strongSelf.parserOperationManager
-                                    parseContentDictionary:responseDictionary
-                                    ofType:parserContentType
-                                    withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                        if (error) {
-                                            ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                            dispatch_async(weakSelf.resultsQueue, ^{
-                                                completionBlock(nil, error);
-                                            });
-                                        } else {
-                                            ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                            dispatch_async(weakSelf.resultsQueue, ^{
-                                                completionBlock(parsedObject, nil);
-                                            });
-                                        }
-                                    }];
-                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   ASDKLogError(@"Failed to create task comment for request: %@",
-                                                [task stateDescriptionForError:error]);
-                                   
-                                   dispatch_async(strongSelf.resultsQueue, ^{
-                                       completionBlock(nil, error);
-                                   });
-                               }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[NSString stringWithFormat:[self.servicePathFactory taskCommentServicePathFormat], taskID]
+                                      parameters:@{kASDKAPIMessageParameter : comment}
+                                        progress:nil
+                                         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+            ASDKLogVerbose(@"Comment created successfully for request: %@",
+                           [task stateDescriptionForResponse:responseDictionary]);
+            
+            // Parse response data
+            NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeComment);
+            
+            [weakSelf.parserOperationManager
+             parseContentDictionary:responseDictionary
+             ofType:parserContentType
+             withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+                if (error) {
+                    ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(nil, error);
+                    });
+                } else {
+                    ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(parsedObject, nil);
+                    });
+                }
+            }];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to create task comment for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)updateTaskForTaskID:(NSString *)taskID
@@ -387,48 +387,38 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskDetailsServicePathFormat], taskID]
-                           parameters:[taskRepresentation jsonDictionary]
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  // Check status code
-                                  NSInteger statusCode = [task statusCode];
-                                  if (ASDKHTTPCode200OK == statusCode) {
-                                      ASDKLogVerbose(@"The task details were updated successfully for request: %@",
-                                                     [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(YES, nil);
-                                      });
-                                  } else {
-                                      ASDKLogError(@"The task details failed to update successfully for request: %@",
-                                                   [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(NO, nil);
-                                      });
-                                  }
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to update task details for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(NO, error);
-                                  });
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskDetailsServicePathFormat], taskID]
+                                     parameters:[taskRepresentation jsonDictionary]
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSInteger statusCode = [task statusCode];
+            ASDKLogVerbose(@"The task details were updated successfully for request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to update task details for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)completeTaskForTaskID:(NSString *)taskID
@@ -439,49 +429,38 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskActionCompleteServicePathFormat], taskID]
-                           parameters:nil
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  // Check status code
-                                  NSInteger statusCode = [task statusCode];
-                                  if (ASDKHTTPCode200OK == statusCode) {
-                                      ASDKLogVerbose(@"The task was marked as completed successfully for request: %@",
-                                                     [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(YES, nil);
-                                      });
-                                  } else {
-                                      ASDKLogVerbose(@"The task failed to be marked as completed for request: %@",
-                                                     [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(NO, nil);
-                                      });
-                                  }
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to mark task as completed for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(NO, error);
-                                  });
-                                  
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskActionCompleteServicePathFormat], taskID]
+                                     parameters:nil
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSInteger statusCode = [task statusCode];
+            ASDKLogVerbose(@"The task was marked as completed successfully for request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to mark task as completed for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)uploadContentWithModel:(ASDKModelFileContent *)file
@@ -495,75 +474,73 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[NSString stringWithFormat:[self.servicePathFactory taskContentUploadServicePathFormat], taskID]
-                            parameters:@{kASDKAPIIsRelatedContentParameter : @(YES)}
-             constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                 NSError *error = nil;
-                 [formData appendPartWithFileURL:file.modelFileURL
-                                            name:kASDKAPIContentUploadMultipartParameter
-                                        fileName:file.fileName
-                                        mimeType:file.mimeType
-                                           error:&error];
-                 
-                 if (error) {
-                     ASDKLogError(@"An error occured while appending multipart form data from file %@.", file.modelFileURL);
-                 }
-                 
-             } progress:^(NSProgress * _Nonnull uploadProgress) {
-                 __strong typeof(self) strongSelf = weakSelf;
-                 
-                 // If a progress block is provided report transfer progress information
-                 if (progressBlock) {
-                     NSUInteger percentProgress = (NSUInteger) (uploadProgress.completedUnitCount * 100 / uploadProgress.totalUnitCount);
-                     
-                     dispatch_async(strongSelf.resultsQueue, ^{
-                         progressBlock(percentProgress, nil);
-                     });
-                 }
-             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                 __strong typeof(self) strongSelf = weakSelf;
-                 
-                 // Remove operation reference
-                 [strongSelf.networkOperations removeObject:dataTask];
-                 
-                 NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                 ASDKLogVerbose(@"Task content succesfully uploaded for request: %@",
-                                [task stateDescriptionForResponse:responseDictionary]);
-                 
-                 // Parse response data
-                 NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeContent);
-                 [strongSelf.parserOperationManager parseContentDictionary:responseDictionary
-                                                                    ofType:parserContentType
-                                                       withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                                           if (error) {
-                                                               ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                                               dispatch_async(weakSelf.resultsQueue, ^{
-                                                                   completionBlock(nil, error);
-                                                               });
-                                                           } else {
-                                                               ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                                               dispatch_async(weakSelf.resultsQueue, ^{
-                                                                   completionBlock(parsedObject, nil);
-                                                               });
-                                                           }
-                                                       }];
-             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                 __strong typeof(self) strongSelf = weakSelf;
-                 
-                 // Remove operation reference
-                 [strongSelf.networkOperations removeObject:dataTask];
-                 
-                 ASDKLogError(@"Failed to upload task content for request:%@",
-                              [task stateDescriptionForError:error]);
-                 
-                 dispatch_async(strongSelf.resultsQueue, ^{
-                     completionBlock(nil, error);
-                 });
-             }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[NSString stringWithFormat:[strongSelf.servicePathFactory taskContentUploadServicePathFormat], taskID]
+                                      parameters:@{kASDKAPIIsRelatedContentParameter : @(YES)}
+                       constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            NSError *error = nil;
+            [formData appendPartWithFileURL:file.modelFileURL
+                                       name:kASDKAPIContentUploadMultipartParameter
+                                   fileName:file.fileName
+                                   mimeType:file.mimeType
+                                      error:&error];
+            
+            if (error) {
+                ASDKLogError(@"An error occured while appending multipart form data from file %@.", file.modelFileURL);
+            }
+            
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            // If a progress block is provided report transfer progress information
+            if (progressBlock) {
+                NSUInteger percentProgress = (NSUInteger) (uploadProgress.completedUnitCount * 100 / uploadProgress.totalUnitCount);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    progressBlock(percentProgress, nil);
+                });
+            }
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+            ASDKLogVerbose(@"Task content succesfully uploaded for request: %@",
+                           [task stateDescriptionForResponse:responseDictionary]);
+            
+            // Parse response data
+            NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeContent);
+            [weakSelf.parserOperationManager parseContentDictionary:responseDictionary
+                                                             ofType:parserContentType
+                                                withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+                if (error) {
+                    ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(nil, error);
+                    });
+                } else {
+                    ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(parsedObject, nil);
+                    });
+                }
+            }];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to upload task content for request:%@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)uploadContentWithModel:(ASDKModelFileContent *)file
@@ -579,77 +556,75 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[NSString stringWithFormat:[self.servicePathFactory taskContentUploadServicePathFormat], taskID]
-                            parameters:@{kASDKAPIIsRelatedContentParameter : @(YES)}
-             constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                 NSError *error = nil;
-                 
-                 [formData appendPartWithFileData:contentData
-                                             name:kASDKAPIContentUploadMultipartParameter
-                                         fileName:file.fileName
-                                         mimeType:file.mimeType];
-                 
-                 if (error) {
-                     ASDKLogError(@"An error occured while appending multipart form data from file %@.", file.modelFileURL);
-                 }
-             } progress:^(NSProgress * _Nonnull uploadProgress) {
-                 __strong typeof(self) strongSelf = weakSelf;
-                 
-                 // If a progress block is provided report transfer progress information
-                 if (progressBlock) {
-                     NSUInteger percentProgress = (NSUInteger) (uploadProgress.completedUnitCount * 100 / uploadProgress.totalUnitCount);
-                     
-                     ASDKLogVerbose(@"Content: %@ for task with ID:%@ is %lu%% uploaded", file.modelFileURL, taskID, (unsigned long)percentProgress);
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[NSString stringWithFormat:[strongSelf.servicePathFactory taskContentUploadServicePathFormat], taskID]
+                                      parameters:@{kASDKAPIIsRelatedContentParameter : @(YES)}
+                       constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            NSError *error = nil;
+            
+            [formData appendPartWithFileData:contentData
+                                        name:kASDKAPIContentUploadMultipartParameter
+                                    fileName:file.fileName
+                                    mimeType:file.mimeType];
+            
+            if (error) {
+                ASDKLogError(@"An error occured while appending multipart form data from file %@.", file.modelFileURL);
+            }
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            // If a progress block is provided report transfer progress information
+            if (progressBlock) {
+                NSUInteger percentProgress = (NSUInteger) (uploadProgress.completedUnitCount * 100 / uploadProgress.totalUnitCount);
                 
-                     dispatch_async(strongSelf.resultsQueue, ^{
-                         progressBlock(percentProgress, nil);
-                     });
-                 }
-             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                 __strong typeof(self) strongSelf = weakSelf;
-                 
-                 // Remove operation reference
-                 [strongSelf.networkOperations removeObject:dataTask];
-                 
-                 NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                 ASDKLogVerbose(@"Task content succesfully uploaded for request: %@",
-                                [task stateDescriptionForResponse:responseDictionary]);
-                 
-                 // Parse response data
-                 NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeContent);
-                 [strongSelf.parserOperationManager
-                  parseContentDictionary:responseDictionary
-                  ofType:parserContentType
-                  withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                      if (error) {
-                          ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                          dispatch_async(weakSelf.resultsQueue, ^{
-                              completionBlock(nil, error);
-                          });
-                      } else {
-                          ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                          dispatch_async(weakSelf.resultsQueue, ^{
-                              completionBlock(parsedObject, nil);
-                          });
-                      }
-                  }];
-             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                 __strong typeof(self) strongSelf = weakSelf;
-                 
-                 // Remove operation reference
-                 [strongSelf.networkOperations removeObject:dataTask];
-                 
-                 ASDKLogError(@"Failed to upload task content for request: %@",
-                              [task stateDescriptionForError:error]);
-                 
-                 dispatch_async(strongSelf.resultsQueue, ^{
-                     completionBlock(nil, error);
-                 });
-             }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+                ASDKLogVerbose(@"Content: %@ for task with ID:%@ is %lu%% uploaded", file.modelFileURL, taskID, (unsigned long)percentProgress);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    progressBlock(percentProgress, nil);
+                });
+            }
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+            ASDKLogVerbose(@"Task content succesfully uploaded for request: %@",
+                           [task stateDescriptionForResponse:responseDictionary]);
+            
+            // Parse response data
+            NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeContent);
+            [weakSelf.parserOperationManager
+             parseContentDictionary:responseDictionary
+             ofType:parserContentType
+             withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+                if (error) {
+                    ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(nil, error);
+                    });
+                } else {
+                    ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(parsedObject, nil);
+                    });
+                }
+            }];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to upload task content for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)deleteContent:(ASDKModelContent *)content
@@ -660,48 +635,38 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager DELETE:[NSString stringWithFormat:[self.servicePathFactory contentServicePathFormat], content.modelID]
-                              parameters:nil
-                                 success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                     __strong typeof(self) strongSelf = weakSelf;
-                                     
-                                     // Remove operation reference
-                                     [strongSelf.networkOperations removeObject:dataTask];
-                                     
-                                     // Check status code
-                                     NSInteger statusCode = [task statusCode];
-                                     if (ASDKHTTPCode200OK == statusCode) {
-                                         ASDKLogVerbose(@"The task content was successfully deleted with request: %@",
-                                                        [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                         
-                                         dispatch_async(strongSelf.resultsQueue, ^{
-                                             completionBlock(YES, nil);
-                                         });
-                                     } else {
-                                         ASDKLogError(@"The task content failed to have been deleted with request: %@",
-                                                      [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                         
-                                         dispatch_async(strongSelf.resultsQueue, ^{
-                                             completionBlock(NO, nil);
-                                         });
-                                     }
-                                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                     __strong typeof(self) strongSelf = weakSelf;
-                                     
-                                     // Remove operation reference
-                                     [strongSelf.networkOperations removeObject:dataTask];
-                                     
-                                     ASDKLogError(@"Failed to delete content for task with request: %@",
-                                                  [task stateDescriptionForError:error]);
-                                     
-                                     dispatch_async(self.resultsQueue, ^{
-                                         completionBlock(NO, error);
-                                     });
-                                 }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager DELETE:[NSString stringWithFormat:[strongSelf.servicePathFactory contentServicePathFormat], content.modelID]
+                                        parameters:nil
+                                           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSInteger statusCode = [task statusCode];
+            ASDKLogVerbose(@"The task content was successfully deleted with request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to delete content for task with request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)downloadContent:(ASDKModelContent *)content
@@ -728,6 +693,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     
     NSString *urlString = [[NSURL URLWithString:[NSString stringWithFormat:[self.servicePathFactory taskContentDownloadServicePathFormat], content.modelID] relativeToURL:self.requestOperationManager.baseURL] absoluteString];
     NSError *downloadRequestError = nil;
+    
     NSURLRequest *downloadRequest =
     [self.requestOperationManager.requestSerializer requestWithMethod:@"GET"
                                                             URLString:urlString
@@ -742,68 +708,58 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     }
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDownloadTask *downloadTask =
-    [self.requestOperationManager downloadTaskWithRequest:downloadRequest
-                                                 progress:nil
-                                              destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-                                                  return [NSURL fileURLWithPath:downloadPathForContent];
-                                              } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-                                                  __strong typeof(self) strongSelf = weakSelf;
-                                                  
-                                                  // Remove operation reference
-                                                  [strongSelf.networkOperations removeObject:downloadTask];
-                                                  
-                                                  if (!error) {
-                                                      // Check status code
-                                                      NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                                                      if (ASDKHTTPCode200OK == statusCode) {
-                                                          ASDKLogVerbose(@"The task content was successfully downloaded with request: %@",
-                                                                         [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                                          
-                                                          dispatch_async(strongSelf.resultsQueue, ^{
-                                                              NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
-                                                              completionBlock(downloadURL, NO, nil);
-                                                          });
-                                                      } else {
-                                                          ASDKLogVerbose(@"The task content failed to download with request: %@",
-                                                                         [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                                          
-                                                          dispatch_async(strongSelf.resultsQueue, ^{
-                                                              completionBlock(nil, NO, nil);
-                                                          });
-                                                      }
-                                                  } else {
-                                                      ASDKLogError(@"Failed to download content for task with request: %@ - %@.\nBody:%@.\nReason:%@",
-                                                                   downloadRequest.HTTPMethod,
-                                                                   downloadRequest.URL.absoluteString,
-                                                                   [[NSString alloc] initWithData:downloadRequest.HTTPBody encoding:NSUTF8StringEncoding],
-                                                                   error.localizedDescription);
-                                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                                          completionBlock(nil, NO, error);
-                                                      });
-                                                  }
-                                              }];
-    // If a progress block is provided report transfer progress information
-    if (progressBlock) {
-        [self.requestOperationManager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session,
-                                                                         NSURLSessionDownloadTask * _Nonnull downloadTask,
-                                                                         int64_t bytesWritten,
-                                                                         int64_t totalBytesWritten,
-                                                                         int64_t totalBytesExpectedToWrite) {
-            __strong typeof(self) strongSelf = weakSelf;
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDownloadTask *downloadTask =
+        [strongSelf.requestOperationManager downloadTaskWithRequest:downloadRequest
+                                                           progress:nil
+                                                        destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+            return [NSURL fileURLWithPath:downloadPathForContent];
+        } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:downloadTask];
             
-            NSString *formattedSize = [weakSelf.diskServices sizeStringForByteCount:totalBytesWritten];
-            ASDKLogVerbose(@"Downloaded %@ of content with ID:%@ ", formattedSize, content.modelID);
-            dispatch_async(strongSelf.resultsQueue, ^{
-                progressBlock([weakSelf.diskServices sizeStringForByteCount:totalBytesWritten] , nil);
-            });
+            if (!error) {
+                NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
+                ASDKLogVerbose(@"The task content was successfully downloaded with request: %@",
+                               [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
+                    completionBlock(downloadURL, NO, nil);
+                });
+            } else {
+                ASDKLogError(@"Failed to download content for task with request: %@ - %@.\nBody:%@.\nReason:%@",
+                             downloadRequest.HTTPMethod,
+                             downloadRequest.URL.absoluteString,
+                             [[NSString alloc] initWithData:downloadRequest.HTTPBody encoding:NSUTF8StringEncoding],
+                             error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, NO, error);
+                });
+            }
         }];
-    }
-    
-    [downloadTask resume];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:downloadTask];
+        // If a progress block is provided report transfer progress information
+        if (progressBlock) {
+            [strongSelf.requestOperationManager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session,
+                                                                                   NSURLSessionDownloadTask * _Nonnull downloadTask,
+                                                                                   int64_t bytesWritten,
+                                                                                   int64_t totalBytesWritten,
+                                                                                   int64_t totalBytesExpectedToWrite) {
+                NSString *formattedSize = [weakSelf.diskServices sizeStringForByteCount:totalBytesWritten];
+                ASDKLogVerbose(@"Downloaded %@ of content with ID:%@ ", formattedSize, content.modelID);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    progressBlock([weakSelf.diskServices sizeStringForByteCount:totalBytesWritten] , nil);
+                });
+            }];
+        }
+        
+        [downloadTask resume];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:downloadTask];
+    });
 }
 
 - (void)downloadThumbnailForContent:(ASDKModelContent *)content
@@ -845,66 +801,56 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     }
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDownloadTask *downloadTask =
-    [self.requestOperationManager downloadTaskWithRequest:downloadRequest
-                                                 progress:nil
-                                              destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-                                                  return [NSURL fileURLWithPath:downloadPathForThumbnail];
-                                              } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-                                                  __strong typeof(self) strongSelf = weakSelf;
-                                                  
-                                                  // Remove operation reference
-                                                  [strongSelf.networkOperations removeObject:downloadTask];
-                                                  
-                                                  if (!error) {
-                                                      // Check status code
-                                                      NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                                                      if (ASDKHTTPCode200OK == statusCode) {
-                                                          ASDKLogVerbose(@"The task content thumbnail was successfully downloaded with request: %@",
-                                                                         [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                                          
-                                                          dispatch_async(strongSelf.resultsQueue, ^{
-                                                              NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForThumbnail];
-                                                              completionBlock(downloadURL, NO, nil);
-                                                          });
-                                                      } else {
-                                                          ASDKLogVerbose(@"The task content thumbnail failed to download with request: %@",
-                                                                         [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                                          
-                                                          dispatch_async(strongSelf.resultsQueue, ^{
-                                                              completionBlock(nil, NO, nil);
-                                                          });
-                                                      }
-                                                  } else {
-                                                      ASDKLogError(@"Failed to download content thumbnail for task with request: %@ - %@.\nBody:%@.\nReason:%@",
-                                                                   downloadRequest.HTTPMethod,
-                                                                   downloadRequest.URL.absoluteString,
-                                                                   [[NSString alloc] initWithData:downloadRequest.HTTPBody encoding:NSUTF8StringEncoding],
-                                                                   error.localizedDescription);
-                                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                                          completionBlock(nil, NO, error);
-                                                      });
-                                                  }
-                                              }];
-    // If a progress block is provided report transfer progress information
-    if (progressBlock) {
-        [self.requestOperationManager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session,
-                                                                         NSURLSessionDownloadTask * _Nonnull downloadTask,
-                                                                         int64_t bytesWritten,
-                                                                         int64_t totalBytesWritten,
-                                                                         int64_t totalBytesExpectedToWrite) {
-            __strong typeof(self) strongSelf = weakSelf;
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDownloadTask *downloadTask =
+        [strongSelf.requestOperationManager downloadTaskWithRequest:downloadRequest
+                                                           progress:nil
+                                                        destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+            return [NSURL fileURLWithPath:downloadPathForThumbnail];
+        } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:downloadTask];
             
-            dispatch_async(strongSelf.resultsQueue, ^{
-                progressBlock([weakSelf.diskServices sizeStringForByteCount:totalBytesWritten] , nil);
-            });
+            if (!error) {
+                NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
+                ASDKLogVerbose(@"The task content thumbnail was successfully downloaded with request: %@",
+                               [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForThumbnail];
+                    completionBlock(downloadURL, NO, nil);
+                });
+            } else {
+                ASDKLogError(@"Failed to download content thumbnail for task with request: %@ - %@.\nBody:%@.\nReason:%@",
+                             downloadRequest.HTTPMethod,
+                             downloadRequest.URL.absoluteString,
+                             [[NSString alloc] initWithData:downloadRequest.HTTPBody encoding:NSUTF8StringEncoding],
+                             error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, NO, error);
+                });
+            }
         }];
-    }
-    
-    [downloadTask resume];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:downloadTask];
+        // If a progress block is provided report transfer progress information
+        if (progressBlock) {
+            [strongSelf.requestOperationManager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session,
+                                                                                   NSURLSessionDownloadTask * _Nonnull downloadTask,
+                                                                                   int64_t bytesWritten,
+                                                                                   int64_t totalBytesWritten,
+                                                                                   int64_t totalBytesExpectedToWrite) {
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    progressBlock([weakSelf.diskServices sizeStringForByteCount:totalBytesWritten] , nil);
+                });
+            }];
+        }
+        
+        [downloadTask resume];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:downloadTask];
+    });
 }
 
 - (void)involveUserWithID:(NSString *)userID
@@ -916,32 +862,32 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskUserInvolveServicePathFormat], taskID]
-                           parameters:@{kASDKAPIUserIdParameter : userID}
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleSuccessfulTaskUserInvolvementResponseForTask:task
-                                                                               isRemoveOperation:NO
-                                                                                 completionBlock:completionBlock];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleFailedTaskUserInvolveResponseForTask:task
-                                                                                   error:error
-                                                                       isRemoveOperation:NO
-                                                                         completionBlock:completionBlock];
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[strongSelf.servicePathFactory taskUserInvolveServicePathFormat], taskID]
+                                     parameters:@{kASDKAPIUserIdParameter : userID}
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleSuccessfulTaskUserInvolvementResponseForTask:task
+                                                       isRemoveOperation:NO
+                                                         completionBlock:completionBlock];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleFailedTaskUserInvolveResponseForTask:task
+                                                           error:error
+                                               isRemoveOperation:NO
+                                                 completionBlock:completionBlock];
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)involveUserWithEmailAddress:(NSString *)userEmailAddress
@@ -953,32 +899,32 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskUserInvolveServicePathFormat], taskID]
-                           parameters:@{kASDKAPIEmailParameter : userEmailAddress}
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleSuccessfulTaskUserInvolvementResponseForTask:task
-                                                                               isRemoveOperation:NO
-                                                                                 completionBlock:completionBlock];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleFailedTaskUserInvolveResponseForTask:task
-                                                                                   error:error
-                                                                       isRemoveOperation:NO
-                                                                         completionBlock:completionBlock];
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[strongSelf.servicePathFactory taskUserInvolveServicePathFormat], taskID]
+                                     parameters:@{kASDKAPIEmailParameter : userEmailAddress}
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleSuccessfulTaskUserInvolvementResponseForTask:task
+                                                       isRemoveOperation:NO
+                                                         completionBlock:completionBlock];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleFailedTaskUserInvolveResponseForTask:task
+                                                           error:error
+                                               isRemoveOperation:NO
+                                                 completionBlock:completionBlock];
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)removeInvolvedUserWithID:(NSString *)userID
@@ -990,32 +936,32 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskUserRemoveInvolvedServicePathFormat], taskID]
-                           parameters:@{kASDKAPIUserIdParameter : userID}
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleSuccessfulTaskUserInvolvementResponseForTask:task
-                                                                               isRemoveOperation:YES
-                                                                                 completionBlock:completionBlock];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleFailedTaskUserInvolveResponseForTask:task
-                                                                                   error:error
-                                                                       isRemoveOperation:YES
-                                                                         completionBlock:completionBlock];
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[strongSelf.servicePathFactory taskUserRemoveInvolvedServicePathFormat], taskID]
+                                     parameters:@{kASDKAPIUserIdParameter : userID}
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleSuccessfulTaskUserInvolvementResponseForTask:task
+                                                       isRemoveOperation:YES
+                                                         completionBlock:completionBlock];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleFailedTaskUserInvolveResponseForTask:task
+                                                           error:error
+                                               isRemoveOperation:YES
+                                                 completionBlock:completionBlock];
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)removeInvolvedUserWithEmailAddress:(NSString *)userEmailAddress
@@ -1027,32 +973,32 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskUserRemoveInvolvedServicePathFormat], taskID]
-                           parameters:@{kASDKAPIEmailParameter : userEmailAddress}
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleSuccessfulTaskUserInvolvementResponseForTask:task
-                                                                               isRemoveOperation:YES
-                                                                                 completionBlock:completionBlock];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleFailedTaskUserInvolveResponseForTask:task
-                                                                                   error:error
-                                                                       isRemoveOperation:YES
-                                                                         completionBlock:completionBlock];
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[strongSelf.servicePathFactory taskUserRemoveInvolvedServicePathFormat], taskID]
+                                     parameters:@{kASDKAPIEmailParameter : userEmailAddress}
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleSuccessfulTaskUserInvolvementResponseForTask:task
+                                                       isRemoveOperation:YES
+                                                         completionBlock:completionBlock];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleFailedTaskUserInvolveResponseForTask:task
+                                                           error:error
+                                               isRemoveOperation:YES
+                                                 completionBlock:completionBlock];
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)createTaskWithRepresentation:(ASDKTaskCreationRequestRepresentation *)taskRepresentation
@@ -1063,33 +1009,33 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager
-     POST:[self.servicePathFactory taskCreationServicePath]
-     parameters:[taskRepresentation jsonDictionary]
-     progress:nil
-     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-         __strong typeof(self) strongSelf = weakSelf;
-         
-         // Remove operation reference
-         [strongSelf.networkOperations removeObject:dataTask];
-         
-         [self handleSuccessfulTaskCreationResponseForTask:task
-                                            responseObject:responseObject
-                                           completionBlock:completionBlock];
-     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-         __strong typeof(self) strongSelf = weakSelf;
-         
-         // Remove operation reference
-         [strongSelf.networkOperations removeObject:dataTask];
-         
-         [strongSelf handleFailedTaskCreationResponseForTask:task
-                                                       error:error
-                                             completionBlock:completionBlock];
-     }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager
+         POST:[strongSelf.servicePathFactory taskCreationServicePath]
+         parameters:[taskRepresentation jsonDictionary]
+         progress:nil
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleSuccessfulTaskCreationResponseForTask:task
+                                                   responseObject:responseObject
+                                                  completionBlock:completionBlock];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleFailedTaskCreationResponseForTask:task
+                                                        error:error
+                                              completionBlock:completionBlock];
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)claimTaskWithID:(NSString *)taskID
@@ -1099,48 +1045,38 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskClaimServicePathFormat], taskID]
-                           parameters:nil
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  // Check status code
-                                  NSInteger statusCode = [task statusCode];
-                                  if (ASDKHTTPCode200OK == statusCode) {
-                                      ASDKLogVerbose(@"The task has been successfully claimed with request: %@",
-                                                     [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(YES, nil);
-                                      });
-                                  } else {
-                                      ASDKLogVerbose(@"The task cannot be claimed with request: %@",
-                                                     [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(NO, nil);
-                                      });
-                                  }
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to claim task with request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(NO, error);
-                                  });
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[strongSelf.servicePathFactory taskClaimServicePathFormat], taskID]
+                                     parameters:nil
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSInteger statusCode = [task statusCode];
+            ASDKLogVerbose(@"The task has been successfully claimed with request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to claim task with request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)unclaimTaskWithID:(NSString *)taskID
@@ -1150,48 +1086,39 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskUnclaimServicePathFormat], taskID]
-                           parameters:nil
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  // Check status code
-                                  NSInteger statusCode = [task statusCode];
-                                  if (ASDKHTTPCode200OK == statusCode) {
-                                      ASDKLogVerbose(@"The task has been successfully unclaimed with request: %@",
-                                                     [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(NO, nil);
-                                      });
-                                  } else {
-                                      ASDKLogVerbose(@"The task cannot be unclaimed with request: %@",
-                                                     [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(YES, nil);
-                                      });
-                                  }
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to unclaim task with request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(YES, error);
-                                  });
-                              }];
     
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[strongSelf.servicePathFactory taskUnclaimServicePathFormat], taskID]
+                                     parameters:nil
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSInteger statusCode = [task statusCode];
+            ASDKLogVerbose(@"The task has been successfully unclaimed with request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, nil);
+            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to unclaim task with request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)assignTaskWithID:(NSString *)taskID
@@ -1204,54 +1131,54 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskAssignServicePathFormat], taskID]
-                           parameters:@{kASDKAPIAssigneeParameter: user.modelID}
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                                  ASDKLogVerbose(@"Task assigned successfully for request: %@",
-                                                 [task stateDescriptionForResponse:responseDictionary]);
-                                  
-                                  // Parse response data
-                                  NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeTaskDetails);
-                                  
-                                  [strongSelf.parserOperationManager
-                                   parseContentDictionary:responseDictionary
-                                   ofType:parserContentType
-                                   withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                       if (error) {
-                                           ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(nil, error);
-                                           });
-                                       } else {
-                                           ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                           dispatch_async(weakSelf.resultsQueue, ^{
-                                               completionBlock(parsedObject, nil);
-                                           });
-                                       }
-                                   }];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to assign task for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(nil, error);
-                                  });
-                              }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[strongSelf.servicePathFactory taskAssignServicePathFormat], taskID]
+                                     parameters:@{kASDKAPIAssigneeParameter: user.modelID}
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+            ASDKLogVerbose(@"Task assigned successfully for request: %@",
+                           [task stateDescriptionForResponse:responseDictionary]);
+            
+            // Parse response data
+            NSString *parserContentType = CREATE_STRING(ASDKTaskDetailsParserContentTypeTaskDetails);
+            
+            [weakSelf.parserOperationManager
+             parseContentDictionary:responseDictionary
+             ofType:parserContentType
+             withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
+                if (error) {
+                    ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(nil, error);
+                    });
+                } else {
+                    ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+                    dispatch_async(weakSelf.resultsQueue, ^{
+                        completionBlock(parsedObject, nil);
+                    });
+                }
+            }];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to assign task for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)downloadAuditLogForTaskWithID:(NSString *)taskID
@@ -1294,66 +1221,56 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     }
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDownloadTask *downloadTask =
-    [self.requestOperationManager downloadTaskWithRequest:downloadRequest
-                                                 progress:nil
-                                              destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-                                                  return [NSURL fileURLWithPath:downloadPathForContent];
-                                              } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-                                                  __strong typeof(self) strongSelf = weakSelf;
-                                                  
-                                                  // Remove operation reference
-                                                  [strongSelf.networkOperations removeObject:downloadTask];
-                                                  
-                                                  if (!error) {
-                                                      // Check status code
-                                                      NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                                                      if (ASDKHTTPCode200OK == statusCode) {
-                                                          ASDKLogVerbose(@"The audit log content was successfully downloaded with request: %@",
-                                                                         [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                                          
-                                                          dispatch_async(strongSelf.resultsQueue, ^{
-                                                              NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
-                                                              completionBlock(downloadURL, NO, nil);
-                                                          });
-                                                      } else {
-                                                          ASDKLogVerbose(@"The audit log content failed to download with request: %@",
-                                                                         [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                                          
-                                                          dispatch_async(strongSelf.resultsQueue, ^{
-                                                              completionBlock(nil, NO, nil);
-                                                          });
-                                                      }
-                                                  } else {
-                                                      ASDKLogError(@"Failed to download audit log content with request: %@ - %@.\nBody:%@.\nReason:%@",
-                                                                   downloadRequest.HTTPMethod,
-                                                                   downloadRequest.URL.absoluteString,
-                                                                   [[NSString alloc] initWithData:downloadRequest.HTTPBody encoding:NSUTF8StringEncoding],
-                                                                   error.localizedDescription);
-                                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                                          completionBlock(nil, NO, error);
-                                                      });
-                                                  }
-                                              }];
-    // If a progress block is provided report transfer progress information
-    if (progressBlock) {
-        [self.requestOperationManager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session,
-                                                                         NSURLSessionDownloadTask * _Nonnull downloadTask,
-                                                                         int64_t bytesWritten,
-                                                                         int64_t totalBytesWritten,
-                                                                         int64_t totalBytesExpectedToWrite) {
-            __strong typeof(self) strongSelf = weakSelf;
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDownloadTask *downloadTask =
+        [strongSelf.requestOperationManager downloadTaskWithRequest:downloadRequest
+                                                           progress:nil
+                                                        destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+            return [NSURL fileURLWithPath:downloadPathForContent];
+        } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:downloadTask];
             
-            dispatch_async(strongSelf.resultsQueue, ^{
-                progressBlock([weakSelf.diskServices sizeStringForByteCount:totalBytesWritten] , nil);
-            });
+            if (!error) {
+                NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
+                ASDKLogVerbose(@"The audit log content was successfully downloaded with request: %@",
+                               [downloadTask stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+                
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    NSURL *downloadURL = [NSURL fileURLWithPath:downloadPathForContent];
+                    completionBlock(downloadURL, NO, nil);
+                });
+            } else {
+                ASDKLogError(@"Failed to download audit log content with request: %@ - %@.\nBody:%@.\nReason:%@",
+                             downloadRequest.HTTPMethod,
+                             downloadRequest.URL.absoluteString,
+                             [[NSString alloc] initWithData:downloadRequest.HTTPBody encoding:NSUTF8StringEncoding],
+                             error.localizedDescription);
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    completionBlock(nil, NO, error);
+                });
+            }
         }];
-    }
-    
-    [downloadTask resume];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:downloadTask];
+        // If a progress block is provided report transfer progress information
+        if (progressBlock) {
+            [strongSelf.requestOperationManager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session,
+                                                                                   NSURLSessionDownloadTask * _Nonnull downloadTask,
+                                                                                   int64_t bytesWritten,
+                                                                                   int64_t totalBytesWritten,
+                                                                                   int64_t totalBytesExpectedToWrite) {
+                dispatch_async(weakSelf.resultsQueue, ^{
+                    progressBlock([weakSelf.diskServices sizeStringForByteCount:totalBytesWritten] , nil);
+                });
+            }];
+        }
+        
+        [downloadTask resume];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:downloadTask];
+    });
 }
 
 - (void)fetchChecklistForTaskWithID:(NSString *)taskID
@@ -1369,24 +1286,24 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                            parameters:nil
                              progress:nil
                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleSuccessfulTaskListResponseForTask:dataTask
-                                                                       responseObject:responseObject
-                                                                      completionBlock:completionBlock];
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  [strongSelf handleFailedTaskListResponseForTask:dataTask
-                                                                            error:error
-                                                                  completionBlock:completionBlock];
-                              }];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        [strongSelf handleSuccessfulTaskListResponseForTask:dataTask
+                                             responseObject:responseObject
+                                            completionBlock:completionBlock];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        // Remove operation reference
+        [strongSelf.networkOperations removeObject:dataTask];
+        
+        [strongSelf handleFailedTaskListResponseForTask:dataTask
+                                                  error:error
+                                        completionBlock:completionBlock];
+    }];
     
     // Keep network operation reference to be able to cancel it
     [self.networkOperations addObject:dataTask];
@@ -1400,32 +1317,32 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(self.resultsQueue);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager POST:[NSString stringWithFormat:[self.servicePathFactory taskCheckListServicePathFormat], taskID]
-                            parameters:[checklistRepresentation jsonDictionary]
-                              progress:nil
-                               success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [self handleSuccessfulTaskCreationResponseForTask:dataTask
-                                                                      responseObject:responseObject
-                                                                     completionBlock:completionBlock];
-                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                   __strong typeof(self) strongSelf = weakSelf;
-                                   
-                                   // Remove operation reference
-                                   [strongSelf.networkOperations removeObject:dataTask];
-                                   
-                                   [strongSelf handleFailedTaskCreationResponseForTask:dataTask
-                                                                                 error:error
-                                                                       completionBlock:completionBlock];
-                               }];
-    
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager POST:[NSString stringWithFormat:[strongSelf.servicePathFactory taskCheckListServicePathFormat], taskID]
+                                      parameters:[checklistRepresentation jsonDictionary]
+                                        progress:nil
+                                         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleSuccessfulTaskCreationResponseForTask:dataTask
+                                                   responseObject:responseObject
+                                                  completionBlock:completionBlock];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            [weakSelf handleFailedTaskCreationResponseForTask:dataTask
+                                                        error:error
+                                              completionBlock:completionBlock];
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)updateChecklistOrderWithRepresentation:(ASDKTaskChecklistOrderRequestRepresentation *)orderRepresentation
@@ -1436,48 +1353,39 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     NSParameterAssert(completionBlock);
     
     __weak typeof(self) weakSelf = self;
-    __block NSURLSessionDataTask *dataTask =
-    [self.requestOperationManager PUT:[NSString stringWithFormat:[self.servicePathFactory taskCheckListServicePathFormat], taskID]
-                           parameters:[orderRepresentation jsonDictionary]
-                              success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  // Check status code
-                                  NSInteger statusCode = [task statusCode];
-                                  if (ASDKHTTPCode200OK == statusCode) {
-                                      ASDKLogVerbose(@"The checklist order was updated successfully for request: %@",
-                                                     [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(YES, nil);
-                                      });
-                                  } else {
-                                      ASDKLogVerbose(@"The checklist order failed to update for request: %@",
-                                                     [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-                                      
-                                      dispatch_async(strongSelf.resultsQueue, ^{
-                                          completionBlock(NO, nil);
-                                      });
-                                  }
-                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                  __strong typeof(self) strongSelf = weakSelf;
-                                  
-                                  // Remove operation reference
-                                  [strongSelf.networkOperations removeObject:dataTask];
-                                  
-                                  ASDKLogError(@"Failed to update checklist order for request: %@",
-                                               [task stateDescriptionForError:error]);
-                                  
-                                  dispatch_async(strongSelf.resultsQueue, ^{
-                                      completionBlock(NO, error);
-                                  });
-                              }];
     
-    // Keep network operation reference to be able to cancel it
-    [self.networkOperations addObject:dataTask];
+    dispatch_async(self.resultsQueue, ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        __block NSURLSessionDataTask *dataTask =
+        [strongSelf.requestOperationManager PUT:[NSString stringWithFormat:[strongSelf.servicePathFactory taskCheckListServicePathFormat], taskID]
+                                     parameters:[orderRepresentation jsonDictionary]
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            NSInteger statusCode = [task statusCode];
+            ASDKLogVerbose(@"The checklist order was updated successfully for request: %@",
+                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(YES, nil);
+            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // Remove operation reference
+            [weakSelf.networkOperations removeObject:dataTask];
+            
+            ASDKLogError(@"Failed to update checklist order for request: %@",
+                         [task stateDescriptionForError:error]);
+            
+            dispatch_async(weakSelf.resultsQueue, ^{
+                completionBlock(NO, error);
+            });
+        }];
+        
+        // Keep network operation reference to be able to cancel it
+        [strongSelf.networkOperations addObject:dataTask];
+    });
 }
 
 - (void)cancelAllNetworkOperations {
@@ -1503,19 +1411,19 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     [self.parserOperationManager parseContentDictionary:responseDictionary
                                                  ofType:parserContentType
                                     withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                        __strong typeof(self) strongSelf = weakSelf;
-                                        if (error) {
-                                            ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                            dispatch_async(strongSelf.resultsQueue, ^{
-                                                completionBlock(nil, error, nil);
-                                            });
-                                        } else {
-                                            ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                            dispatch_async(strongSelf.resultsQueue, ^{
-                                                completionBlock(parsedObject, nil, paging);
-                                            });
-                                        }
-                                    }];
+        __strong typeof(self) strongSelf = weakSelf;
+        if (error) {
+            ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+            dispatch_async(strongSelf.resultsQueue, ^{
+                completionBlock(nil, error, nil);
+            });
+        } else {
+            ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+            dispatch_async(strongSelf.resultsQueue, ^{
+                completionBlock(parsedObject, nil, paging);
+            });
+        }
+    }];
 }
 
 - (void)handleSuccessfulTaskCreationResponseForTask:(NSURLSessionDataTask *)task
@@ -1533,54 +1441,37 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     [self.parserOperationManager parseContentDictionary:responseDictionary
                                                  ofType:parserContentType
                                     withCompletionBlock:^(id parsedObject, NSError *error, ASDKModelPaging *paging) {
-                                        __strong typeof(self) strongSelf = weakSelf;
-                                        if (error) {
-                                            ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
-                                            dispatch_async(strongSelf.resultsQueue, ^{
-                                                completionBlock(nil, error);
-                                            });
-                                        } else {
-                                            ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
-                                            dispatch_async(strongSelf.resultsQueue, ^{
-                                                completionBlock(parsedObject, nil);
-                                            });
-                                        }
-                                    }];
+        __strong typeof(self) strongSelf = weakSelf;
+        if (error) {
+            ASDKLogError(kASDKAPIParserManagerConversionErrorFormat, parserContentType, error.localizedDescription);
+            dispatch_async(strongSelf.resultsQueue, ^{
+                completionBlock(nil, error);
+            });
+        } else {
+            ASDKLogVerbose(kASDKAPIParserManagerConversionFormat, parserContentType, parsedObject);
+            dispatch_async(strongSelf.resultsQueue, ^{
+                completionBlock(parsedObject, nil);
+            });
+        }
+    }];
 }
 
 - (void)handleSuccessfulTaskUserInvolvementResponseForTask:(NSURLSessionTask *)task
                                          isRemoveOperation:(BOOL)isRemoveOperation
                                            completionBlock:(ASDKTaskUserInvolvementCompletionBlock)completionBlock {
-    // Check status code
     NSInteger statusCode = [task statusCode];
-    if (ASDKHTTPCode200OK == statusCode) {
-        if (isRemoveOperation) {
-            ASDKLogVerbose(@"The user's involvement was successfully removed for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            dispatch_async(self.resultsQueue, ^{
-                completionBlock(NO, nil);
-            });
-        } else {
-            ASDKLogVerbose(@"The user was successfully involved for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            dispatch_async(self.resultsQueue, ^{
-                completionBlock(YES, nil);
-            });
-        }
+    if (isRemoveOperation) {
+        ASDKLogVerbose(@"The user's involvement was successfully removed for request: %@",
+                       [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+        dispatch_async(self.resultsQueue, ^{
+            completionBlock(NO, nil);
+        });
     } else {
-        if (isRemoveOperation) {
-            ASDKLogVerbose(@"The user's involvement removal failed for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            dispatch_async(self.resultsQueue, ^{
-                completionBlock(YES, nil);
-            });
-        } else {
-            ASDKLogVerbose(@"The user involvement failed for request: %@",
-                           [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
-            dispatch_async(self.resultsQueue, ^{
-                completionBlock(NO, nil);
-            });
-        }
+        ASDKLogVerbose(@"The user was successfully involved for request: %@",
+                       [task stateDescriptionForResponse:[NSHTTPURLResponse localizedStringForStatusCode:statusCode]]);
+        dispatch_async(self.resultsQueue, ^{
+            completionBlock(YES, nil);
+        });
     }
 }
 

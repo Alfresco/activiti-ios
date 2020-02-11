@@ -17,6 +17,7 @@
  ******************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "ASDKCoreDataCacheService.h"
 
 @class ASDKFilterListRequestRepresentation, ASDKModelPaging;
 

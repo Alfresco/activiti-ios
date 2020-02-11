@@ -59,10 +59,13 @@
 #import "ASDKNetworkDelayedOperationSaveFormService.h"
 
 // Configurations imports
-#import "ASDKBasicAuthentificationProvider.h"
+#import "ASDKBasicAuthenticationProvider.h"
+#import "ASDKPKCEAuthenticationProvider.h"
 
 // Model imports
 #import "ASDKModelServerConfiguration.h"
+#import "ASDKModelCredentialAIMS.h"
+#import "ASDKModelCredentialBaseAuth.h"
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -114,17 +117,15 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     ASDKLogVerbose(@"Registering services...");
     
     // Create a service path factory with the passed server configuration
-    ASDKServicePathFactory *servicePathFactory = [[ASDKServicePathFactory alloc] initWithHostAddress:self.serverConfiguration.hostAddressString
-                                                                                 serviceDocumentPath:self.serverConfiguration.serviceDocument
-                                                                                                port:self.serverConfiguration.port
-                                                                                     overSecureLayer:self.serverConfiguration.isCommunicationOverSecureLayer];
+    ASDKServicePathFactory *servicePathFactory =
+    [[ASDKServicePathFactory alloc] initWithHostAddress:self.serverConfiguration.hostAddressString
+                                    serviceDocumentPath:self.serverConfiguration.serviceDocument
+                                                   port:self.serverConfiguration.port
+                                        overSecureLayer:self.serverConfiguration.isCommunicationOverSecureLayer];
     
     // Set up the request manager
-    ASDKBasicAuthentificationProvider *basicAuthentificationProvider =
-    [[ASDKBasicAuthentificationProvider alloc] initWithUserName:self.serverConfiguration.username
-                                                       password:self.serverConfiguration.password];
     self.requestOperationManager = [[ASDKRequestOperationManager alloc] initWithBaseURL:servicePathFactory.baseURL
-                                                                 authenticationProvider:basicAuthentificationProvider];
+                                                                             credential:serverConfiguration.credential];
     
     // Set up parser services
     ASDKParserOperationManager *parserOperationManager = [self parserOperationManager];
@@ -185,15 +186,15 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
     [self setupPersistenceStack];
 }
 
-- (void)updateServerConfigurationCredentialsForUsername:(NSString *)username
-                                               password:(NSString *)password {
-    _serverConfiguration.username = username;
-    _serverConfiguration.password = password;
-    
-    ASDKBasicAuthentificationProvider *authenticationProvider =
-    [[ASDKBasicAuthentificationProvider alloc] initWithUserName:username
-                                                       password:password];
-    [self.requestOperationManager replaceAuthenticationProvider:authenticationProvider];
+- (void)updateServerConfigurationWithCredential:(id<ASDKModelCredentialBaseProtocol>)credential; {
+    [self.requestOperationManager updateCredential:credential];
+}
+
+- (void)setSessionDelegate:(id<ASDKNetworkSessionProtocol>)sessionDelegate {
+    if (sessionDelegate != _sessionDelegate) {
+        _sessionDelegate = sessionDelegate;
+        _requestOperationManager.sessionDelegate = _sessionDelegate;
+    }
 }
 
 

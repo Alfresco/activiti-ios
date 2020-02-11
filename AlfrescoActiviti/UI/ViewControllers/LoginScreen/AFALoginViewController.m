@@ -184,7 +184,7 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
     if ([kSegueIDLoginAuthorized isEqualToString:segue.identifier]) {
         AFAContainerViewController *containerViewController = segue.destinationViewController;
         containerViewController.transitioningDelegate = self;
-        containerViewController.loginViewModel = self.loginViewModel;
+//        containerViewController.loginViewModel = self.loginViewModel;
     }
 }
 

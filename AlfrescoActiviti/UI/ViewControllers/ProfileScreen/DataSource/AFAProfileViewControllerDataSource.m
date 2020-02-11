@@ -25,12 +25,15 @@
 // Categories
 #import "UIColor+AFATheme.h"
 
+// Managers
+#import "AFALogFormatter.h"
+
 // Cells
 #import "AFAProfileDetailTableViewCell.h"
 #import "AFAProfileSimpleTableViewCell.h"
 #import "AFAProfileActionTableViewCell.h"
 
-static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLAG_TRACE;
+static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRACE;
 
 @interface AFAProfileViewControllerDataSource () <AFAProfileDetailTableViewCellDelegate,
                                                   AFAProfileActionTableViewCellDelegate>
@@ -58,7 +61,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
         ASDKModelProfile *profileCopy = [unarchiver decodeObjectOfClasses:[NSSet setWithObject:ASDKModelProfile.class]
                                                                    forKey:NSKeyedArchiveRootObjectKey];
         if (error) {
-            ASDKLogError(@"Encountered an error while un/archiving processing profile model");
+            AFALogError(@"Encountered an error while un/archiving processing profile model");
         }
         
         _originalProfileInstance = profileCopy;
@@ -80,7 +83,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
                                                                                forKey:NSKeyedArchiveRootObjectKey];
     
     if (error) {
-        ASDKLogError(@"Encountered an error while un/archiving processing profile model");
+        AFALogError(@"Encountered an error while un/archiving processing profile model");
     }
     
     _currentProfile = originalProfileInstanceCopy;
@@ -245,7 +248,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return REPORT_TOOL ? AFAProfileControllerSectionTypeEnumCount : AFAProfileControllerSectionTypeEnumCount-1 ;
+    return AFAProfileControllerSectionTypeEnumCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -264,7 +267,8 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_VERBOSE; // | ASDK_LOG_FLA
             break;
             
         case AFAProfileControllerSectionTypeChangePassord: {
-            rowCount = 1;
+            // function disable for now => [IOS-1475]
+            rowCount = 0;
         }
             break;
             

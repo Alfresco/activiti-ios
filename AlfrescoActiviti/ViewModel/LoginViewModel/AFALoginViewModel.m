@@ -31,9 +31,8 @@
 // Managers
 #import "AFAServiceRepository.h"
 #import "AFAKeychainWrapper.h"
-#import "ASDKReachabilityManager.h"
-
 @import ActivitiSDK;
+@import ActivitiSDK.Private;
 
 @interface AFALoginViewModel ()
 
@@ -158,6 +157,11 @@
     
     // Initiate the Activiti SDK bootstrap with the given server configuration
     ASDKModelServerConfiguration *serverConfiguration = self.credentialModel.serverConfiguration;
+    ASDKModelCredentialBaseAuth *baseAuthCredential = nil;
+    if ([serverConfiguration.credential isKindOfClass:ASDKModelCredentialBaseAuth.class]) {
+        baseAuthCredential = serverConfiguration.credential;
+    }
+    
     ASDKBootstrap *sdkBootstrap = [ASDKBootstrap sharedInstance];
     [sdkBootstrap setupServicesWithServerConfiguration:serverConfiguration];
     NSString *persistenceStackModelName = [self persistenceStackModelName];
@@ -189,19 +193,19 @@
                     
                     // Former credentials are registered, will update them
                     if ([AFAKeychainWrapper keychainStringFromMatchingIdentifier:persistenceStackModelName]) {
-                        [AFAKeychainWrapper updateKeychainValue:serverConfiguration.password
+                        [AFAKeychainWrapper updateKeychainValue:baseAuthCredential.password
                                                   forIdentifier:persistenceStackModelName];
                     } else { // Insert new values in the keychain
-                        [AFAKeychainWrapper createKeychainValue:serverConfiguration.password
+                        [AFAKeychainWrapper createKeychainValue:baseAuthCredential.password
                                                   forIdentifier:persistenceStackModelName];
                     }
                     
                     // Store credentials to match checks when offline
                     if ([AFAKeychainWrapper keychainStringFromMatchingIdentifier:offlinePersistenceStackModelName]) {
-                        [AFAKeychainWrapper updateKeychainValue:serverConfiguration.password
+                        [AFAKeychainWrapper updateKeychainValue:baseAuthCredential.password
                                                   forIdentifier:offlinePersistenceStackModelName];
                     } else {
-                        [AFAKeychainWrapper createKeychainValue:serverConfiguration.password
+                        [AFAKeychainWrapper createKeychainValue:baseAuthCredential.password
                                                   forIdentifier:offlinePersistenceStackModelName];
                     }
                 }
@@ -223,7 +227,7 @@
                     // Store in the user defaults details of the current login
                     [strongSelf synchronizeToUserDefaultsServerConfiguration:serverConfiguration];
                     
-                    if ([[AFAKeychainWrapper keychainStringFromMatchingIdentifier:offlinePersistenceStackModelName] isEqualToString:serverConfiguration.password]) {
+                    if ([[AFAKeychainWrapper keychainStringFromMatchingIdentifier:offlinePersistenceStackModelName] isEqualToString:baseAuthCredential.password]) {
                         strongSelf.authState = AFALoginAuthenticationStateAuthorized;
                         completionBlock(YES, nil);
                     } else {
@@ -325,12 +329,18 @@
     [userDefaults setObject:currentAuthentificationIdentifier
                      forKey:kAuthentificationTypeCredentialIdentifier];
     
+    ASDKModelCredentialBaseAuth *baseAuthCredential = nil;
+    if ([serverConfiguration.credential isKindOfClass:ASDKModelCredentialBaseAuth.class]) {
+        baseAuthCredential = serverConfiguration.credential;
+    }
+    
+    
     if (AFALoginAuthenticationTypeCloud == self.authentificationType) {
         [userDefaults setObject:serverConfiguration.hostAddressString
                          forKey:kCloudHostNameCredentialIdentifier];
         [userDefaults setBool:serverConfiguration.isCommunicationOverSecureLayer
                        forKey:kCloudSecureLayerCredentialIdentifier];
-        [userDefaults setObject:serverConfiguration.username
+        [userDefaults setObject:baseAuthCredential.username
                          forKey:kCloudUsernameCredentialIdentifier];
     } else {
         [userDefaults setObject:serverConfiguration.hostAddressString
@@ -339,7 +349,7 @@
                          forKey:kPremiseServiceDocumentCredentialIdentifier];
         [userDefaults setBool:serverConfiguration.isCommunicationOverSecureLayer
                        forKey:kPremiseSecureLayerCredentialIdentifier];
-        [userDefaults setObject:serverConfiguration.username
+        [userDefaults setObject:baseAuthCredential.username
                          forKey:kPremiseUsernameCredentialIdentifier];
         if (serverConfiguration.port.length) {
             [userDefaults setObject:serverConfiguration.port

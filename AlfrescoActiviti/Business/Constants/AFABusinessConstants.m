@@ -24,7 +24,8 @@
 
 NSUInteger kDefaultLoginUnsecuredPort                = 80;
 NSUInteger kDefaultLoginSecuredPort                  = 443;
-
+NSString  *kAdvancedSettingsParameters               = @"kAdvancedSettingsParameters";
+NSString  *kPersistenceStackSessionParameter         = @"AlfrescoSession";
 
 #pragma mark -
 #pragma mark Task related
@@ -40,8 +41,10 @@ NSInteger  kDefaultTaskListFetchSize                = 25;
 
 NSString *kCloudAuthetificationCredentialIdentifier     = @"kCloudAuthetificationCredentialIdentifier";
 NSString *kPremiseAuthentificationCredentialIdentifier  = @"kPremiseAuthentificationCredentialIdentifier";
+NSString *kAIMSAuthenticationCredentialIdentifier       = @"kAIMSAuthenticationCredentialIdentifier";
 NSString *kCloudUsernameCredentialIdentifier            = @"kCloudUsernameCredentialIdentifier";
 NSString *kPremiseUsernameCredentialIdentifier          = @"kPremiseUsernameCredentialIdentifier";
+NSString *kAIMSUsernameCredentialIdentifier             = @"kAIMSUsernameCredentialIdentifier";
 NSString *kUsernameCredentialIdentifier                 = @"kUsernameCredentialIdentifier";
 NSString *kPasswordCredentialIdentifier                 = @"kPasswordCredentialIdentifier";
 NSString *kCloudHostNameCredentialIdentifier            = @"kCloudHostNameCredentialIdentifier";
@@ -77,5 +80,8 @@ NSString  *kCellFactoryCellParameterActionType      = @"kCellFactoryCellParamete
 #pragma mark Error domains
 
 NSString * const AFALoginViewModelErrorDomain                   = @"AFALoginViewModelErrorDomain";
+NSString * const AFALoginViewModelWarningDomain                 = @"AFALoginViewModelWarningDomain";
 NSInteger const kAFALoginViewModelInvalidCredentialErrorCode    = 1;
+NSString * const AFAAIMSLoginErrorDomain                        = @"AFAAIMSLoginErrorDomain";
+NSInteger const kAFALoginSSOViewModelCancelErrorCode            = -3;
 

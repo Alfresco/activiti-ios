@@ -10,6 +10,7 @@ def shared_pods
 	pod 'Mantle', '~> 2.1'
 	pod 'JGProgressHUD', '~> 2.1'
 	pod 'AFNetworking', '~> 3.2'
+    pod 'JWT'
 end
 
 abstract_target 'Shared' do
@@ -19,13 +20,14 @@ abstract_target 'Shared' do
         pod 'Fabric', '~> 1.0'
         pod 'Crashlytics', '~> 3.14'
         pod 'Buglife', '~> 2.10'
-	    pod 'AlfrescoAuth'
-        pod 'MaterialComponents'
+        pod 'AlfrescoAuth'
+        pod 'MaterialComponents' , '~> 92.5'
+        pod 'Firebase/Analytics'
 	end
 
 	target 'ActivitiSDK' do
         target 'ActivitiSDKTests' do
-            pod 'OCMock', '~> 3.4'
+            pod 'OCMock', '~> 3.5'
         end
 	end
 end

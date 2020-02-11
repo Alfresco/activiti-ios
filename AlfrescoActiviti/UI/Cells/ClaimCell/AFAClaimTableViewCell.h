@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "ASDKRoundedBorderView.h"
+@import ActivitiSDK;
 
 @protocol AFAClaimTableViewCellDelegate <NSObject>
 
