@@ -84,6 +84,7 @@ NSString *kLocalizationAdvancedSettingsScreenSaveConfirmationText               
 NSString *kLocalizationBannerViewErrorText              = @"bannerViewErrorText";
 NSString *kLocalizationBannerViewWarningText            = @"bannerViewWarningText";
 NSString *kLocalizationBannerViewConfirmationText       = @"bannerViewConfirmationText";
+NSString *kLocalizationBannerViewSuccessText            = @"bannerViewSuccessText";
 NSString *kLocalizationGenericErrorText                 = @"genericErrorText";
 NSString *kLocalizationErrorCheckConnectURL             = @"errorCheckConnectURL";
 NSString *kLocalizationErrorNoAuthAlfrescoURL           = @"errorNoAuthAlfrescoURL";

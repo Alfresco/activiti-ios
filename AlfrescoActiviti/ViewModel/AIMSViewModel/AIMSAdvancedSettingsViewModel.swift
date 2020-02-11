@@ -37,6 +37,7 @@ class AIMSAdvancedSettingsViewModel {
     let helpHintText = NSLocalizedString(kLocalizationAdvancedSettingsScreenHelpHintText, comment: "Hint Help")
     let closeText = NSLocalizedString(kLocalizationAdvancedSettingsScreenCloseText, comment: "Close")
     let confirmationSaveText = NSLocalizedString(kLocalizationAdvancedSettingsScreenSaveConfirmationText, comment: "Saved")
+    let successSaveText = NSLocalizedString(kLocalizationBannerViewSuccessText, comment: "Success")
     
     var copyrightText: String {
         get {

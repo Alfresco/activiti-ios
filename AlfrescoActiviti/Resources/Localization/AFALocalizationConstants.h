@@ -79,6 +79,7 @@ extern NSString *kLocalizationAdvancedSettingsScreenSaveConfirmationText;
 extern NSString *kLocalizationBannerViewErrorText;
 extern NSString *kLocalizationBannerViewWarningText;
 extern NSString *kLocalizationBannerViewConfirmationText;
+extern NSString *kLocalizationBannerViewSuccessText;
 extern NSString *kLocalizationGenericErrorText;
 extern NSString *kLocalizationErrorCheckConnectURL;
 extern NSString *kLocalizationErrorNoAuthAlfrescoURL;

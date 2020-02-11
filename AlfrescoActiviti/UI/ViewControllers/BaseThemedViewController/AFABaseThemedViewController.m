@@ -155,6 +155,12 @@
                                  style:AFABannerAlertStyleSuccess];
 }
 
+- (void)showConfirmationWithTitle:(NSString*)title andMessage:(NSString *)confirmationMessage {
+    [self.bannerAlertView showWithText:confirmationMessage
+                                 title:title
+                                 style:AFABannerAlertStyleSuccess];
+}
+
 - (void)didRestoredNetworkConnectivity {
     [self showConfirmationMessage:NSLocalizedString(kLocalizationOfflineConnectivityConnectedRefreshingText, @"Reconect text")];
 }
