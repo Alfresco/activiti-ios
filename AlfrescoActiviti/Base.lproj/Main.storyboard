@@ -6432,7 +6432,7 @@ success</string>
                         <outlet property="signInButton" destination="VXp-o9-Ccd" id="oAA-C9-iTM"/>
                         <outlet property="subtitle1Label" destination="IDg-Ta-wTf" id="07n-LV-lbF"/>
                         <outlet property="subtitle2Label" destination="RFI-ro-FgJ" id="wVe-MU-g2v"/>
-                        <segue destination="6VM-Di-SZo" kind="presentation" identifier="LoginAuthorizedSegueID" modalPresentationStyle="fullScreen" id="SbH-Il-4GU"/>
+                        <segue destination="6VM-Di-SZo" kind="presentation" identifier="LoginAuthorizedSegueID" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="SbH-Il-4GU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eOJ-tV-4di" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -6480,7 +6480,7 @@ success</string>
         <segue reference="fpJ-UB-l4s"/>
         <segue reference="Rct-bP-63w"/>
         <segue reference="dAG-4I-soh"/>
-        <segue reference="6Sl-EL-XUc"/>
+        <segue reference="SbH-Il-4GU"/>
         <segue reference="DnA-gY-0TX"/>
     </inferredMetricsTieBreakers>
 </document>

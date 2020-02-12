@@ -201,7 +201,6 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == kSegueIDLoginAuthorized {
             let cvc = segue.destination as! AFAContainerViewController
-            cvc.transitioningDelegate = self
             cvc.viewModel = ContainerViewModel.init(with: model.persistenceStackModelName(), logoutViewController: cvc)
         }
     }
@@ -311,18 +310,5 @@ extension AIMSSSOViewController: AIMSSSOViewModelDelegate {
                 }
             }
         }
-    }
-}
-
-//MARK: - UIViewControllerTransitioning Delegate
-
-extension AIMSSSOViewController: UIViewControllerTransitioningDelegate {
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AFAModalDismissAnimator()
-    }
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AFAModalReplaceAnimator()
     }
 }
