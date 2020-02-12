@@ -261,9 +261,9 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                 __weak typeof(self) weakSelf = self;
                 [self.sessionDelegate refreshNetworkSessionWithCompletionBlock:^(NSError * _Nullable error) {
                     __strong typeof(self) strongSelf = weakSelf;
-
+                    
                     strongSelf.isSessionRefreshInProgress = NO;
-
+                    
                     if (error) {
                         ASDKLogError(@"Failed to refresh session. Reason: %@", error.localizedDescription);
                         [strongSelf postNotificationForUnauthorizedAccessWithError:error];
@@ -271,11 +271,11 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                         [strongSelf executeQueuedRequests];
                     }
                 }];
-            } else {
-                // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
-                // status to the caller
-                [self postNotificationForUnauthorizedAccessWithError:nil];
             }
+        } else {
+            // If session delegate has not been set or Basic Auth is used instead of AIMS report the request
+            // status to the caller
+            [self postNotificationForUnauthorizedAccessWithError:nil];
         }
     } else { // Execute original request
         task = [super POST:URLString
@@ -285,7 +285,7 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
                    success:success
                    failure:failure];
     }
-
+    
     return task;
 }
 
@@ -328,18 +328,20 @@ static const int activitiSDKLogLevel = ASDK_LOG_LEVEL_WARN; // | ASDK_LOG_FLAG_T
     for (int idx = 0; idx < self.queuedRequests.count; idx++) {
         ASDKRequestOperationManagerRequest *queuedRequest = (ASDKRequestOperationManagerRequest *)self.queuedRequests[idx];
         
-        if (queuedRequest.request) {
-            [self executeRequest:queuedRequest.request
-               uploadProgress:queuedRequest.uploadProgressBlock
-             downloadProgress:queuedRequest.downloadProgressBlock
-            completionHandler:queuedRequest.completionHandler];
-        } else {
-            [self POST:queuedRequest.urlString
-            parameters:queuedRequest.parameters
-constructingBodyWithBlock:queuedRequest.bodyBlock
-              progress:queuedRequest.uploadProgressBlock
-               success:queuedRequest.successBlock
-               failure:queuedRequest.failureBlock];
+        if (!self.isSessionRefreshInProgress) {
+            if (queuedRequest.request) {
+                        [self executeRequest:queuedRequest.request
+                           uploadProgress:queuedRequest.uploadProgressBlock
+                         downloadProgress:queuedRequest.downloadProgressBlock
+                        completionHandler:queuedRequest.completionHandler];
+                    } else {
+                        [super POST:queuedRequest.urlString
+                        parameters:queuedRequest.parameters
+            constructingBodyWithBlock:queuedRequest.bodyBlock
+                          progress:queuedRequest.uploadProgressBlock
+                           success:queuedRequest.successBlock
+                           failure:queuedRequest.failureBlock];
+                    }
         }
     }
     
