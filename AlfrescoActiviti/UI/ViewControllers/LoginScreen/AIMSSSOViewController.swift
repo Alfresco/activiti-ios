@@ -168,7 +168,7 @@ class AIMSSSOViewController: AFABaseThemedViewController, SplashScreenProtocol {
     
     @IBAction func signInButtonPressed(_ sender: MDCButton) {
         self.view.endEditing(true)
-        self.controllerState = .isLoading
+//        self.controllerState = .isLoading
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             self.delegate?.dismiss(animated: true)
