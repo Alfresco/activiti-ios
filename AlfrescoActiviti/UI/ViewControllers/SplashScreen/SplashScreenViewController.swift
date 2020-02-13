@@ -121,7 +121,6 @@ class SplashScreenViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == kSegueIDLoginAuthorized {
             let cvc = segue.destination as! AFAContainerViewController
-            cvc.transitioningDelegate = self
             cvc.viewModel = ContainerViewModel.init(with: SplashScreenViewController.model.persistenceStackModelName(), logoutViewController: cvc)
             cvc.navigationController?.navigationBar.backItem?.title = ""
         } else if segue.identifier == kSegueIDSplashScreenContainerSegueID {
@@ -172,18 +171,6 @@ class SplashScreenViewController: UIViewController {
         baseView.layer.shadowPath = UIBezierPath(rect: baseView.bounds).cgPath
         baseView.layer.shouldRasterize = true
         baseView.layer.rasterizationScale = UIScreen.main.scale
-    }
-}
-
-// MARK: UIViewControllerTransitioningDelegate
-extension SplashScreenViewController: UIViewControllerTransitioningDelegate {
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AFAModalDismissAnimator()
-    }
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AFAModalReplaceAnimator()
     }
 }
 

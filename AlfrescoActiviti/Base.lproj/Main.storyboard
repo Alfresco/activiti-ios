@@ -165,7 +165,7 @@
                         <outlet property="shadowView" destination="gTU-ov-94U" id="og4-Gc-0oh"/>
                         <outlet property="whiteView" destination="tpS-lw-atg" id="thl-RW-BgI"/>
                         <segue destination="2sj-96-gBg" kind="presentation" identifier="ShowAppFromSplashScreenSegueID" animates="NO" modalPresentationStyle="fullScreen" id="EG2-po-uYF"/>
-                        <segue destination="6VM-Di-SZo" kind="presentation" identifier="LoginAuthorizedSegueID" modalPresentationStyle="fullScreen" id="6Sl-EL-XUc"/>
+                        <segue destination="6VM-Di-SZo" kind="presentation" identifier="LoginAuthorizedSegueID" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="6Sl-EL-XUc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXi-BV-cL9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -6480,7 +6480,7 @@ success</string>
         <segue reference="fpJ-UB-l4s"/>
         <segue reference="Rct-bP-63w"/>
         <segue reference="dAG-4I-soh"/>
-        <segue reference="k63-kf-nLH"/>
+        <segue reference="6Sl-EL-XUc"/>
         <segue reference="DnA-gY-0TX"/>
     </inferredMetricsTieBreakers>
 </document>
