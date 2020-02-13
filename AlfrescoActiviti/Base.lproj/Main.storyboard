@@ -5117,7 +5117,7 @@
                         <outlet property="processServicesAppLabel" destination="1gx-Gb-y45" id="oid-Zu-wwN"/>
                         <outlet property="signInButton" destination="iC0-X6-qax" id="kdg-AB-s5m"/>
                         <outlet property="usernameTextfield" destination="x1o-cv-Ktx" id="9em-Zn-eXY"/>
-                        <segue destination="6VM-Di-SZo" kind="presentation" identifier="LoginAuthorizedSegueID" modalPresentationStyle="fullScreen" id="k63-kf-nLH"/>
+                        <segue destination="6VM-Di-SZo" kind="presentation" identifier="LoginAuthorizedSegueID" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="k63-kf-nLH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lF-rs-7Wl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -6480,7 +6480,7 @@ success</string>
         <segue reference="fpJ-UB-l4s"/>
         <segue reference="Rct-bP-63w"/>
         <segue reference="dAG-4I-soh"/>
-        <segue reference="SbH-Il-4GU"/>
+        <segue reference="k63-kf-nLH"/>
         <segue reference="DnA-gY-0TX"/>
     </inferredMetricsTieBreakers>
 </document>
