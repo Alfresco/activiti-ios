@@ -141,33 +141,33 @@ typedef NS_ENUM(NSInteger, ASDKAttachFormFieldDetailsCellType) {
 - (void)onTakePhoto {
     __weak typeof(self) weakSelf = self;
     [ASDKPhotosLibraryService requestPhotosAuthorizationWithCompletionBlock:^(BOOL isAuthorized) {
-        __strong typeof(self) strongSelf = weakSelf;
-        
-        if (isAuthorized) {
-            strongSelf.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-            [strongSelf presentViewController:strongSelf.imagePickerController
-                                     animated:YES
-                                   completion:nil];
-        } else {
-            [strongSelf showGenericErrorAlertControllerWithMessage:ASDKLocalizedStringFromTable(kLocalizationFormContentPickerComponentNotAuthorizedText, ASDKLocalizationTable, @"Access not granted error")];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (isAuthorized) {
+                weakSelf.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+                [weakSelf presentViewController:weakSelf.imagePickerController
+                                         animated:YES
+                                       completion:nil];
+            } else {
+                [weakSelf showGenericErrorAlertControllerWithMessage:ASDKLocalizedStringFromTable(kLocalizationFormContentPickerComponentNotAuthorizedText, ASDKLocalizationTable, @"Access not granted error")];
 
-        }
+            }
+        });
     }];
 }
 
 - (void)onSelectPhoto {
     __weak typeof(self) weakSelf = self;
     [ASDKPhotosLibraryService requestPhotosAuthorizationWithCompletionBlock:^(BOOL isAuthorized) {
-        __strong typeof(self) strongSelf = weakSelf;
-        
-        if (isAuthorized) {
-            self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [self presentViewController:self.imagePickerController
-                               animated:YES
-                             completion:nil];
-        } else {
-            [strongSelf showGenericErrorAlertControllerWithMessage:ASDKLocalizedStringFromTable(kLocalizationFormContentPickerComponentNotAuthorizedText, ASDKLocalizationTable, @"Access not granted error")];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (isAuthorized) {
+                weakSelf.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                [weakSelf presentViewController:weakSelf.imagePickerController
+                                   animated:YES
+                                 completion:nil];
+            } else {
+                [weakSelf showGenericErrorAlertControllerWithMessage:ASDKLocalizedStringFromTable(kLocalizationFormContentPickerComponentNotAuthorizedText, ASDKLocalizationTable, @"Access not granted error")];
+            }
+        });
     }];
 }
 
