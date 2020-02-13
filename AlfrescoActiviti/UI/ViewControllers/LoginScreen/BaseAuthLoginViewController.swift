@@ -292,22 +292,8 @@ class BaseAuthLoginViewController: AFABaseThemedViewController, SplashScreenProt
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == kSegueIDLoginAuthorized {
             let cvc = segue.destination as! AFAContainerViewController
-            cvc.transitioningDelegate = self
             cvc.viewModel = ContainerViewModel.init(with: model.persistenceStackModelName(), logoutViewController: cvc)
         }
-    }
-}
-
-// MARK: - UIViewControllerTransitioning Delegate
-
-extension BaseAuthLoginViewController: UIViewControllerTransitioningDelegate {
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AFAModalDismissAnimator()
-    }
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AFAModalReplaceAnimator()
     }
 }
 
