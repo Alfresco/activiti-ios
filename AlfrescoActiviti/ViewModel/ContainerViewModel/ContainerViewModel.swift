@@ -59,6 +59,8 @@ class ContainerViewModel: NSObject {
     
     @objc func performLogout(withPKCERequest: Bool) {
         if withPKCERequest {
+            isLogoutRequestInProgress = true;
+            
             // 1. Retrieve credentials from Keychain
             var alfrescoCredential: AlfrescoCredential?
             let decoder = JSONDecoder()
@@ -135,11 +137,14 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
             credential = nil
         }
         
-        refreshTokenDispatchGroup.leave()
+        if !isLogoutRequestInProgress {
+            refreshTokenDispatchGroup.leave()
+        }
     }
     
     func didLogOut(result: Result<Int, APIError>) {
         var hasLogoutBeenCancelled = false
+        isLogoutRequestInProgress = false;
         
         switch result {
         case .success(_):
