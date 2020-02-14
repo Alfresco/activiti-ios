@@ -23,6 +23,7 @@ class ContainerViewModel: NSObject {
     @objc weak var delegate: AFAContainerViewModelDelegate?
     @objc var isLogoutRequestInProgress: Bool
     @objc var logoutViewController: UIViewController
+    let reachabilityManager: ASDKReachabilityManager = ASDKReachabilityManager()
     
     private (set) var persistenceStackModelName: String?
     
@@ -51,7 +52,11 @@ class ContainerViewModel: NSObject {
         
         switch lastLoginType {
         case kAIMSAuthenticationCredentialIdentifier:
-            performLogout(withPKCERequest: true)
+            if reachabilityManager.requestInitialReachabilityStatus() != .reachableViaWWANOrWifi {
+                performLogout(withPKCERequest: false)
+            } else {
+                performLogout(withPKCERequest: true)
+            }
         default:
             performLogout(withPKCERequest: false)
         }
