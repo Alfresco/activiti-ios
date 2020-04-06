@@ -24,7 +24,7 @@ public typealias AvailableAuthTypeCallback<AuthType> = (Result<AuthType, APIErro
 protocol AIMSLoginServiceProtocol {
     
     // Login related methods
-    func availableAuthType(for serviceDocument: String, handler:@escaping AvailableAuthTypeCallback<AvailableAuthType>)
+    func availableAuthType(handler:@escaping AvailableAuthTypeCallback<AvailableAuthType>)
     func login(onViewController: UIViewController, delegate: AlfrescoAuthDelegate)
     func refreshSession(keychainIdentifier: String, delegate: AlfrescoAuthDelegate)
     func logout(onViewController viewController: UIViewController,
