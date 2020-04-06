@@ -1978,7 +1978,6 @@
 		B9FD29EC23BF628600403968 /* ASDKModelCredentialAIMS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKModelCredentialAIMS.m; path = Model/ASDKModelCredentialAIMS/ASDKModelCredentialAIMS.m; sourceTree = "<group>"; };
 		B9FD29F323C3589D00403968 /* ASDKModelCredentialBaseProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKModelCredentialBaseProtocol.h; path = Model/ASDKModelCredentialBaseProtocol/ASDKModelCredentialBaseProtocol.h; sourceTree = "<group>"; };
 		B9FD29F523C4C58F00403968 /* AlfrescoCredential+ActivitiSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AlfrescoCredential+ActivitiSDK.swift"; path = "ViewModel/AIMSViewModel/Extensions/AlfrescoCredential+ActivitiSDK.swift"; sourceTree = "<group>"; };
-		E30248B522AAA083006C5A3B /* AlfrescoActiviti.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AlfrescoActiviti.xcconfig; sourceTree = "<group>"; };
 		E306347523E04FB400DD8248 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "AlfrescoActiviti/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E307B32223D5AFB3005933E9 /* NSError+Mapers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSError+Mapers.swift"; path = "UI/Extensions/NSError+Mapers.swift"; sourceTree = "<group>"; };
 		E335FA752372BE35005EE76B /* BaseAuthLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseAuthLoginViewController.swift; path = UI/ViewControllers/LoginScreen/BaseAuthLoginViewController.swift; sourceTree = "<group>"; };
@@ -2814,7 +2813,6 @@
 			isa = PBXGroup;
 			children = (
 				B9BF25B9236338270017B71D /* Fonts */,
-				E30248B522AAA083006C5A3B /* AlfrescoActiviti.xcconfig */,
 				1310F2F31D927481002FF53F /* AlfrescoActiviti.entitlements */,
 				13BDA7401B7B632500A2CE40 /* Localization */,
 				137194621B6922DE00D4E1F0 /* LaunchScreen.xib */,

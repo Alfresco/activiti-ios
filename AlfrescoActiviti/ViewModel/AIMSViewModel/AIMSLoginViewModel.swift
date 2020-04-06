@@ -54,7 +54,7 @@ class AIMSLoginViewModel {
         authenticationService = AIMSLoginService(with: authParameters)
         AFAServiceRepository.shared()?.registerServiceObject(authenticationService, forPurpose: .aimsLogin)
         
-        authenticationService?.availableAuthType(for: authParameters.fullFormatURL, handler: { [weak self] (result) in
+        authenticationService?.availableAuthType(handler: { [weak self] (result) in
             guard let sSelf = self else { return }
             
             switch result {

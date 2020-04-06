@@ -38,10 +38,10 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
         alfrescoAuth.pkceAuth(onViewController: onViewController, delegate: delegate)
     }
     
-    func availableAuthType(for url: String, handler: @escaping AvailableAuthTypeCallback<AvailableAuthType>) {
+    func availableAuthType(handler: @escaping AvailableAuthTypeCallback<AvailableAuthType>) {
         let authConfig = authConfiguration()
         alfrescoAuth.update(configuration: authConfig)
-        alfrescoAuth.availableAuthType(for: url, handler: handler)
+        alfrescoAuth.availableAuthType(handler: handler)
     }
     
     func refreshSession(keychainIdentifier: String, delegate: AlfrescoAuthDelegate) {
