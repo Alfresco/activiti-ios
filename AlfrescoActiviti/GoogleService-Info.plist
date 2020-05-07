@@ -7,7 +7,7 @@
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.940296167981-8to51f4ndv15mm04l4shktosrv14j822</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCuzamlG_QZtIXJTUSM04n-ZeBOn5UGrRo</string>
+	<string>INSERT_KEY_HERE</string>
 	<key>GCM_SENDER_ID</key>
 	<string>940296167981</string>
 	<key>PLIST_VERSION</key>
@@ -19,15 +19,15 @@
 	<key>STORAGE_BUCKET</key>
 	<string>mobile-development-2dab3.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:940296167981:ios:e3434f0375850c7cde8ea4</string>
 	<key>DATABASE_URL</key>
