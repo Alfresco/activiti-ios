@@ -75,7 +75,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      xcodebuild -sdk iphoneos -configuration Release -workspace AlfrescoActiviti.xcworkspace -scheme AlfrescoActiviti build CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY='iPhone Distribution: Alfresco Software, Inc. (W8N95J537P)' PROVISIONING_PROFILE='ac4a6227-fe6a-42cf-88e7-d7a1b136e8ce'
+      xcodebuild -sdk iphoneos -configuration Release -workspace AlfrescoActiviti.xcworkspace -scheme AlfrescoActiviti build CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY='iPhone Distribution: Alfresco Software, Inc. (W8N95J537P)' PROVISIONING_PROFILE=''
 
 - task: Xcode@5
   displayName: 'Archive Process Services App'
