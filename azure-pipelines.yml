@@ -84,6 +84,7 @@ steps:
     packageApp: true
     signingOption: manual
     signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    provisioningProfileName: ''
 
 - task: Xcode@5
   displayName: 'Archive Process Services App'
