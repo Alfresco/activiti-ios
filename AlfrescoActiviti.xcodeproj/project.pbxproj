@@ -8092,6 +8092,7 @@
 				ENABLE_CLOUD_DECOMMISSION_ALERT = 1;
 				INFOPLIST_FILE = AlfrescoActiviti/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alfresco.activiti;
 				PRODUCT_NAME = AlfrescoActiviti;
 				PROVISIONING_PROFILE_SPECIFIER = "Alfresco Activiti Mobile Development";
@@ -8115,6 +8116,7 @@
 				ENABLE_CLOUD_DECOMMISSION_ALERT = 1;
 				INFOPLIST_FILE = AlfrescoActiviti/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alfresco.activiti;
 				PRODUCT_NAME = AlfrescoActiviti;
 				PROVISIONING_PROFILE_SPECIFIER = "Activiti Mobile App Store Profile";
@@ -8323,6 +8325,7 @@
 				ENABLE_CLOUD_DECOMMISSION_ALERT = 1;
 				INFOPLIST_FILE = AlfrescoActiviti/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alfresco.activiti;
 				PRODUCT_NAME = AlfrescoActiviti;
 				PROVISIONING_PROFILE_SPECIFIER = "Activiti Mobile Ad Hoc Profile";
