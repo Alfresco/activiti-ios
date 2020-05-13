@@ -82,7 +82,8 @@ steps:
     xcWorkspacePath: '**/AlfrescoActiviti.xcworkspace'
     xcodeVersion: 'default'
     packageApp: true
-    signingOption: auto
+    signingOption: manual
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
 
 - task: Xcode@5
   displayName: 'Archive Process Services App'
