@@ -41,10 +41,7 @@ post_install do |installer|
             cflags = config.build_settings['OTHER_CFLAGS'] || ['$(inherited)']
             cflags << '-fembed-bitcode'
             config.build_settings['OTHER_CFLAGS'] = cflags
-            config.build_settings['ENABLE_BITCODE'] = 'YES'
-            config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
-            config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
-            config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
+            config.build_settings['ENABLE_BITCODE'] = 'YES'  
         end
     end
     
