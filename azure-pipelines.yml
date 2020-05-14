@@ -83,34 +83,11 @@ steps:
     signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
     provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
 
-- task: Xcode@5
-  displayName: 'Archive Process Services App'
-  inputs:
-    actions: 'build archive'
-    sdk: '$(sdk)'
-    scheme: 'AlfrescoActiviti'
-    configuration: '$(configuration)'
-    xcWorkspacePath: '**/AlfrescoActiviti.xcworkspace'
-    useXcpretty: 'false'
-    args: '-archivePath $(agent.buildDirectory)/AlfrescoActiviti'
-
-- task: ArchiveFiles@2
-  displayName: 'Package .xcarchive into a zip file'
-  inputs:
-    rootFolderOrFile: '$(agent.buildDirectory)/AlfrescoActiviti.xcarchive/'
-    archiveFile: '$(build.artifactStagingDirectory)/AlfrescoActiviti.xcarchive.zip'
-
 - task: CopyFiles@2
   inputs:
     contents: '**/*.ipa'
     targetFolder: '$(build.artifactStagingDirectory)'
     overWrite: true
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(build.artifactStagingDirectory)/AlfrescoActiviti.xcarchive.zip'
-    artifactName: 'xcarchive-files'
-    artifactType: 'container'
 
 - task: PublishBuildArtifacts@1
   inputs:
