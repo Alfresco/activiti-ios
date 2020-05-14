@@ -30,7 +30,7 @@ steps:
   displayName: 'Increment build version'
   inputs:
     script: |
-      fastlane run increment_build_number build_number:$(Build.Date:yyyyMMdd)$(Build.Rev:.r)
+      fastlane run increment_build_number build_number:$(Build.Date).$(Build.Rev)
 
 - task: CmdLine@2
   displayName: Adding Alfresco private podspec repository
