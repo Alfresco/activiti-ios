@@ -26,12 +26,6 @@ steps:
 # displayName: 'Installing fastlane'
 
 - task: CmdLine@2
-  displayName: 'Increment build version'
-  inputs:
-    script: |
-      fastlane run increment_build_number build_number:$(Build.BuildNumber)
-
-- task: CmdLine@2
   displayName: Adding Alfresco private podspec repository
   inputs:
     script: |
@@ -82,6 +76,12 @@ steps:
    provisioningProfileLocation: 'secureFiles'
    provProfileSecureFile: '$(apsReleaseProvisioningProfile)'
    removeProfile: true 
+
+- task: CmdLine@2
+  displayName: 'Increment build version'
+  inputs:
+    script: |
+      fastlane run increment_build_number build_number:$(Build.BuildNumber)
 
 - task: CmdLine@2
   displayName: 'Preparing IPA file for Testflight'
