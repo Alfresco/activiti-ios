@@ -19,6 +19,12 @@ variables:
 steps:
 - checkout: self
 
+- script: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  displayName: 'Installing Homebrew'
+
+- script: brew install fastlane
+  displayName: 'Installing fastlane'
+
 - task: CmdLine@2
   displayName: Adding Alfresco private podspec repository
   inputs:
