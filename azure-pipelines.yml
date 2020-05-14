@@ -34,7 +34,6 @@ steps:
   displayName: Installing pods
   inputs:
     script: |
-      pod repo update
       pod install
 - task: CmdLine@2
   displayName: Variable substitution for GoogleAnalytics
