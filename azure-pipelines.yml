@@ -73,9 +73,10 @@ steps:
    removeProfile: true 
 
 - task: CmdLine@2
+  displayName: 'Preparing IPA file for Testflight'
   inputs:
     script: |
-      xcodebuild -sdk iphoneos -configuration Release -workspace AlfrescoActiviti.xcworkspace -scheme AlfrescoActiviti build CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY='iPhone Distribution: Alfresco Software, Inc. (W8N95J537P)' PROVISIONING_PROFILE=''
+      bundle exec fastlane PrepareForTestFlight
 
 - task: Xcode@5
   displayName: 'Archive Process Services App'
