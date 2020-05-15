@@ -18,6 +18,7 @@ The SDK can be used seperatly to create your own tailormade iOS client for the A
 ## Contributors
 
 * Emanuel Lupu-Marinei (NESS Digital Engineering) <emanuel.lupu@icloud.com>
+* Florin Baincescu (NESS Digital Engineering) <florinbaincescu9c@gmail.com>
 * Yvo Swillens <yvoswillens@gmail.com>
 
 ## What's the code License ?
