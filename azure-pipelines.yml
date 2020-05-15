@@ -7,8 +7,10 @@ pool:
   vmImage: 'macos-latest'
 
 variables:
-  - group: aps-ios-signing
+  - group: aps-ios
   - group: git-credentials
+  - group: source-clear-credentials
+  - group: ios-signing
   - name: configuration
     value: 'Release'
   - name: sdk
@@ -16,6 +18,12 @@ variables:
 
 steps:
 - checkout: self
+
+#- script: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#  displayName: 'Installing Homebrew'
+
+#- script: brew install fastlane
+# displayName: 'Installing fastlane'
 
 - task: CmdLine@2
   displayName: Adding Alfresco private podspec repository
@@ -69,19 +77,17 @@ steps:
    provProfileSecureFile: '$(apsReleaseProvisioningProfile)'
    removeProfile: true 
 
-- task: Xcode@5
-  displayName: 'Generate Process Services IPA'
+- task: CmdLine@2
+  displayName: 'Increment build version'
   inputs:
-    actions: 'build'
-    scheme: 'AlfrescoActiviti'
-    sdk: '$(sdk)'
-    configuration: '$(configuration)'
-    xcWorkspacePath: '**/AlfrescoActiviti.xcworkspace'
-    xcodeVersion: 'default'
-    packageApp: true
-    signingOption: 'manual'
-    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
-    provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+    script: |
+      fastlane run increment_build_number build_number:$(Build.BuildID)
+
+- task: CmdLine@2
+  displayName: 'Preparing IPA file for Testflight'
+  inputs:
+    script: |
+      fastlane PrepareForTestFlight
 
 - task: CopyFiles@2
   inputs:
@@ -100,7 +106,7 @@ steps:
     script: 'curl -sSL https://download.sourceclear.com/ci.sh | sh'
   displayName: 'Performing Source Clear checks'
   env:
-    SRCCLR_API_TOKEN: $(SOURCE_CLEAR_API_TOKEN)
+    SRCCLR_API_TOKEN: $(source_clear_token)
 
 - task: AppStoreRelease@1
   inputs:
