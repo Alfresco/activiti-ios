@@ -21,6 +21,7 @@ The SDK can be used seperatly to create your own tailormade iOS client for the A
 * Florin Baincescu (NESS Digital Engineering) <florinbaincescu9c@gmail.com>
 * Yvo Swillens <yvoswillens@gmail.com>
 
+
 ## What's the code License ?
 
 ```
