@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/AlfrescoMobile/Alfresco%20Mobile%20Team/_apis/build/status/Alfresco.activiti-ios?branchName=master)](https://dev.azure.com/AlfrescoMobile/Alfresco%20Mobile%20Team/_build/latest?definitionId=12&branchName=master)
+
 # Welcome to the Alfresco Process Services iOS App
 
 ## What Is Alfresco Process Services iOS?
