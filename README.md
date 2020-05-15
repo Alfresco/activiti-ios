@@ -23,7 +23,7 @@ The SDK can be used seperatly to create your own tailormade iOS client for the A
 ## What's the code License ?
 
 ```
-Copyright (C) 2005-2018 Alfresco Software Limited.
+Copyright (C) 2005-2020 Alfresco Software Limited.
 
 This file is part of the Alfresco Activiti Mobile SDK.
 
