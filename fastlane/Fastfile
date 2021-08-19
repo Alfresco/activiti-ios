@@ -1,28 +1,22 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:ios)
 
 platform :ios do
-  lane :PrepareForTestFlight do
-    build_app(
- 	 	workspace: "AlfrescoActiviti.xcworkspace",
-  		configuration: "Release",
-  		scheme: "AlfrescoActiviti",
-  		silent: true,
-  		clean: true,
-  		output_name: "AlfrescoActiviti.ipa")
+  desc "Build and Pilot"
+  lane :build_and_pilot do
+      update_project_provisioning(
+        xcodeproj: "AlfrescoActiviti.xcodeproj",
+        profile: ENV["PROV_PROFILE"],
+        target_filter: "AlfrescoActiviti",
+        build_configuration: ENV["CONFIGURATION"],
+        code_signing_identity: ENV["SIGNING_IDENTITY"]
+      )
+      build_app(
+        scheme: "AlfrescoActiviti",
+        configuration: ENV["CONFIGURATION"]
+      )
+      upload_to_testflight(
+        skip_waiting_for_build_processing: true,
+        apple_id: ENV["APPSTORE_APP_ID"]
+      )
   end
 end
