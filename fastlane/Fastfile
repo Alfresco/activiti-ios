@@ -1,4 +1,5 @@
 default_platform(:ios)
+xcversion(version: "~> 12.0")
 
 platform :ios do
   desc "Build and Pilot"
