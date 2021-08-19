@@ -57,12 +57,12 @@ steps:
   inputs:
     actions: 'clean test'
     sdk: 'iphonesimulator'
-    xcodeVersion: 11
+    xcodeVersion: 12
     scheme: 'AlfrescoActiviti'
     configuration: 'Debug'
     destinationPlatformOption: 'custom'
     destinationPlatform: 'iOS'
-    destinationSimulators: 'iPhone 11'
+    destinationSimulators: 'iPhone 12'
     xcWorkspacePath: '**/AlfrescoActiviti.xcworkspace'
     useXcpretty: true
     publishJUnitResults: 'build/reports/junit.xml'
