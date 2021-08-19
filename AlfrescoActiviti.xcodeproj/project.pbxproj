@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012DB1C9270703B35E3BB1AF /* Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01859B13466D8CBAD5F64DD1 /* Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework */; };
 		130269691C57735800152F71 /* AFAFilterOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 130269681C57735800152F71 /* AFAFilterOptionTableViewCell.m */; };
 		13044FC91BFA178A008FF6E6 /* ASDKModelAmountFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = 13044FC71BFA178A008FF6E6 /* ASDKModelAmountFormField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13044FCA1BFA178A008FF6E6 /* ASDKModelAmountFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 13044FC81BFA178A008FF6E6 /* ASDKModelAmountFormField.m */; };
@@ -714,6 +715,7 @@
 		13FF67A51CEC52F300A8C95F /* NSString+ASDKFontGlyphiconsFiletypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 13FF67A31CEC52F300A8C95F /* NSString+ASDKFontGlyphiconsFiletypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13FF67A61CEC52F300A8C95F /* NSString+ASDKFontGlyphiconsFiletypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 13FF67A41CEC52F300A8C95F /* NSString+ASDKFontGlyphiconsFiletypes.m */; };
 		13FFF4101C43A6E600550747 /* AFAApplicationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13FFF40F1C43A6E600550747 /* AFAApplicationListViewController.m */; };
+		285BD4C6F5C7C1DA9BB087F6 /* Pods_Shared_ActivitiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D601AF2AE8E101419C09F5 /* Pods_Shared_ActivitiSDK.framework */; };
 		7597AEE91B821E9500F8B5DE /* AFAActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7597AEE81B821E9500F8B5DE /* AFAActivityView.m */; };
 		7597AEED1B82425E00F8B5DE /* AFACredentialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7597AEEC1B82425E00F8B5DE /* AFACredentialModel.m */; };
 		75CFBC6D1B81CB900018DADE /* AFASecurityLayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CFBC6C1B81CB900018DADE /* AFASecurityLayerTableViewCell.m */; };
@@ -831,6 +833,7 @@
 		8DEA25451C7E0D3400BF376F /* ASDKDateFormFieldDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA25431C7E0D3400BF376F /* ASDKDateFormFieldDetailsViewController.m */; };
 		8DEA25481C7E0D9E00BF376F /* ASDKFormDateFieldCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DEA25461C7E0D9E00BF376F /* ASDKFormDateFieldCollectionViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8DEA25491C7E0D9E00BF376F /* ASDKFormDateFieldCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA25471C7E0D9E00BF376F /* ASDKFormDateFieldCollectionViewCell.m */; };
+		9D4CE63DB03A17142AB08A52 /* Pods_AlfrescoActivitiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5B2BE4132051B17EC35F1B /* Pods_AlfrescoActivitiTests.framework */; };
 		B90A375E2360821500BE66A1 /* AIMSLoginServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A375D2360821500BE66A1 /* AIMSLoginServiceProtocol.swift */; };
 		B90CF3A72361C4F700C1D600 /* AIMSLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90CF3A62361C4F700C1D600 /* AIMSLoginService.swift */; };
 		B90EE5CE23C61E58002C965D /* NSString+PersistenceStackNormalization.h in Headers */ = {isa = PBXBuildFile; fileRef = B90EE5CC23C61E58002C965D /* NSString+PersistenceStackNormalization.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -878,6 +881,7 @@
 		B9FD29EE23BF628600403968 /* ASDKModelCredentialAIMS.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FD29EC23BF628600403968 /* ASDKModelCredentialAIMS.m */; };
 		B9FD29F423C3589D00403968 /* ASDKModelCredentialBaseProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B9FD29F323C3589D00403968 /* ASDKModelCredentialBaseProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B9FD29F623C4C58F00403968 /* AlfrescoCredential+ActivitiSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD29F523C4C58F00403968 /* AlfrescoCredential+ActivitiSDK.swift */; };
+		C4F9853B397302C15AB02388 /* Pods_Shared_AlfrescoActiviti.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5798A0B269BC4518C6A58B /* Pods_Shared_AlfrescoActiviti.framework */; };
 		E306347623E04FB500DD8248 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E306347523E04FB400DD8248 /* GoogleService-Info.plist */; };
 		E307B32323D5AFB3005933E9 /* NSError+Mapers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E307B32223D5AFB3005933E9 /* NSError+Mapers.swift */; };
 		E335FA762372BE35005EE76B /* BaseAuthLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E335FA752372BE35005EE76B /* BaseAuthLoginViewController.swift */; };
@@ -942,6 +946,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01859B13466D8CBAD5F64DD1 /* Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		03CBC3234B3DA56B19E668EA /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK-ActivitiSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B5798A0B269BC4518C6A58B /* Pods_Shared_AlfrescoActiviti.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_AlfrescoActiviti.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CA2FEE20445C12D1736924B /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig"; path = "Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig"; sourceTree = "<group>"; };
+		0F7B3281CB36EA2997576F68 /* Pods-Shared-AlfrescoActiviti.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-AlfrescoActiviti.adhoc.xcconfig"; path = "Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti.adhoc.xcconfig"; sourceTree = "<group>"; };
 		130269671C57735800152F71 /* AFAFilterOptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFAFilterOptionTableViewCell.h; path = UI/Cells/FilterOptionCell/AFAFilterOptionTableViewCell.h; sourceTree = "<group>"; };
 		130269681C57735800152F71 /* AFAFilterOptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFAFilterOptionTableViewCell.m; path = UI/Cells/FilterOptionCell/AFAFilterOptionTableViewCell.m; sourceTree = "<group>"; };
 		13044FC71BFA178A008FF6E6 /* ASDKModelAmountFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKModelAmountFormField.h; path = Model/AmountFormField/ASDKModelAmountFormField.h; sourceTree = "<group>"; };
@@ -1787,6 +1796,11 @@
 		13FF67A41CEC52F300A8C95F /* NSString+ASDKFontGlyphiconsFiletypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+ASDKFontGlyphiconsFiletypes.m"; path = "ActivitiSDK/FormRenderEngine/Categories/NSString+ASDKFontGlyphiconsFiletypes.m"; sourceTree = SOURCE_ROOT; };
 		13FFF40E1C43A6E600550747 /* AFAApplicationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFAApplicationListViewController.h; path = UI/ViewControllers/ApplicationScreen/AFAApplicationListViewController.h; sourceTree = "<group>"; };
 		13FFF40F1C43A6E600550747 /* AFAApplicationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFAApplicationListViewController.m; path = UI/ViewControllers/ApplicationScreen/AFAApplicationListViewController.m; sourceTree = "<group>"; };
+		1CC4DB74166B97A228DD065F /* Pods-Shared-ActivitiSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK.debug.xcconfig"; path = "Target Support Files/Pods-Shared-ActivitiSDK/Pods-Shared-ActivitiSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		36D601AF2AE8E101419C09F5 /* Pods_Shared_ActivitiSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shared_ActivitiSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DE0223941DEE6812A5F576E /* Pods-AlfrescoActivitiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlfrescoActivitiTests.release.xcconfig"; path = "Target Support Files/Pods-AlfrescoActivitiTests/Pods-AlfrescoActivitiTests.release.xcconfig"; sourceTree = "<group>"; };
+		444EFD2D34BFE3384314FB07 /* Pods-Shared-ActivitiSDK.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK.adhoc.xcconfig"; path = "Target Support Files/Pods-Shared-ActivitiSDK/Pods-Shared-ActivitiSDK.adhoc.xcconfig"; sourceTree = "<group>"; };
+		65B0E352DEA0A8643791689F /* Pods-AlfrescoActivitiTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlfrescoActivitiTests.adhoc.xcconfig"; path = "Target Support Files/Pods-AlfrescoActivitiTests/Pods-AlfrescoActivitiTests.adhoc.xcconfig"; sourceTree = "<group>"; };
 		7597AEE71B821E9500F8B5DE /* AFAActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFAActivityView.h; path = UI/Components/ActivitiView/AFAActivityView.h; sourceTree = "<group>"; };
 		7597AEE81B821E9500F8B5DE /* AFAActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFAActivityView.m; path = UI/Components/ActivitiView/AFAActivityView.m; sourceTree = "<group>"; };
 		7597AEEB1B82425E00F8B5DE /* AFACredentialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFACredentialModel.h; path = Model/CredentialModel/AFACredentialModel.h; sourceTree = "<group>"; };
@@ -1929,6 +1943,8 @@
 		8DEA25431C7E0D3400BF376F /* ASDKDateFormFieldDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKDateFormFieldDetailsViewController.m; path = FormRenderEngine/Controllers/FormFieldDetailControllers/ASDKDateFormFieldDetailsViewController.m; sourceTree = "<group>"; };
 		8DEA25461C7E0D9E00BF376F /* ASDKFormDateFieldCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKFormDateFieldCollectionViewCell.h; path = FormRenderEngine/Cells/CollectionViewCells/ASDKFormDateFieldCollectionViewCell.h; sourceTree = "<group>"; };
 		8DEA25471C7E0D9E00BF376F /* ASDKFormDateFieldCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKFormDateFieldCollectionViewCell.m; path = FormRenderEngine/Cells/CollectionViewCells/ASDKFormDateFieldCollectionViewCell.m; sourceTree = "<group>"; };
+		A279EEEC4A588E64B6119D55 /* Pods-Shared-AlfrescoActiviti.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-AlfrescoActiviti.release.xcconfig"; path = "Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti.release.xcconfig"; sourceTree = "<group>"; };
+		B2CB77BF8E71F79CFDA316DE /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig"; path = "Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		B90A375C2360821500BE66A1 /* AlfrescoActiviti-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlfrescoActiviti-Bridging-Header.h"; sourceTree = "<group>"; };
 		B90A375D2360821500BE66A1 /* AIMSLoginServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSLoginServiceProtocol.swift; path = Business/AIMSLoginService/AIMSLoginServiceProtocol.swift; sourceTree = "<group>"; };
 		B90CF3A62361C4F700C1D600 /* AIMSLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AIMSLoginService.swift; path = Business/AIMSLoginService/AIMSLoginService.swift; sourceTree = "<group>"; };
@@ -1978,6 +1994,8 @@
 		B9FD29EC23BF628600403968 /* ASDKModelCredentialAIMS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ASDKModelCredentialAIMS.m; path = Model/ASDKModelCredentialAIMS/ASDKModelCredentialAIMS.m; sourceTree = "<group>"; };
 		B9FD29F323C3589D00403968 /* ASDKModelCredentialBaseProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ASDKModelCredentialBaseProtocol.h; path = Model/ASDKModelCredentialBaseProtocol/ASDKModelCredentialBaseProtocol.h; sourceTree = "<group>"; };
 		B9FD29F523C4C58F00403968 /* AlfrescoCredential+ActivitiSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AlfrescoCredential+ActivitiSDK.swift"; path = "ViewModel/AIMSViewModel/Extensions/AlfrescoCredential+ActivitiSDK.swift"; sourceTree = "<group>"; };
+		DC2334E5FDEB246F348C5BD2 /* Pods-AlfrescoActivitiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlfrescoActivitiTests.debug.xcconfig"; path = "Target Support Files/Pods-AlfrescoActivitiTests/Pods-AlfrescoActivitiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DC8B619E31CF08ECD7A7A586 /* Pods-Shared-AlfrescoActiviti.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-AlfrescoActiviti.debug.xcconfig"; path = "Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti.debug.xcconfig"; sourceTree = "<group>"; };
 		E306347523E04FB400DD8248 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "AlfrescoActiviti/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E307B32223D5AFB3005933E9 /* NSError+Mapers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSError+Mapers.swift"; path = "UI/Extensions/NSError+Mapers.swift"; sourceTree = "<group>"; };
 		E335FA752372BE35005EE76B /* BaseAuthLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseAuthLoginViewController.swift; path = UI/ViewControllers/LoginScreen/BaseAuthLoginViewController.swift; sourceTree = "<group>"; };
@@ -1995,6 +2013,8 @@
 		E3822E9523C362D400D625BB /* MDCTextFields+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MDCTextFields+Helpers.swift"; path = "UI/Extensions/MDCTextFields+Helpers.swift"; sourceTree = "<group>"; };
 		E3DEBE1D238564E10056118A /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashScreenViewController.swift; path = AlfrescoActiviti/UI/ViewControllers/SplashScreen/SplashScreenViewController.swift; sourceTree = SOURCE_ROOT; };
 		E3E42A5923A78AC50079FA03 /* String+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Helpers.swift"; path = "UI/Extensions/String+Helpers.swift"; sourceTree = "<group>"; };
+		EC5B2BE4132051B17EC35F1B /* Pods_AlfrescoActivitiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlfrescoActivitiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6273DD5F6CFE2FF0B6E7F76 /* Pods-Shared-ActivitiSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-ActivitiSDK.release.xcconfig"; path = "Target Support Files/Pods-Shared-ActivitiSDK/Pods-Shared-ActivitiSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2003,6 +2023,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				137194951B6924DF00D4E1F0 /* ActivitiSDK.framework in Frameworks */,
+				C4F9853B397302C15AB02388 /* Pods_Shared_AlfrescoActiviti.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2010,6 +2031,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D4CE63DB03A17142AB08A52 /* Pods_AlfrescoActivitiTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2017,6 +2039,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				285BD4C6F5C7C1DA9BB087F6 /* Pods_Shared_ActivitiSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2025,6 +2048,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				137194891B6924DF00D4E1F0 /* ActivitiSDK.framework in Frameworks */,
+				012DB1C9270703B35E3BB1AF /* Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3506,6 +3530,7 @@
 				1371947F1B6924DE00D4E1F0 /* ActivitiSDK */,
 				1371944E1B6922DE00D4E1F0 /* Products */,
 				A341846D49F7DD70CECF11A1 /* Pods */,
+				2E2C1181A7B3BCDB5296B012 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -6063,6 +6088,17 @@
 			name = ApplicationScreen;
 			sourceTree = "<group>";
 		};
+		2E2C1181A7B3BCDB5296B012 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC5B2BE4132051B17EC35F1B /* Pods_AlfrescoActivitiTests.framework */,
+				36D601AF2AE8E101419C09F5 /* Pods_Shared_ActivitiSDK.framework */,
+				01859B13466D8CBAD5F64DD1 /* Pods_Shared_ActivitiSDK_ActivitiSDKTests.framework */,
+				0B5798A0B269BC4518C6A58B /* Pods_Shared_AlfrescoActiviti.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7597AEEA1B821E9900F8B5DE /* ActivitiView */ = {
 			isa = PBXGroup;
 			children = (
@@ -6558,6 +6594,18 @@
 		A341846D49F7DD70CECF11A1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				DC2334E5FDEB246F348C5BD2 /* Pods-AlfrescoActivitiTests.debug.xcconfig */,
+				3DE0223941DEE6812A5F576E /* Pods-AlfrescoActivitiTests.release.xcconfig */,
+				65B0E352DEA0A8643791689F /* Pods-AlfrescoActivitiTests.adhoc.xcconfig */,
+				1CC4DB74166B97A228DD065F /* Pods-Shared-ActivitiSDK.debug.xcconfig */,
+				F6273DD5F6CFE2FF0B6E7F76 /* Pods-Shared-ActivitiSDK.release.xcconfig */,
+				444EFD2D34BFE3384314FB07 /* Pods-Shared-ActivitiSDK.adhoc.xcconfig */,
+				03CBC3234B3DA56B19E668EA /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.debug.xcconfig */,
+				B2CB77BF8E71F79CFDA316DE /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig */,
+				0CA2FEE20445C12D1736924B /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig */,
+				DC8B619E31CF08ECD7A7A586 /* Pods-Shared-AlfrescoActiviti.debug.xcconfig */,
+				A279EEEC4A588E64B6119D55 /* Pods-Shared-AlfrescoActiviti.release.xcconfig */,
+				0F7B3281CB36EA2997576F68 /* Pods-Shared-AlfrescoActiviti.adhoc.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -7139,11 +7187,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 137194731B6922DE00D4E1F0 /* Build configuration list for PBXNativeTarget "AlfrescoActiviti" */;
 			buildPhases = (
+				C1989BC74017F9A4B61330F9 /* [CP] Check Pods Manifest.lock */,
 				137194491B6922DE00D4E1F0 /* Sources */,
 				1371944A1B6922DE00D4E1F0 /* Frameworks */,
 				1371944B1B6922DE00D4E1F0 /* Resources */,
 				1371949A1B6924DF00D4E1F0 /* Embed Frameworks */,
 				131E27961BA2BF91009586C1 /* Version increment script */,
+				5C6A115CBD3F269876BA7F11 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -7159,6 +7209,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 137194761B6922DE00D4E1F0 /* Build configuration list for PBXNativeTarget "AlfrescoActivitiTests" */;
 			buildPhases = (
+				3C866CB17CF369F9EBCF8B40 /* [CP] Check Pods Manifest.lock */,
 				137194651B6922DE00D4E1F0 /* Sources */,
 				137194661B6922DE00D4E1F0 /* Frameworks */,
 				137194671B6922DE00D4E1F0 /* Resources */,
@@ -7177,6 +7228,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 137194971B6924DF00D4E1F0 /* Build configuration list for PBXNativeTarget "ActivitiSDK" */;
 			buildPhases = (
+				9D07E849799756768227F357 /* [CP] Check Pods Manifest.lock */,
 				137194791B6924DE00D4E1F0 /* Sources */,
 				1371947A1B6924DE00D4E1F0 /* Frameworks */,
 				1371947B1B6924DE00D4E1F0 /* Headers */,
@@ -7196,9 +7248,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1371949B1B6924DF00D4E1F0 /* Build configuration list for PBXNativeTarget "ActivitiSDKTests" */;
 			buildPhases = (
+				A5A52CC20A560A9D70D96DBC /* [CP] Check Pods Manifest.lock */,
 				137194841B6924DF00D4E1F0 /* Sources */,
 				137194851B6924DF00D4E1F0 /* Frameworks */,
 				137194861B6924DF00D4E1F0 /* Resources */,
+				1B2FE06DBFD5157DAE61510B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -7371,6 +7425,186 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi\n";
+		};
+		1B2FE06DBFD5157DAE61510B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Base64/Base64.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/JWT/JWT.framework",
+				"${BUILT_PRODUCTS_DIR}/Mantle/Mantle.framework",
+				"${BUILT_PRODUCTS_DIR}/OCMock/OCMock.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Base64.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWT.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shared-ActivitiSDK-ActivitiSDKTests/Pods-Shared-ActivitiSDK-ActivitiSDKTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3C866CB17CF369F9EBCF8B40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AlfrescoActivitiTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C6A115CBD3F269876BA7F11 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Base64/Base64.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/JWT/JWT.framework",
+				"${BUILT_PRODUCTS_DIR}/Mantle/Mantle.framework",
+				"${BUILT_PRODUCTS_DIR}/AlfrescoAuth/AlfrescoAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/AlfrescoCore/AlfrescoCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/Buglife/Buglife.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
+				"${BUILT_PRODUCTS_DIR}/MotionAnimator/MotionAnimator.framework",
+				"${BUILT_PRODUCTS_DIR}/MotionInterchange/MotionInterchange.framework",
+				"${BUILT_PRODUCTS_DIR}/MotionTransitioning/MotionTransitioning.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Base64.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWT.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlfrescoAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlfrescoCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Buglife.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionAnimator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionInterchange.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionTransitioning.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shared-AlfrescoActiviti/Pods-Shared-AlfrescoActiviti-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D07E849799756768227F357 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Shared-ActivitiSDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5A52CC20A560A9D70D96DBC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Shared-ActivitiSDK-ActivitiSDKTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1989BC74017F9A4B61330F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Shared-AlfrescoActiviti-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -8078,6 +8312,7 @@
 		};
 		137194741B6922DE00D4E1F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC8B619E31CF08ECD7A7A586 /* Pods-Shared-AlfrescoActiviti.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8102,6 +8337,7 @@
 		};
 		137194751B6922DE00D4E1F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A279EEEC4A588E64B6119D55 /* Pods-Shared-AlfrescoActiviti.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8126,6 +8362,7 @@
 		};
 		137194771B6922DE00D4E1F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC2334E5FDEB246F348C5BD2 /* Pods-AlfrescoActivitiTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -8144,6 +8381,7 @@
 		};
 		137194781B6922DE00D4E1F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DE0223941DEE6812A5F576E /* Pods-AlfrescoActivitiTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -8158,6 +8396,7 @@
 		};
 		137194981B6924DF00D4E1F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CC4DB74166B97A228DD065F /* Pods-Shared-ActivitiSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
@@ -8191,6 +8430,7 @@
 		};
 		137194991B6924DF00D4E1F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6273DD5F6CFE2FF0B6E7F76 /* Pods-Shared-ActivitiSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
@@ -8219,6 +8459,7 @@
 		};
 		1371949C1B6924DF00D4E1F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03CBC3234B3DA56B19E668EA /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = "";
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
@@ -8235,6 +8476,7 @@
 		};
 		1371949D1B6924DF00D4E1F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2CB77BF8E71F79CFDA316DE /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = "";
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
@@ -8307,6 +8549,7 @@
 		};
 		E31E2A0A22AA93F80068B449 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F7B3281CB36EA2997576F68 /* Pods-Shared-AlfrescoActiviti.adhoc.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8330,6 +8573,7 @@
 		};
 		E31E2A0B22AA93F80068B449 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65B0E352DEA0A8643791689F /* Pods-AlfrescoActivitiTests.adhoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -8344,6 +8588,7 @@
 		};
 		E31E2A0C22AA93F80068B449 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 444EFD2D34BFE3384314FB07 /* Pods-Shared-ActivitiSDK.adhoc.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
@@ -8372,6 +8617,7 @@
 		};
 		E31E2A0D22AA93F80068B449 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CA2FEE20445C12D1736924B /* Pods-Shared-ActivitiSDK-ActivitiSDKTests.adhoc.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = "";
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;

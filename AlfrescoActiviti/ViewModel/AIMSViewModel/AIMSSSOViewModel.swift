@@ -75,7 +75,8 @@ class AIMSSSOViewModel: AIMSLoginViewModelProtocol {
 
 //MARK: - AlfrescoAuth Delegate
 extension AIMSSSOViewModel: AlfrescoAuthDelegate {
-    func didLogOut(result: Result<Int, APIError>) {}
+
+    func didLogOut(result: Result<Int, APIError>, session: AlfrescoAuthSession?) {}
     
     var serverConfiguration: ASDKModelServerConfiguration {
         get {
@@ -96,25 +97,31 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
         }
     }
     
-    func didReceive(result: Result<AlfrescoCredential, APIError>, session: AlfrescoAuthSession?) {
+    func didReceive(result: Result<AlfrescoCredential?, APIError>, session: AlfrescoAuthSession?) {
         switch result {
         case .success(let alfrescoCredential):
-            // Persist the login type identifier
-            let sud = UserDefaults.standard
-            sud.set(kAIMSAuthenticationCredentialIdentifier, forKey: kAuthentificationTypeCredentialIdentifier)
-            
-            if let payload = alfrescoCredential.toASDKModelCredentialType().decodedJWTPayloadToken()[kASDKAIMSJwtTokenPayload] as? [String : Any] {
-                sud.set(payload[kASDKAPIEmailParameter], forKey: kAIMSUsernameCredentialIdentifier)
+            if let credential = alfrescoCredential {
+                // Persist the login type identifier
+                let sud = UserDefaults.standard
+                sud.set(kAIMSAuthenticationCredentialIdentifier,
+                        forKey: kAuthentificationTypeCredentialIdentifier)
+
+                if let payload = credential.toASDKModelCredentialType().decodedJWTPayloadToken()[kASDKAIMSJwtTokenPayload] as? [String : Any] {
+                    sud.set(payload[kASDKAPIEmailParameter],
+                            forKey: kAIMSUsernameCredentialIdentifier)
+                }
+                sud.synchronize()
+
+                // Save Alfresco credentials and server connection parameters
+                self.alfrescoCredential = alfrescoCredential
+                authenticationService?.session = session
+                authParameters?.save()
+
+                let persistenceStackModelName = self.persistenceStackModelName()
+                authenticationService?.saveToKeychain(for: persistenceStackModelName,
+                                                      session: session,
+                                                      credential: credential)
             }
-            sud.synchronize()
-            
-            // Save Alfresco credentials and server connection parameters
-            self.alfrescoCredential = alfrescoCredential
-            authenticationService?.session = session
-            authParameters?.save()
-            
-            let persistenceStackModelName = self.persistenceStackModelName()
-            authenticationService?.saveToKeychain(for: persistenceStackModelName, session: session, credential: alfrescoCredential)
             
             // Initialize ActivitiSDK
             let sdkBootstrap = ASDKBootstrap.sharedInstance()
