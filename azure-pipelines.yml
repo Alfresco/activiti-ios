@@ -15,8 +15,6 @@ variables:
     value: 'Release'
   - name: sdk
     value: 'iphoneos'
-  - name: cocoapods_path
-    value: $(Pipeline.Workspace)/.cocoapods
 
 steps:
 - checkout: self
@@ -32,13 +30,6 @@ steps:
   inputs:
     script: |
       pod install
-
-- task: Cache@2
-  inputs:
-    key: 'cocoapods | Podfile.lock'
-    restoreKeys: cocoapods
-    path: $(cocoapods_path)
-  displayName: Cache CocoaPods Specs
 
 - task: Cache@2
   inputs:
