@@ -74,11 +74,18 @@ class AIMSLoginService: NSObject, AIMSLoginServiceProtocol {
         }
     }
     
-    func logout(onViewController viewController: UIViewController, delegate: AlfrescoAuthDelegate, forCredential credential: AlfrescoCredential) {
-        session = nil
+    func logout(onViewController viewController: UIViewController,
+                delegate: AlfrescoAuthDelegate,
+                forCredential credential: AlfrescoCredential) {
         let authConfig = authConfiguration()
         alfrescoAuth.update(configuration: authConfig)
-        alfrescoAuth.logout(onViewController: viewController, delegate: delegate, forCredential: credential)
+
+        if let session = self.session {
+            alfrescoAuth.logout(onViewController: viewController,
+                                delegate: delegate,
+                                session: session,
+                                forCredential: credential)
+        }
     }
     
     func updateAuthParameters(with parameters: AIMSAuthenticationParameters) {

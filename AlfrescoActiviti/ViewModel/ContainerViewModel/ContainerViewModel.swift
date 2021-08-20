@@ -125,18 +125,23 @@ class ContainerViewModel: NSObject {
 }
 
 extension ContainerViewModel: AlfrescoAuthDelegate {
-    func didReceive(result: Result<AlfrescoCredential, APIError>, session: AlfrescoAuthSession?) {
+
+    func didReceive(result: Result<AlfrescoCredential?, APIError>, session: AlfrescoAuthSession?) {
         switch result {
         case .success(let credential):
             // Update the access token for future requests
             self.credential = credential
             loginService?.session = session
             let sdkBootstrap = ASDKBootstrap.sharedInstance()
-            sdkBootstrap?.updateServerConfiguration(withCredential: credential.toASDKModelCredentialType())
-            
-            if let persistenceStackModelName = self.persistenceStackModelName {
-                loginService?.saveToKeychain(for: persistenceStackModelName, session: session, credential: credential)
+            if let credentialModel = credential?.toASDKModelCredentialType(),
+               let persistenceStackModelName = self.persistenceStackModelName,
+               let credential = credential {
+                sdkBootstrap?.updateServerConfiguration(withCredential: credentialModel)
+                loginService?.saveToKeychain(for: persistenceStackModelName,
+                                             session: session,
+                                             credential: credential)
             }
+
         case .failure(let error):
             credentialError = error
             credential = nil
@@ -146,8 +151,8 @@ extension ContainerViewModel: AlfrescoAuthDelegate {
             refreshTokenDispatchGroup.leave()
         }
     }
-    
-    func didLogOut(result: Result<Int, APIError>) {
+
+    func didLogOut(result: Result<Int, APIError>, session: AlfrescoAuthSession?) {
         var hasLogoutBeenCancelled = false
         isLogoutRequestInProgress = false;
         
