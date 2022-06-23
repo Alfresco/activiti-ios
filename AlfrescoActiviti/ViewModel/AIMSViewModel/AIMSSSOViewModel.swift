@@ -19,6 +19,7 @@
 import Foundation
 import AlfrescoAuth
 
+
 protocol AIMSSSOViewModelDelegate: class {
     func logInFailed(with error: APIError)
     func logInSuccessful()
@@ -90,6 +91,9 @@ extension AIMSSSOViewModel: AlfrescoAuthDelegate {
                 
                 if let aimsCredential = alfrescoCredential?.toASDKModelCredentialType() {
                     serverConfiguration.credential = aimsCredential
+                    let sdkBootstrap = ASDKBootstrap.sharedInstance()
+                    sdkBootstrap?.accesstokenValue = "Bearer " + aimsCredential.accessToken
+                    
                 }
             }
         

@@ -16,8 +16,8 @@ abstract_target 'Shared' do
 	shared_pods
 
 	target 'AlfrescoActiviti' do
-        pod 'Fabric', '~> 1.0'
-        pod 'Crashlytics', '~> 3.14'
+#        pod 'Fabric', '~> 1.0'
+#        pod 'Crashlytics'
         pod 'Buglife', '~> 2.10'
         pod 'AlfrescoAuth'
         pod 'MaterialComponents' , '~> 92.5'

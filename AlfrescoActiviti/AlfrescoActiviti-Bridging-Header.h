@@ -16,6 +16,7 @@
 #import "AFAKeychainWrapper.h"
 #import "AFABaseThemedViewController.h"
 #import "AFAContainerViewModelDelegate.h"
+#import "AppDelegate.h"
 
 @import ActivitiSDK;
 @import ActivitiSDK.Private;

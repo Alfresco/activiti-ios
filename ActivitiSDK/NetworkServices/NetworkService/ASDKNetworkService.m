@@ -18,8 +18,7 @@
 
 #import "ASDKNetworkService.h"
 #import "ASDKNetworkServiceConstants.h"
-
-
+#import "ActivitiSDK/ASDKBootstrap.h"
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
@@ -92,7 +91,11 @@
     AFHTTPRequestSerializer *httpWithCSRFRequestSerializer = [AFHTTPRequestSerializer serializer];
     [httpWithCSRFRequestSerializer setValue:[tokenStorage csrfTokenString]
                          forHTTPHeaderField:kASDKAPICSRFHeaderFieldParameter];
-    
+//    let sdkBootstrap = ASDKBootstrap.sharedInstance()
+    ASDKBootstrap *sdkBootStrap = [ASDKBootstrap sharedInstance];
+    NSString *bearerAccessToken = sdkBootStrap.accesstokenValue;
+    [httpWithCSRFRequestSerializer setValue:bearerAccessToken forHTTPHeaderField:@"Authorization"];
+    // sdkBootStrap.serverConfiguration
     NSMutableDictionary *requestSerializersDict = [NSMutableDictionary dictionaryWithDictionary:self.requestSerializersDict];
     [requestSerializersDict addEntriesFromDictionary:@{@(ASDKNetworkServiceRequestSerializerTypeHTTPWithCSRFToken) : httpWithCSRFRequestSerializer}];
     self.requestSerializersDict = requestSerializersDict;

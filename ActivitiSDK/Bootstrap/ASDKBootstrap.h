@@ -40,5 +40,5 @@
 // Read-only properties
 @property (strong, nonatomic, readonly) ASDKServiceLocator              *serviceLocator;
 @property (strong, nonatomic, readonly) ASDKModelServerConfiguration    *serverConfiguration;
-
+@property (strong, nonatomic) NSString  *accesstokenValue;
 @end

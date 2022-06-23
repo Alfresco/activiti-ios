@@ -33,15 +33,15 @@
 #import "AlfrescoActiviti-Swift.h"
 
 // Frameworks
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+//#import <Fabric/Fabric.h>
+//#import <Crashlytics/Crashlytics.h>
 #import <Buglife/Buglife.h>
 @import Firebase;
 
 
 static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRACE;
 
-@interface AppDelegate () <CrashlyticsDelegate, BuglifeDelegate>
+@interface AppDelegate () < BuglifeDelegate>
 
 @property (strong, nonatomic) DDFileLogger      *fileLogger;
 @property (strong, nonatomic) AIMSLoginService  *loginService;
@@ -73,8 +73,8 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
     [DDLog addLogger:self.fileLogger];
     
     // Crashlyticss integration
-    CrashlyticsKit.delegate = self;
-    [Fabric with:@[[Crashlytics class]]];
+//    CrashlyticsKit.delegate = self;
+//    [Fabric with:@[[Crashlytics class]]];
     
     // Buglife integration
     // Add your email key to receive bug reports
@@ -93,19 +93,19 @@ static const int activitiLogLevel = AFA_LOG_LEVEL_VERBOSE; // | AFA_LOG_FLAG_TRA
     return YES;
 }
 
-- (void)crashlyticsDidDetectReportForLastExecution:(CLSReport *)report
-                                 completionHandler:(void (^)(BOOL))completionHandler {
-    // As a precaution to keep the users safe from entering a possible crash-loop
-    // if a previous crash was detected disable the auto sign-in function to at least
-    // give time for the crash reports to be delivered
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    [standardUserDefaults removeObjectForKey:kCloudUsernameCredentialIdentifier];
-    [standardUserDefaults removeObjectForKey:kPremiseUsernameCredentialIdentifier];
-    
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        completionHandler(YES);
-    }];
-}
+//- (void)crashlyticsDidDetectReportForLastExecution:(CLSReport *)report
+//                                 completionHandler:(void (^)(BOOL))completionHandler {
+//    // As a precaution to keep the users safe from entering a possible crash-loop
+//    // if a previous crash was detected disable the auto sign-in function to at least
+//    // give time for the crash reports to be delivered
+//    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+//    [standardUserDefaults removeObjectForKey:kCloudUsernameCredentialIdentifier];
+//    [standardUserDefaults removeObjectForKey:kPremiseUsernameCredentialIdentifier];
+//
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//        completionHandler(YES);
+//    }];
+//}
 
 - (void)buglife:(nonnull Buglife *)buglife handleAttachmentRequestWithCompletionHandler:(nonnull void (^)(void))completionHandler {
     for (DDLogFileInfo *fileInfo in [self.fileLogger.logFileManager unsortedLogFileInfos]) {
